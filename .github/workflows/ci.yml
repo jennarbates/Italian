@@ -1,0 +1,64 @@
+# Spec 9: typecheck, lint, Vitest and Playwright on every push and pull request,
+# with a local Supabase started first for the sync and sign-in tests.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format
+        run: pnpm format:check
+
+      - uses: supabase/setup-cli@v3
+        with:
+          version: 2.119.0
+
+      # Studio, storage and the edge runtime aren't used by any test. Mailpit stays:
+      # it is the local inbox the sign-in e2e test reads codes from.
+      - name: Start local Supabase
+        run: supabase start -x studio,storage-api,imgproxy,edge-runtime,logflare,vector,supavisor
+
+      - name: Vitest
+        run: pnpm test
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium webkit
+
+      - name: Playwright
+        run: pnpm test:e2e
+
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
