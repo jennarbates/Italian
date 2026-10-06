@@ -100,7 +100,7 @@ There is no turn limit and no timer. Each round stands alone; there is no match 
 
 ## 3. Content model
 
-**Decision.** All Italian lives in JSON, validated with Zod at build time. Every inflected form is written out as data. There is no inflection code.
+All Italian lives in JSON, validated with Zod at build time. Every inflected form is written out as data. There is no inflection code.
 
 ### 3.1 Attributes
 
@@ -241,7 +241,7 @@ Vocabulary choice: `castani` for brown hair and `azzurri` for blue eyes, the sta
 
 ### 3.4 Question templates
 
-**Decision.** Templates are declarative data. The predicate is a named operation, not a function, so templates can live in JSON and be tested exhaustively.
+Templates are declarative data. The predicate is a named operation, not a function, so templates can live in JSON and be tested exhaustively.
 
 ```ts
 const Template = z.object({
@@ -275,7 +275,7 @@ Every mismatch is reported separately (`{ slot, given, expected, rule }`, where 
 
 ### 3.5 Art manifest
 
-**Decision.** Characters are SVG built from stacked layers, chosen from the attributes, so the picture can never disagree with the data. The MVP ships with simple placeholder layers (flat shapes and colors) made in code. Final art replaces them later by dropping in files with the same names; no code changes.
+Characters are SVG built from stacked layers, chosen from the attributes, so the picture can never disagree with the data. The MVP ships with simple placeholder layers (flat shapes and colors) made in code. Final art replaces them later by dropping in files with the same names; no code changes.
 
 | z | Layer | Driven by | Files |
 |---|---|---|---|
@@ -295,13 +295,13 @@ Placeholder rule: each layer must make its attribute obvious at card size (about
 
 ### 3.6 Content ids and versions
 
-**Decision.** Ids (`n.capelli`, `adj.biondo`, `c.giulia`, `t.have.adj`) are permanent. They are never renamed or reused, because the review log refers to them forever. A word that leaves the game stays in the lexicon with `retired: true`, so old history still resolves.
+Ids (`n.capelli`, `adj.biondo`, `c.giulia`, `t.have.adj`) are permanent. They are never renamed or reused, because the review log refers to them forever. A word that leaves the game stays in the lexicon with `retired: true`, so old history still resolves.
 
 `content/version.json` holds an integer `contentVersion`, bumped whenever content changes. Each saved game stores the version it started with (also the `content_version` column in 7.1). An unfinished saved game with an older version is discarded on load instead of resumed. `content/released-ids.json` lists every id in the last production release and is updated as part of each release. A content test fails if any id in that file is missing from the current content.
 
 ### 3.7 Feedback messages
 
-**Decision.** Every feedback string lives in `content/messages.json`, keyed by rule id, with `{placeholders}`. UI chrome is English, with Italian words in italics. The list below is a draft; the Italian reviewer checks it in 10.1.
+Every feedback string lives in `content/messages.json`, keyed by rule id, with `{placeholders}`. UI chrome is English, with Italian words in italics. The list below is a draft; the Italian reviewer checks it in 10.1.
 
 | Key | When | Message (draft) |
 |---|---|---|
@@ -326,7 +326,7 @@ Placeholder rule: each layer must make its attribute obvious at card size (about
 
 ## 4. Engine contract
 
-**Decision.** `engine/` is pure TypeScript with no React, DOM, or time access. One function moves the game forward: `step(state, action, content) → { state, events }`. Randomness comes only from the seed.
+`engine/` is pure TypeScript with no React, DOM, or time access. One function moves the game forward: `step(state, action, content) → { state, events }`. Randomness comes only from the seed.
 
 ### 4.1 Types
 
@@ -458,7 +458,7 @@ Same tiles but with `gli` and `bionde`: step 3 fails, the engine returns `reject
 
 ## 5. CPU behavior
 
-**Decision.** The CPU plays smart and deterministic: it always asks the question that best splits its remaining candidates.
+The CPU plays smart and deterministic: it always asks the question that best splits its remaining candidates.
 
 CPU questions always use the default wording (for brown eyes, the word picked in the Italian review, 3.3).
 
@@ -477,7 +477,7 @@ Expected length: about 5 or 6 CPU questions to find the player's character. Beca
 
 ## 6. Learning model
 
-**Decision.** Spaced repetition with FSRS (proposed library: `ts-fsrs`, default parameters, desired retention 0.9). In the MVP, scheduling is computed and stored, and shown on the Progress screen. Nothing in gameplay reads it yet.
+Spaced repetition with FSRS (proposed library: `ts-fsrs`, default parameters, desired retention 0.9). In the MVP, scheduling is computed and stored, and shown on the Progress screen. Nothing in gameplay reads it yet.
 
 **Card.** One card per `(lexiconId, direction)` for nouns and adjectives (18 lemmas × 2 = 36 cards).
 - `recognize`: Italian → meaning. Exercised when the player answers a CPU question.
@@ -525,7 +525,7 @@ type ReviewLogRow = {
 
 ## 7. Data and backend
 
-**Decision.** Supabase (Postgres + Auth) with Row Level Security. No custom server code in the MVP. Guests' data stays in IndexedDB and is never sent to a server.
+Supabase (Postgres + Auth) with Row Level Security. No custom server code in the MVP. Guests' data stays in IndexedDB and is never sent to a server.
 
 **Environments.**
 
@@ -662,22 +662,22 @@ The `anon` role has no policies, so it can read and write nothing.
 
 ### 7.3 Auth and sync rules
 
-- **Sign-in:** a 6-digit code sent by email, typed into the same tab; Google sign-in is future work. There is no magic link, because on phones the email often opens in another app or browser, which would sign the user in somewhere without their guest data. The app calls `signInWithOtp` to send the code and `verifyOtp` (type `email`) to check it. The Supabase email template shows `{{ .Token }}` and no link. The sheet offers "Resend code" after Supabase's cooldown.
-- **Sending email:** Supabase's built-in sender is for testing only (about 2 emails an hour, delivered only to the project team), so production sends through **AWS SES** set as Supabase's custom SMTP, from the domain `chie.1412labs.com`. Setup: verify the domain in SES (SPF, DKIM and DMARC records), then request production access to leave the SES sandbox. Approval can take a day or more, so it is requested on day 2. **Fallback:** if SES access is slow or refused, Resend is used as the custom SMTP instead, with the same domain. Staging uses the built-in sender, which is enough for the team.
-- **Guest:** data lives in IndexedDB under the key `guest` and is never uploaded unless the guest signs in. The app calls `navigator.storage.persist()` to ask the browser to keep it. Safari on iOS can still delete a site's storage after 7 days of Safari use without a visit, so after each finished guest round the app shows a quiet "Sign in to keep your progress safe" nudge, and the privacy note says so. The app needs a connection to load (online only in the MVP, see 11.1); once loaded, a round keeps working if the connection drops.
-- **Guest → account (any sign-in while guest data exists on this device):** ask "Save your progress to this account?" (default Yes).
+- Sign-in: a 6-digit code sent by email, typed into the same tab; Google sign-in is future work. There is no magic link, because on phones the email often opens in another app or browser, which would sign the user in somewhere without their guest data. The app calls `signInWithOtp` to send the code and `verifyOtp` (type `email`) to check it. The Supabase email template shows `{{ .Token }}` and no link. The sheet offers "Resend code" after Supabase's cooldown.
+- Sending email: Supabase's built-in sender is for testing only (about 2 emails an hour, delivered only to the project team), so production sends through **AWS SES** set as Supabase's custom SMTP, from the domain `chie.1412labs.com`. Setup: verify the domain in SES (SPF, DKIM and DMARC records), then request production access to leave the SES sandbox. Approval can take a day or more, so it is requested on day 2. **Fallback:** if SES access is slow or refused, Resend is used as the custom SMTP instead, with the same domain. Staging uses the built-in sender, which is enough for the team.
+- Guest: data lives in IndexedDB under the key `guest` and is never uploaded unless the guest signs in. The app calls `navigator.storage.persist()` to ask the browser to keep it. Safari on iOS can still delete a site's storage after 7 days of Safari use without a visit, so after each finished guest round the app shows a quiet "Sign in to keep your progress safe" nudge, and the privacy note says so. The app needs a connection to load (online only in the MVP, see 11.1); once loaded, a round keeps working if the connection drops.
+- Guest → account (any sign-in while guest data exists on this device): ask "Save your progress to this account?" (default Yes).
   - Yes: rewrite `user_id` on local rows, upload `games` first, then `review_log` with `insert ... on conflict (id) do nothing`.
   - No: delete guest data.
-- **Signed in, normal play:** every write goes to an IndexedDB outbox first, then flushes to Supabase. The `games` row enters the outbox at START and is upserted again at round end with `ended_at` and `result`. A flush always sends `games` rows before `review_log` rows, because each log row must point at an existing game. Flush on each round end, on app start, and on the `online` event. A failed flush keeps rows in the outbox and shows a quiet banner.
-- **Merging across devices:** the review log is append-only with client uuids, so a merge is a union with no conflicts. After each sync the client downloads the full log, replays it to rebuild card state, and upserts `cards` with `log_count` set to the number of log rows it replayed. The trigger in 7.1 ignores an upsert with a smaller `log_count` than the stored one.
-- **Sign-out:** clears the local copy of that user's data (shared devices). If the outbox still has unsynced rows, the app first warns: "Some progress hasn't synced yet. Sign out anyway?" with "Sign out" and "Wait" buttons.
-- **Account deletion:** by request. The privacy note gives an email address; the owner deletes the user in the Supabase dashboard, and the `on delete cascade` foreign keys remove all of their rows. Requests are handled within one month (the GDPR deadline). An in-app button is future work (section 11).
+- Signed in, normal play: every write goes to an IndexedDB outbox first, then flushes to Supabase. The `games` row enters the outbox at START and is upserted again at round end with `ended_at` and `result`. A flush always sends `games` rows before `review_log` rows, because each log row must point at an existing game. Flush on each round end, on app start, and on the `online` event. A failed flush keeps rows in the outbox and shows a quiet banner.
+- Merging across devices: the review log is append-only with client uuids, so a merge is a union with no conflicts. After each sync the client downloads the full log, replays it to rebuild card state, and upserts `cards` with `log_count` set to the number of log rows it replayed. The trigger in 7.1 ignores an upsert with a smaller `log_count` than the stored one.
+- Sign-out: clears the local copy of that user's data (shared devices). If the outbox still has unsynced rows, the app first warns: "Some progress hasn't synced yet. Sign out anyway?" with "Sign out" and "Wait" buttons.
+- Account deletion: by request. The privacy note gives an email address; the owner deletes the user in the Supabase dashboard, and the `on delete cascade` foreign keys remove all of their rows. Requests are handled within one month (the GDPR deadline). An in-app button is future work (section 11).
 
 ---
 
 ## 8. UX
 
-**Decision.** Mobile-first, portrait, styled with Tailwind CSS. The full 24-card board must fit without scrolling in the space a 360 × 640 phone actually shows after the browser's own toolbars (roughly 360 × 560; layout uses `dvh` units, and this is checked on real phones). The question builder (or the CPU's question) lives in a bottom sheet over the board that collapses to a one-line bar, so the board never shrinks.
+Mobile-first, portrait, styled with Tailwind CSS. The full 24-card board must fit without scrolling in the space a 360 × 640 phone actually shows after the browser's own toolbars (roughly 360 × 560; layout uses `dvh` units, and this is checked on real phones). The question builder (or the CPU's question) lives in a bottom sheet over the board that collapses to a one-line bar, so the board never shrinks.
 
 ### 8.1 Screens and flow
 
@@ -764,10 +764,10 @@ docs/spec.md   this file
 **Privacy.**
 - Guests' game data and progress never leave the device.
 - Accounts store email, profile, games, review log, cards. No analytics or trackers. The services that process data:
-  - **Supabase:** database and sign-in. Stores everything listed above.
-  - **Cloudflare:** hosting. Sees each visitor's IP address and requests, guests included.
-  - **AWS SES** (or **Resend** if the fallback is used): sends the sign-in email. Sees the email address.
-  - **Sentry:** error reports, with personal data stripped (see Error reporting).
+  - Supabase: database and sign-in. Stores everything listed above.
+  - Cloudflare: hosting. Sees each visitor's IP address and requests, guests included.
+  - AWS SES (or Resend if the fallback is used): sends the sign-in email. Sees the email address.
+  - Sentry: error reports, with personal data stripped (see Error reporting).
 - The Supabase region is chosen deliberately when the projects are created (EU if EU users are expected), and each provider's data processing agreement is accepted.
 - There is no in-app account deletion in the MVP. The privacy note says so plainly and gives the email address for deletion requests (7.3).
 
@@ -782,7 +782,7 @@ docs/spec.md   this file
 ### 10.1 Spec sign-off (before building)
 
 1. Trace one full game on paper using only this doc. Every point where you had to guess becomes a `TBD:` or a fix.
-2. Your Italian-speaking contact reviews section 3 and every rendered string (17 questions, counting both brown-eyes wordings, their 34 answers, and every message in 3.7), checks all 18 words against the *Profilo della lingua italiana* (3.3), and picks the default brown-eyes word.
+2. The Italian-speaking reviewer goes through section 3 and every rendered string (17 questions, counting both brown-eyes wordings, their 34 answers, and every message in 3.7), checks all 18 words against the *Profilo della lingua italiana* (3.3), and picks the default brown-eyes word.
 3. A developer reviews sections 4 and 7.
 4. Tag the doc `v1`. After that, every change adds a dated line to the changelog at the bottom.
 
@@ -800,7 +800,7 @@ docs/spec.md   this file
 | Sync | Vitest + local Supabase | Guest upload is idempotent; games flush before review rows; two-device merge converges; a `cards` upsert with a smaller `log_count` is ignored; a new user gets a profile row; RLS blocks reading another user's rows |
 | E2E | Playwright (Chromium, WebKit) | Full seeded round to a win; wrong guess loses; quitting records `abandoned`; sign-in with a code from the local inbox; reload mid-round resumes; `/play` loads directly |
 | Manual | Real iPhone + Android phone | Board fits the visible area with browser toolbars showing, bottom sheet works, detail view opens by long-press, a full round is playable one-handed |
-| Playtest | 3 or more A1 learners you know | Each plays 3 rounds; note rounds lost, minutes per round, and every confusing string |
+| Playtest | 3 or more A1 learners | Each plays 3 rounds; note rounds lost, minutes per round, and every confusing string |
 
 ### 10.3 Definition of done
 
@@ -901,7 +901,7 @@ Also queued: final character art, colorblind mode, Easy CPU setting, championshi
 | D27 | Long-press detail view with no text; colorblind mode with labels is future work | Small details become visible without giving away the Italian |
 | D28 | Account deletion by email request at launch | Meets data-protection duties with no code; in-app deletion later |
 | D29 | Hosting stays on Cloudflare, not GitHub Pages | Pages forbids running a business or SaaS, has no previews and no SPA fallback |
-| D30 | App and email on `chie.1412labs.com` | DNS is already under your control, so SES verification starts immediately |
+| D30 | App and email on `chie.1412labs.com` | The 1412labs.com DNS is already set up, so SES verification can start right away |
 | D31 | Keep the server `cards` table, guarded by `log_count` | Ready for server features like due-word emails; stale devices can't overwrite newer state |
 | D32 | No daily new-card limit in the MVP | Gameplay doesn't follow the schedule yet, so a limit would only discard data |
 | D33 | "Quit round" button; starting a new round abandons the saved one | Every round ends in a recorded result |
