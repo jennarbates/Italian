@@ -415,11 +415,11 @@ Checks run in this order; the first failure rejects:
 
 1. Phase is `playerTurn`.
 2. Template and all fill ids exist (`unknownId`).
-3. Grammar: verb and article (`grammar`). Emits an `again` rating for the noun (section 6). A wrong adjective form does not reject here; it becomes an agreement slip on success.
+3. Grammar: verb and article (`grammar`). Emits an `again` rating for the noun (section 6). A wrong adjective form does not reject here; it becomes an agreement slip on success. If step 3 fails, the adjective form is still checked and any mismatch is added to `errors` with `rule: "agreement"`, so feedback shows every problem at once. Only the noun's `again` rating is emitted: no `agreementSlip` and no slip row, because the question was not accepted.
 4. Meaning (`nonsense`). The adjective's meaning for this noun is its own `attr` if that is in `noun.adjAttrs`, otherwise the first `alsoMeans` entry whose `attr` is in `noun.adjAttrs` (so `castani` on `occhi` means `eyeColor: adj.marrone`). If neither exists, the question is rejected; if the adjective has a `wordChoice` entry for this noun, the feedback is `meaning.wordChoice`, otherwise `meaning.mismatch`.
 5. Not already asked by the player this round (`duplicate`).
 
-On success: evaluate the predicate against `cpuSecret`, render question and answer using the correct adjective form, append to `history`, emit `asked`, ratings and any `agreementSlip`, move to `playerReview`.
+On success: evaluate the predicate against `cpuSecret`, render question and answer using the correct adjective form, append to `history`, emit `asked`, and move to `playerReview`. At level 2 only, also emit the produce ratings and any `agreementSlip` (section 6). At level 1 the question comes from the picker, so steps 3 and 4 always pass and no produce rating is emitted.
 
 ### 4.4 Invariants (each becomes a test)
 
@@ -435,7 +435,7 @@ On success: evaluate the predicate against `cpuSecret`, render question and answ
 
 ### 4.5 Traced example turn
 
-Level 2, CPU secret is Giulia (castano, lungo, verde, glasses).
+Level 2, CPU secret is Giulia (castano, lungo, verde, glasses). The same question at level 1 emits only `asked`.
 
 1. Player taps tiles `Ha` `i` `capelli` `biondi`. UI calls `parseTiles` → `{ templateId: "t.have.adj", fill: { verb: "v.ha", art: "art.i", noun: "n.capelli", adj: "adj.biondo#mp" } }`.
 2. UI dispatches `ASK` with that payload.
@@ -451,6 +451,8 @@ Level 2, CPU secret is Giulia (castano, lungo, verde, glasses).
 Same tiles but with `bionde`: steps 3 to 5 pass (the verb and article are right). The question is accepted and rendered correctly as `Ha i capelli biondi?`, the feedback says "*biondi*, not *bionde*: *capelli* is masculine plural", and the events are `asked`, `rating { n.capelli, produce, good }` and `agreementSlip { adj.biondo, given: "bionde", expected: "biondi" }`. `adj.biondo` gets no rating this turn.
 
 Same tiles but with `gli` instead of `i`: step 3 fails, the engine returns `rejected { reason: "grammar", errors: [{ slot: "art", given: "gli", expected: "i", rule: "art.mpl.consonant" }] }` and `rating { n.capelli, produce, again }`, and the phase stays `playerTurn`.
+
+Same tiles but with `gli` and `bionde`: step 3 fails, the engine returns `rejected { reason: "grammar", errors: [{ slot: "art", given: "gli", expected: "i", rule: "art.mpl.consonant" }, { slot: "adj", given: "bionde", expected: "biondi", rule: "agreement" }] }` and `rating { n.capelli, produce, again }`, and nothing else: no `agreementSlip`, no rating for `adj.biondo`.
 
 ---
 
@@ -695,7 +697,7 @@ Home ──► Game ──► Round end ──► Game (play again)
 | Progress | Mistakes tab: grouped by word, showing what was given and what was expected. Due tab: words due today and their next review date |
 | Settings | Default level, account (sign in or out, with the unsynced warning from 7.3), link to the privacy note |
 | Sign-in sheet | Email field, then a 6-digit code field with "Resend code" |
-| Privacy note | What is stored, the third parties (Sentry, the email sender), that guest data can be cleared by Safari, and the email address for account deletion |
+| Privacy note | What is stored, the services in section 9 (Privacy) and what each sees, that guest data can be cleared by Safari, and the email address for account deletion |
 
 **Level 1 question picker:** a list of the 16 questions, each with its English gloss. Questions already asked this round are greyed out and show their answer.
 **Level 2 tile builder:** four slots in order (verb, article, noun, adjective) above rows of verb tiles, article tiles, noun tiles, and adjective lemma tiles. Tapping a tile fills its slot. Tapping an adjective opens its forms, each distinct text shown once (`marrone`, `marroni`). Built question previews in the slots. "Chiedi" submits.
@@ -760,8 +762,13 @@ docs/spec.md   this file
 - `step()` under 5 ms per action.
 
 **Privacy.**
-- Guests send nothing to any server.
-- Accounts store email, profile, games, review log, cards. No analytics or trackers. The only third parties are Sentry (error reports with no personal data) and AWS SES (sends the sign-in email).
+- Guests' game data and progress never leave the device.
+- Accounts store email, profile, games, review log, cards. No analytics or trackers. The services that process data:
+  - **Supabase:** database and sign-in. Stores everything listed above.
+  - **Cloudflare:** hosting. Sees each visitor's IP address and requests, guests included.
+  - **AWS SES** (or **Resend** if the fallback is used): sends the sign-in email. Sees the email address.
+  - **Sentry:** error reports, with personal data stripped (see Error reporting).
+- The Supabase region is chosen deliberately when the projects are created (EU if EU users are expected), and each provider's data processing agreement is accepted.
 - There is no in-app account deletion in the MVP. The privacy note says so plainly and gives the email address for deletion requests (7.3).
 
 **Cheating.** The CPU's secret is in the page's memory, so a determined player can find it with developer tools. Accepted: single player, nothing at stake.
@@ -784,10 +791,10 @@ docs/spec.md   this file
 | Layer | Tool | What |
 |---|---|---|
 | Content | Vitest | All JSON passes Zod; every invariant in 3.2; every lexicon id and message key referenced exists; no id in `released-ids.json` is missing (3.6) |
-| Engine | Vitest | Every cell of the transition table; every invariant in 4.4; the traced turn in 4.5 as a test |
+| Engine | Vitest | Every cell of the transition table; every invariant in 4.4; the traced turns in 4.5 as tests; a level 1 ASK emits no `rating` or `agreementSlip` events, while CPU-question recognize ratings fire at both levels |
 | Engine | fast-check | Random action sequences never break the invariants |
 | Rendering | Vitest snapshot | All 17 question strings and 34 answers as golden strings, reviewed by the Italian speaker; answers lowercase the first letter |
-| Grammar | Vitest | Each wrong verb and article is rejected with the right `SlotError`; each wrong adjective form is accepted as a slip with the right correction; `occhi castani` and `occhi marroni` are both accepted and count as one question; `capelli marroni` is rejected with `meaning.wordChoice`; each `ShapeError` kind is returned by `parseTiles` |
+| Grammar | Vitest | Each wrong verb and article is rejected with the right `SlotError`; each wrong adjective form is accepted as a slip with the right correction; a question with both an article error and an agreement error returns both `SlotError`s and logs only the noun's `again`; `occhi castani` and `occhi marroni` are both accepted and count as one question; `capelli marroni` is rejected with `meaning.wordChoice`; each `ShapeError` kind is returned by `parseTiles` |
 | CPU | Vitest | Always finds a splitting question; never guesses wrong; same seed gives the same game |
 | SRS | Vitest | Event → rating table; rebuild from log equals incremental state |
 | Sync | Vitest + local Supabase | Guest upload is idempotent; games flush before review rows; two-device merge converges; a `cards` upsert with a smaller `log_count` is ignored; a new user gets a profile row; RLS blocks reading another user's rows |
