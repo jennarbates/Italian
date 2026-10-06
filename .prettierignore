@@ -1,0 +1,7 @@
+dist
+coverage
+pnpm-lock.yaml
+backlog.csv
+# planning docs are hand-formatted
+*.md
+github-setup
