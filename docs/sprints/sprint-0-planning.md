@@ -13,10 +13,10 @@ The goal was to get the spec and backlog detailed enough that I could build with
 
 ## How the spec changed
 
-- **v0.1:** Picked the name. Settled that a wrong guess loses (the official rule) and that the CPU plays smart. Chose placeholder art and Cloudflare hosting.
-- **v0.2:** Cut audio and offline play. Picked the email provider, environments, stack and CI. First real calendar.
-- **v0.3:** Checked every word against the *Profilo della lingua italiana* to make sure it's actually A1. Made adjective agreement mistakes soft instead of rejecting the question.
-- **v0.4:** Went through the whole spec looking for holes. Switched sign-in from magic links to a 6-digit code, because on phones the link often opens in a different browser. Added a staging environment, a privacy note, a quit button, and a list of every feedback message.
+- v0.1: Picked the name. Settled that a wrong guess loses (the official rule) and that the CPU plays smart. Chose placeholder art and Cloudflare hosting.
+- v0.2: Cut audio and offline play. Picked the email provider, environments, stack and CI. First real calendar.
+- v0.3: Checked every word against the *Profilo della lingua italiana* to make sure it's actually A1. Made adjective agreement mistakes soft instead of rejecting the question.
+- v0.4: Went through the whole spec looking for holes. Switched sign-in from magic links to a 6-digit code, because on phones the link often opens in a different browser. Added a staging environment, a privacy note, a quit button, and a list of every feedback message.
 
 After v0.4 I found three more gaps. Level 1 questions weren't excluded from ratings. The spec didn't say what happens when a question has a grammar error and an agreement error at the same time. And the privacy note left out Supabase and Cloudflare. All three are fixed in the spec and backlog.
 
@@ -31,8 +31,8 @@ The setup script failed the first time. GitHub doesn't allow commas in label nam
 
 ## Retro
 
-**Went well:**
+Went well:
 
-**Didn't go well:**
+Didn't go well:
 
-**Trying in Sprint 1:**
+Trying in Sprint 1:

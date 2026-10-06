@@ -4,10 +4,10 @@ Thanks for doing this. Chi è? is a Guess Who style game for adult learners at A
 
 There are four things to check:
 
-1. **Every string** (sections A to C). Is it correct, natural Italian that an A1 learner would see in a textbook? Mark anything that sounds off.
-2. **The level of each word** (section D). Look up each of the 18 words in the *Profilo della lingua italiana* (Spinelli and Parizzi, 2010) and write A1, A2 or higher.
-3. **The brown-eyes word** (section E). Pick one.
-4. **Feedback messages** (section F). These are in English with Italian words in them. Check the grammar explanations.
+1. Every string (sections A to C). Is it correct, natural Italian that an A1 learner would see in a textbook? Mark anything that sounds off.
+2. The level of each word (section D). Look up each of the 18 words in the *Profilo della lingua italiana* (Spinelli and Parizzi, 2010) and write A1, A2 or higher.
+3. The brown-eyes word (section E). Pick one.
+4. Feedback messages (section F). These are in English with Italian words in them. Check the grammar explanations.
 
 Write your comments however is easiest, for example inline, in the margin, or as a list of numbers.
 
@@ -50,7 +50,7 @@ Brown eyes can be asked two ways (11 and 12), so there are 17 strings for 16 que
 
 Questions to consider:
 
-- For 14 and 15, would a textbook prefer *Porta gli occhiali?* / *Porta il cappello?* We chose *ha* to keep A1 to two verbs (*avere*, *essere*). Is *Ha il cappello?* acceptable, or does it sound wrong?
+- For 14 and 15, would a textbook prefer *Porta gli occhiali?* / *Porta il cappello?* I chose *ha* to keep A1 to two verbs (*avere*, *essere*). Is *Ha il cappello?* acceptable, or does it sound wrong?
 - For 7, is *capelli bianchi* the natural choice for an older character, or would *capelli grigi* be more natural?
 
 ## B. The 34 answers
@@ -77,7 +77,7 @@ Questions to consider:
 
 Questions to consider:
 
-- Is *No, non ha la barba.* natural, or would a speaker say *No, non ha la barba* differently (for example drop the article, *non ha barba*)? We want the answer to repeat the question's words, but not at the cost of sounding wrong.
+- Is *No, non ha la barba.* natural, or would a speaker say *No, non ha la barba* differently (for example drop the article, *non ha barba*)? I want the answer to repeat the question's words, but not at the cost of sounding wrong.
 - Same question for *No, non ha il cappello.* and *No, non ha gli occhiali.*
 
 ## C. Every word form the game uses
@@ -150,7 +150,7 @@ The game accepts both *occhi castani* and *occhi marroni* from the player, becau
 
 Why (one line is fine):
 
-We reject *capelli marroni* and show a hint to use *castani*. Is that right, or is *capelli marroni* acceptable?
+The game rejects *capelli marroni* and show a hint to use *castani*. Is that right, or is *capelli marroni* acceptable?
 
 ## F. Feedback messages
 
@@ -178,8 +178,8 @@ These show when a learner makes a mistake at Level 2. The app is in English, wit
 Questions to consider:
 
 - Is "starts with a consonant / vowel" the right way to explain *i* vs *gli* at A1, or would you explain it differently?
-- *occhi* needs "a color", not "a color or length". We'll fix that one wording.
+- *occhi* needs "a color", not "a color or length". I'll fix that one wording.
 
 ---
 
-Thank you! Anything you flag goes back into the spec before we start building the game on October 12.
+Thank you! Anything you flag goes back into the spec before I start building the game on October 12.

@@ -1,6 +1,6 @@
 # Chi è? MVP backlog
 
-Generated from `spec.md` v0.4. Every deliverable in the spec as a card with acceptance criteria, story points (1, 2, 3, 5), dependencies and spec section references. Four one-week sprints follow the milestones in 10.4.
+Built from `spec.md` v0.4. Every deliverable in the spec is a card with acceptance criteria, story points (1, 2, 3, 5), dependencies and spec section references. The four one-week sprints follow the milestones in 10.4.
 
 **85 cards, 179 points.** Cards marked *waits on others* depend on someone outside the build (reviewers, SES approval, playtesters), so start them early.
 
@@ -48,7 +48,7 @@ Give the Italian-speaking reviewer everything in 10.1 step 2 in one document, wi
 
 #### CHI-002 Request developer review of engine and data sections *(waits on others)*
 
-Spec sign-off · task · 1 pts · spec 4, 7, 10.1
+Spec sign-off · task · 1 pt · spec 4, 7, 10.1
 
 Send sections 4 and 7 to a developer for review.
 
@@ -66,7 +66,7 @@ Play one complete round on paper using only the spec, and log every point where 
 
 #### CHI-005 Book 3+ A1 playtesters for Thu Oct 22 *(waits on others)*
 
-Spec sign-off · task · 1 pts · spec 10.2, 10.4
+Spec sign-off · task · 1 pt · spec 10.2, 10.4
 
 Line up at least three A1 learners now, since playtests depend on other people's calendars.
 
@@ -75,7 +75,7 @@ Line up at least three A1 learners now, since playtests depend on other people's
 
 #### CHI-010 Add DNS for chie.1412labs.com
 
-Repo, CI and infra · chore · 1 pts · spec 7.3, 10.4, D30
+Repo, CI and infra · chore · 1 pt · spec 7.3, 10.4, D30
 
 Create the subdomain now so SES domain verification can start on day 2.
 
@@ -124,7 +124,7 @@ Workers static assets, a preview URL per pull request built with staging keys, m
 
 #### CHI-015 Local Supabase for dev and tests
 
-Repo, CI and infra · chore · 1 pts · spec 7, D16
+Repo, CI and infra · chore · 1 pt · spec 7, D16
 
 Supabase CLI in Docker with the local inbox for sign-in emails.
 
@@ -133,7 +133,7 @@ Supabase CLI in Docker with the local inbox for sign-in emails.
 
 #### CHI-016 Create staging and production Supabase projects
 
-Repo, CI and infra · chore · 1 pts · spec 7, D16, D17
+Repo, CI and infra · chore · 1 pt · spec 7, D16, D17
 
 Two free cloud projects; only the publishable (anon) key ever reaches the app.
 
@@ -154,7 +154,7 @@ Sentry browser SDK with no replay, no tracing, no PII, and URLs stripped of quer
 
 #### CHI-018 Verify domain in AWS SES and request production access *(waits on others)*
 
-Repo, CI and infra · chore · 1 pts · spec 7.3, D15 · depends on CHI-010
+Repo, CI and infra · chore · 1 pt · spec 7.3, D15 · depends on CHI-010
 
 Approval can take a day or more, so it starts on day 2.
 
@@ -164,7 +164,7 @@ Approval can take a day or more, so it starts on day 2.
 
 #### CHI-019 Open a Resend account as the email fallback
 
-Repo, CI and infra · chore · 1 pts · spec 7.3, D15 · depends on CHI-010
+Repo, CI and infra · chore · 1 pt · spec 7.3, D15 · depends on CHI-010
 
 Same domain, ready to swap in as Supabase custom SMTP if SES is slow or refused.
 
@@ -205,7 +205,7 @@ Content and art · story · 2 pts · spec 3.3, D2, D23 · depends on CHI-020
 
 #### CHI-022 Write templates.json
 
-Content and art · story · 1 pts · spec 3.4 · depends on CHI-020
+Content and art · story · 1 pt · spec 3.4 · depends on CHI-020
 
 t.have, t.have.adj and t.be as declarative data with named predicates.
 
@@ -213,7 +213,7 @@ t.have, t.have.adj and t.be as declarative data with named predicates.
 
 #### CHI-023 Write messages.json
 
-Content and art · story · 1 pts · spec 3.7 · depends on CHI-001
+Content and art · story · 1 pt · spec 3.7 · depends on CHI-001
 
 Every feedback string from 3.7, keyed by rule id, with placeholders.
 
@@ -231,7 +231,7 @@ scripts/generate-characters.ts picks 24 attribute combinations that pass every i
 
 #### CHI-025 Generate, name and commit 24 characters
 
-Content and art · task · 1 pts · spec 3.2, 3.6 · depends on CHI-024
+Content and art · task · 1 pt · spec 3.2, 3.6 · depends on CHI-024
 
 Run the generator once, review it, give Italian names, commit characters.json.
 
@@ -276,7 +276,7 @@ Goal: Engine and CPU fully tested; a full round plays to a win and a loss on a r
 
 #### CHI-030 Engine types
 
-Game engine · task · 1 pts · spec 4, 4.1 · depends on CHI-011
+Game engine · task · 1 pt · spec 4, 4.1 · depends on CHI-011
 
 Phase, Fill, QuestionKey, SlotError, ShapeError, Feedback, AskedQuestion, GameState, Action, GameEvent.
 
@@ -371,7 +371,7 @@ Emit ratings per the section 6 table, at most one per card per turn.
 
 #### CHI-039 GUESS resolution
 
-Game engine · story · 1 pts · spec 2, 4.2, D3 · depends on CHI-032
+Game engine · story · 1 pt · spec 2, 4.2, D3 · depends on CHI-032
 
 Right guess wins, wrong guess loses.
 
@@ -460,7 +460,7 @@ As a learner, I see all 24 faces at once and flip them as I rule people out.
 
 #### CHI-052 Top bar and secret card
 
-Game UI · story · 1 pts · spec 8.1 · depends on CHI-050
+Game UI · story · 1 pt · spec 8.1 · depends on CHI-050
 
 Turn number, whose turn, and the player's own secret card shown small.
 
@@ -591,7 +591,7 @@ Turn rating and slip events into append-only ReviewLogRows.
 
 #### CHI-071 Games rows written at START
 
-Learning and progress · story · 1 pts · spec 7.3, D34 · depends on CHI-061
+Learning and progress · story · 1 pt · spec 7.3, D34 · depends on CHI-061
 
 The games row exists before any review row points at it, and is updated at round end.
 
@@ -654,7 +654,7 @@ Policies from 7.2, proven by tests.
 
 #### CHI-082 Sign-in email template and SMTP
 
-Accounts and sync · chore · 1 pts · spec 7.3, D10, D15 · depends on CHI-018, CHI-019, CHI-016
+Accounts and sync · chore · 1 pt · spec 7.3, D10, D15 · depends on CHI-018, CHI-019, CHI-016
 
 Code-only email template; production sends through SES or Resend, staging uses the built-in sender.
 
@@ -703,7 +703,7 @@ After each sync, download the full log, replay it, upsert cards with log_count.
 
 #### CHI-087 Sign-out with unsynced warning
 
-Accounts and sync · story · 1 pts · spec 7.3, D35 · depends on CHI-084
+Accounts and sync · story · 1 pt · spec 7.3, D35 · depends on CHI-084
 
 Sign-out clears local data, warning first if the outbox is not empty.
 
@@ -724,7 +724,7 @@ Prove the sync rules in 7.3.
 
 #### CHI-089 Settings screen
 
-Accounts and sync · story · 1 pts · spec 8.1 · depends on CHI-087
+Accounts and sync · story · 1 pt · spec 8.1 · depends on CHI-087
 
 Default level, account sign in or out, link to the privacy note.
 
@@ -756,7 +756,7 @@ Every state in the 8.2 table.
 
 #### CHI-092 Privacy note page
 
-Accessibility, states, privacy · story · 1 pts · spec 7.3, 9, D28 · depends on CHI-011
+Accessibility, states, privacy · story · 1 pt · spec 7.3, 9, D28 · depends on CHI-011
 
 What is stored, third parties, Safari clearing guest data, and the deletion email address.
 
@@ -766,7 +766,7 @@ What is stored, third parties, Safari clearing guest data, and the deletion emai
 
 #### CHI-093 Test account deletion on staging
 
-Accessibility, states, privacy · task · 1 pts · spec 7.3, 10.3 · depends on CHI-080
+Accessibility, states, privacy · task · 1 pt · spec 7.3, 10.3 · depends on CHI-080
 
 Delete one user in the dashboard and confirm cascades remove every row.
 
@@ -809,7 +809,7 @@ iPhone Safari and Android Chrome, with browser toolbars showing.
 
 #### CHI-102 Playtest build on staging
 
-Testing and playtest · chore · 1 pts · spec 10.2, 10.4 · depends on CHI-100, CHI-101
+Testing and playtest · chore · 1 pt · spec 10.2, 10.4 · depends on CHI-100, CHI-101
 
 A stable staging build and a short note for testers.
 
@@ -828,7 +828,7 @@ Testing and playtest · task · 3 pts · spec 10.2 · depends on CHI-102, CHI-00
 
 #### CHI-104 Triage playtest findings
 
-Testing and playtest · task · 1 pts · spec 10.3 · depends on CHI-103
+Testing and playtest · task · 1 pt · spec 10.3 · depends on CHI-103
 
 Sort every finding into must-fix now or section 11.
 
@@ -865,7 +865,7 @@ Timebox for the remaining must-fix findings, including question balance tuning.
 
 #### CHI-110 Production Supabase on Pro
 
-Launch · chore · 1 pts · spec 9, D17 · depends on CHI-080
+Launch · chore · 1 pt · spec 9, D17 · depends on CHI-080
 
 Upgrade production and confirm migrations are applied.
 
@@ -874,7 +874,7 @@ Upgrade production and confirm migrations are applied.
 
 #### CHI-111 Final email check in production
 
-Launch · task · 1 pts · spec 7.3, 10.3 · depends on CHI-082
+Launch · task · 1 pt · spec 7.3, 10.3 · depends on CHI-082
 
 A sign-in code from production reaches an outside address.
 
@@ -883,7 +883,7 @@ A sign-in code from production reaches an outside address.
 
 #### CHI-112 Sentry test error from production
 
-Launch · task · 1 pts · spec 9, 10.3 · depends on CHI-017
+Launch · task · 1 pt · spec 9, 10.3 · depends on CHI-017
 
 Throw one test error and check the event carries no personal data.
 
@@ -900,18 +900,18 @@ How to run, test, deploy and add a character.
 
 #### CHI-114 TBD and definition-of-done sweep
 
-Launch · task · 1 pts · spec 10.3 · depends on CHI-106
+Launch · task · 1 pt · spec 10.3 · depends on CHI-106
 
 Every TBD resolved or moved to section 11; every 10.3 box checked.
 
 - [ ] No open TBD in the spec
 - [ ] Every 10.3 box checked
 
-### Day 17, Thu Oct 29 (1 pts)
+### Day 17, Thu Oct 29 (1 pt)
 
 #### CHI-115 Launch
 
-Launch · task · 1 pts · spec 1, 3.6, 10.4 · depends on CHI-110, CHI-111, CHI-112, CHI-113, CHI-114
+Launch · task · 1 pt · spec 1, 3.6, 10.4 · depends on CHI-110, CHI-111, CHI-112, CHI-113, CHI-114
 
 Merge to main, update released-ids.json, confirm the live URL plays on both phones.
 

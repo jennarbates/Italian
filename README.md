@@ -39,3 +39,13 @@ If something isn't in the spec's scope table, it's not in the MVP. New ideas go 
 React, TypeScript, Vite, Tailwind, Zustand, Zod, Supabase, `ts-fsrs` for spaced repetition, and Sentry. Tests use Vitest, fast-check and Playwright. It's hosted on Cloudflare. My reasons for each choice are in [section 9 of the spec](spec.md#9-non-functional).
 
 I'll add setup instructions once the repo is scaffolded in Sprint 1.
+
+## Testing
+
+```bash
+pnpm test          # Vitest, with a coverage report for src/engine/
+pnpm test:watch    # Vitest in watch mode
+pnpm test:e2e      # Playwright against the production build, in Chromium (Pixel 7) and WebKit (iPhone 15)
+```
+
+The first time, install the Playwright browsers with `pnpm exec playwright install chromium webkit`.
