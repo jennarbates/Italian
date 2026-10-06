@@ -1,0 +1,41 @@
+name: Bug
+description: Something behaves differently from the spec
+labels: ["type: bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What the spec says should happen
+      description: Include the spec section.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the game seed if you have it.
+      value: |
+        1.
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      placeholder: "iPhone 15, Safari 26"
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - "Must fix before launch"
+        - "Should fix"
+        - "Can wait (move to future work)"
+    validations:
+      required: true

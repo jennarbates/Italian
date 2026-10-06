@@ -1,0 +1,900 @@
+{
+ "labels": [
+  "type: story",
+  "type: task",
+  "type: test",
+  "type: chore",
+  "type: spike",
+  "waits on others",
+  "epic",
+  "epic: Spec sign-off",
+  "epic: Repo and infra",
+  "epic: Content and art",
+  "epic: Game engine",
+  "epic: CPU opponent",
+  "epic: Game UI",
+  "epic: Learning and progress",
+  "epic: Accounts and sync",
+  "epic: Accessibility and privacy",
+  "epic: Testing and playtest",
+  "epic: Launch"
+ ],
+ "milestones": {
+  "S1": 1,
+  "S2": 2,
+  "S3": 3,
+  "S4": 4
+ },
+ "issues": {
+  "E0": {
+   "number": 1,
+   "id": 5735945548,
+   "url": "https://github.com/jennarbates/Italian/issues/1"
+  },
+  "E1": {
+   "number": 2,
+   "id": 5735945799,
+   "url": "https://github.com/jennarbates/Italian/issues/2"
+  },
+  "E2": {
+   "number": 3,
+   "id": 5735946082,
+   "url": "https://github.com/jennarbates/Italian/issues/3"
+  },
+  "E3": {
+   "number": 4,
+   "id": 5735946349,
+   "url": "https://github.com/jennarbates/Italian/issues/4"
+  },
+  "E4": {
+   "number": 5,
+   "id": 5735946565,
+   "url": "https://github.com/jennarbates/Italian/issues/5"
+  },
+  "E5": {
+   "number": 6,
+   "id": 5735946856,
+   "url": "https://github.com/jennarbates/Italian/issues/6"
+  },
+  "E6": {
+   "number": 7,
+   "id": 5735947106,
+   "url": "https://github.com/jennarbates/Italian/issues/7"
+  },
+  "E7": {
+   "number": 8,
+   "id": 5735947379,
+   "url": "https://github.com/jennarbates/Italian/issues/8"
+  },
+  "E8": {
+   "number": 9,
+   "id": 5735947630,
+   "url": "https://github.com/jennarbates/Italian/issues/9"
+  },
+  "E9": {
+   "number": 10,
+   "id": 5735947904,
+   "url": "https://github.com/jennarbates/Italian/issues/10"
+  },
+  "E10": {
+   "number": 11,
+   "id": 5735948151,
+   "url": "https://github.com/jennarbates/Italian/issues/11"
+  },
+  "CHI-001": {
+   "number": 12,
+   "id": 5735948389,
+   "url": "https://github.com/jennarbates/Italian/issues/12"
+  },
+  "CHI-002": {
+   "number": 13,
+   "id": 5735948672,
+   "url": "https://github.com/jennarbates/Italian/issues/13"
+  },
+  "CHI-003": {
+   "number": 14,
+   "id": 5735948989,
+   "url": "https://github.com/jennarbates/Italian/issues/14"
+  },
+  "CHI-004": {
+   "number": 15,
+   "id": 5735949296,
+   "url": "https://github.com/jennarbates/Italian/issues/15"
+  },
+  "CHI-005": {
+   "number": 16,
+   "id": 5735949600,
+   "url": "https://github.com/jennarbates/Italian/issues/16"
+  },
+  "CHI-010": {
+   "number": 17,
+   "id": 5735949925,
+   "url": "https://github.com/jennarbates/Italian/issues/17"
+  },
+  "CHI-011": {
+   "number": 18,
+   "id": 5735950198,
+   "url": "https://github.com/jennarbates/Italian/issues/18"
+  },
+  "CHI-012": {
+   "number": 19,
+   "id": 5735950473,
+   "url": "https://github.com/jennarbates/Italian/issues/19"
+  },
+  "CHI-015": {
+   "number": 20,
+   "id": 5735950722,
+   "url": "https://github.com/jennarbates/Italian/issues/20"
+  },
+  "CHI-013": {
+   "number": 21,
+   "id": 5735951020,
+   "url": "https://github.com/jennarbates/Italian/issues/21"
+  },
+  "CHI-016": {
+   "number": 22,
+   "id": 5735951351,
+   "url": "https://github.com/jennarbates/Italian/issues/22"
+  },
+  "CHI-014": {
+   "number": 23,
+   "id": 5735951637,
+   "url": "https://github.com/jennarbates/Italian/issues/23"
+  },
+  "CHI-017": {
+   "number": 24,
+   "id": 5735951996,
+   "url": "https://github.com/jennarbates/Italian/issues/24"
+  },
+  "CHI-018": {
+   "number": 25,
+   "id": 5735952303,
+   "url": "https://github.com/jennarbates/Italian/issues/25"
+  },
+  "CHI-019": {
+   "number": 26,
+   "id": 5735952621,
+   "url": "https://github.com/jennarbates/Italian/issues/26"
+  },
+  "CHI-020": {
+   "number": 27,
+   "id": 5735952920,
+   "url": "https://github.com/jennarbates/Italian/issues/27"
+  },
+  "CHI-021": {
+   "number": 28,
+   "id": 5735953222,
+   "url": "https://github.com/jennarbates/Italian/issues/28"
+  },
+  "CHI-022": {
+   "number": 29,
+   "id": 5735953527,
+   "url": "https://github.com/jennarbates/Italian/issues/29"
+  },
+  "CHI-023": {
+   "number": 30,
+   "id": 5735953824,
+   "url": "https://github.com/jennarbates/Italian/issues/30"
+  },
+  "CHI-024": {
+   "number": 31,
+   "id": 5735954139,
+   "url": "https://github.com/jennarbates/Italian/issues/31"
+  },
+  "CHI-025": {
+   "number": 32,
+   "id": 5735954460,
+   "url": "https://github.com/jennarbates/Italian/issues/32"
+  },
+  "CHI-026": {
+   "number": 33,
+   "id": 5735954797,
+   "url": "https://github.com/jennarbates/Italian/issues/33"
+  },
+  "CHI-027": {
+   "number": 34,
+   "id": 5735955113,
+   "url": "https://github.com/jennarbates/Italian/issues/34"
+  },
+  "CHI-028": {
+   "number": 35,
+   "id": 5735955406,
+   "url": "https://github.com/jennarbates/Italian/issues/35"
+  },
+  "CHI-030": {
+   "number": 36,
+   "id": 5735955749,
+   "url": "https://github.com/jennarbates/Italian/issues/36"
+  },
+  "CHI-031": {
+   "number": 37,
+   "id": 5735956076,
+   "url": "https://github.com/jennarbates/Italian/issues/37"
+  },
+  "CHI-032": {
+   "number": 38,
+   "id": 5735956429,
+   "url": "https://github.com/jennarbates/Italian/issues/38"
+  },
+  "CHI-033": {
+   "number": 39,
+   "id": 5735956747,
+   "url": "https://github.com/jennarbates/Italian/issues/39"
+  },
+  "CHI-034": {
+   "number": 40,
+   "id": 5735957042,
+   "url": "https://github.com/jennarbates/Italian/issues/40"
+  },
+  "CHI-035": {
+   "number": 41,
+   "id": 5735957358,
+   "url": "https://github.com/jennarbates/Italian/issues/41"
+  },
+  "CHI-036": {
+   "number": 42,
+   "id": 5735957678,
+   "url": "https://github.com/jennarbates/Italian/issues/42"
+  },
+  "CHI-037": {
+   "number": 43,
+   "id": 5735957994,
+   "url": "https://github.com/jennarbates/Italian/issues/43"
+  },
+  "CHI-038": {
+   "number": 44,
+   "id": 5735958279,
+   "url": "https://github.com/jennarbates/Italian/issues/44"
+  },
+  "CHI-039": {
+   "number": 45,
+   "id": 5735958565,
+   "url": "https://github.com/jennarbates/Italian/issues/45"
+  },
+  "CHI-045": {
+   "number": 46,
+   "id": 5735958864,
+   "url": "https://github.com/jennarbates/Italian/issues/46"
+  },
+  "CHI-040": {
+   "number": 47,
+   "id": 5735959171,
+   "url": "https://github.com/jennarbates/Italian/issues/47"
+  },
+  "CHI-046": {
+   "number": 48,
+   "id": 5735959514,
+   "url": "https://github.com/jennarbates/Italian/issues/48"
+  },
+  "CHI-047": {
+   "number": 49,
+   "id": 5735959813,
+   "url": "https://github.com/jennarbates/Italian/issues/49"
+  },
+  "CHI-049": {
+   "number": 50,
+   "id": 5735960121,
+   "url": "https://github.com/jennarbates/Italian/issues/50"
+  },
+  "CHI-050": {
+   "number": 51,
+   "id": 5735960434,
+   "url": "https://github.com/jennarbates/Italian/issues/51"
+  },
+  "CHI-051": {
+   "number": 52,
+   "id": 5735960733,
+   "url": "https://github.com/jennarbates/Italian/issues/52"
+  },
+  "CHI-052": {
+   "number": 53,
+   "id": 5735961004,
+   "url": "https://github.com/jennarbates/Italian/issues/53"
+  },
+  "CHI-053": {
+   "number": 54,
+   "id": 5735961332,
+   "url": "https://github.com/jennarbates/Italian/issues/54"
+  },
+  "CHI-054": {
+   "number": 55,
+   "id": 5735961622,
+   "url": "https://github.com/jennarbates/Italian/issues/55"
+  },
+  "CHI-055": {
+   "number": 56,
+   "id": 5735961935,
+   "url": "https://github.com/jennarbates/Italian/issues/56"
+  },
+  "CHI-056": {
+   "number": 57,
+   "id": 5735962258,
+   "url": "https://github.com/jennarbates/Italian/issues/57"
+  },
+  "CHI-057": {
+   "number": 58,
+   "id": 5735962540,
+   "url": "https://github.com/jennarbates/Italian/issues/58"
+  },
+  "CHI-058": {
+   "number": 59,
+   "id": 5735962874,
+   "url": "https://github.com/jennarbates/Italian/issues/59"
+  },
+  "CHI-059": {
+   "number": 60,
+   "id": 5735963160,
+   "url": "https://github.com/jennarbates/Italian/issues/60"
+  },
+  "CHI-060": {
+   "number": 61,
+   "id": 5735963489,
+   "url": "https://github.com/jennarbates/Italian/issues/61"
+  },
+  "CHI-061": {
+   "number": 62,
+   "id": 5735963789,
+   "url": "https://github.com/jennarbates/Italian/issues/62"
+  },
+  "CHI-062": {
+   "number": 63,
+   "id": 5735964125,
+   "url": "https://github.com/jennarbates/Italian/issues/63"
+  },
+  "CHI-070": {
+   "number": 64,
+   "id": 5735964411,
+   "url": "https://github.com/jennarbates/Italian/issues/64"
+  },
+  "CHI-071": {
+   "number": 65,
+   "id": 5735964697,
+   "url": "https://github.com/jennarbates/Italian/issues/65"
+  },
+  "CHI-072": {
+   "number": 66,
+   "id": 5735964972,
+   "url": "https://github.com/jennarbates/Italian/issues/66"
+  },
+  "CHI-073": {
+   "number": 67,
+   "id": 5735965285,
+   "url": "https://github.com/jennarbates/Italian/issues/67"
+  },
+  "CHI-074": {
+   "number": 68,
+   "id": 5735965586,
+   "url": "https://github.com/jennarbates/Italian/issues/68"
+  },
+  "CHI-080": {
+   "number": 69,
+   "id": 5735965874,
+   "url": "https://github.com/jennarbates/Italian/issues/69"
+  },
+  "CHI-081": {
+   "number": 70,
+   "id": 5735966181,
+   "url": "https://github.com/jennarbates/Italian/issues/70"
+  },
+  "CHI-082": {
+   "number": 71,
+   "id": 5735966481,
+   "url": "https://github.com/jennarbates/Italian/issues/71"
+  },
+  "CHI-083": {
+   "number": 72,
+   "id": 5735966783,
+   "url": "https://github.com/jennarbates/Italian/issues/72"
+  },
+  "CHI-084": {
+   "number": 73,
+   "id": 5735967105,
+   "url": "https://github.com/jennarbates/Italian/issues/73"
+  },
+  "CHI-085": {
+   "number": 74,
+   "id": 5735967412,
+   "url": "https://github.com/jennarbates/Italian/issues/74"
+  },
+  "CHI-086": {
+   "number": 75,
+   "id": 5735967703,
+   "url": "https://github.com/jennarbates/Italian/issues/75"
+  },
+  "CHI-087": {
+   "number": 76,
+   "id": 5735967947,
+   "url": "https://github.com/jennarbates/Italian/issues/76"
+  },
+  "CHI-088": {
+   "number": 77,
+   "id": 5735968216,
+   "url": "https://github.com/jennarbates/Italian/issues/77"
+  },
+  "CHI-089": {
+   "number": 78,
+   "id": 5735968517,
+   "url": "https://github.com/jennarbates/Italian/issues/78"
+  },
+  "CHI-090": {
+   "number": 79,
+   "id": 5735968806,
+   "url": "https://github.com/jennarbates/Italian/issues/79"
+  },
+  "CHI-091": {
+   "number": 80,
+   "id": 5735969125,
+   "url": "https://github.com/jennarbates/Italian/issues/80"
+  },
+  "CHI-092": {
+   "number": 81,
+   "id": 5735969457,
+   "url": "https://github.com/jennarbates/Italian/issues/81"
+  },
+  "CHI-093": {
+   "number": 82,
+   "id": 5735969788,
+   "url": "https://github.com/jennarbates/Italian/issues/82"
+  },
+  "CHI-094": {
+   "number": 83,
+   "id": 5735970098,
+   "url": "https://github.com/jennarbates/Italian/issues/83"
+  },
+  "CHI-100": {
+   "number": 84,
+   "id": 5735970414,
+   "url": "https://github.com/jennarbates/Italian/issues/84"
+  },
+  "CHI-101": {
+   "number": 85,
+   "id": 5735970720,
+   "url": "https://github.com/jennarbates/Italian/issues/85"
+  },
+  "CHI-102": {
+   "number": 86,
+   "id": 5735971017,
+   "url": "https://github.com/jennarbates/Italian/issues/86"
+  },
+  "CHI-103": {
+   "number": 87,
+   "id": 5735971311,
+   "url": "https://github.com/jennarbates/Italian/issues/87"
+  },
+  "CHI-104": {
+   "number": 88,
+   "id": 5735971612,
+   "url": "https://github.com/jennarbates/Italian/issues/88"
+  },
+  "CHI-105": {
+   "number": 89,
+   "id": 5735971911,
+   "url": "https://github.com/jennarbates/Italian/issues/89"
+  },
+  "CHI-106": {
+   "number": 90,
+   "id": 5735972176,
+   "url": "https://github.com/jennarbates/Italian/issues/90"
+  },
+  "CHI-110": {
+   "number": 91,
+   "id": 5735972469,
+   "url": "https://github.com/jennarbates/Italian/issues/91"
+  },
+  "CHI-111": {
+   "number": 92,
+   "id": 5735972744,
+   "url": "https://github.com/jennarbates/Italian/issues/92"
+  },
+  "CHI-112": {
+   "number": 93,
+   "id": 5735973061,
+   "url": "https://github.com/jennarbates/Italian/issues/93"
+  },
+  "CHI-113": {
+   "number": 94,
+   "id": 5735973348,
+   "url": "https://github.com/jennarbates/Italian/issues/94"
+  },
+  "CHI-114": {
+   "number": 95,
+   "id": 5735973628,
+   "url": "https://github.com/jennarbates/Italian/issues/95"
+  },
+  "CHI-115": {
+   "number": 96,
+   "id": 5735973907,
+   "url": "https://github.com/jennarbates/Italian/issues/96"
+  }
+ },
+ "subissues": [
+  "CHI-001",
+  "CHI-002",
+  "CHI-003",
+  "CHI-004",
+  "CHI-005",
+  "CHI-010",
+  "CHI-011",
+  "CHI-012",
+  "CHI-015",
+  "CHI-013",
+  "CHI-016",
+  "CHI-014",
+  "CHI-017",
+  "CHI-018",
+  "CHI-019",
+  "CHI-020",
+  "CHI-021",
+  "CHI-022",
+  "CHI-023",
+  "CHI-024",
+  "CHI-025",
+  "CHI-026",
+  "CHI-027",
+  "CHI-028",
+  "CHI-030",
+  "CHI-031",
+  "CHI-032",
+  "CHI-033",
+  "CHI-034",
+  "CHI-035",
+  "CHI-036",
+  "CHI-037",
+  "CHI-038",
+  "CHI-039",
+  "CHI-045",
+  "CHI-040",
+  "CHI-046",
+  "CHI-047",
+  "CHI-049",
+  "CHI-050",
+  "CHI-051",
+  "CHI-052",
+  "CHI-053",
+  "CHI-054",
+  "CHI-055",
+  "CHI-056",
+  "CHI-057",
+  "CHI-058",
+  "CHI-059",
+  "CHI-060",
+  "CHI-061",
+  "CHI-062",
+  "CHI-070",
+  "CHI-071",
+  "CHI-072",
+  "CHI-073",
+  "CHI-074",
+  "CHI-080",
+  "CHI-081",
+  "CHI-082",
+  "CHI-083",
+  "CHI-084",
+  "CHI-085",
+  "CHI-086",
+  "CHI-087",
+  "CHI-088",
+  "CHI-089",
+  "CHI-090",
+  "CHI-091",
+  "CHI-092",
+  "CHI-093",
+  "CHI-094",
+  "CHI-100",
+  "CHI-101",
+  "CHI-102",
+  "CHI-103",
+  "CHI-104",
+  "CHI-105",
+  "CHI-106",
+  "CHI-110",
+  "CHI-111",
+  "CHI-112",
+  "CHI-113",
+  "CHI-114",
+  "CHI-115"
+ ],
+ "blocked": [
+  "CHI-004<CHI-001",
+  "CHI-004<CHI-002",
+  "CHI-004<CHI-003",
+  "CHI-012<CHI-011",
+  "CHI-013<CHI-012",
+  "CHI-013<CHI-015",
+  "CHI-014<CHI-010",
+  "CHI-014<CHI-011",
+  "CHI-014<CHI-016",
+  "CHI-017<CHI-011",
+  "CHI-018<CHI-010",
+  "CHI-019<CHI-010",
+  "CHI-020<CHI-011",
+  "CHI-021<CHI-020",
+  "CHI-022<CHI-020",
+  "CHI-023<CHI-001",
+  "CHI-024<CHI-020",
+  "CHI-025<CHI-024",
+  "CHI-026<CHI-021",
+  "CHI-026<CHI-022",
+  "CHI-026<CHI-023",
+  "CHI-026<CHI-025",
+  "CHI-028<CHI-025",
+  "CHI-028<CHI-027",
+  "CHI-030<CHI-011",
+  "CHI-031<CHI-030",
+  "CHI-032<CHI-031",
+  "CHI-033<CHI-030",
+  "CHI-034<CHI-030",
+  "CHI-035<CHI-032",
+  "CHI-035<CHI-033",
+  "CHI-035<CHI-034",
+  "CHI-036<CHI-035",
+  "CHI-037<CHI-030",
+  "CHI-038<CHI-035",
+  "CHI-039<CHI-032",
+  "CHI-045<CHI-032",
+  "CHI-045<CHI-034",
+  "CHI-045<CHI-004",
+  "CHI-040<CHI-035",
+  "CHI-040<CHI-036",
+  "CHI-040<CHI-037",
+  "CHI-040<CHI-038",
+  "CHI-040<CHI-039",
+  "CHI-040<CHI-045",
+  "CHI-046<CHI-045",
+  "CHI-047<CHI-046",
+  "CHI-049<CHI-011",
+  "CHI-050<CHI-032",
+  "CHI-050<CHI-049",
+  "CHI-051<CHI-028",
+  "CHI-051<CHI-050",
+  "CHI-052<CHI-050",
+  "CHI-053<CHI-011",
+  "CHI-054<CHI-051",
+  "CHI-055<CHI-053",
+  "CHI-055<CHI-035",
+  "CHI-056<CHI-053",
+  "CHI-056<CHI-037",
+  "CHI-057<CHI-023",
+  "CHI-057<CHI-055",
+  "CHI-058<CHI-046",
+  "CHI-058<CHI-053",
+  "CHI-059<CHI-039",
+  "CHI-059<CHI-051",
+  "CHI-060<CHI-058",
+  "CHI-060<CHI-059",
+  "CHI-061<CHI-050",
+  "CHI-062<CHI-061",
+  "CHI-070<CHI-038",
+  "CHI-070<CHI-049",
+  "CHI-071<CHI-061",
+  "CHI-072<CHI-070",
+  "CHI-073<CHI-072",
+  "CHI-074<CHI-072",
+  "CHI-080<CHI-015",
+  "CHI-080<CHI-016",
+  "CHI-081<CHI-080",
+  "CHI-082<CHI-018",
+  "CHI-082<CHI-019",
+  "CHI-082<CHI-016",
+  "CHI-083<CHI-082",
+  "CHI-083<CHI-053",
+  "CHI-084<CHI-080",
+  "CHI-084<CHI-070",
+  "CHI-084<CHI-071",
+  "CHI-085<CHI-083",
+  "CHI-085<CHI-084",
+  "CHI-086<CHI-084",
+  "CHI-086<CHI-072",
+  "CHI-087<CHI-084",
+  "CHI-088<CHI-085",
+  "CHI-088<CHI-086",
+  "CHI-089<CHI-087",
+  "CHI-090<CHI-062",
+  "CHI-091<CHI-084",
+  "CHI-092<CHI-011",
+  "CHI-093<CHI-080",
+  "CHI-094<CHI-090",
+  "CHI-100<CHI-060",
+  "CHI-100<CHI-061",
+  "CHI-100<CHI-083",
+  "CHI-101<CHI-060",
+  "CHI-102<CHI-100",
+  "CHI-102<CHI-101",
+  "CHI-103<CHI-102",
+  "CHI-103<CHI-005",
+  "CHI-104<CHI-103",
+  "CHI-105<CHI-104",
+  "CHI-106<CHI-105",
+  "CHI-110<CHI-080",
+  "CHI-111<CHI-082",
+  "CHI-112<CHI-017",
+  "CHI-113<CHI-025",
+  "CHI-114<CHI-106",
+  "CHI-115<CHI-110",
+  "CHI-115<CHI-111",
+  "CHI-115<CHI-112",
+  "CHI-115<CHI-113",
+  "CHI-115<CHI-114"
+ ],
+ "blocked_unsupported": false,
+ "project": {
+  "number": 1,
+  "id": "PVT_kwHOApTEl84Bl_GJ",
+  "url": "https://github.com/users/jennarbates/projects/1"
+ },
+ "fields": {},
+ "items": {
+  "CHI-001": "PVTI_lAHOApTEl84Bl_GJzg-_vhk",
+  "CHI-002": "PVTI_lAHOApTEl84Bl_GJzg-_vjw",
+  "CHI-003": "PVTI_lAHOApTEl84Bl_GJzg-_vnM",
+  "CHI-004": "PVTI_lAHOApTEl84Bl_GJzg-_vrw",
+  "CHI-005": "PVTI_lAHOApTEl84Bl_GJzg-_vw4",
+  "CHI-010": "PVTI_lAHOApTEl84Bl_GJzg-_v0c",
+  "CHI-011": "PVTI_lAHOApTEl84Bl_GJzg-_v3g",
+  "CHI-012": "PVTI_lAHOApTEl84Bl_GJzg-_v5w",
+  "CHI-015": "PVTI_lAHOApTEl84Bl_GJzg-_v9E",
+  "CHI-013": "PVTI_lAHOApTEl84Bl_GJzg-_wAQ",
+  "CHI-016": "PVTI_lAHOApTEl84Bl_GJzg-_wCo",
+  "CHI-014": "PVTI_lAHOApTEl84Bl_GJzg-_wF0",
+  "CHI-017": "PVTI_lAHOApTEl84Bl_GJzg-_wI8",
+  "CHI-018": "PVTI_lAHOApTEl84Bl_GJzg-_wK0",
+  "CHI-019": "PVTI_lAHOApTEl84Bl_GJzg-_wNQ",
+  "CHI-020": "PVTI_lAHOApTEl84Bl_GJzg-_wPM",
+  "CHI-021": "PVTI_lAHOApTEl84Bl_GJzg-_wRk",
+  "CHI-022": "PVTI_lAHOApTEl84Bl_GJzg-_wTY",
+  "CHI-023": "PVTI_lAHOApTEl84Bl_GJzg-_wV4",
+  "CHI-024": "PVTI_lAHOApTEl84Bl_GJzg-_wYQ",
+  "CHI-025": "PVTI_lAHOApTEl84Bl_GJzg-_wac",
+  "CHI-026": "PVTI_lAHOApTEl84Bl_GJzg-_wdY",
+  "CHI-027": "PVTI_lAHOApTEl84Bl_GJzg-_wgw",
+  "CHI-028": "PVTI_lAHOApTEl84Bl_GJzg-_wjs",
+  "CHI-030": "PVTI_lAHOApTEl84Bl_GJzg-_wmw",
+  "CHI-031": "PVTI_lAHOApTEl84Bl_GJzg-_wpE",
+  "CHI-032": "PVTI_lAHOApTEl84Bl_GJzg-_wrc",
+  "CHI-033": "PVTI_lAHOApTEl84Bl_GJzg-_wto",
+  "CHI-034": "PVTI_lAHOApTEl84Bl_GJzg-_wws",
+  "CHI-035": "PVTI_lAHOApTEl84Bl_GJzg-_wz0",
+  "CHI-036": "PVTI_lAHOApTEl84Bl_GJzg-_w18",
+  "CHI-037": "PVTI_lAHOApTEl84Bl_GJzg-_w5w",
+  "CHI-038": "PVTI_lAHOApTEl84Bl_GJzg-_w84",
+  "CHI-039": "PVTI_lAHOApTEl84Bl_GJzg-_w_0",
+  "CHI-045": "PVTI_lAHOApTEl84Bl_GJzg-_xDk",
+  "CHI-040": "PVTI_lAHOApTEl84Bl_GJzg-_xGc",
+  "CHI-046": "PVTI_lAHOApTEl84Bl_GJzg-_xJA",
+  "CHI-047": "PVTI_lAHOApTEl84Bl_GJzg-_xLg",
+  "CHI-049": "PVTI_lAHOApTEl84Bl_GJzg-_xN4",
+  "CHI-050": "PVTI_lAHOApTEl84Bl_GJzg-_xQ4",
+  "CHI-051": "PVTI_lAHOApTEl84Bl_GJzg-_xS0",
+  "CHI-052": "PVTI_lAHOApTEl84Bl_GJzg-_xVY",
+  "CHI-053": "PVTI_lAHOApTEl84Bl_GJzg-_xaQ",
+  "CHI-054": "PVTI_lAHOApTEl84Bl_GJzg-_xdg",
+  "CHI-055": "PVTI_lAHOApTEl84Bl_GJzg-_xf4",
+  "CHI-056": "PVTI_lAHOApTEl84Bl_GJzg-_xik",
+  "CHI-057": "PVTI_lAHOApTEl84Bl_GJzg-_xlA",
+  "CHI-058": "PVTI_lAHOApTEl84Bl_GJzg-_xnc",
+  "CHI-059": "PVTI_lAHOApTEl84Bl_GJzg-_xq0",
+  "CHI-060": "PVTI_lAHOApTEl84Bl_GJzg-_xts",
+  "CHI-061": "PVTI_lAHOApTEl84Bl_GJzg-_xv0",
+  "CHI-062": "PVTI_lAHOApTEl84Bl_GJzg-_xy0",
+  "CHI-070": "PVTI_lAHOApTEl84Bl_GJzg-_x1s",
+  "CHI-071": "PVTI_lAHOApTEl84Bl_GJzg-_x5I",
+  "CHI-072": "PVTI_lAHOApTEl84Bl_GJzg-_x7U",
+  "CHI-073": "PVTI_lAHOApTEl84Bl_GJzg-_x-E",
+  "CHI-074": "PVTI_lAHOApTEl84Bl_GJzg-_yA4",
+  "CHI-080": "PVTI_lAHOApTEl84Bl_GJzg-_yDo",
+  "CHI-081": "PVTI_lAHOApTEl84Bl_GJzg-_yIQ",
+  "CHI-082": "PVTI_lAHOApTEl84Bl_GJzg-_yLc",
+  "CHI-083": "PVTI_lAHOApTEl84Bl_GJzg-_yNs",
+  "CHI-084": "PVTI_lAHOApTEl84Bl_GJzg-_yQQ",
+  "CHI-085": "PVTI_lAHOApTEl84Bl_GJzg-_ySw",
+  "CHI-086": "PVTI_lAHOApTEl84Bl_GJzg-_yUs",
+  "CHI-087": "PVTI_lAHOApTEl84Bl_GJzg-_yXI",
+  "CHI-088": "PVTI_lAHOApTEl84Bl_GJzg-_yZk",
+  "CHI-089": "PVTI_lAHOApTEl84Bl_GJzg-_ycI",
+  "CHI-090": "PVTI_lAHOApTEl84Bl_GJzg-_yek",
+  "CHI-091": "PVTI_lAHOApTEl84Bl_GJzg-_yhE",
+  "CHI-092": "PVTI_lAHOApTEl84Bl_GJzg-_ykE",
+  "CHI-093": "PVTI_lAHOApTEl84Bl_GJzg-_ymk",
+  "CHI-094": "PVTI_lAHOApTEl84Bl_GJzg-_yoY",
+  "CHI-100": "PVTI_lAHOApTEl84Bl_GJzg-_yq8",
+  "CHI-101": "PVTI_lAHOApTEl84Bl_GJzg-_yts",
+  "CHI-102": "PVTI_lAHOApTEl84Bl_GJzg-_ywI",
+  "CHI-103": "PVTI_lAHOApTEl84Bl_GJzg-_yx8",
+  "CHI-104": "PVTI_lAHOApTEl84Bl_GJzg-_y0Q",
+  "CHI-105": "PVTI_lAHOApTEl84Bl_GJzg-_y2w",
+  "CHI-106": "PVTI_lAHOApTEl84Bl_GJzg-_y5s",
+  "CHI-110": "PVTI_lAHOApTEl84Bl_GJzg-_y8Q",
+  "CHI-111": "PVTI_lAHOApTEl84Bl_GJzg-_y-0",
+  "CHI-112": "PVTI_lAHOApTEl84Bl_GJzg-_zB8",
+  "CHI-113": "PVTI_lAHOApTEl84Bl_GJzg-_zFY",
+  "CHI-114": "PVTI_lAHOApTEl84Bl_GJzg-_zIQ",
+  "CHI-115": "PVTI_lAHOApTEl84Bl_GJzg-_zKU"
+ },
+ "edited": [
+  "CHI-001",
+  "CHI-002",
+  "CHI-003",
+  "CHI-004",
+  "CHI-005",
+  "CHI-010",
+  "CHI-011",
+  "CHI-012",
+  "CHI-015",
+  "CHI-013",
+  "CHI-016",
+  "CHI-014",
+  "CHI-017",
+  "CHI-018",
+  "CHI-019",
+  "CHI-020",
+  "CHI-021",
+  "CHI-022",
+  "CHI-023",
+  "CHI-024",
+  "CHI-025",
+  "CHI-026",
+  "CHI-027",
+  "CHI-028",
+  "CHI-030",
+  "CHI-031",
+  "CHI-032",
+  "CHI-033",
+  "CHI-034",
+  "CHI-035",
+  "CHI-036",
+  "CHI-037",
+  "CHI-038",
+  "CHI-039",
+  "CHI-045",
+  "CHI-040",
+  "CHI-046",
+  "CHI-047",
+  "CHI-049",
+  "CHI-050",
+  "CHI-051",
+  "CHI-052",
+  "CHI-053",
+  "CHI-054",
+  "CHI-055",
+  "CHI-056",
+  "CHI-057",
+  "CHI-058",
+  "CHI-059",
+  "CHI-060",
+  "CHI-061",
+  "CHI-062",
+  "CHI-070",
+  "CHI-071",
+  "CHI-072",
+  "CHI-073",
+  "CHI-074",
+  "CHI-080",
+  "CHI-081",
+  "CHI-082",
+  "CHI-083",
+  "CHI-084",
+  "CHI-085",
+  "CHI-086",
+  "CHI-087",
+  "CHI-088",
+  "CHI-089",
+  "CHI-090",
+  "CHI-091",
+  "CHI-092",
+  "CHI-093",
+  "CHI-094",
+  "CHI-100",
+  "CHI-101",
+  "CHI-102",
+  "CHI-103",
+  "CHI-104",
+  "CHI-105",
+  "CHI-106",
+  "CHI-110",
+  "CHI-111",
+  "CHI-112",
+  "CHI-113",
+  "CHI-114",
+  "CHI-115"
+ ]
+}

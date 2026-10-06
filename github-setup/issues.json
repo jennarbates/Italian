@@ -1,0 +1,1622 @@
+{
+ "repo": "jennarbates/Italian",
+ "owner": "jennarbates",
+ "project_title": "Chi è? MVP",
+ "labels": [
+  {
+   "name": "type: story",
+   "color": "1f6feb",
+   "description": "Backlog card type: story"
+  },
+  {
+   "name": "type: task",
+   "color": "8250df",
+   "description": "Backlog card type: task"
+  },
+  {
+   "name": "type: test",
+   "color": "bf3989",
+   "description": "Backlog card type: test"
+  },
+  {
+   "name": "type: chore",
+   "color": "6e7781",
+   "description": "Backlog card type: chore"
+  },
+  {
+   "name": "type: spike",
+   "color": "d4a72c",
+   "description": "Backlog card type: spike"
+  },
+  {
+   "name": "type: bug",
+   "color": "d73a4a",
+   "description": "Behaves differently from the spec"
+  },
+  {
+   "name": "waits on others",
+   "color": "cf3a24",
+   "description": "Depends on someone outside the build. Start early."
+  },
+  {
+   "name": "epic",
+   "color": "3d2c8d",
+   "description": "Parent issue grouping related backlog cards"
+  },
+  {
+   "name": "epic: Spec sign-off",
+   "color": "a14dcb",
+   "description": "Card belongs to the Spec sign-off epic"
+  },
+  {
+   "name": "epic: Repo and infra",
+   "color": "4d8ccb",
+   "description": "Card belongs to the Repo, CI and infra epic"
+  },
+  {
+   "name": "epic: Content and art",
+   "color": "4dcba1",
+   "description": "Card belongs to the Content and art epic"
+  },
+  {
+   "name": "epic: Game engine",
+   "color": "4d57cb",
+   "description": "Card belongs to the Game engine epic"
+  },
+  {
+   "name": "epic: CPU opponent",
+   "color": "4db6cb",
+   "description": "Card belongs to the CPU opponent epic"
+  },
+  {
+   "name": "epic: Game UI",
+   "color": "cb814d",
+   "description": "Card belongs to the Game UI epic"
+  },
+  {
+   "name": "epic: Learning and progress",
+   "color": "81cb4d",
+   "description": "Card belongs to the Learning and progress epic"
+  },
+  {
+   "name": "epic: Accounts and sync",
+   "color": "cb4d8c",
+   "description": "Card belongs to the Accounts and sync epic"
+  },
+  {
+   "name": "epic: Accessibility and privacy",
+   "color": "cbb64d",
+   "description": "Card belongs to the Accessibility, states, privacy epic"
+  },
+  {
+   "name": "epic: Testing and playtest",
+   "color": "cb4d4d",
+   "description": "Card belongs to the Testing and playtest epic"
+  },
+  {
+   "name": "epic: Launch",
+   "color": "4dcb57",
+   "description": "Card belongs to the Launch epic"
+  }
+ ],
+ "milestones": [
+  {
+   "key": "S1",
+   "title": "Sprint 1: Foundations",
+   "description": "Oct 7 to Oct 9. Goal: Spec reviewed and tagged v1, repo and CI live with previews, all 24 characters render from validated content.",
+   "due_on": "2026-10-09T23:59:59Z"
+  },
+  {
+   "key": "S2",
+   "title": "Sprint 2: Playable round",
+   "description": "Oct 12 to Oct 16. Goal: Engine and CPU fully tested; a full round plays to a win and a loss on a real phone at both levels.",
+   "due_on": "2026-10-16T23:59:59Z"
+  },
+  {
+   "key": "S3",
+   "title": "Sprint 3: Progress, sync, playtest",
+   "description": "Oct 19 to Oct 23. Goal: Learning data, sign-in and sync work end to end; accessibility pass done; 3+ learners have playtested.",
+   "due_on": "2026-10-23T23:59:59Z"
+  },
+  {
+   "key": "S4",
+   "title": "Sprint 4: Fix and launch",
+   "description": "Oct 26 to Oct 29. Goal: Must-fix playtest findings closed, every definition-of-done box checked, live at chie.1412labs.com.",
+   "due_on": "2026-10-29T23:59:59Z"
+  }
+ ],
+ "epics": [
+  {
+   "key": "E0",
+   "title": "Epic: Spec sign-off",
+   "body": "Epic for the Chi è? MVP. 5 cards, 8 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Spec sign-off"
+   ]
+  },
+  {
+   "key": "E1",
+   "title": "Epic: Repo, CI and infra",
+   "body": "Epic for the Chi è? MVP. 10 cards, 18 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Repo and infra"
+   ]
+  },
+  {
+   "key": "E2",
+   "title": "Epic: Content and art",
+   "body": "Epic for the Chi è? MVP. 9 cards, 17 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Content and art"
+   ]
+  },
+  {
+   "key": "E3",
+   "title": "Epic: Game engine",
+   "body": "Epic for the Chi è? MVP. 11 cards, 28 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Game engine"
+   ]
+  },
+  {
+   "key": "E4",
+   "title": "Epic: CPU opponent",
+   "body": "Epic for the Chi è? MVP. 3 cards, 7 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: CPU opponent"
+   ]
+  },
+  {
+   "key": "E5",
+   "title": "Epic: Game UI",
+   "body": "Epic for the Chi è? MVP. 14 cards, 36 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Game UI"
+   ]
+  },
+  {
+   "key": "E6",
+   "title": "Epic: Learning and progress",
+   "body": "Epic for the Chi è? MVP. 5 cards, 11 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Learning and progress"
+   ]
+  },
+  {
+   "key": "E7",
+   "title": "Epic: Accounts and sync",
+   "body": "Epic for the Chi è? MVP. 10 cards, 20 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Accounts and sync"
+   ]
+  },
+  {
+   "key": "E8",
+   "title": "Epic: Accessibility, states, privacy",
+   "body": "Epic for the Chi è? MVP. 5 cards, 9 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Accessibility and privacy"
+   ]
+  },
+  {
+   "key": "E9",
+   "title": "Epic: Testing and playtest",
+   "body": "Epic for the Chi è? MVP. 7 cards, 18 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Testing and playtest"
+   ]
+  },
+  {
+   "key": "E10",
+   "title": "Epic: Launch",
+   "body": "Epic for the Chi è? MVP. 6 cards, 7 story points.\n\nThe cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Launch"
+   ]
+  }
+ ],
+ "cards": [
+  {
+   "key": "CHI-001",
+   "title": "CHI-001 Send the Italian review packet",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **2 points** · task\nEpic: {{E0}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nGive the Italian-speaking reviewer everything in 10.1 step 2 in one document, with a return date of Fri Oct 9.\n\n### Acceptance criteria\n\n- [ ] Packet includes section 3, all 17 question strings, all 34 answers and every message in 3.7\n- [ ] Reviewer asked to check all 18 lemmas against the Profilo and return a level per word\n- [ ] Reviewer asked to pick the default brown-eyes word (castani or marroni)\n- [ ] Return date of Fri Oct 9 agreed\n\n### Spec\n\n[3.3](https://github.com/jennarbates/Italian/blob/main/spec.md#33-lexicon) · [3.7](https://github.com/jennarbates/Italian/blob/main/spec.md#37-feedback-messages) · [10.1](https://github.com/jennarbates/Italian/blob/main/spec.md#101-spec-sign-off-before-building)",
+   "labels": [
+    "type: task",
+    "epic: Spec sign-off",
+    "waits on others"
+   ],
+   "milestone": "S1",
+   "epic": "E0",
+   "deps": [],
+   "points": 2,
+   "target_date": "2026-10-07"
+  },
+  {
+   "key": "CHI-002",
+   "title": "CHI-002 Request developer review of engine and data sections",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **1 points** · task\nEpic: {{E0}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nSend sections 4 and 7 to a developer for review.\n\n### Acceptance criteria\n\n- [ ] Sections 4 and 7 sent with a return date of Fri Oct 9\n- [ ] Comments collected in one place\n\n### Spec\n\n[4](https://github.com/jennarbates/Italian/blob/main/spec.md#4-engine-contract) · [7](https://github.com/jennarbates/Italian/blob/main/spec.md#7-data-and-backend) · [10.1](https://github.com/jennarbates/Italian/blob/main/spec.md#101-spec-sign-off-before-building)",
+   "labels": [
+    "type: task",
+    "epic: Spec sign-off",
+    "waits on others"
+   ],
+   "milestone": "S1",
+   "epic": "E0",
+   "deps": [],
+   "points": 1,
+   "target_date": "2026-10-07"
+  },
+  {
+   "key": "CHI-003",
+   "title": "CHI-003 Paper-trace one full game",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **2 points** · spike\nEpic: {{E0}}\n\nPlay one complete round on paper using only the spec, and log every point where you had to guess.\n\n### Acceptance criteria\n\n- [ ] One full round traced from START to over\n- [ ] Every guess logged as a TBD or a spec fix\n\n### Spec\n\n[10.1](https://github.com/jennarbates/Italian/blob/main/spec.md#101-spec-sign-off-before-building)",
+   "labels": [
+    "type: spike",
+    "epic: Spec sign-off"
+   ],
+   "milestone": "S1",
+   "epic": "E0",
+   "deps": [],
+   "points": 2,
+   "target_date": "2026-10-07"
+  },
+  {
+   "key": "CHI-004",
+   "title": "CHI-004 Fold in reviews and tag spec v1",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **2 points** · task\nEpic: {{E0}}\n\nApply the Italian and developer review feedback, resolve the brown-eyes TBD, and tag the doc v1.\n\n### Acceptance criteria\n\n- [ ] Default brown-eyes word chosen and written into 3.3 and section 5\n- [ ] Every lemma has a level (A1 or A2) from the Profilo check\n- [ ] Message and string fixes applied to content and spec\n- [ ] Spec tagged v1 with a changelog line\n\n### Depends on\n\n- {{CHI-001}} Send the Italian review packet\n- {{CHI-002}} Request developer review of engine and data sections\n- {{CHI-003}} Paper-trace one full game\n\n### Spec\n\n[3.3](https://github.com/jennarbates/Italian/blob/main/spec.md#33-lexicon) · [10.1](https://github.com/jennarbates/Italian/blob/main/spec.md#101-spec-sign-off-before-building)",
+   "labels": [
+    "type: task",
+    "epic: Spec sign-off"
+   ],
+   "milestone": "S1",
+   "epic": "E0",
+   "deps": [
+    "CHI-001",
+    "CHI-002",
+    "CHI-003"
+   ],
+   "points": 2,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-005",
+   "title": "CHI-005 Book 3+ A1 playtesters for Thu Oct 22",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **1 points** · task\nEpic: {{E0}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nLine up at least three A1 learners now, since playtests depend on other people's calendars.\n\n### Acceptance criteria\n\n- [ ] At least 3 learners confirmed for Oct 22\n- [ ] Each knows the session is about 3 rounds on their own phone\n\n### Spec\n\n[10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones)",
+   "labels": [
+    "type: task",
+    "epic: Spec sign-off",
+    "waits on others"
+   ],
+   "milestone": "S1",
+   "epic": "E0",
+   "deps": [],
+   "points": 1,
+   "target_date": "2026-10-07"
+  },
+  {
+   "key": "CHI-010",
+   "title": "CHI-010 Add DNS for chie.1412labs.com",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **1 points** · chore\nEpic: {{E1}}\n\nCreate the subdomain now so SES domain verification can start on day 2.\n\n### Acceptance criteria\n\n- [ ] chie.1412labs.com resolves\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones) · [D30](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [],
+   "points": 1,
+   "target_date": "2026-10-07"
+  },
+  {
+   "key": "CHI-011",
+   "title": "CHI-011 Scaffold the app",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **3 points** · chore\nEpic: {{E1}}\n\npnpm, Vite, React, TypeScript strict, React Router, Zustand, Tailwind, ESLint, Prettier, and the folder structure from section 9.\n\n### Acceptance criteria\n\n- [ ] Folders engine, content, services, store, ui, scripts, supabase, e2e exist\n- [ ] Routes /, /play, /progress, /settings, /privacy render placeholders\n- [ ] TypeScript strict on; lint and format scripts run clean\n\n### Spec\n\n[8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow) · [9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [],
+   "points": 3,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-012",
+   "title": "CHI-012 Set up test tooling",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **2 points** · chore\nEpic: {{E1}}\n\nVitest with coverage, fast-check, and Playwright for Chromium and WebKit.\n\n### Acceptance criteria\n\n- [ ] pnpm test runs Vitest with a coverage report for engine/\n- [ ] Playwright runs one smoke test in Chromium and WebKit\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [
+    "CHI-011"
+   ],
+   "points": 2,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-015",
+   "title": "CHI-015 Local Supabase for dev and tests",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\nSupabase CLI in Docker with the local inbox for sign-in emails.\n\n### Acceptance criteria\n\n- [ ] supabase start runs locally\n- [ ] Sign-in emails appear in the local inbox\n\n### Spec\n\n[7](https://github.com/jennarbates/Italian/blob/main/spec.md#7-data-and-backend) · [D16](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [],
+   "points": 1,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-013",
+   "title": "CHI-013 GitHub Actions CI with local Supabase",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **3 points** · chore\nEpic: {{E1}}\n\nTypecheck, lint, Vitest and Playwright on every push and pull request, with supabase start before tests.\n\n### Acceptance criteria\n\n- [ ] CI runs on push and PR\n- [ ] supabase start runs before sync and e2e tests\n- [ ] main is protected and merges need green CI\n\n### Depends on\n\n- {{CHI-012}} Set up test tooling\n- {{CHI-015}} Local Supabase for dev and tests\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [
+    "CHI-012",
+    "CHI-015"
+   ],
+   "points": 3,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-016",
+   "title": "CHI-016 Create staging and production Supabase projects",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\nTwo free cloud projects; only the publishable (anon) key ever reaches the app.\n\n### Acceptance criteria\n\n- [ ] Staging and production projects exist\n- [ ] Env vars wired per environment\n- [ ] No service role or secret key in the app or repo\n\n### Spec\n\n[7](https://github.com/jennarbates/Italian/blob/main/spec.md#7-data-and-backend) · [D16](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D17](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [],
+   "points": 1,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-014",
+   "title": "CHI-014 Cloudflare deploys and PR previews",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **3 points** · chore\nEpic: {{E1}}\n\nWorkers static assets, a preview URL per pull request built with staging keys, main deploys production.\n\n### Acceptance criteria\n\n- [ ] A PR gets its own preview URL pointing at staging Supabase\n- [ ] main deploys to chie.1412labs.com with production keys\n- [ ] assets.not_found_handling set to single-page-application, so /play loads directly\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.1412labs.com\n- {{CHI-011}} Scaffold the app\n- {{CHI-016}} Create staging and production Supabase projects\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D11](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D29](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [
+    "CHI-010",
+    "CHI-011",
+    "CHI-016"
+   ],
+   "points": 3,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-017",
+   "title": "CHI-017 Sentry, errors only, with URL scrubbing",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **2 points** · chore\nEpic: {{E1}}\n\nSentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.\n\n### Acceptance criteria\n\n- [ ] sendDefaultPii is false; replay and tracing off\n- [ ] beforeSend and beforeBreadcrumb strip query strings and hashes\n- [ ] IP address storage turned off in the Sentry project\n- [ ] Releases tagged with the git commit\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D19](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [
+    "CHI-011"
+   ],
+   "points": 2,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-018",
+   "title": "CHI-018 Verify domain in AWS SES and request production access",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nApproval can take a day or more, so it starts on day 2.\n\n### Acceptance criteria\n\n- [ ] SPF, DKIM and DMARC records added for chie.1412labs.com\n- [ ] Domain verified in SES\n- [ ] Production access (leave sandbox) requested\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.1412labs.com\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D15](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra",
+    "waits on others"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [
+    "CHI-010"
+   ],
+   "points": 1,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-019",
+   "title": "CHI-019 Open a Resend account as the email fallback",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\nSame domain, ready to swap in as Supabase custom SMTP if SES is slow or refused.\n\n### Acceptance criteria\n\n- [ ] Resend account created\n- [ ] Domain added in Resend\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.1412labs.com\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D15](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Repo and infra"
+   ],
+   "milestone": "S1",
+   "epic": "E1",
+   "deps": [
+    "CHI-010"
+   ],
+   "points": 1,
+   "target_date": "2026-10-08"
+  },
+  {
+   "key": "CHI-020",
+   "title": "CHI-020 Zod schemas for all content",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **2 points** · story\nEpic: {{E2}}\n\nCharacter, Article, Noun, Adjective and Template schemas, validated at build time.\n\n### Acceptance criteria\n\n- [ ] Schemas match 3.2, 3.3 and 3.4 exactly\n- [ ] Build fails on invalid content\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[3](https://github.com/jennarbates/Italian/blob/main/spec.md#3-content-model) · [3.2](https://github.com/jennarbates/Italian/blob/main/spec.md#32-characters) · [3.3](https://github.com/jennarbates/Italian/blob/main/spec.md#33-lexicon) · [3.4](https://github.com/jennarbates/Italian/blob/main/spec.md#34-question-templates)",
+   "labels": [
+    "type: story",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-011"
+   ],
+   "points": 2,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-021",
+   "title": "CHI-021 Write lexicon.json",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **2 points** · story\nEpic: {{E2}}\n\n8 nouns, 10 adjectives, 6 articles, 2 verbs, with every form written out.\n\n### Acceptance criteria\n\n- [ ] All nouns have gender, number, articles, template, artRule and adjAttrs or attr\n- [ ] castano has alsoMeans eyeColor; marrone has wordChoice for capelli\n- [ ] Every entry has a level from the Profilo check\n\n### Depends on\n\n- {{CHI-020}} Zod schemas for all content\n\n### Spec\n\n[3.3](https://github.com/jennarbates/Italian/blob/main/spec.md#33-lexicon) · [D2](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D23](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-020"
+   ],
+   "points": 2,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-022",
+   "title": "CHI-022 Write templates.json",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **1 points** · story\nEpic: {{E2}}\n\nt.have, t.have.adj and t.be as declarative data with named predicates.\n\n### Acceptance criteria\n\n- [ ] Three templates with pattern, verb, article, needsAdj, predicate\n\n### Depends on\n\n- {{CHI-020}} Zod schemas for all content\n\n### Spec\n\n[3.4](https://github.com/jennarbates/Italian/blob/main/spec.md#34-question-templates)",
+   "labels": [
+    "type: story",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-020"
+   ],
+   "points": 1,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-023",
+   "title": "CHI-023 Write messages.json",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **1 points** · story\nEpic: {{E2}}\n\nEvery feedback string from 3.7, keyed by rule id, with placeholders.\n\n### Acceptance criteria\n\n- [ ] Every key in the 3.7 table exists\n- [ ] Reviewer corrections applied\n\n### Depends on\n\n- {{CHI-001}} Send the Italian review packet\n\n### Spec\n\n[3.7](https://github.com/jennarbates/Italian/blob/main/spec.md#37-feedback-messages)",
+   "labels": [
+    "type: story",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-001"
+   ],
+   "points": 1,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-024",
+   "title": "CHI-024 Seeded character generator script",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **3 points** · story\nEpic: {{E2}}\n\nscripts/generate-characters.ts picks 24 attribute combinations that pass every invariant, retrying until they do.\n\n### Acceptance criteria\n\n- [ ] Same seed gives the same 24 characters\n- [ ] Output passes all 3.2 invariants (unique, 12/12, no beards on women, 3 to 15 yes per question)\n\n### Depends on\n\n- {{CHI-020}} Zod schemas for all content\n\n### Spec\n\n[3.2](https://github.com/jennarbates/Italian/blob/main/spec.md#32-characters) · [D20](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-020"
+   ],
+   "points": 3,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-025",
+   "title": "CHI-025 Generate, name and commit 24 characters",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **1 points** · task\nEpic: {{E2}}\n\nRun the generator once, review it, give Italian names, commit characters.json.\n\n### Acceptance criteria\n\n- [ ] characters.json committed with 24 named characters and permanent ids\n\n### Depends on\n\n- {{CHI-024}} Seeded character generator script\n\n### Spec\n\n[3.2](https://github.com/jennarbates/Italian/blob/main/spec.md#32-characters) · [3.6](https://github.com/jennarbates/Italian/blob/main/spec.md#36-content-ids-and-versions)",
+   "labels": [
+    "type: task",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-024"
+   ],
+   "points": 1,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-026",
+   "title": "CHI-026 Content versioning and content tests",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **2 points** · test\nEpic: {{E2}}\n\nversion.json, released-ids.json, and Vitest checks for schemas, invariants and references.\n\n### Acceptance criteria\n\n- [ ] All JSON passes Zod\n- [ ] Every 3.2 invariant is a test\n- [ ] Every referenced lexicon id and message key exists\n- [ ] Test fails if an id in released-ids.json is missing\n\n### Depends on\n\n- {{CHI-021}} Write lexicon.json\n- {{CHI-022}} Write templates.json\n- {{CHI-023}} Write messages.json\n- {{CHI-025}} Generate, name and commit 24 characters\n\n### Spec\n\n[3.6](https://github.com/jennarbates/Italian/blob/main/spec.md#36-content-ids-and-versions) · [10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests) · [D21](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: test",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-021",
+    "CHI-022",
+    "CHI-023",
+    "CHI-025"
+   ],
+   "points": 2,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-027",
+   "title": "CHI-027 Placeholder SVG layers",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **3 points** · story\nEpic: {{E2}}\n\nEvery file in the 3.5 manifest as flat shapes that make the attribute obvious at about 80 px wide.\n\n### Acceptance criteria\n\n- [ ] All layer files exist with manifest names\n- [ ] Hat drawn high so short hair shows; eyes drawn large; beard without mustache leaves a gap\n- [ ] Each attribute readable at card size\n\n### Spec\n\n[3.5](https://github.com/jennarbates/Italian/blob/main/spec.md#35-art-manifest) · [D9](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D26](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [],
+   "points": 3,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-028",
+   "title": "CHI-028 SVG face composer",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **2 points** · story\nEpic: {{E2}}\n\nStack layers by attributes so the picture can never disagree with the data.\n\n### Acceptance criteria\n\n- [ ] Composer picks layers from attrs and skin in z order\n- [ ] All 24 characters render\n- [ ] Dropping in new files with the same names changes art with no code change\n\n### Depends on\n\n- {{CHI-025}} Generate, name and commit 24 characters\n- {{CHI-027}} Placeholder SVG layers\n\n### Spec\n\n[3.5](https://github.com/jennarbates/Italian/blob/main/spec.md#35-art-manifest)",
+   "labels": [
+    "type: story",
+    "epic: Content and art"
+   ],
+   "milestone": "S1",
+   "epic": "E2",
+   "deps": [
+    "CHI-025",
+    "CHI-027"
+   ],
+   "points": 2,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-030",
+   "title": "CHI-030 Engine types",
+   "body": "**Sprint 2: Playable round** · Day 4, Mon Oct 12 · **1 points** · task\nEpic: {{E3}}\n\nPhase, Fill, QuestionKey, SlotError, ShapeError, Feedback, AskedQuestion, GameState, Action, GameEvent.\n\n### Acceptance criteria\n\n- [ ] Types match 4.1\n- [ ] engine/ imports nothing from React, the DOM or time\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[4](https://github.com/jennarbates/Italian/blob/main/spec.md#4-engine-contract) · [4.1](https://github.com/jennarbates/Italian/blob/main/spec.md#41-types)",
+   "labels": [
+    "type: task",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-011"
+   ],
+   "points": 1,
+   "target_date": "2026-10-12"
+  },
+  {
+   "key": "CHI-031",
+   "title": "CHI-031 Seeded RNG and START",
+   "body": "**Sprint 2: Playable round** · Day 4, Mon Oct 12 · **2 points** · story\nEpic: {{E3}}\n\nDraw both secrets independently from the seed and fix the CPU question order.\n\n### Acceptance criteria\n\n- [ ] Same seed gives the same secrets and cpuQuestionOrder\n- [ ] Secrets may be the same character\n- [ ] Player goes first\n\n### Depends on\n\n- {{CHI-030}} Engine types\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [4.1](https://github.com/jennarbates/Italian/blob/main/spec.md#41-types) · [5](https://github.com/jennarbates/Italian/blob/main/spec.md#5-cpu-behavior)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-030"
+   ],
+   "points": 2,
+   "target_date": "2026-10-12"
+  },
+  {
+   "key": "CHI-032",
+   "title": "CHI-032 step() and the transition table",
+   "body": "**Sprint 2: Playable round** · Day 4, Mon Oct 12 · **3 points** · story\nEpic: {{E3}}\n\nOne function moves the game forward; every phase and action pair behaves as in 4.2.\n\n### Acceptance criteria\n\n- [ ] Every cell of 4.2 implemented, wrongPhase rejections included\n- [ ] FLIP toggles in every phase except setup and over\n- [ ] END_TURN from cpuReview increments turn and clears ratedThisTurn\n- [ ] over accepts only START\n\n### Depends on\n\n- {{CHI-031}} Seeded RNG and START\n\n### Spec\n\n[4.2](https://github.com/jennarbates/Italian/blob/main/spec.md#42-transition-table)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-031"
+   ],
+   "points": 3,
+   "target_date": "2026-10-12"
+  },
+  {
+   "key": "CHI-033",
+   "title": "CHI-033 Render questions and answers",
+   "body": "**Sprint 2: Playable round** · Day 4, Mon Oct 12 · **2 points** · story\nEpic: {{E3}}\n\nrender(template, fill) builds the question and the Sì/No answer from the player's own words.\n\n### Acceptance criteria\n\n- [ ] Sì answers: 'Sì, ' + lowercased body + '.'\n- [ ] No answers: 'No, non ' + lowercased body + '.'\n- [ ] castani and marroni each render as themselves\n\n### Depends on\n\n- {{CHI-030}} Engine types\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [3.4](https://github.com/jennarbates/Italian/blob/main/spec.md#34-question-templates)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-030"
+   ],
+   "points": 2,
+   "target_date": "2026-10-12"
+  },
+  {
+   "key": "CHI-034",
+   "title": "CHI-034 Predicates and adjective meaning",
+   "body": "**Sprint 2: Playable round** · Day 4, Mon Oct 12 · **2 points** · story\nEpic: {{E3}}\n\nhasFeature, featureIs and genderIs, plus resolving what an adjective means for a given noun.\n\n### Acceptance criteria\n\n- [ ] castani on occhi resolves to eyeColor adj.marrone\n- [ ] Meaning uses own attr if allowed, else first matching alsoMeans\n\n### Depends on\n\n- {{CHI-030}} Engine types\n\n### Spec\n\n[3.4](https://github.com/jennarbates/Italian/blob/main/spec.md#34-question-templates) · [4.3](https://github.com/jennarbates/Italian/blob/main/spec.md#43-ask-validation-order)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-030"
+   ],
+   "points": 2,
+   "target_date": "2026-10-12"
+  },
+  {
+   "key": "CHI-035",
+   "title": "CHI-035 ASK validation pipeline",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **5 points** · story\nEpic: {{E3}}\n\nRun the five checks in order and reject on the first failure.\n\n### Acceptance criteria\n\n- [ ] Order: phase, unknownId, grammar, nonsense, duplicate\n- [ ] Grammar returns one SlotError per wrong slot with the right rule key\n- [ ] capelli marroni rejected with meaning.wordChoice; occhi biondi with meaning.mismatch\n- [ ] occhi castani and occhi marroni share one QuestionKey, so the second is a duplicate\n- [ ] Duplicate shows the previous answer and does not use the turn\n\n### Depends on\n\n- {{CHI-032}} step() and the transition table\n- {{CHI-033}} Render questions and answers\n- {{CHI-034}} Predicates and adjective meaning\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [4.3](https://github.com/jennarbates/Italian/blob/main/spec.md#43-ask-validation-order)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-032",
+    "CHI-033",
+    "CHI-034"
+   ],
+   "points": 5,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-036",
+   "title": "CHI-036 Soft agreement slips",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **2 points** · story\nEpic: {{E3}}\n\nA wrong adjective form is accepted, rendered correctly, and reported as a slip.\n\n### Acceptance criteria\n\n- [ ] Question rendered with the correct form\n- [ ] agreementSlip event emitted with given and expected\n- [ ] Adjective gets no rating that turn; forms compared by text\n- [ ] A grammar-rejected question reports the agreement error in errors but emits no agreementSlip\n\n### Depends on\n\n- {{CHI-035}} ASK validation pipeline\n\n### Spec\n\n[3.4](https://github.com/jennarbates/Italian/blob/main/spec.md#34-question-templates) · [D24](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-035"
+   ],
+   "points": 2,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-037",
+   "title": "CHI-037 parseTiles and shape errors",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **2 points** · story\nEpic: {{E3}}\n\nTurn the four tile slots into templateId and fill, or a ShapeError.\n\n### Acceptance criteria\n\n- [ ] The noun picks the template\n- [ ] noVerb, noArt, noNoun, needsAdj, noAdjAllowed each returned\n- [ ] Shape errors dispatch nothing and log nothing\n\n### Depends on\n\n- {{CHI-030}} Engine types\n\n### Spec\n\n[3.4](https://github.com/jennarbates/Italian/blob/main/spec.md#34-question-templates) · [4.1](https://github.com/jennarbates/Italian/blob/main/spec.md#41-types)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-030"
+   ],
+   "points": 2,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-038",
+   "title": "CHI-038 Rating events and ANSWER",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **3 points** · story\nEpic: {{E3}}\n\nEmit ratings per the section 6 table, at most one per card per turn.\n\n### Acceptance criteria\n\n- [ ] ratedThisTurn prevents a second rating for the same card and direction\n- [ ] Correct Sì/No without hint rates recognize as hard; wrong rates again with an answer.wrong detail\n- [ ] hintShown answers produce no rating\n- [ ] Level 1 ASKs emit no produce rating or agreementSlip; CPU-question recognize ratings still fire at both levels\n\n### Depends on\n\n- {{CHI-035}} ASK validation pipeline\n\n### Spec\n\n[4.1](https://github.com/jennarbates/Italian/blob/main/spec.md#41-types) · [6](https://github.com/jennarbates/Italian/blob/main/spec.md#6-learning-model) · [D7](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-035"
+   ],
+   "points": 3,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-039",
+   "title": "CHI-039 GUESS resolution",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **1 points** · story\nEpic: {{E3}}\n\nRight guess wins, wrong guess loses.\n\n### Acceptance criteria\n\n- [ ] Correct guess sets result won\n- [ ] Wrong guess sets result lost\n- [ ] Both move to over\n\n### Depends on\n\n- {{CHI-032}} step() and the transition table\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [4.2](https://github.com/jennarbates/Italian/blob/main/spec.md#42-transition-table) · [D3](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-032"
+   ],
+   "points": 1,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-045",
+   "title": "CHI-045 CPU chooses its move",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **3 points** · story\nEpic: {{E4}}\n\nGuess when one candidate remains, otherwise ask the question that best splits the candidates.\n\n### Acceptance criteria\n\n- [ ] Guesses only with one candidate left\n- [ ] Picks the question with yes count closest to half\n- [ ] Ties go to the earlier question in cpuQuestionOrder\n- [ ] Uses the default brown-eyes wording\n\n### Depends on\n\n- {{CHI-032}} step() and the transition table\n- {{CHI-034}} Predicates and adjective meaning\n- {{CHI-004}} Fold in reviews and tag spec v1\n\n### Spec\n\n[5](https://github.com/jennarbates/Italian/blob/main/spec.md#5-cpu-behavior) · [D8](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: CPU opponent"
+   ],
+   "milestone": "S2",
+   "epic": "E4",
+   "deps": [
+    "CHI-032",
+    "CHI-034",
+    "CHI-004"
+   ],
+   "points": 3,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-040",
+   "title": "CHI-040 Engine test suite to 90% coverage",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **5 points** · test\nEpic: {{E3}}\n\nTransition table, invariants, the traced turn, property tests and golden strings.\n\n### Acceptance criteria\n\n- [ ] Every transition cell tested\n- [ ] All 9 invariants in 4.4 tested\n- [ ] 4.5 traced turn as a test, with the bionde and gli variants\n- [ ] fast-check random action sequences never break invariants\n- [ ] Golden snapshot of 17 questions and 34 answers\n- [ ] step() under 5 ms per action\n- [ ] engine/ line coverage at or above 90%\n\n### Depends on\n\n- {{CHI-035}} ASK validation pipeline\n- {{CHI-036}} Soft agreement slips\n- {{CHI-037}} parseTiles and shape errors\n- {{CHI-038}} Rating events and ANSWER\n- {{CHI-039}} GUESS resolution\n- {{CHI-045}} CPU chooses its move\n\n### Spec\n\n[4.4](https://github.com/jennarbates/Italian/blob/main/spec.md#44-invariants-each-becomes-a-test) · [4.5](https://github.com/jennarbates/Italian/blob/main/spec.md#45-traced-example-turn) · [9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: test",
+    "epic: Game engine"
+   ],
+   "milestone": "S2",
+   "epic": "E3",
+   "deps": [
+    "CHI-035",
+    "CHI-036",
+    "CHI-037",
+    "CHI-038",
+    "CHI-039",
+    "CHI-045"
+   ],
+   "points": 5,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-046",
+   "title": "CHI-046 CPU filters candidates on the true answer",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **2 points** · story\nEpic: {{E4}}\n\nThe CPU always uses the truth, even when the player answers wrongly.\n\n### Acceptance criteria\n\n- [ ] Candidates filtered by the true answer\n- [ ] Wrong player answer shows the correct one and logs a mistake\n- [ ] cpuCandidates always contains playerSecret\n\n### Depends on\n\n- {{CHI-045}} CPU chooses its move\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [5](https://github.com/jennarbates/Italian/blob/main/spec.md#5-cpu-behavior) · [D4](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: CPU opponent"
+   ],
+   "milestone": "S2",
+   "epic": "E4",
+   "deps": [
+    "CHI-045"
+   ],
+   "points": 2,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-047",
+   "title": "CHI-047 CPU tests and length simulation",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **2 points** · test\nEpic: {{E4}}\n\nProve the CPU always splits, never guesses wrong, and is deterministic.\n\n### Acceptance criteria\n\n- [ ] Always finds a splitting question\n- [ ] Never guesses wrong\n- [ ] Same seed gives the same game\n- [ ] Simulation reports average CPU questions to win (expect about 5 or 6)\n\n### Depends on\n\n- {{CHI-046}} CPU filters candidates on the true answer\n\n### Spec\n\n[5](https://github.com/jennarbates/Italian/blob/main/spec.md#5-cpu-behavior) · [10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: test",
+    "epic: CPU opponent"
+   ],
+   "milestone": "S2",
+   "epic": "E4",
+   "deps": [
+    "CHI-046"
+   ],
+   "points": 2,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-049",
+   "title": "CHI-049 IndexedDB storage service",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **2 points** · story\nEpic: {{E5}}\n\nSmall idb wrapper for saved rounds and guest data, asking the browser to persist it.\n\n### Acceptance criteria\n\n- [ ] Guest data stored under key guest\n- [ ] navigator.storage.persist() requested\n- [ ] Reads and writes wrapped so failures never block play\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-011"
+   ],
+   "points": 2,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-050",
+   "title": "CHI-050 Game store with save and resume",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **3 points** · story\nEpic: {{E5}}\n\nZustand store wraps step(), saves after every action, and resumes on reload.\n\n### Acceptance criteria\n\n- [ ] State saved after every action\n- [ ] Reload mid-round resumes\n- [ ] Saved round with an older contentVersion is discarded, not resumed\n\n### Depends on\n\n- {{CHI-032}} step() and the transition table\n- {{CHI-049}} IndexedDB storage service\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [3.6](https://github.com/jennarbates/Italian/blob/main/spec.md#36-content-ids-and-versions) · [9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-032",
+    "CHI-049"
+   ],
+   "points": 3,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-051",
+   "title": "CHI-051 Board that fits a real phone",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **5 points** · story\nEpic: {{E5}}\n\nAs a learner, I see all 24 faces at once and flip them as I rule people out.\n\n### Acceptance criteria\n\n- [ ] 4 x 6 grid fits about 360 x 560 using dvh, with the sheet collapsed\n- [ ] Tap flips; flipped shown by more than color (face hidden, icon)\n- [ ] Flip animation off under prefers-reduced-motion\n- [ ] Unflip all appears when all 24 are down\n\n### Depends on\n\n- {{CHI-028}} SVG face composer\n- {{CHI-050}} Game store with save and resume\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [8](https://github.com/jennarbates/Italian/blob/main/spec.md#8-ux) · [8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow) · [9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-028",
+    "CHI-050"
+   ],
+   "points": 5,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-052",
+   "title": "CHI-052 Top bar and secret card",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **1 points** · story\nEpic: {{E5}}\n\nTurn number, whose turn, and the player's own secret card shown small.\n\n### Acceptance criteria\n\n- [ ] Turn and whose turn always visible\n- [ ] Player's secret card visible\n\n### Depends on\n\n- {{CHI-050}} Game store with save and resume\n\n### Spec\n\n[8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-050"
+   ],
+   "points": 1,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-053",
+   "title": "CHI-053 Bottom sheet",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **3 points** · story\nEpic: {{E5}}\n\nHolds the picker, builder or CPU question over the board and collapses to one line.\n\n### Acceptance criteria\n\n- [ ] Board never shrinks when the sheet opens\n- [ ] Collapsed sheet shows the last answer\n- [ ] Works one-handed on a phone\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[8](https://github.com/jennarbates/Italian/blob/main/spec.md#8-ux) · [D18](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-011"
+   ],
+   "points": 3,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-054",
+   "title": "CHI-054 Card detail view",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **2 points** · story\nEpic: {{E5}}\n\nAs a learner, I can long-press a face to see it large and check small details.\n\n### Acceptance criteria\n\n- [ ] Long-press opens the face large with no text\n- [ ] Zoom control does the same for keyboard users\n\n### Depends on\n\n- {{CHI-051}} Board that fits a real phone\n\n### Spec\n\n[3.5](https://github.com/jennarbates/Italian/blob/main/spec.md#35-art-manifest) · [9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D27](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-051"
+   ],
+   "points": 2,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-055",
+   "title": "CHI-055 Level 1 question picker",
+   "body": "**Sprint 2: Playable round** · Day 7, Thu Oct 15 · **2 points** · story\nEpic: {{E5}}\n\nAs a beginner, I tap one of 16 ready-made questions with English hints.\n\n### Acceptance criteria\n\n- [ ] 16 questions listed with English glosses\n- [ ] Asked questions greyed out and show their answer\n- [ ] Uses the default brown-eyes wording\n\n### Depends on\n\n- {{CHI-053}} Bottom sheet\n- {{CHI-035}} ASK validation pipeline\n\n### Spec\n\n[8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-053",
+    "CHI-035"
+   ],
+   "points": 2,
+   "target_date": "2026-10-15"
+  },
+  {
+   "key": "CHI-056",
+   "title": "CHI-056 Level 2 tile builder",
+   "body": "**Sprint 2: Playable round** · Day 7, Thu Oct 15 · **5 points** · story\nEpic: {{E5}}\n\nAs a learner, I build each question from verb, article, noun and adjective tiles with no English.\n\n### Acceptance criteria\n\n- [ ] Four fixed slots in order, filled by tapping tiles\n- [ ] Tapping an adjective opens its forms, each distinct text once\n- [ ] Built question previews in the slots\n- [ ] Chiedi submits; shape errors show inline\n\n### Depends on\n\n- {{CHI-053}} Bottom sheet\n- {{CHI-037}} parseTiles and shape errors\n\n### Spec\n\n[3.4](https://github.com/jennarbates/Italian/blob/main/spec.md#34-question-templates) · [8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-053",
+    "CHI-037"
+   ],
+   "points": 5,
+   "target_date": "2026-10-15"
+  },
+  {
+   "key": "CHI-057",
+   "title": "CHI-057 Feedback messages",
+   "body": "**Sprint 2: Playable round** · Day 7, Thu Oct 15 · **2 points** · story\nEpic: {{E5}}\n\nRender engine feedback from messages.json with placeholders and Italian in italics.\n\n### Acceptance criteria\n\n- [ ] Every SlotError, slip, duplicate and shape error shows its message\n- [ ] Agreement slip shows the correct form next to the answer\n\n### Depends on\n\n- {{CHI-023}} Write messages.json\n- {{CHI-055}} Level 1 question picker\n\n### Spec\n\n[3.7](https://github.com/jennarbates/Italian/blob/main/spec.md#37-feedback-messages)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-023",
+    "CHI-055"
+   ],
+   "points": 2,
+   "target_date": "2026-10-15"
+  },
+  {
+   "key": "CHI-058",
+   "title": "CHI-058 CPU turn: Sì / No",
+   "body": "**Sprint 2: Playable round** · Day 8, Fri Oct 16 · **2 points** · story\nEpic: {{E5}}\n\nAs a learner, I read the CPU's question and answer Sì or No.\n\n### Acceptance criteria\n\n- [ ] CPU question shows in the sheet with Sì and No\n- [ ] Wrong answer shows the correct one\n- [ ] Level 1 has Show hint; revealing it removes the rating\n- [ ] Avanti ends the turn\n\n### Depends on\n\n- {{CHI-046}} CPU filters candidates on the true answer\n- {{CHI-053}} Bottom sheet\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-046",
+    "CHI-053"
+   ],
+   "points": 2,
+   "target_date": "2026-10-16"
+  },
+  {
+   "key": "CHI-059",
+   "title": "CHI-059 Guessing with confirm",
+   "body": "**Sprint 2: Playable round** · Day 8, Fri Oct 16 · **2 points** · story\nEpic: {{E5}}\n\nIndovina, tap a card, confirm. A wrong guess loses, so it is always confirmed.\n\n### Acceptance criteria\n\n- [ ] Confirm dialog before every guess\n- [ ] Dialog warns when the card is flipped down\n\n### Depends on\n\n- {{CHI-039}} GUESS resolution\n- {{CHI-051}} Board that fits a real phone\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow) · [D3](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-039",
+    "CHI-051"
+   ],
+   "points": 2,
+   "target_date": "2026-10-16"
+  },
+  {
+   "key": "CHI-060",
+   "title": "CHI-060 Round end screen",
+   "body": "**Sprint 2: Playable round** · Day 8, Fri Oct 16 · **3 points** · story\nEpic: {{E5}}\n\nResult, both secrets, question history, this round's mistakes, Play again.\n\n### Acceptance criteria\n\n- [ ] Both secrets revealed\n- [ ] Full question history with answers\n- [ ] This round's mistakes listed\n- [ ] Play again starts a new round\n- [ ] Guests see the quiet sign-in nudge\n\n### Depends on\n\n- {{CHI-058}} CPU turn: Sì / No\n- {{CHI-059}} Guessing with confirm\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow) · [8.2](https://github.com/jennarbates/Italian/blob/main/spec.md#82-states)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-058",
+    "CHI-059"
+   ],
+   "points": 3,
+   "target_date": "2026-10-16"
+  },
+  {
+   "key": "CHI-061",
+   "title": "CHI-061 Quit round and Continue round",
+   "body": "**Sprint 2: Playable round** · Day 8, Fri Oct 16 · **2 points** · story\nEpic: {{E5}}\n\nEvery round ends in a recorded result.\n\n### Acceptance criteria\n\n- [ ] Quit round asks to confirm and records abandoned\n- [ ] Starting a new round over a saved one records it abandoned\n- [ ] Ratings already logged are kept\n- [ ] Home offers Continue round when one is saved\n\n### Depends on\n\n- {{CHI-050}} Game store with save and resume\n\n### Spec\n\n[2](https://github.com/jennarbates/Italian/blob/main/spec.md#2-game-rules) · [8.2](https://github.com/jennarbates/Italian/blob/main/spec.md#82-states) · [D33](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-050"
+   ],
+   "points": 2,
+   "target_date": "2026-10-16"
+  },
+  {
+   "key": "CHI-062",
+   "title": "CHI-062 Home screen",
+   "body": "**Sprint 2: Playable round** · Day 8, Fri Oct 16 · **2 points** · story\nEpic: {{E5}}\n\nPlay or Continue round, level picker, Progress, Settings, sign-in status.\n\n### Acceptance criteria\n\n- [ ] Level 1 or 2 picker\n- [ ] Continue round shown when a round is saved\n- [ ] Sign-in status visible\n\n### Depends on\n\n- {{CHI-061}} Quit round and Continue round\n\n### Spec\n\n[8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow)",
+   "labels": [
+    "type: story",
+    "epic: Game UI"
+   ],
+   "milestone": "S2",
+   "epic": "E5",
+   "deps": [
+    "CHI-061"
+   ],
+   "points": 2,
+   "target_date": "2026-10-16"
+  },
+  {
+   "key": "CHI-070",
+   "title": "CHI-070 Progress store and review log",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 9, Mon Oct 19 · **2 points** · story\nEpic: {{E6}}\n\nTurn rating and slip events into append-only ReviewLogRows.\n\n### Acceptance criteria\n\n- [ ] Each row has a client uuid, gameId, localDay and createdAt\n- [ ] slip rows logged for agreement slips\n- [ ] Log is never edited or deleted\n\n### Depends on\n\n- {{CHI-038}} Rating events and ANSWER\n- {{CHI-049}} IndexedDB storage service\n\n### Spec\n\n[6](https://github.com/jennarbates/Italian/blob/main/spec.md#6-learning-model) · [D5](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Learning and progress"
+   ],
+   "milestone": "S3",
+   "epic": "E6",
+   "deps": [
+    "CHI-038",
+    "CHI-049"
+   ],
+   "points": 2,
+   "target_date": "2026-10-19"
+  },
+  {
+   "key": "CHI-071",
+   "title": "CHI-071 Games rows written at START",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 9, Mon Oct 19 · **1 points** · story\nEpic: {{E6}}\n\nThe games row exists before any review row points at it, and is updated at round end.\n\n### Acceptance criteria\n\n- [ ] Row written at START with seed, level, contentVersion\n- [ ] Row updated with ended_at and won, lost or abandoned\n\n### Depends on\n\n- {{CHI-061}} Quit round and Continue round\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D34](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Learning and progress"
+   ],
+   "milestone": "S3",
+   "epic": "E6",
+   "deps": [
+    "CHI-061"
+   ],
+   "points": 1,
+   "target_date": "2026-10-19"
+  },
+  {
+   "key": "CHI-072",
+   "title": "CHI-072 FSRS replay service",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 9, Mon Oct 19 · **3 points** · story\nEpic: {{E6}}\n\nts-fsrs with default parameters and 0.9 retention; card state rebuilt by replaying the log.\n\n### Acceptance criteria\n\n- [ ] 36 cards (18 lemmas x 2 directions)\n- [ ] Replay in createdAt order\n- [ ] slip rows skipped\n- [ ] easy never produced\n\n### Depends on\n\n- {{CHI-070}} Progress store and review log\n\n### Spec\n\n[6](https://github.com/jennarbates/Italian/blob/main/spec.md#6-learning-model)",
+   "labels": [
+    "type: story",
+    "epic: Learning and progress"
+   ],
+   "milestone": "S3",
+   "epic": "E6",
+   "deps": [
+    "CHI-070"
+   ],
+   "points": 3,
+   "target_date": "2026-10-19"
+  },
+  {
+   "key": "CHI-073",
+   "title": "CHI-073 SRS tests",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 9, Mon Oct 19 · **2 points** · test\nEpic: {{E6}}\n\nEvent to rating table and replay correctness.\n\n### Acceptance criteria\n\n- [ ] Every row of the section 6 table tested\n- [ ] Rebuild from log equals incremental state\n\n### Depends on\n\n- {{CHI-072}} FSRS replay service\n\n### Spec\n\n[6](https://github.com/jennarbates/Italian/blob/main/spec.md#6-learning-model) · [10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: test",
+    "epic: Learning and progress"
+   ],
+   "milestone": "S3",
+   "epic": "E6",
+   "deps": [
+    "CHI-072"
+   ],
+   "points": 2,
+   "target_date": "2026-10-19"
+  },
+  {
+   "key": "CHI-074",
+   "title": "CHI-074 Progress screen: Mistakes and Due",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 9, Mon Oct 19 · **3 points** · story\nEpic: {{E6}}\n\nAs a learner, I see which words I got wrong and which are due.\n\n### Acceptance criteria\n\n- [ ] Mistakes tab grouped by word, showing given and expected\n- [ ] Due tab lists words due today with next review date\n- [ ] Empty state: 'Play a round to see your words here.'\n\n### Depends on\n\n- {{CHI-072}} FSRS replay service\n\n### Spec\n\n[8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow) · [8.2](https://github.com/jennarbates/Italian/blob/main/spec.md#82-states)",
+   "labels": [
+    "type: story",
+    "epic: Learning and progress"
+   ],
+   "milestone": "S3",
+   "epic": "E6",
+   "deps": [
+    "CHI-072"
+   ],
+   "points": 3,
+   "target_date": "2026-10-19"
+  },
+  {
+   "key": "CHI-080",
+   "title": "CHI-080 Database migrations",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **2 points** · story\nEpic: {{E7}}\n\nTables, indexes, the new-user profile trigger and the cards stale-write guard.\n\n### Acceptance criteria\n\n- [ ] profiles, games, review_log, cards created as in 7.1\n- [ ] New auth user gets a profile row\n- [ ] cards update with smaller log_count is skipped\n- [ ] Applied locally, then staging, then production before dependent code merges\n\n### Depends on\n\n- {{CHI-015}} Local Supabase for dev and tests\n- {{CHI-016}} Create staging and production Supabase projects\n\n### Spec\n\n[7](https://github.com/jennarbates/Italian/blob/main/spec.md#7-data-and-backend) · [7.1](https://github.com/jennarbates/Italian/blob/main/spec.md#71-tables) · [D31](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-015",
+    "CHI-016"
+   ],
+   "points": 2,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-081",
+   "title": "CHI-081 Row Level Security and RLS tests",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **2 points** · test\nEpic: {{E7}}\n\nPolicies from 7.2, proven by tests.\n\n### Acceptance criteria\n\n- [ ] RLS enabled on all four tables\n- [ ] review_log has no update or delete policy\n- [ ] Test proves user A cannot read user B's review_log\n- [ ] anon can read and write nothing\n\n### Depends on\n\n- {{CHI-080}} Database migrations\n\n### Spec\n\n[7.2](https://github.com/jennarbates/Italian/blob/main/spec.md#72-rls-policies) · [10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: test",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-080"
+   ],
+   "points": 2,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-082",
+   "title": "CHI-082 Sign-in email template and SMTP",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **1 points** · chore\nEpic: {{E7}}\n\nCode-only email template; production sends through SES or Resend, staging uses the built-in sender.\n\n### Acceptance criteria\n\n- [ ] Template shows {{ .Token }} and no link\n- [ ] Production custom SMTP set to SES (or Resend)\n- [ ] A code reaches an address outside the team\n\n### Depends on\n\n- {{CHI-018}} Verify domain in AWS SES and request production access\n- {{CHI-019}} Open a Resend account as the email fallback\n- {{CHI-016}} Create staging and production Supabase projects\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D10](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D15](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-018",
+    "CHI-019",
+    "CHI-016"
+   ],
+   "points": 1,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-083",
+   "title": "CHI-083 Sign-in sheet with 6-digit code",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **3 points** · story\nEpic: {{E7}}\n\nAs a learner, I sign in by typing a code from my email into the same tab.\n\n### Acceptance criteria\n\n- [ ] signInWithOtp sends the code; verifyOtp type email checks it\n- [ ] Resend code offered after the cooldown\n- [ ] Inline errors for wrong or expired code and for send failure\n\n### Depends on\n\n- {{CHI-082}} Sign-in email template and SMTP\n- {{CHI-053}} Bottom sheet\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow) · [8.2](https://github.com/jennarbates/Italian/blob/main/spec.md#82-states)",
+   "labels": [
+    "type: story",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-082",
+    "CHI-053"
+   ],
+   "points": 3,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-084",
+   "title": "CHI-084 Outbox and flush",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **3 points** · story\nEpic: {{E7}}\n\nEvery signed-in write goes to an IndexedDB outbox first, then to Supabase.\n\n### Acceptance criteria\n\n- [ ] games rows always flushed before review_log rows\n- [ ] Flush on round end, app start and the online event\n- [ ] Failed flush keeps rows and shows 'Saved on this device, will sync later.'\n\n### Depends on\n\n- {{CHI-080}} Database migrations\n- {{CHI-070}} Progress store and review log\n- {{CHI-071}} Games rows written at START\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [8.2](https://github.com/jennarbates/Italian/blob/main/spec.md#82-states)",
+   "labels": [
+    "type: story",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-080",
+    "CHI-070",
+    "CHI-071"
+   ],
+   "points": 3,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-085",
+   "title": "CHI-085 Guest to account upload",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **2 points** · story\nEpic: {{E7}}\n\nAs a guest who signs in, I keep my progress.\n\n### Acceptance criteria\n\n- [ ] Prompt 'Save your progress to this account?' defaults to Yes\n- [ ] Yes rewrites user_id and uploads games then review_log with on conflict do nothing\n- [ ] No deletes guest data\n\n### Depends on\n\n- {{CHI-083}} Sign-in sheet with 6-digit code\n- {{CHI-084}} Outbox and flush\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D6](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-083",
+    "CHI-084"
+   ],
+   "points": 2,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-086",
+   "title": "CHI-086 Cross-device merge",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **2 points** · story\nEpic: {{E7}}\n\nAfter each sync, download the full log, replay it, upsert cards with log_count.\n\n### Acceptance criteria\n\n- [ ] Two devices converge to the same Progress\n- [ ] Stale device cannot overwrite newer cards\n\n### Depends on\n\n- {{CHI-084}} Outbox and flush\n- {{CHI-072}} FSRS replay service\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D5](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D31](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-084",
+    "CHI-072"
+   ],
+   "points": 2,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-087",
+   "title": "CHI-087 Sign-out with unsynced warning",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **1 points** · story\nEpic: {{E7}}\n\nSign-out clears local data, warning first if the outbox is not empty.\n\n### Acceptance criteria\n\n- [ ] Local copy cleared on sign-out\n- [ ] Unsynced rows trigger 'Some progress hasn't synced yet. Sign out anyway?' with Sign out and Wait\n\n### Depends on\n\n- {{CHI-084}} Outbox and flush\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D35](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-084"
+   ],
+   "points": 1,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-088",
+   "title": "CHI-088 Sync tests against local Supabase",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **3 points** · test\nEpic: {{E7}}\n\nProve the sync rules in 7.3.\n\n### Acceptance criteria\n\n- [ ] Guest upload is idempotent\n- [ ] games flush before review rows\n- [ ] Two-device merge converges\n- [ ] Smaller log_count upsert ignored\n- [ ] New user gets a profile row\n\n### Depends on\n\n- {{CHI-085}} Guest to account upload\n- {{CHI-086}} Cross-device merge\n\n### Spec\n\n[10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: test",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-085",
+    "CHI-086"
+   ],
+   "points": 3,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-089",
+   "title": "CHI-089 Settings screen",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **1 points** · story\nEpic: {{E7}}\n\nDefault level, account sign in or out, link to the privacy note.\n\n### Acceptance criteria\n\n- [ ] Default level saved\n- [ ] Sign in and sign out reachable\n- [ ] Privacy note linked\n\n### Depends on\n\n- {{CHI-087}} Sign-out with unsynced warning\n\n### Spec\n\n[8.1](https://github.com/jennarbates/Italian/blob/main/spec.md#81-screens-and-flow)",
+   "labels": [
+    "type: story",
+    "epic: Accounts and sync"
+   ],
+   "milestone": "S3",
+   "epic": "E7",
+   "deps": [
+    "CHI-087"
+   ],
+   "points": 1,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-090",
+   "title": "CHI-090 Accessibility pass",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **3 points** · story\nEpic: {{E8}}\n\nWCAG 2.2 AA: screen reader names in Italian, full keyboard play, visible focus, 44 px targets.\n\n### Acceptance criteria\n\n- [ ] Each card's accessible name lists name and attributes in Italian\n- [ ] Full round playable by keyboard with visible focus\n- [ ] Touch targets at least 44 x 44 px\n\n### Depends on\n\n- {{CHI-062}} Home screen\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional)",
+   "labels": [
+    "type: story",
+    "epic: Accessibility and privacy"
+   ],
+   "milestone": "S3",
+   "epic": "E8",
+   "deps": [
+    "CHI-062"
+   ],
+   "points": 3,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-091",
+   "title": "CHI-091 Loading, empty and error states",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **2 points** · story\nEpic: {{E8}}\n\nEvery state in the 8.2 table.\n\n### Acceptance criteria\n\n- [ ] Skeleton board while loading\n- [ ] Sync failed banner never blocks play\n- [ ] Connection lost mid-round keeps the round playable\n\n### Depends on\n\n- {{CHI-084}} Outbox and flush\n\n### Spec\n\n[8.2](https://github.com/jennarbates/Italian/blob/main/spec.md#82-states)",
+   "labels": [
+    "type: story",
+    "epic: Accessibility and privacy"
+   ],
+   "milestone": "S3",
+   "epic": "E8",
+   "deps": [
+    "CHI-084"
+   ],
+   "points": 2,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-092",
+   "title": "CHI-092 Privacy note page",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **1 points** · story\nEpic: {{E8}}\n\nWhat is stored, third parties, Safari clearing guest data, and the deletion email address.\n\n### Acceptance criteria\n\n- [ ] Lists Supabase, Cloudflare, the email sender (SES or Resend) and Sentry, and what each sees\n- [ ] Says Safari can clear guest data\n- [ ] Gives the account deletion email and the one-month promise\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D28](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Accessibility and privacy"
+   ],
+   "milestone": "S3",
+   "epic": "E8",
+   "deps": [
+    "CHI-011"
+   ],
+   "points": 1,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-093",
+   "title": "CHI-093 Test account deletion on staging",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **1 points** · task\nEpic: {{E8}}\n\nDelete one user in the dashboard and confirm cascades remove every row.\n\n### Acceptance criteria\n\n- [ ] User deleted on staging\n- [ ] No rows remain in games, review_log, cards, profiles\n\n### Depends on\n\n- {{CHI-080}} Database migrations\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: task",
+    "epic: Accessibility and privacy"
+   ],
+   "milestone": "S3",
+   "epic": "E8",
+   "deps": [
+    "CHI-080"
+   ],
+   "points": 1,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-094",
+   "title": "CHI-094 Performance and Lighthouse budget",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **2 points** · test\nEpic: {{E8}}\n\nInitial JS under 250 KB gzipped, LCP under 2.5 s, accessibility score at least 95.\n\n### Acceptance criteria\n\n- [ ] Bundle size checked in CI or by hand\n- [ ] Lighthouse mobile LCP under 2.5 s\n- [ ] Lighthouse accessibility at least 95\n\n### Depends on\n\n- {{CHI-090}} Accessibility pass\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: test",
+    "epic: Accessibility and privacy"
+   ],
+   "milestone": "S3",
+   "epic": "E8",
+   "deps": [
+    "CHI-090"
+   ],
+   "points": 2,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-100",
+   "title": "CHI-100 End-to-end Playwright suite",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **3 points** · test\nEpic: {{E9}}\n\nChromium and WebKit, against local Supabase.\n\n### Acceptance criteria\n\n- [ ] Seeded round to a win\n- [ ] Wrong guess loses\n- [ ] Quit records abandoned\n- [ ] Sign-in with a code from the local inbox\n- [ ] Reload mid-round resumes\n- [ ] /play loads directly\n\n### Depends on\n\n- {{CHI-060}} Round end screen\n- {{CHI-061}} Quit round and Continue round\n- {{CHI-083}} Sign-in sheet with 6-digit code\n\n### Spec\n\n[10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: test",
+    "epic: Testing and playtest"
+   ],
+   "milestone": "S3",
+   "epic": "E9",
+   "deps": [
+    "CHI-060",
+    "CHI-061",
+    "CHI-083"
+   ],
+   "points": 3,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-101",
+   "title": "CHI-101 Real device pass",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **2 points** · test\nEpic: {{E9}}\n\niPhone Safari and Android Chrome, with browser toolbars showing.\n\n### Acceptance criteria\n\n- [ ] Board fits the visible area\n- [ ] Bottom sheet and long-press detail work\n- [ ] Full round playable one-handed\n- [ ] All 24 faces spot-checked against their data\n\n### Depends on\n\n- {{CHI-060}} Round end screen\n\n### Spec\n\n[3.5](https://github.com/jennarbates/Italian/blob/main/spec.md#35-art-manifest) · [10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests) · [10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: test",
+    "epic: Testing and playtest"
+   ],
+   "milestone": "S3",
+   "epic": "E9",
+   "deps": [
+    "CHI-060"
+   ],
+   "points": 2,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-102",
+   "title": "CHI-102 Playtest build on staging",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **1 points** · chore\nEpic: {{E9}}\n\nA stable staging build and a short note for testers.\n\n### Acceptance criteria\n\n- [ ] Staging build deployed\n- [ ] Findings form or sheet ready (rounds lost, minutes per round, confusing strings)\n\n### Depends on\n\n- {{CHI-100}} End-to-end Playwright suite\n- {{CHI-101}} Real device pass\n\n### Spec\n\n[10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones)",
+   "labels": [
+    "type: chore",
+    "epic: Testing and playtest"
+   ],
+   "milestone": "S3",
+   "epic": "E9",
+   "deps": [
+    "CHI-100",
+    "CHI-101"
+   ],
+   "points": 1,
+   "target_date": "2026-10-21"
+  },
+  {
+   "key": "CHI-103",
+   "title": "CHI-103 Run playtests",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 12, Thu Oct 22 · **3 points** · task\nEpic: {{E9}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\n3 or more A1 learners play 3 rounds each.\n\n### Acceptance criteria\n\n- [ ] Rounds lost, minutes per round and every confusing string recorded per tester\n\n### Depends on\n\n- {{CHI-102}} Playtest build on staging\n- {{CHI-005}} Book 3+ A1 playtesters for Thu Oct 22\n\n### Spec\n\n[10.2](https://github.com/jennarbates/Italian/blob/main/spec.md#102-tests)",
+   "labels": [
+    "type: task",
+    "epic: Testing and playtest",
+    "waits on others"
+   ],
+   "milestone": "S3",
+   "epic": "E9",
+   "deps": [
+    "CHI-102",
+    "CHI-005"
+   ],
+   "points": 3,
+   "target_date": "2026-10-22"
+  },
+  {
+   "key": "CHI-104",
+   "title": "CHI-104 Triage playtest findings",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 12, Thu Oct 22 · **1 points** · task\nEpic: {{E9}}\n\nSort every finding into must-fix now or section 11.\n\n### Acceptance criteria\n\n- [ ] Every finding labelled must-fix or future\n- [ ] Must-fix items added as cards\n\n### Depends on\n\n- {{CHI-103}} Run playtests\n\n### Spec\n\n[10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: task",
+    "epic: Testing and playtest"
+   ],
+   "milestone": "S3",
+   "epic": "E9",
+   "deps": [
+    "CHI-103"
+   ],
+   "points": 1,
+   "target_date": "2026-10-22"
+  },
+  {
+   "key": "CHI-105",
+   "title": "CHI-105 Playtest fixes, part 1",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 13, Fri Oct 23 · **3 points** · story\nEpic: {{E9}}\n\nTimebox for the highest-impact must-fix findings.\n\n### Acceptance criteria\n\n- [ ] Top must-fix findings fixed and deployed to staging\n\n### Depends on\n\n- {{CHI-104}} Triage playtest findings\n\n### Spec\n\n[10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones)",
+   "labels": [
+    "type: story",
+    "epic: Testing and playtest"
+   ],
+   "milestone": "S3",
+   "epic": "E9",
+   "deps": [
+    "CHI-104"
+   ],
+   "points": 3,
+   "target_date": "2026-10-23"
+  },
+  {
+   "key": "CHI-106",
+   "title": "CHI-106 Playtest fixes, part 2",
+   "body": "**Sprint 4: Fix and launch** · Days 14 to 15, Mon Oct 26 to Tue Oct 27 · **5 points** · story\nEpic: {{E9}}\n\nTimebox for the remaining must-fix findings, including question balance tuning.\n\n### Acceptance criteria\n\n- [ ] Every must-fix finding fixed\n- [ ] 3-to-15 yes-count invariant confirmed or retuned (3.2 TBD)\n- [ ] Easy CPU decision recorded if learners lost too often (section 5)\n\n### Depends on\n\n- {{CHI-105}} Playtest fixes, part 1\n\n### Spec\n\n[3.2](https://github.com/jennarbates/Italian/blob/main/spec.md#32-characters) · [5](https://github.com/jennarbates/Italian/blob/main/spec.md#5-cpu-behavior) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones)",
+   "labels": [
+    "type: story",
+    "epic: Testing and playtest"
+   ],
+   "milestone": "S4",
+   "epic": "E9",
+   "deps": [
+    "CHI-105"
+   ],
+   "points": 5,
+   "target_date": "2026-10-27"
+  },
+  {
+   "key": "CHI-110",
+   "title": "CHI-110 Production Supabase on Pro",
+   "body": "**Sprint 4: Fix and launch** · Day 16, Wed Oct 28 · **1 points** · chore\nEpic: {{E10}}\n\nUpgrade production and confirm migrations are applied.\n\n### Acceptance criteria\n\n- [ ] Production on Pro\n- [ ] All migrations applied to production\n\n### Depends on\n\n- {{CHI-080}} Database migrations\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D17](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "labels": [
+    "type: chore",
+    "epic: Launch"
+   ],
+   "milestone": "S4",
+   "epic": "E10",
+   "deps": [
+    "CHI-080"
+   ],
+   "points": 1,
+   "target_date": "2026-10-28"
+  },
+  {
+   "key": "CHI-111",
+   "title": "CHI-111 Final email check in production",
+   "body": "**Sprint 4: Fix and launch** · Day 16, Wed Oct 28 · **1 points** · task\nEpic: {{E10}}\n\nA sign-in code from production reaches an outside address.\n\n### Acceptance criteria\n\n- [ ] SES out of sandbox, or Resend in place\n- [ ] Code received at a non-team address\n\n### Depends on\n\n- {{CHI-082}} Sign-in email template and SMTP\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: task",
+    "epic: Launch"
+   ],
+   "milestone": "S4",
+   "epic": "E10",
+   "deps": [
+    "CHI-082"
+   ],
+   "points": 1,
+   "target_date": "2026-10-28"
+  },
+  {
+   "key": "CHI-112",
+   "title": "CHI-112 Sentry test error from production",
+   "body": "**Sprint 4: Fix and launch** · Day 16, Wed Oct 28 · **1 points** · task\nEpic: {{E10}}\n\nThrow one test error and check the event carries no personal data.\n\n### Acceptance criteria\n\n- [ ] Event received\n- [ ] No email, IP, query string or hash in it\n\n### Depends on\n\n- {{CHI-017}} Sentry, errors only, with URL scrubbing\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: task",
+    "epic: Launch"
+   ],
+   "milestone": "S4",
+   "epic": "E10",
+   "deps": [
+    "CHI-017"
+   ],
+   "points": 1,
+   "target_date": "2026-10-28"
+  },
+  {
+   "key": "CHI-113",
+   "title": "CHI-113 README",
+   "body": "**Sprint 4: Fix and launch** · Day 16, Wed Oct 28 · **2 points** · chore\nEpic: {{E10}}\n\nHow to run, test, deploy and add a character.\n\n### Acceptance criteria\n\n- [ ] Run, test, deploy and add-a-character sections written\n\n### Depends on\n\n- {{CHI-025}} Generate, name and commit 24 characters\n\n### Spec\n\n[1](https://github.com/jennarbates/Italian/blob/main/spec.md#1-scope-and-non-goals) · [10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: chore",
+    "epic: Launch"
+   ],
+   "milestone": "S4",
+   "epic": "E10",
+   "deps": [
+    "CHI-025"
+   ],
+   "points": 2,
+   "target_date": "2026-10-28"
+  },
+  {
+   "key": "CHI-114",
+   "title": "CHI-114 TBD and definition-of-done sweep",
+   "body": "**Sprint 4: Fix and launch** · Day 16, Wed Oct 28 · **1 points** · task\nEpic: {{E10}}\n\nEvery TBD resolved or moved to section 11; every 10.3 box checked.\n\n### Acceptance criteria\n\n- [ ] No open TBD in the spec\n- [ ] Every 10.3 box checked\n\n### Depends on\n\n- {{CHI-106}} Playtest fixes, part 2\n\n### Spec\n\n[10.3](https://github.com/jennarbates/Italian/blob/main/spec.md#103-definition-of-done)",
+   "labels": [
+    "type: task",
+    "epic: Launch"
+   ],
+   "milestone": "S4",
+   "epic": "E10",
+   "deps": [
+    "CHI-106"
+   ],
+   "points": 1,
+   "target_date": "2026-10-28"
+  },
+  {
+   "key": "CHI-115",
+   "title": "CHI-115 Launch",
+   "body": "**Sprint 4: Fix and launch** · Day 17, Thu Oct 29 · **1 points** · task\nEpic: {{E10}}\n\nMerge to main, update released-ids.json, confirm the live URL plays on both phones.\n\n### Acceptance criteria\n\n- [ ] chie.1412labs.com live\n- [ ] released-ids.json updated for this release\n- [ ] Full round played on iPhone and Android against production\n\n### Depends on\n\n- {{CHI-110}} Production Supabase on Pro\n- {{CHI-111}} Final email check in production\n- {{CHI-112}} Sentry test error from production\n- {{CHI-113}} README\n- {{CHI-114}} TBD and definition-of-done sweep\n\n### Spec\n\n[1](https://github.com/jennarbates/Italian/blob/main/spec.md#1-scope-and-non-goals) · [3.6](https://github.com/jennarbates/Italian/blob/main/spec.md#36-content-ids-and-versions) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones)",
+   "labels": [
+    "type: task",
+    "epic: Launch"
+   ],
+   "milestone": "S4",
+   "epic": "E10",
+   "deps": [
+    "CHI-110",
+    "CHI-111",
+    "CHI-112",
+    "CHI-113",
+    "CHI-114"
+   ],
+   "points": 1,
+   "target_date": "2026-10-29"
+  }
+ ]
+}

@@ -235,8 +235,9 @@ Acceptance criteria:
 - Question rendered with the correct form
 - agreementSlip event emitted with given and expected
 - Adjective gets no rating that turn; forms compared by text
+- A grammar-rejected question reports the agreement error in errors but emits no agreementSlip
 
-Spec: 3.4, D24",Question rendered with the correct form | agreementSlip event emitted with given and expected | Adjective gets no rating that turn; forms compared by text,"Game engine,story"
+Spec: 3.4, D24",Question rendered with the correct form | agreementSlip event emitted with given and expected | Adjective gets no rating that turn; forms compared by text | A grammar-rejected question reports the agreement error in errors but emits no agreementSlip,"Game engine,story"
 CHI-037,parseTiles and shape errors,To do,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-030,,"3.4, 4.1","Turn the four tile slots into templateId and fill, or a ShapeError.
 
 Acceptance criteria:
@@ -251,9 +252,9 @@ Acceptance criteria:
 - ratedThisTurn prevents a second rating for the same card and direction
 - Correct Sì/No without hint rates recognize as hard; wrong rates again with an answer.wrong detail
 - hintShown answers produce no rating
-- Level 1 taps produce no rating
+- Level 1 ASKs emit no produce rating or agreementSlip; CPU-question recognize ratings still fire at both levels
 
-Spec: 4.1, 6, D7",ratedThisTurn prevents a second rating for the same card and direction | Correct Sì/No without hint rates recognize as hard; wrong rates again with an answer.wrong detail | hintShown answers produce no rating | Level 1 taps produce no rating,"Game engine,story"
+Spec: 4.1, 6, D7",ratedThisTurn prevents a second rating for the same card and direction | Correct Sì/No without hint rates recognize as hard; wrong rates again with an answer.wrong detail | hintShown answers produce no rating | Level 1 ASKs emit no produce rating or agreementSlip; CPU-question recognize ratings still fire at both levels,"Game engine,story"
 CHI-039,GUESS resolution,To do,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,1,CHI-032,,"2, 4.2, D3","Right guess wins, wrong guess loses.
 
 Acceptance criteria:
@@ -554,11 +555,11 @@ Spec: 8.2",Skeleton board while loading | Sync failed banner never blocks play |
 CHI-092,Privacy note page,To do,"Accessibility, states, privacy",story,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,1,CHI-011,,"7.3, 9, D28","What is stored, third parties, Safari clearing guest data, and the deletion email address.
 
 Acceptance criteria:
-- Lists Sentry and the email sender as the only third parties
+- Lists Supabase, Cloudflare, the email sender (SES or Resend) and Sentry, and what each sees
 - Says Safari can clear guest data
 - Gives the account deletion email and the one-month promise
 
-Spec: 7.3, 9, D28",Lists Sentry and the email sender as the only third parties | Says Safari can clear guest data | Gives the account deletion email and the one-month promise,"Accessibility, states, privacy,story"
+Spec: 7.3, 9, D28","Lists Supabase, Cloudflare, the email sender (SES or Resend) and Sentry, and what each sees | Says Safari can clear guest data | Gives the account deletion email and the one-month promise","Accessibility, states, privacy,story"
 CHI-093,Test account deletion on staging,To do,"Accessibility, states, privacy",task,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,1,CHI-080,,"7.3, 10.3","Delete one user in the dashboard and confirm cascades remove every row.
 
 Acceptance criteria:

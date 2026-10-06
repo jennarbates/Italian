@@ -1,0 +1,48 @@
+name: Story
+description: A piece of user-facing or engine behavior from the spec
+labels: ["type: story"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What this delivers, in one or two sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance criteria
+      description: Each one checkable as true or false.
+      value: |
+        - [ ]
+    validations:
+      required: true
+  - type: dropdown
+    id: points
+    attributes:
+      label: Story points
+      description: Anything bigger than 5 is split first.
+      options: ["1", "2", "3", "5"]
+    validations:
+      required: true
+  - type: input
+    id: spec
+    attributes:
+      label: Spec section
+      placeholder: "4.3, D24"
+    validations:
+      required: true
+  - type: input
+    id: deps
+    attributes:
+      label: Depends on
+      placeholder: "#12, #14"
+  - type: checkboxes
+    id: ready
+    attributes:
+      label: Definition of Ready
+      options:
+        - label: Acceptance criteria are checkable
+        - label: Estimated at 5 points or fewer
+        - label: Dependencies are done or scheduled earlier in the sprint

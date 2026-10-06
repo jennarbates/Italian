@@ -1,0 +1,36 @@
+name: Task
+description: Setup, tooling, infrastructure or a request to someone else
+labels: ["type: task"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Done when
+      value: |
+        - [ ]
+    validations:
+      required: true
+  - type: dropdown
+    id: points
+    attributes:
+      label: Story points
+      options: ["1", "2", "3", "5"]
+    validations:
+      required: true
+  - type: input
+    id: spec
+    attributes:
+      label: Spec section
+  - type: checkboxes
+    id: waits
+    attributes:
+      label: Waits on others
+      description: If checked, add the "waits on others" label and start it early.
+      options:
+        - label: Depends on someone outside the build (reviewer, provider approval, playtester)

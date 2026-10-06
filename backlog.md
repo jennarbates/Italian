@@ -346,6 +346,7 @@ A wrong adjective form is accepted, rendered correctly, and reported as a slip.
 - [ ] Question rendered with the correct form
 - [ ] agreementSlip event emitted with given and expected
 - [ ] Adjective gets no rating that turn; forms compared by text
+- [ ] A grammar-rejected question reports the agreement error in errors but emits no agreementSlip
 
 #### CHI-037 parseTiles and shape errors
 
@@ -366,7 +367,7 @@ Emit ratings per the section 6 table, at most one per card per turn.
 - [ ] ratedThisTurn prevents a second rating for the same card and direction
 - [ ] Correct Sì/No without hint rates recognize as hard; wrong rates again with an answer.wrong detail
 - [ ] hintShown answers produce no rating
-- [ ] Level 1 taps produce no rating
+- [ ] Level 1 ASKs emit no produce rating or agreementSlip; CPU-question recognize ratings still fire at both levels
 
 #### CHI-039 GUESS resolution
 
@@ -759,7 +760,7 @@ Accessibility, states, privacy · story · 1 pts · spec 7.3, 9, D28 · depends 
 
 What is stored, third parties, Safari clearing guest data, and the deletion email address.
 
-- [ ] Lists Sentry and the email sender as the only third parties
+- [ ] Lists Supabase, Cloudflare, the email sender (SES or Resend) and Sentry, and what each sees
 - [ ] Says Safari can clear guest data
 - [ ] Gives the account deletion email and the one-month promise
 
