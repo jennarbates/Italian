@@ -89,7 +89,7 @@ def step(title):
     print("\n== " + title)
 
 
-# ---------------------------------------------------------------- preflight
+# preflight
 step("Checking GitHub access")
 try:
     gh(["--version"])
@@ -109,7 +109,7 @@ except GhError as e:
              "then run this script again.\n" + str(e))
 print("   OK: write access to " + REPO + " and Projects access for " + OWNER)
 
-# ---------------------------------------------------------------- labels
+# labels
 step("Labels")
 for lab in DATA["labels"]:
     if lab["name"] in state["labels"]:
@@ -120,7 +120,7 @@ for lab in DATA["labels"]:
     save()
     print("   " + lab["name"])
 
-# ---------------------------------------------------------------- milestones
+# milestones
 step("Sprint milestones")
 existing = {m["title"]: m["number"] for m in
             api("GET", "repos/" + REPO + "/milestones?state=all&per_page=100")}
@@ -137,7 +137,7 @@ for m in DATA["milestones"]:
     print("   " + m["title"])
 
 
-# ---------------------------------------------------------------- issues
+# issues
 def fill(body):
     for key, info in state["issues"].items():
         body = body.replace("{{" + key + "}}", "#" + str(info["number"]))
@@ -165,7 +165,7 @@ step("Backlog issues (" + str(len(DATA["cards"])) + "). This takes a few minutes
 for c in DATA["cards"]:
     create_issue(c, state["milestones"][c["milestone"]])
 
-# ---------------------------------------------------------------- sub-issues
+# sub-issues
 step("Attaching cards to their epics as sub-issues")
 skipped_sub = 0
 for c in DATA["cards"]:
@@ -185,7 +185,7 @@ for c in DATA["cards"]:
     save()
 print("   done" + ("" if not skipped_sub else " (" + str(skipped_sub) + " skipped, see above)"))
 
-# ---------------------------------------------------------------- blocked-by
+# blocked-by
 step("Adding blocked-by links")
 if state["blocked_unsupported"]:
     print("   skipped: this repo does not support issue dependencies; each issue lists them instead")
@@ -218,7 +218,7 @@ else:
             break
     print("   done")
 
-# ---------------------------------------------------------------- project
+# project
 step("Project board")
 if not state["project"]:
     proj = gh(["project", "create", "--owner", OWNER, "--title", DATA["project_title"],
