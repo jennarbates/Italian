@@ -24,10 +24,10 @@ Carried over: __ points
 
 ## Retro
 
-**Went well:**
+Went well:
 
-**Didn't go well:**
+Didn't go well:
 
-**Trying next sprint:**
+Trying next sprint:
 
-**Did last sprint's changes help?**
+Did last sprint's changes help?

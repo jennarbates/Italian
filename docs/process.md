@@ -8,10 +8,10 @@ At the start of a sprint I check that every card in it is ready (see below), and
 
 ## Board
 
-- **Todo:** ready to start
-- **In progress:** I've made a branch
-- **Review:** the PR is open
-- **Done:** merged
+- Todo: ready to start
+- In progress: I've made a branch
+- Review: the PR is open
+- Done: merged
 
 I only keep one card in progress at a time. The exception is when one is stuck waiting on someone else.
 
