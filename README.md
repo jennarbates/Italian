@@ -55,7 +55,7 @@ The first time, install the Playwright browsers with `pnpm exec playwright insta
 The app is the Vite build served as Cloudflare Workers static assets ([wrangler.jsonc](wrangler.jsonc)). Cloudflare's GitHub integration (Workers Builds) deploys it:
 
 - Every pull request is uploaded as a preview version with its own `workers.dev` URL, built against the **staging** Supabase project. Cloudflare comments the URL on the PR.
-- Merging to `main` deploys to [chie.1412labs.com](https://chie.1412labs.com), built against **production**.
+- Merging to `main` deploys to [chie.parlaplay.games](https://chie.parlaplay.games), built against **production**.
 
 [scripts/cloudflare-build.ts](scripts/cloudflare-build.ts) picks the keys from the branch name and fails the build if a variable is missing, if a preview would point at production, or if a key is a secret or service role key.
 
@@ -68,4 +68,4 @@ One-time setup in the Cloudflare dashboard (Workers & Pages → Create → Impor
 | Non-production branch builds | On, with the default preview command |
 | Build variables | `STAGING_SUPABASE_URL`, `STAGING_SUPABASE_PUBLISHABLE_KEY`, `PRODUCTION_SUPABASE_URL`, `PRODUCTION_SUPABASE_PUBLISHABLE_KEY` |
 
-Only the publishable (anon) keys go in there. The `1412labs.com` zone has to be on the same Cloudflare account for the custom domain.
+Only the publishable (anon) keys go in there. The `parlaplay.games` zone has to be on the same Cloudflare account for the custom domain.

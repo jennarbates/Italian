@@ -10,7 +10,7 @@
     // Deep links such as /play get index.html instead of a 404.
     "not_found_handling": "single-page-application",
   },
-  "routes": [{ "pattern": "chie.1412labs.com", "custom_domain": true }],
+  "routes": [{ "pattern": "chie.parlaplay.games", "custom_domain": true }],
   // Production lives only on the custom domain. Preview URLs are on workers.dev,
   // so they stay on while the workers.dev route for production is off.
   "workers_dev": false,

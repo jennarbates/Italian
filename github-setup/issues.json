@@ -121,7 +121,7 @@
   {
    "key": "S4",
    "title": "Sprint 4: Fix and launch",
-   "description": "Oct 26 to Oct 29. Goal: Must-fix playtest findings closed, every definition-of-done box checked, live at chie.1412labs.com.",
+   "description": "Oct 26 to Oct 29. Goal: Must-fix playtest findings closed, every definition-of-done box checked, live at chie.parlaplay.games.",
    "due_on": "2026-10-29T23:59:59Z"
   }
  ],
@@ -306,8 +306,8 @@
   },
   {
    "key": "CHI-010",
-   "title": "CHI-010 Add DNS for chie.1412labs.com",
-   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **1 points** · chore\nEpic: {{E1}}\n\nCreate the subdomain now so SES domain verification can start on day 2.\n\n### Acceptance criteria\n\n- [ ] chie.1412labs.com resolves\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones) · [D30](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "title": "CHI-010 Buy parlaplay.games on Cloudflare",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **1 points** · chore\nEpic: {{E1}}\n\nBuy parlaplay.games through Cloudflare so its DNS is there from the start; the first production deploy creates the chie record, and SES verification can start on day 2.\n\n### Acceptance criteria\n\n- [ ] parlaplay.games registered, with its zone active on Cloudflare\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones) · [D30](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
    "labels": [
     "type: chore",
     "epic: Repo and infra"
@@ -396,7 +396,7 @@
   {
    "key": "CHI-014",
    "title": "CHI-014 Cloudflare deploys and PR previews",
-   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **3 points** · chore\nEpic: {{E1}}\n\nWorkers static assets, a preview URL per pull request built with staging keys, main deploys production.\n\n### Acceptance criteria\n\n- [ ] A PR gets its own preview URL pointing at staging Supabase\n- [ ] main deploys to chie.1412labs.com with production keys\n- [ ] assets.not_found_handling set to single-page-application, so /play loads directly\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.1412labs.com\n- {{CHI-011}} Scaffold the app\n- {{CHI-016}} Create staging and production Supabase projects\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D11](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D29](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **3 points** · chore\nEpic: {{E1}}\n\nWorkers static assets, a preview URL per pull request built with staging keys, main deploys production.\n\n### Acceptance criteria\n\n- [ ] A PR gets its own preview URL pointing at staging Supabase\n- [ ] main deploys to chie.parlaplay.games with production keys\n- [ ] assets.not_found_handling set to single-page-application, so /play loads directly\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.parlaplay.games\n- {{CHI-011}} Scaffold the app\n- {{CHI-016}} Create staging and production Supabase projects\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D11](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log) · [D29](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
    "labels": [
     "type: chore",
     "epic: Repo and infra"
@@ -430,7 +430,7 @@
   {
    "key": "CHI-018",
    "title": "CHI-018 Verify domain in AWS SES and request production access",
-   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nApproval can take a day or more, so it starts on day 2.\n\n### Acceptance criteria\n\n- [ ] SPF, DKIM and DMARC records added for chie.1412labs.com\n- [ ] Domain verified in SES\n- [ ] Production access (leave sandbox) requested\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.1412labs.com\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D15](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nApproval can take a day or more, so it starts on day 2.\n\n### Acceptance criteria\n\n- [ ] SPF, DKIM and DMARC records added for chie.parlaplay.games\n- [ ] Domain verified in SES\n- [ ] Production access (leave sandbox) requested\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.parlaplay.games\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D15](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
    "labels": [
     "type: chore",
     "epic: Repo and infra",
@@ -447,7 +447,7 @@
   {
    "key": "CHI-019",
    "title": "CHI-019 Open a Resend account as the email fallback",
-   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\nSame domain, ready to swap in as Supabase custom SMTP if SES is slow or refused.\n\n### Acceptance criteria\n\n- [ ] Resend account created\n- [ ] Domain added in Resend\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.1412labs.com\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D15](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **1 points** · chore\nEpic: {{E1}}\n\nSame domain, ready to swap in as Supabase custom SMTP if SES is slow or refused.\n\n### Acceptance criteria\n\n- [ ] Resend account created\n- [ ] Domain added in Resend\n\n### Depends on\n\n- {{CHI-010}} Add DNS for chie.parlaplay.games\n\n### Spec\n\n[7.3](https://github.com/jennarbates/Italian/blob/main/spec.md#73-auth-and-sync-rules) · [D15](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
    "labels": [
     "type: chore",
     "epic: Repo and infra"
@@ -1601,7 +1601,7 @@
   {
    "key": "CHI-115",
    "title": "CHI-115 Launch",
-   "body": "**Sprint 4: Fix and launch** · Day 17, Thu Oct 29 · **1 points** · task\nEpic: {{E10}}\n\nMerge to main, update released-ids.json, confirm the live URL plays on both phones.\n\n### Acceptance criteria\n\n- [ ] chie.1412labs.com live\n- [ ] released-ids.json updated for this release\n- [ ] Full round played on iPhone and Android against production\n\n### Depends on\n\n- {{CHI-110}} Production Supabase on Pro\n- {{CHI-111}} Final email check in production\n- {{CHI-112}} Sentry test error from production\n- {{CHI-113}} README\n- {{CHI-114}} TBD and definition-of-done sweep\n\n### Spec\n\n[1](https://github.com/jennarbates/Italian/blob/main/spec.md#1-scope-and-non-goals) · [3.6](https://github.com/jennarbates/Italian/blob/main/spec.md#36-content-ids-and-versions) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones)",
+   "body": "**Sprint 4: Fix and launch** · Day 17, Thu Oct 29 · **1 points** · task\nEpic: {{E10}}\n\nMerge to main, update released-ids.json, confirm the live URL plays on both phones.\n\n### Acceptance criteria\n\n- [ ] chie.parlaplay.games live\n- [ ] released-ids.json updated for this release\n- [ ] Full round played on iPhone and Android against production\n\n### Depends on\n\n- {{CHI-110}} Production Supabase on Pro\n- {{CHI-111}} Final email check in production\n- {{CHI-112}} Sentry test error from production\n- {{CHI-113}} README\n- {{CHI-114}} TBD and definition-of-done sweep\n\n### Spec\n\n[1](https://github.com/jennarbates/Italian/blob/main/spec.md#1-scope-and-non-goals) · [3.6](https://github.com/jennarbates/Italian/blob/main/spec.md#36-content-ids-and-versions) · [10.4](https://github.com/jennarbates/Italian/blob/main/spec.md#104-milestones)",
    "labels": [
     "type: task",
     "epic: Launch"
