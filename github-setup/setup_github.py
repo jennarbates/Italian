@@ -261,7 +261,8 @@ for c in DATA["cards"]:
     iid = state["items"][key]
     base = ["project", "item-edit", "--id", iid, "--project-id", PID]
     gh(base + ["--field-id", fields["Points"]["id"], "--number", str(c["points"])], pause=0.3)
-    gh(base + ["--field-id", fields["Target date"]["id"], "--date", c["target_date"]], pause=0.3)
+    if c["target_date"]:  # unscheduled sprints have no date yet
+        gh(base + ["--field-id", fields["Target date"]["id"], "--date", c["target_date"]], pause=0.3)
     if todo_option:
         gh(base + ["--field-id", status["id"], "--single-select-option-id", todo_option], pause=0.3)
     state["edited"].append(key)
