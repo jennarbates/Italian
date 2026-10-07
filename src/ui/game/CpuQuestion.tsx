@@ -27,7 +27,7 @@ export function CpuQuestion({
           <button
             type="button"
             onClick={() => setHintShown(true)}
-            className="self-start text-sm text-blue-700 underline"
+            className="inline-flex min-h-11 items-center self-start text-sm text-blue-700 underline"
           >
             Show hint
           </button>

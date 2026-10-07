@@ -3,7 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 // CHI-051 to CHI-054: the board, top bar, bottom sheet and card detail view.
 
 const card = (page: Page, name: string) =>
-  page.getByRole("button", { name: new RegExp(`^${name}(,|$)`) });
+  page.getByRole("button", { name: new RegExp(`^${name}: capelli`) });
 
 // The flipped cards of the round saved in IndexedDB, read from inside the page.
 function savedFlipped(page: Page): Promise<string[] | undefined> {
@@ -73,15 +73,12 @@ test("tap flips a card and tap again flips it back, and it shows by more than co
   await page.goto("/play?seed=1");
   await collapseSheet(page);
   await card(page, "Chiara").click();
-  const flipped = page.getByRole("button", { name: "Chiara, flipped down" });
+  const flipped = card(page, "Chiara");
   await expect(flipped).toHaveAttribute("aria-pressed", "true");
   // The face is turned away and a cross shows instead.
   await expect(flipped.locator("svg path")).toBeVisible();
   await flipped.click();
-  await expect(page.getByRole("button", { name: "Chiara", exact: true })).toHaveAttribute(
-    "aria-pressed",
-    "false",
-  );
+  await expect(card(page, "Chiara")).toHaveAttribute("aria-pressed", "false");
 });
 
 test("Unflip all appears once every card is down, and turns them all back", async ({ page }) => {
@@ -103,12 +100,12 @@ test("flips survive a reload, because the round is saved after every action", as
   await collapseSheet(page);
   await card(page, "Marco").click();
   await card(page, "Sara").click();
-  await expect(page.getByRole("button", { name: "Sara, flipped down" })).toBeVisible();
+  await expect(card(page, "Sara")).toHaveAttribute("aria-pressed", "true");
   // Each action is written to IndexedDB; wait for the writes to land, then reload.
   await expect.poll(() => savedFlipped(page)).toEqual(["c.marco", "c.sara"]);
   await page.reload();
-  await expect(page.getByRole("button", { name: "Marco, flipped down" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Sara, flipped down" })).toBeVisible();
+  await expect(card(page, "Marco")).toHaveAttribute("aria-pressed", "true");
+  await expect(card(page, "Sara")).toHaveAttribute("aria-pressed", "true");
 });
 
 test("the top bar shows the turn, whose turn, and your own card", async ({ page }) => {

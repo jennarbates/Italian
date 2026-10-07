@@ -29,7 +29,7 @@ export function Progress() {
     <section className="flex flex-col gap-4 p-4">
       <header className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Progress</h1>
-        <Link to="/" className="text-blue-700 underline">
+        <Link to="/" className="inline-flex min-h-11 min-w-11 items-center text-blue-700 underline">
           Home
         </Link>
       </header>

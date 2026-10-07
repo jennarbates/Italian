@@ -44,7 +44,10 @@ export function Home() {
         <h1 className="text-4xl font-bold">Chi è?</h1>
         <p className="text-sm text-stone-500">
           Guest ·{" "}
-          <Link to="/settings" className="text-blue-700 underline">
+          <Link
+            to="/settings"
+            className="inline-flex min-h-11 items-center text-blue-700 underline"
+          >
             Sign in
           </Link>
         </p>
