@@ -4,7 +4,8 @@
 // save it to the account.
 import { create } from "zustand";
 import { read, remove, write } from "../services/storage.ts";
-import { useSyncStore, type Op } from "../services/sync.ts";
+import { content } from "../content/index.ts";
+import { pull, useSyncStore, type Op } from "../services/sync.ts";
 import { useAuthStore } from "./authStore.ts";
 import { progressSaved, storageKeyFor, useProgressStore, type GuestData } from "./progressStore.ts";
 
@@ -62,7 +63,17 @@ export async function onAccountChange(userId: string | null) {
   }
   await useProgressStore.getState().switchOwner(userId ?? "guest");
   await useSyncStore.getState().load(userId);
-  if (userId) await useSyncStore.getState().flush();
+  if (userId) await syncNow();
+}
+
+// Push the outbox, then pull every device's rows and merge them in (spec 7.3).
+export async function syncNow(): Promise<void> {
+  const sync = useSyncStore.getState();
+  if (!sync.userId) return;
+  if (!(await sync.flush())) return;
+  const remote = await pull(content.lexicon);
+  if (remote && useProgressStore.getState().owner === sync.userId)
+    useProgressStore.getState().mergeRemote(remote);
 }
 
 export function startAccountSync() {
@@ -78,6 +89,6 @@ export function startAccountSync() {
   // Spec 7.3: flush on app start (above), on each round end (game store), and when
   // the connection comes back.
   if (typeof window !== "undefined") {
-    window.addEventListener("online", () => void useSyncStore.getState().flush());
+    window.addEventListener("online", () => void syncNow());
   }
 }

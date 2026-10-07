@@ -36,6 +36,9 @@ type ProgressStore = GuestData & {
   hydrate: () => Promise<void>;
   // Load another owner's local copy (on sign-in or sign-out).
   switchOwner: (owner: string) => Promise<void>;
+  // Merge rows downloaded from another device (spec 7.3): a union by id, where a
+  // finished game beats the same game still open.
+  mergeRemote: (remote: GuestData) => void;
   recordGameStart: (game: Omit<GameRow, "endedAt" | "result">) => void;
   recordGameEnd: (gameId: string, result: NonNullable<GameRow["result"]>, at?: Date) => void;
   appendEvents: (gameId: string, events: GameEvent[], at?: Date) => ReviewLogRow[];
@@ -124,6 +127,17 @@ export const useProgressStore = create<ProgressStore>((set, get) => ({
         ...s.reviewLog,
       ]),
     }));
+  },
+
+  mergeRemote(remote) {
+    const games = new Map(get().games.map((g) => [g.id, g]));
+    for (const g of remote.games) {
+      const mine = games.get(g.id);
+      if (!mine || (!mine.result && g.result)) games.set(g.id, g);
+    }
+    const reviewLog = unique([...get().reviewLog, ...remote.reviewLog]);
+    set({ games: [...games.values()], reviewLog });
+    persist(get().owner, snapshot(get()));
   },
 
   recordGameStart(game) {
