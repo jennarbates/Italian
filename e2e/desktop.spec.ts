@@ -523,3 +523,71 @@ test.describe("keyboard (DS 4, DS 8)", () => {
     await expect(panel(page)).toContainText("Your turn: ask a question, or guess.");
   });
 });
+
+test.describe("Home, Settings and Privacy (DS 9.1, 9.4, 9.5)", () => {
+  const box = async (page: Page, l: ReturnType<Page["locator"]>) => {
+    const b = await l.boundingBox();
+    if (!b) throw new Error(`no box for ${page.url()}`);
+    return b;
+  };
+
+  test("Home is two columns: the name on the left, levels and Play on the right", async ({
+    page,
+  }) => {
+    for (const width of [1024, 1440]) {
+      await page.setViewportSize({ width, height: 800 });
+      await page.goto("/");
+      const main = page.locator("main");
+      await expect(main).toContainText(
+        "Ask yes-or-no questions in Italian to find the secret character.",
+      );
+      const title = await box(page, page.getByRole("heading", { name: "Chi è?" }));
+      const play = await box(page, page.getByRole("button", { name: "Play" }));
+      expect(play.x).toBeGreaterThan(title.x + title.width);
+      // The two levels side by side.
+      const one = await box(page, page.getByText("Level 1", { exact: true }));
+      const two = await box(page, page.getByText("Level 2", { exact: true }));
+      expect(two.y).toBe(one.y);
+      expect(two.x).toBeGreaterThan(one.x);
+      // The links and sign-in status are DesktopNav's.
+      await expect(main.getByRole("link", { name: "Progress" })).toBeHidden();
+      await expect(main.getByRole("link", { name: "Sign in" })).toBeHidden();
+    }
+  });
+
+  test("Settings is rows under Game, Account and About", async ({ page }) => {
+    await page.goto("/settings");
+    for (const name of ["Game", "Account", "About"])
+      await expect(page.getByRole("heading", { name, level: 2 })).toBeVisible();
+    const label = await box(page, page.getByText("Default level", { exact: true }));
+    const control = await box(page, page.getByRole("radiogroup", { name: "Default level" }));
+    expect(control.x).toBeGreaterThan(label.x + label.width);
+    expect(Math.abs(control.y + control.height / 2 - (label.y + label.height / 2))).toBeLessThan(
+      30,
+    );
+    // The default level still works from here.
+    await page.getByRole("radio", { name: "Level 2" }).check();
+    await page.goto("/");
+    await expect(page.getByRole("radio", { name: /Level 2/ })).toBeChecked();
+  });
+
+  test("Privacy is one reading column with a way back to Settings", async ({ page }) => {
+    await page.goto("/privacy");
+    const article = page.locator("article");
+    const width = await article.evaluate((el) => el.getBoundingClientRect().width);
+    const ch = await article.evaluate((el) => {
+      const probe = document.createElement("span");
+      probe.style.width = "65ch";
+      probe.style.display = "block";
+      el.append(probe);
+      const w = probe.getBoundingClientRect().width;
+      probe.remove();
+      return w;
+    });
+    expect(width).toBeLessThanOrEqual(ch + 1);
+    expect(await article.evaluate((el) => getComputedStyle(el).fontSize)).toBe("18px");
+    await expect(page.locator("main").getByRole("link", { name: "Home" })).toBeHidden();
+    await page.getByRole("link", { name: "Back to Settings" }).click();
+    await expect(page).toHaveURL(/\/settings$/);
+  });
+});
