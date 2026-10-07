@@ -70,7 +70,7 @@ export function RoundEnd({
                 className="w-28 rounded-xl ring-1 ring-stone-300"
               />
               <figcaption className="text-center text-sm">
-                <span className="text-stone-500">{label}</span>
+                <span className="text-stone-600">{label}</span>
                 <br />
                 <strong>{c.name}</strong>
               </figcaption>
@@ -84,7 +84,7 @@ export function RoundEnd({
           This round's mistakes
         </h2>
         {mistakes.length === 0 ? (
-          <p className="text-sm text-stone-500">None. Nicely done.</p>
+          <p className="text-sm text-stone-600">None. Nicely done.</p>
         ) : (
           <ul className="flex flex-col gap-1.5 text-sm">
             {mistakes.map((m) => (
@@ -125,7 +125,7 @@ export function RoundEnd({
               h.by === "cpu" && h.playerAnswer !== undefined && h.playerAnswer !== h.answer;
             return (
               <li key={i} className="rounded-lg bg-white px-3 py-2 ring-1 ring-stone-200">
-                <span className="text-xs text-stone-500">
+                <span className="text-xs text-stone-600">
                   {h.by === "player" ? "You asked" : "The computer asked"}
                 </span>
                 <p lang="it">{h.text}</p>
@@ -141,12 +141,12 @@ export function RoundEnd({
             );
           })}
           {game.history.length === 0 && (
-            <li className="text-stone-500">No questions this round.</li>
+            <li className="text-stone-600">No questions this round.</li>
           )}
         </ol>
       </section>
 
-      <p className="text-center text-sm text-stone-500">
+      <p className="text-center text-sm text-stone-600">
         <Link to="/settings" className="inline-flex min-h-11 items-center underline">
           Sign in to keep your progress safe
         </Link>

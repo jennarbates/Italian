@@ -16,7 +16,7 @@ export function CpuQuestion({
   const [hintShown, setHintShown] = useState(false);
   return (
     <div className="flex flex-col gap-3 py-3">
-      <p className="text-sm text-stone-500">The computer asks about your card:</p>
+      <p className="text-sm text-stone-600">The computer asks about your card:</p>
       <p lang="it" className="text-2xl font-semibold">
         {question.text}
       </p>

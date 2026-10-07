@@ -24,14 +24,14 @@ export function TopBar({
   return (
     <header className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-stone-200 bg-white px-3">
       <div className="leading-tight">
-        <p className="text-xs text-stone-500">Turn {game.turn}</p>
+        <p className="text-xs text-stone-600">Turn {game.turn}</p>
         <p className="font-semibold" aria-live="polite">
           {whoseTurn[game.phase]}
         </p>
       </div>
       <div className="flex items-center gap-2">
         <figure className="flex items-center gap-1.5">
-          <figcaption className="text-right text-xs leading-tight text-stone-500">
+          <figcaption className="text-right text-xs leading-tight text-stone-600">
             You are
             <br />
             <span className="font-medium text-stone-900">{secret.name}</span>

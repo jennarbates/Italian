@@ -44,13 +44,15 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
         >
           <span className="absolute inset-0 overflow-hidden rounded-md shadow-sm ring-1 ring-stone-300 [backface-visibility:hidden]">
             <Face character={character} className="h-full w-full" />
-            <span className="absolute inset-x-0 bottom-0 truncate bg-white/80 px-0.5 text-center text-[10px] leading-tight font-medium">
-              {character.name}
-            </span>
+            {!flipped && (
+              <span className="absolute inset-x-0 bottom-0 truncate bg-white/80 px-0.5 text-center text-[10px] leading-tight font-medium">
+                {character.name}
+              </span>
+            )}
           </span>
           <span
             aria-hidden="true"
-            className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 rounded-md bg-stone-300 text-stone-500 ring-1 ring-stone-400 [backface-visibility:hidden] [transform:rotateY(180deg)]"
+            className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 rounded-md bg-stone-300 text-stone-600 ring-1 ring-stone-400 [backface-visibility:hidden] [transform:rotateY(180deg)]"
           >
             <svg
               viewBox="0 0 24 24"
@@ -62,7 +64,9 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
             >
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
-            <span className="text-[10px] leading-tight">{character.name}</span>
+            {flipped && (
+              <span className="text-[10px] leading-tight text-stone-800">{character.name}</span>
+            )}
           </span>
         </span>
       </button>
