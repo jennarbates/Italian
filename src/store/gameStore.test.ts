@@ -5,6 +5,7 @@ import { contentVersion } from "../content/index.ts";
 import { allQuestions } from "../engine/index.ts";
 import { read, resetForTests, write } from "../services/storage.ts";
 import { randomSeed, savesSettled, useGameStore, type SavedRound } from "./gameStore.ts";
+import { progressSaved, useProgressStore } from "./progressStore.ts";
 
 const q = allQuestions((await import("../content/index.ts")).content)[0];
 if (!q) throw new Error("no questions");
@@ -13,7 +14,14 @@ const ask = { type: "ASK" as const, templateId: q.templateId, fill: q.fill };
 beforeEach(() => {
   vi.stubGlobal("indexedDB", new IDBFactory());
   resetForTests();
-  useGameStore.setState({ status: "loading", game: null, lastEvents: [] });
+  useGameStore.setState({ status: "loading", game: null, gameId: null, lastEvents: [] });
+  useProgressStore.setState({ games: [], reviewLog: [], loaded: false });
+});
+
+const withId = (state: unknown) => ({
+  contentVersion,
+  gameId: useGameStore.getState().gameId,
+  state,
 });
 
 async function saved() {
@@ -26,7 +34,7 @@ describe("start and dispatch", () => {
     useGameStore.getState().start(2, 123);
     const { game } = useGameStore.getState();
     expect(game).toMatchObject({ phase: "playerTurn", level: 2, seed: 123 });
-    expect(await saved()).toEqual({ contentVersion, state: game });
+    expect(await saved()).toEqual(withId(game));
   });
 
   test("state is saved after every action", async () => {
@@ -38,7 +46,7 @@ describe("start and dispatch", () => {
       { type: "END_TURN" as const },
     ]) {
       store.dispatch(action);
-      expect(await saved()).toEqual({ contentVersion, state: useGameStore.getState().game });
+      expect(await saved()).toEqual(withId(useGameStore.getState().game));
     }
   });
 
@@ -75,9 +83,9 @@ describe("start and dispatch", () => {
     expect(useGameStore.getState().game).toBeNull();
   });
 
-  test("clear forgets the round and its save", async () => {
+  test("quit forgets the round and its save", async () => {
     useGameStore.getState().start(1, 5);
-    useGameStore.getState().clear();
+    useGameStore.getState().quit();
     expect(useGameStore.getState().game).toBeNull();
     expect(await saved()).toBeUndefined();
   });
@@ -99,7 +107,7 @@ describe("hydrate", () => {
     await savesSettled();
 
     // A reload: fresh store state, fresh database connection.
-    useGameStore.setState({ status: "loading", game: null, lastEvents: [] });
+    useGameStore.setState({ status: "loading", game: null, gameId: null, lastEvents: [] });
     resetForTests();
     await useGameStore.getState().hydrate();
     expect(useGameStore.getState()).toMatchObject({ status: "ready", game: before });
@@ -118,7 +126,7 @@ describe("hydrate", () => {
     useGameStore.getState().start(1, 5);
     const state = useGameStore.getState().game;
     await savesSettled();
-    await write("round", { contentVersion: contentVersion - 1, state });
+    await write("round", { contentVersion: contentVersion - 1, gameId: "g", state });
     useGameStore.setState({ status: "loading", game: null });
     await useGameStore.getState().hydrate();
     expect(useGameStore.getState().game).toBeNull();
@@ -130,18 +138,21 @@ describe("hydrate", () => {
     ["an unknown secret", "unknown"],
     ["a finished round", "over"],
     ["missing history", "noHistory"],
+    ["no game id", "noGameId"],
   ])("a damaged save (%s) is discarded", async (_, kind) => {
     useGameStore.getState().start(1, 5);
     const state = useGameStore.getState().game;
     await savesSettled();
     const damaged =
       kind === "unknown"
-        ? { contentVersion, state: { ...state, cpuSecret: "c.nobody" } }
+        ? { contentVersion, gameId: "g", state: { ...state, cpuSecret: "c.nobody" } }
         : kind === "over"
-          ? { contentVersion, state: { ...state, phase: "over" } }
+          ? { contentVersion, gameId: "g", state: { ...state, phase: "over" } }
           : kind === "noHistory"
-            ? { contentVersion, state: { ...state, history: undefined } }
-            : kind;
+            ? { contentVersion, gameId: "g", state: { ...state, history: undefined } }
+            : kind === "noGameId"
+              ? { contentVersion, state }
+              : kind;
     await write("round", damaged);
     useGameStore.setState({ status: "loading", game: null });
     await useGameStore.getState().hydrate();
@@ -161,5 +172,106 @@ describe("hydrate", () => {
     expect(useGameStore.getState().status).toBe("ready");
     useGameStore.getState().start(1, 5);
     expect(useGameStore.getState().game?.phase).toBe("playerTurn");
+  });
+});
+
+describe("games rows and the review log (CHI-070, CHI-071)", () => {
+  const games = () => useProgressStore.getState().games;
+  const log = () => useProgressStore.getState().reviewLog;
+
+  test("START writes a games row before anything points at it", () => {
+    useGameStore.getState().start(2, 99);
+    const { gameId } = useGameStore.getState();
+    expect(games()).toEqual([
+      {
+        id: gameId,
+        seed: 99,
+        level: 2,
+        contentVersion,
+        startedAt: expect.stringMatching(/^\d{4}-\d\d-\d\dT/),
+      },
+    ]);
+  });
+
+  test("ratings and slips from play are appended to the log with the game's id", () => {
+    useGameStore.getState().start(2, 99);
+    const { gameId } = useGameStore.getState();
+    useGameStore.getState().dispatch({
+      type: "ASK",
+      templateId: "t.have.adj",
+      fill: { verb: "v.ha", art: "art.i", noun: "n.capelli", adj: "adj.biondo#fp" },
+    });
+    expect(log()).toEqual([
+      expect.objectContaining({
+        gameId,
+        lexiconId: "n.capelli",
+        direction: "produce",
+        rating: "good",
+      }),
+      expect.objectContaining({
+        gameId,
+        lexiconId: "adj.biondo",
+        direction: "produce",
+        rating: "slip",
+        detail: { slot: "adj", given: "bionde", expected: "biondi", rule: "agreement" },
+      }),
+    ]);
+  });
+
+  test("the end of a round updates its row with ended_at and the result", () => {
+    useGameStore.getState().start(1, 5);
+    const { game, gameId } = useGameStore.getState();
+    useGameStore.getState().dispatch({ type: "GUESS", characterId: game?.cpuSecret ?? "" });
+    expect(games().find((g) => g.id === gameId)).toMatchObject({
+      result: "won",
+      endedAt: expect.any(String),
+    });
+  });
+
+  test("quitting records abandoned and keeps the ratings already logged", () => {
+    useGameStore.getState().start(2, 99);
+    const { gameId } = useGameStore.getState();
+    useGameStore.getState().dispatch({
+      type: "ASK",
+      templateId: "t.have",
+      fill: { verb: "v.e", art: "art.la", noun: "n.barba" },
+    });
+    const logged = log();
+    expect(logged).toHaveLength(1);
+    useGameStore.getState().quit();
+    expect(games().find((g) => g.id === gameId)).toMatchObject({ result: "abandoned" });
+    expect(log()).toEqual(logged);
+  });
+
+  test("starting a new round over an unfinished one records the old one abandoned", () => {
+    useGameStore.getState().start(1, 5);
+    const first = useGameStore.getState().gameId;
+    useGameStore.getState().start(1, 6);
+    expect(games().find((g) => g.id === first)?.result).toBe("abandoned");
+    expect(games().find((g) => g.id === useGameStore.getState().gameId)?.result).toBeUndefined();
+  });
+
+  test("a finished round is not marked abandoned by the next start", () => {
+    useGameStore.getState().start(1, 5);
+    const first = useGameStore.getState().gameId;
+    useGameStore.getState().dispatch({ type: "GUESS", characterId: "c.anna" });
+    const result = games().find((g) => g.id === first)?.result;
+    useGameStore.getState().start(1, 6);
+    expect(games().find((g) => g.id === first)?.result).toBe(result);
+  });
+
+  test("everything survives a reload", async () => {
+    useGameStore.getState().start(2, 99);
+    useGameStore.getState().dispatch({
+      type: "ASK",
+      templateId: "t.have",
+      fill: { verb: "v.ha", art: "art.la", noun: "n.barba" },
+    });
+    const before = { games: games(), reviewLog: log() };
+    await progressSaved();
+    useProgressStore.setState({ games: [], reviewLog: [], loaded: false });
+    resetForTests();
+    await useProgressStore.getState().hydrate();
+    expect({ games: games(), reviewLog: log() }).toEqual(before);
   });
 });

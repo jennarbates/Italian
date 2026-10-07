@@ -4,8 +4,10 @@ import { RouterProvider } from "react-router";
 import "./index.css";
 import { router } from "./routes.tsx";
 import { useGameStore } from "./store/gameStore.ts";
+import { useProgressStore } from "./store/progressStore.ts";
 
-// Resume a saved round, if any, while the first screen renders.
+// Load saved progress and resume a saved round, if any, while the first screen renders.
+void useProgressStore.getState().hydrate();
 void useGameStore.getState().hydrate();
 
 const root = document.getElementById("root");
