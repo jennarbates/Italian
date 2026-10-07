@@ -6,9 +6,15 @@ import { join } from "node:path";
 import type { Plugin } from "vite";
 import { contentFiles, type ContentFile } from "../src/content/schemas.ts";
 
-export function validateContentDir(dir: string): string[] {
+export function validateContentDir(dir: string, { requireAll = true } = {}): string[] {
   const problems: string[] = [];
   const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
+
+  if (requireAll) {
+    for (const file of Object.keys(contentFiles)) {
+      if (!files.includes(file)) problems.push(`${file}: missing`);
+    }
+  }
 
   for (const file of files) {
     if (!(file in contentFiles)) {
@@ -38,9 +44,9 @@ function formatPath(path: PropertyKey[]): string {
 
 export const contentDir = new URL("../src/content/", import.meta.url).pathname;
 
-export function contentCheck(dir = contentDir): Plugin {
+export function contentCheck(dir = contentDir, options?: { requireAll?: boolean }): Plugin {
   const check = () => {
-    const problems = validateContentDir(dir);
+    const problems = validateContentDir(dir, options);
     if (problems.length) throw new Error(`Invalid content:\n  ${problems.join("\n  ")}`);
   };
   return {
