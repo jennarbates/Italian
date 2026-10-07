@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { supabaseEnvFor } from "./cloudflare-env.ts";
+import { sentryEnvFor, supabaseEnvFor } from "./cloudflare-env.ts";
 
 const vars = {
   STAGING_SUPABASE_URL: "https://staging.supabase.co",
@@ -69,5 +69,31 @@ describe("supabaseEnvFor", () => {
       supabaseEnvFor("feature", { ...vars, STAGING_SUPABASE_PUBLISHABLE_KEY: anon })
         .VITE_SUPABASE_PUBLISHABLE_KEY,
     ).toBe(anon);
+  });
+});
+
+describe("sentryEnvFor", () => {
+  const sentryVars = {
+    WORKERS_CI_COMMIT_SHA: "abc123",
+    SENTRY_DSN: "https://key@o1.ingest.sentry.io/1",
+  };
+
+  test("main is production, tagged with the commit", () => {
+    expect(sentryEnvFor("main", sentryVars)).toEqual({
+      VITE_ENVIRONMENT: "production",
+      VITE_RELEASE: "abc123",
+      VITE_SENTRY_DSN: "https://key@o1.ingest.sentry.io/1",
+    });
+  });
+
+  test("other branches are staging", () => {
+    expect(sentryEnvFor("chi-017-sentry", sentryVars).VITE_ENVIRONMENT).toBe("staging");
+  });
+
+  test("no DSN leaves Sentry off instead of failing the build", () => {
+    expect(sentryEnvFor("main", { WORKERS_CI_COMMIT_SHA: "abc123", SENTRY_DSN: " " })).toEqual({
+      VITE_ENVIRONMENT: "production",
+      VITE_RELEASE: "abc123",
+    });
   });
 });

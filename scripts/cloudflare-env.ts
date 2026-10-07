@@ -30,6 +30,24 @@ export function supabaseEnvFor(branch: string | undefined, vars: Vars): Supabase
   return { VITE_SUPABASE_URL: url, VITE_SUPABASE_PUBLISHABLE_KEY: key };
 }
 
+// Spec 9, D19: errors are tagged with the commit and the environment. Sentry stays
+// off until the SENTRY_DSN build variable is set.
+export type SentryEnv = {
+  VITE_ENVIRONMENT: "production" | "staging";
+  VITE_RELEASE?: string;
+  VITE_SENTRY_DSN?: string;
+};
+
+export function sentryEnvFor(branch: string | undefined, vars: Vars): SentryEnv {
+  const release = vars.WORKERS_CI_COMMIT_SHA?.trim();
+  const dsn = vars.SENTRY_DSN?.trim();
+  return {
+    VITE_ENVIRONMENT: branch === productionBranch ? "production" : "staging",
+    ...(release && { VITE_RELEASE: release }),
+    ...(dsn && { VITE_SENTRY_DSN: dsn }),
+  };
+}
+
 function required(vars: Vars, name: string): string {
   const value = vars[name]?.trim();
   if (!value) throw new Error(`Build variable ${name} is not set`);
