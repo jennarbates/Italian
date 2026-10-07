@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useEffectEvent, useRef, useState, type ReactNode } from "react";
 import { flushSync } from "react-dom";
 import { useNavigate, useSearchParams } from "react-router";
 import { content } from "../content/index.ts";
@@ -12,8 +12,11 @@ import { CpuQuestion } from "./game/CpuQuestion.tsx";
 import { FeedbackText } from "./game/FeedbackText.tsx";
 import { GameMenu } from "./game/GameMenu.tsx";
 import { GuessConfirm } from "./game/GuessConfirm.tsx";
+import { Kbd } from "./game/Kbd.tsx";
 import { QuestionPicker } from "./game/QuestionPicker.tsx";
 import { RoundEnd } from "./game/RoundEnd.tsx";
+import { keyToAction } from "./game/shortcuts.ts";
+import { ShortcutsDialog } from "./game/ShortcutsDialog.tsx";
 import { Sheet } from "./game/Sheet.tsx";
 import { SidePanel } from "./game/SidePanel.tsx";
 import { TileBuilder, type TileDraft } from "./game/TileBuilder.tsx";
@@ -88,6 +91,80 @@ export function Game() {
   const { sheetOpen, guessing, hintShown, draft } = ui;
   const setSheetOpen = (open: boolean) => setUi((u) => ({ ...u, sheetOpen: open }));
   const setGuessing = (on: boolean) => setUi((u) => ({ ...u, guessing: on }));
+  const [help, setHelp] = useState(false);
+
+  // Desktop spec DS 4: one keydown listener for the game's shortcut keys. The
+  // pure keyToAction() decides; this carries it out with the same handlers the
+  // buttons use, and stops the browser doing anything else with the key.
+  const onShortcut = useEffectEvent((e: KeyboardEvent) => {
+    if (status !== "ready" || !game) return;
+    const target = e.target instanceof HTMLElement ? e.target : null;
+    const action = keyToAction(
+      {
+        key: e.key,
+        ctrlKey: e.ctrlKey,
+        metaKey: e.metaKey,
+        altKey: e.altKey,
+        targetTag: target?.tagName ?? "",
+        targetEditable: !!target?.isContentEditable,
+      },
+      {
+        phase: game.phase,
+        level: game.level,
+        guessing,
+        dialogOpen: !!document.querySelector("dialog[open]"),
+      },
+    );
+    if (!action) return;
+    e.preventDefault();
+    switch (action.type) {
+      case "focusQuestions":
+        // The panel is always open; on the phone, after the render that opens the sheet.
+        if (desktop) focusQuestions();
+        else {
+          setSheetOpen(true);
+          requestAnimationFrame(focusQuestions);
+        }
+        break;
+      case "focusBoard":
+        focusBoard();
+        break;
+      case "startGuess":
+        setGuessing(true);
+        setSheetOpen(false);
+        focusBoard();
+        break;
+      case "cancelGuess":
+        setGuessing(false);
+        break;
+      case "answer":
+        dispatch({ type: "ANSWER", value: action.value, hintShown });
+        break;
+      case "showHint":
+        setUi((u) => ({ ...u, hintShown: true }));
+        break;
+      case "next":
+        dispatch({ type: "END_TURN" });
+        break;
+      case "openHelp":
+        setHelp(true);
+        break;
+    }
+  });
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => onShortcut(e);
+    document.addEventListener("keydown", listener);
+    return () => document.removeEventListener("keydown", listener);
+  }, []);
+
+  // Desktop spec DS 2.2: a resize across lg swaps the board and the panel, which
+  // drops focus if it was in them; it goes to the board's card instead.
+  const wasDesktop = useRef(desktop);
+  useEffect(() => {
+    if (wasDesktop.current === desktop) return;
+    wasDesktop.current = desktop;
+    if (document.activeElement === document.body) focusBoard();
+  }, [desktop]);
 
   if (status !== "ready" || !settled || !game) return <SkeletonBoard desktop={desktop} />;
   const secret = byId.get(game.playerSecret);
@@ -133,6 +210,7 @@ export function Game() {
             void navigate("/");
             quit();
           }}
+          onShortcuts={() => setHelp(true)}
         />
       }
     />
@@ -190,6 +268,7 @@ export function Game() {
         character={zoomed ? byId.get(zoomed) : undefined}
         onClose={() => setZoomed(undefined)}
       />
+      <ShortcutsDialog open={help} onClose={() => setHelp(false)} />
       <GuessConfirm
         character={guessFor ? byId.get(guessFor) : undefined}
         flipped={!!guessFor && game.flipped.includes(guessFor)}
@@ -202,6 +281,23 @@ export function Game() {
       />
     </>
   );
+}
+
+// The board's card in the tab order (desktop), or its first card (phone).
+function focusBoard() {
+  (
+    document.querySelector<HTMLElement>('[aria-label="Board"] [data-card][tabindex="0"]') ??
+    document.querySelector<HTMLElement>('[aria-label="Board"] [data-card]')
+  )?.focus();
+}
+
+// The first question that can still be asked, or the first word tile.
+function focusQuestions() {
+  document
+    .querySelector<HTMLElement>(
+      '[aria-label="Questions to ask"] button:not(:disabled), [role="group"][aria-label="Verb"] button',
+    )
+    ?.focus();
 }
 
 type Handlers = {
@@ -227,8 +323,9 @@ function sheetFor(
 ): { summary: ReactNode; body: ReactNode; actions?: ReactNode } {
   const last = game.history.at(-1);
   const avanti = (
-    <button type="button" onClick={h.next} className={primary}>
+    <button type="button" onClick={h.next} aria-keyshortcuts="a" className={primary}>
       Avanti
+      {h.desktop && <Kbd>A</Kbd>}
     </button>
   );
 
@@ -240,8 +337,14 @@ function sheetFor(
           summary: <strong>{h.desktop ? "Click" : "Tap"} the card you think it is.</strong>,
           body: null,
           actions: (
-            <button type="button" onClick={h.cancelGuess} className={secondary}>
+            <button
+              type="button"
+              onClick={h.cancelGuess}
+              aria-keyshortcuts="Escape"
+              className={secondary}
+            >
               Cancel guess
+              {h.desktop && <Kbd>Esc</Kbd>}
             </button>
           ),
         };
@@ -254,13 +357,19 @@ function sheetFor(
             {game.level === 1 ? (
               <QuestionPicker history={game.history} onAsk={h.ask} />
             ) : (
-              <TileBuilder draft={h.draft} onDraft={h.setDraft} onAsk={h.askTiles} />
+              <TileBuilder
+                draft={h.draft}
+                onDraft={h.setDraft}
+                onAsk={h.askTiles}
+                roving={h.desktop}
+              />
             )}
           </div>
         ),
         actions: (
-          <button type="button" onClick={h.startGuess} className={secondary}>
+          <button type="button" onClick={h.startGuess} aria-keyshortcuts="g" className={secondary}>
             Indovina
+            {h.desktop && <Kbd>G</Kbd>}
           </button>
         ),
       };
@@ -295,6 +404,7 @@ function sheetFor(
             key={q.key}
             question={q}
             level={game.level}
+            desktop={h.desktop}
             hintShown={h.hintShown}
             onShowHint={h.showHint}
             onAnswer={h.answer}

@@ -11,12 +11,28 @@ type Props = {
   onZoom: () => void;
   guessing: boolean;
   describedBy?: string; // the hover preview, while it shows
+  // Desktop spec DS 8.2: in the board grid one card is in the tab order (0) and
+  // the rest are not (-1); the Zoom control leaves it, since i does its job.
+  // Undefined on the phone, where every card is a tab stop as before.
+  tabIndex?: number;
+  index?: number;
+  onFocus?: () => void;
 };
 
 // One board card. Tap flips it (or picks it, while guessing); long-press or the
 // Zoom control opens the detail view. Flipped cards hide the face and show a
 // cross, so the state never depends on color alone.
-export function Card({ character, flipped, onTap, onZoom, guessing, describedBy }: Props) {
+export function Card({
+  character,
+  flipped,
+  onTap,
+  onZoom,
+  guessing,
+  describedBy,
+  tabIndex,
+  index,
+  onFocus,
+}: Props) {
   const press = useLongPress(onZoom);
   // Spec 9: the name and attributes in Italian; the flipped state is aria-pressed.
   const described = describeCharacter(character, content.lexicon);
@@ -29,6 +45,9 @@ export function Card({ character, flipped, onTap, onZoom, guessing, describedBy 
         aria-label={label}
         aria-pressed={guessing ? undefined : flipped}
         aria-describedby={describedBy}
+        tabIndex={tabIndex}
+        onFocus={onFocus}
+        data-card={index}
         data-flipped={flipped}
         className={`group relative block aspect-[5/6] w-full select-none rounded-md outline-offset-2 [-webkit-touch-callout:none] [perspective:600px] hover:ring-2 ${
           guessing
@@ -81,6 +100,7 @@ export function Card({ character, flipped, onTap, onZoom, guessing, describedBy 
       <button
         type="button"
         onClick={onZoom}
+        tabIndex={tabIndex === undefined ? undefined : -1}
         className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:right-0 focus:z-10 focus:flex focus:min-h-11 focus:min-w-11 focus:items-center focus:rounded focus:bg-white focus:px-1 focus:text-xs focus:shadow"
       >
         Zoom {character.name}

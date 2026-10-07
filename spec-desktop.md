@@ -400,7 +400,7 @@ Shortcuts work at every size (a phone with a keyboard benefits too). The "Press 
 
 ### DS 8.2 Board focus model
 
-- The board is `role="grid"` with four (desktop) or six (phone) `role="row"` elements, each holding `role="gridcell"` cards. The rows follow `--cols`, so `Board` takes `cols` from `useIsDesktop()`.
+- At `lg` the board is `role="grid"` with four `role="row"` elements, each holding six `role="gridcell"` cards. The rows follow `--cols` (`boardShape()`). Below `lg` it stays the list it was, every card a tab stop, so the phone is unchanged (DD11) and its e2e tests pass without edits. The same goes for TileBuilder's roving tabindex per row: `lg` only.
 - **Roving tabindex**: exactly one card has `tabIndex=0` (the last focused, or the first card); the rest have `-1`. Tab enters and leaves the board in one stop.
 - The phone's focus-only "Zoom {name}" button stays as the screen-reader path to CardDetail. At `lg`, `i` does the same thing.
 - `b` and `g` move focus to the roving card.
@@ -669,3 +669,4 @@ Desktop work runs **before launch**, alongside the MVP's Sprints 2 and 3 (`spec.
 - 2026-10-07: v0.2. Restructured to the full spec format: success criteria, in/out table, desktop round walkthrough, edge cases, data model (`ProgressStats`), shortcuts contract with transition table, check order, invariants and traced example, tests by layer, milestones before launch (DD12), future work, references. Level 1 questions use `q` then arrows instead of number keys. Playwright desktop devices verified at 1280 × 720 and overridden to 1440 × 900.
 - 2026-10-07: CHI-120. DS 2.2 resize TBD resolved: a half-built Level 2 question did not survive the swap, so `Game` now holds the TileBuilder draft, and CpuQuestion's `hintShown` for the same reason.
 - 2026-10-07: CHI-121. DS 7.4: question rows hover to `bg-stone-200`, since they already rest at `bg-stone-100`.
+- 2026-10-07: CHI-123. DS 8.2: the ARIA grid and the roving tabindex (board and tile rows) are `lg` only; the phone keeps its list and tab order (DD11). ShortcutsDialog is `min(90vw, 32rem)`, since the menu item is on the phone too.

@@ -1,5 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { content } from "../src/content/index.ts";
+import { allQuestions } from "../src/engine/index.ts";
+import { evaluate } from "../src/engine/meaning.ts";
 import { startGame } from "../src/engine/start.ts";
 import { hasSupabase } from "./inbox.ts";
 
@@ -29,7 +31,7 @@ test.describe("app shell (DS 5)", () => {
       }
     }
     await page.goto("/play?seed=1");
-    await expect(page.getByRole("list", { name: "Board" })).toBeVisible();
+    await expect(page.getByRole("grid", { name: "Board" })).toBeVisible();
     await expect(nav(page)).toHaveCount(0);
   });
 
@@ -54,9 +56,9 @@ test.describe("app shell (DS 5)", () => {
     await nav(page).getByRole("link", { name: "Guest · Sign in" }).click();
     await expect(page).toHaveURL(/\/settings$/);
     await nav(page).getByRole("link", { name: "Play", exact: true }).click();
-    await expect(page.getByRole("list", { name: "Board" })).toBeVisible();
+    await expect(page.getByRole("grid", { name: "Board" })).toBeVisible();
     // Flip a card so the round is saved, then come back.
-    await page.locator('ul[aria-label="Board"] button[aria-pressed="false"]').first().click();
+    await page.locator('[aria-label="Board"] button[aria-pressed="false"]').first().click();
     await page.goto("/");
     await expect(nav(page).getByRole("link", { name: "Continue", exact: true })).toBeVisible();
   });
@@ -74,7 +76,8 @@ test("no horizontal scroll on any screen at 1024 and 1440 wide", async ({ page }
   }
 });
 
-const board = (page: Page) => page.getByRole("list", { name: "Board" });
+// At lg the board is an ARIA grid of rows of cells (DS 8.2).
+const board = (page: Page) => page.getByRole("grid", { name: "Board" });
 const panel = (page: Page) => page.locator('aside[aria-label="Questions"]');
 const card = (page: Page, name: string) =>
   page.getByRole("button", { name: new RegExp(`^${name}: capelli`) });
@@ -89,7 +92,7 @@ test.describe("game: 6 × 4 board and side panel (DS 6)", () => {
     }) => {
       await page.setViewportSize(size);
       await page.goto("/play?seed=1");
-      const items = board(page).getByRole("listitem");
+      const items = board(page).getByRole("gridcell");
       await expect(items).toHaveCount(24);
       for (const item of await items.all()) {
         const box = await item.boundingBox();
@@ -122,9 +125,9 @@ test.describe("game: 6 × 4 board and side panel (DS 6)", () => {
     await page.goto("/play?seed=1");
     const positions = () =>
       board(page)
-        .getByRole("listitem")
+        .getByRole("gridcell")
         .evaluateAll((els) => els.map((e) => JSON.stringify(e.getBoundingClientRect())));
-    await expect(board(page).getByRole("listitem")).toHaveCount(24);
+    await expect(board(page).getByRole("gridcell")).toHaveCount(24);
     const before = await positions();
     await page.getByRole("list", { name: "Questions to ask" }).getByRole("button").first().click();
     await expect(panel(page).getByRole("button", { name: "Avanti" })).toBeVisible();
@@ -165,7 +168,7 @@ test.describe("game: 6 × 4 board and side panel (DS 6)", () => {
     await panel(page).getByRole("button", { name: "Cancel guess" }).click();
     for (const name of ["Marco", "Sara", "Luca"])
       await expect(card(page, name)).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator('ul[aria-label="Board"] button[aria-pressed="true"]')).toHaveCount(3);
+    await expect(page.locator('[aria-label="Board"] button[aria-pressed="true"]')).toHaveCount(3);
   });
 
   test("resizing keeps a half-built Level 2 question", async ({ page }) => {
@@ -351,5 +354,172 @@ test.describe("round end and dialogs (DS 9.2, DS 9.6)", () => {
     expect(Math.abs(box.y + box.height / 2 - 450)).toBeLessThan(2);
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
+  });
+});
+
+test.describe("keyboard (DS 4, DS 8)", () => {
+  const focusedLabel = (page: Page) =>
+    page.evaluate(() => document.activeElement?.getAttribute("aria-label") ?? "");
+
+  test("a whole Level 1 round with only the shortcut keys (DS 2.1)", async ({ page }) => {
+    const seed = 5;
+    const g = startGame(seed, 1, content);
+    await page.goto(`/play?seed=${seed}`);
+    await expect(board(page)).toBeVisible();
+
+    // q, then ↓ twice and Enter: the third question is asked.
+    await page.keyboard.press("q");
+    await expect(
+      page.getByRole("list", { name: "Questions to ask" }).getByRole("button").first(),
+    ).toBeFocused();
+    const first = await page.evaluate(() => document.activeElement?.textContent ?? "");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    const third = await page.evaluate(() => document.activeElement?.textContent ?? "");
+    expect(third).not.toBe(first);
+    await page.keyboard.press("Enter");
+    await expect(panel(page).getByRole("button", { name: "Avanti" })).toBeVisible();
+
+    // b, → and Enter flip the second card.
+    await page.keyboard.press("b");
+    expect(await focusedLabel(page)).toMatch(/^Anna: /);
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("Enter");
+    await expect(card(page, "Chiara")).toHaveAttribute("aria-pressed", "true");
+
+    // a: the CPU asks; answer it truthfully with s or n; a again.
+    await page.keyboard.press("a");
+    const text = await panel(page).locator('p[lang="it"].text-2xl').innerText();
+    const q = allQuestions(content).find((x) => x.text === text);
+    const attrs = content.characters.find((c) => c.id === g.playerSecret)?.attrs;
+    if (!q || !attrs) throw new Error("no CPU question");
+    await page.keyboard.press(evaluate(q.asked, attrs) ? "s" : "n");
+    await expect(panel(page)).toContainText("Right!");
+    await page.keyboard.press("a");
+    await expect(page.locator("header")).toContainText("Turn 2");
+
+    // g, then the arrow keys to the computer's card, Enter, and Enter to confirm.
+    await page.keyboard.press("g");
+    await expect(panel(page)).toContainText("Click the card you think it is.");
+    const index = content.characters.findIndex((c) => c.id === g.cpuSecret);
+    await page.keyboard.press("Control+Home");
+    for (let i = 0; i < index % 6; i++) await page.keyboard.press("ArrowRight");
+    for (let i = 0; i < Math.floor(index / 6); i++) await page.keyboard.press("ArrowDown");
+    expect(await focusedLabel(page)).toContain(`Guess ${cpuName(seed)}: `);
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("dialog")).toContainText(`Guess ${cpuName(seed)}?`);
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("heading", { name: "You won!" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Play again" })).toBeFocused();
+  });
+
+  test("the board is one tab stop, moved around with the grid keys", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    await expect(board(page)).toBeVisible();
+    const tabStops = await board(page)
+      .locator("button")
+      .evaluateAll((els) => els.filter((e) => (e as HTMLElement).tabIndex >= 0).length);
+    expect(tabStops).toBe(1);
+    await page.keyboard.press("b");
+    const names = content.characters.map((c) => c.name);
+    const at = async () => (await focusedLabel(page)).split(":")[0];
+    // No wrapping at the edges.
+    await page.keyboard.press("ArrowLeft");
+    await page.keyboard.press("ArrowUp");
+    expect(await at()).toBe(names[0]);
+    await page.keyboard.press("End");
+    expect(await at()).toBe(names[5]);
+    await page.keyboard.press("ArrowRight");
+    expect(await at()).toBe(names[5]);
+    await page.keyboard.press("ArrowDown");
+    expect(await at()).toBe(names[11]);
+    await page.keyboard.press("Home");
+    expect(await at()).toBe(names[6]);
+    await page.keyboard.press("Control+End");
+    expect(await at()).toBe(names[23]);
+    await page.keyboard.press("ArrowDown");
+    expect(await at()).toBe(names[23]);
+    await page.keyboard.press("Control+Home");
+    expect(await at()).toBe(names[0]);
+    // The last card focused stays the tab stop.
+    await page.keyboard.press("ArrowRight");
+    await page.locator("body").focus();
+    await page.keyboard.press("b");
+    expect(await at()).toBe(names[1]);
+    // i opens the detail view.
+    await page.keyboard.press("i");
+    await expect(page.getByRole("dialog").getByRole("img", { name: names[1] })).toBeVisible();
+  });
+
+  test("? and the menu open the shortcuts; the menu closes on Esc and outside", async ({
+    page,
+  }) => {
+    await page.goto("/play?seed=1");
+    await expect(board(page)).toBeVisible();
+    await page.keyboard.press("?");
+    const dialog = page.getByRole("dialog", { name: "Keyboard shortcuts" });
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("?"); // a dialog is open: nothing more happens
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+
+    const menu = page.getByRole("button", { name: "Menu" });
+    await menu.click();
+    await expect(page.getByRole("menu")).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("menu")).toBeHidden();
+    await expect(menu).toBeFocused();
+    await menu.click();
+    await page.mouse.click(10, 300);
+    await expect(page.getByRole("menu")).toBeHidden();
+    await menu.click();
+    await page.getByRole("menuitem", { name: "Keyboard shortcuts" }).click();
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(panel(page)).toContainText("Press ? for shortcuts");
+  });
+
+  test("Level 2: Tab moves between tile rows, ← → along one", async ({ page, browserName }) => {
+    // WebKit only Tabs to buttons with a macOS setting on (see a11y.spec.ts).
+    test.skip(browserName !== "chromium", "Tab order for buttons is a macOS setting in WebKit");
+    await page.goto("/play?level=2&seed=5");
+    await expect(board(page)).toBeVisible();
+    const row = (name: string) => page.getByRole("group", { name, exact: true });
+    await page.keyboard.press("q");
+    await expect(row("Verb").getByRole("button").first()).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(row("Verb").getByRole("button").nth(1)).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(row("Article").getByRole("button").first()).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(row("Noun").getByRole("button").first()).toBeFocused();
+    await page.keyboard.press("ArrowLeft"); // no wrap
+    await expect(row("Noun").getByRole("button").first()).toBeFocused();
+    await page.keyboard.press("Shift+Tab");
+    await page.keyboard.press("Shift+Tab");
+    // Back in the verb row, on the tile last focused there.
+    await expect(row("Verb").getByRole("button").nth(1)).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("group", { name: "Your question" })).not.toContainText("Verb");
+  });
+
+  test("buttons show their keys and carry aria-keyshortcuts", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    const indovina = panel(page).getByRole("button", { name: "Indovina" });
+    await expect(indovina).toHaveAttribute("aria-keyshortcuts", "g");
+    await expect(indovina).toHaveText("IndovinaG");
+    await expect(indovina).toHaveAccessibleName("Indovina");
+  });
+
+  test("keys with Ctrl, Cmd or Alt held do nothing", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    await expect(board(page)).toBeVisible();
+    await page.keyboard.press("Alt+g");
+    await page.keyboard.press("Control+g");
+    await expect(panel(page)).toContainText("Your turn: ask a question, or guess.");
+    await page.keyboard.press("G");
+    await expect(panel(page)).toContainText("Click the card you think it is.");
+    await page.keyboard.press("Escape");
+    await expect(panel(page)).toContainText("Your turn: ask a question, or guess.");
   });
 });

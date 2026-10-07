@@ -12,7 +12,24 @@ export function QuestionPicker({
 }) {
   const asked = new Map(history.filter((h) => h.by === "player").map((h) => [h.key, h]));
   return (
-    <ul aria-label="Questions to ask" className="flex flex-col gap-1.5 py-2">
+    <ul
+      aria-label="Questions to ask"
+      className="flex flex-col gap-1.5 py-2"
+      // Desktop spec DS 8.1: ↑ and ↓ move between the questions that can still
+      // be asked (disabled ones are skipped); Enter asks.
+      onKeyDown={(e) => {
+        if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+        const enabled = [
+          ...e.currentTarget.querySelectorAll<HTMLButtonElement>("button:not(:disabled)"),
+        ];
+        const i = enabled.indexOf(e.target as HTMLButtonElement);
+        if (i < 0) return;
+        e.preventDefault();
+        enabled[
+          e.key === "ArrowDown" ? Math.min(i + 1, enabled.length - 1) : Math.max(i - 1, 0)
+        ]?.focus();
+      }}
+    >
       {questions.map((q) => {
         const previous = asked.get(q.key);
         return (

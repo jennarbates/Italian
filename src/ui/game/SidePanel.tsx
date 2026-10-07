@@ -19,9 +19,10 @@ export function SidePanel({ summary, actions, children }: Props) {
         {summary}
       </p>
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5">{children}</div>
-      {actions && (
-        <div className="flex shrink-0 gap-2 border-t border-stone-100 px-5 py-3">{actions}</div>
-      )}
+      <div className="shrink-0 border-t border-stone-100 px-5 py-3">
+        {actions && <div className="mb-2 flex gap-2">{actions}</div>}
+        <p className="text-sm text-stone-600">Press ? for shortcuts</p>
+      </div>
     </aside>
   );
 }
