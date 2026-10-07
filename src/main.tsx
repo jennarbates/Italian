@@ -5,9 +5,13 @@ import { RouterProvider } from "react-router";
 import "./index.css";
 import { router } from "./routes.tsx";
 import { initErrors } from "./services/errors.ts";
+import { useGameStore } from "./store/gameStore.ts";
 
 // Before anything renders, so startup errors are caught too.
 const reporting = initErrors();
+
+// Resume a saved round, if any, while the first screen renders.
+void useGameStore.getState().hydrate();
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Missing #root element");
