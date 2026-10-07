@@ -11,31 +11,37 @@ import {
   type Level,
 } from "../engine/index.ts";
 import { read, remove, write } from "../services/storage.ts";
+import { useProgressStore } from "./progressStore.ts";
 
-export type SavedRound = { contentVersion: number; state: GameState };
+export type SavedRound = { contentVersion: number; gameId: string; state: GameState };
 
 type GameStore = {
   status: "loading" | "ready";
   game: GameState | null; // null: no round in progress
+  gameId: string | null; // the games row this round writes to (spec 7.1)
   lastEvents: GameEvent[];
   // Load the saved round, if there is one and it is still valid.
   hydrate: () => Promise<void>;
   start: (level: Level, seed?: number) => GameEvent[];
   dispatch: (action: Action) => GameEvent[];
-  // Forget the round (quit, or replaced by a new one).
-  clear: () => void;
+  // Quit: record the round as abandoned and forget it (spec 2). Ratings already
+  // logged stay in the review log.
+  quit: () => void;
 };
 
 // Saves happen in order, one after another, so a slow write can't land after a
 // newer one.
 let saving: Promise<unknown> = Promise.resolve();
-function persist(game: GameState | null) {
+function persist(game: GameState | null, gameId: string | null) {
   saving = saving.then(() =>
-    game && game.phase !== "over" && game.phase !== "setup"
-      ? write("round", { contentVersion, state: game } satisfies SavedRound)
+    game && gameId && game.phase !== "over" && game.phase !== "setup"
+      ? write("round", { contentVersion, gameId, state: game } satisfies SavedRound)
       : remove("round"),
   );
 }
+
+const inProgress = (game: GameState | null) =>
+  !!game && game.phase !== "over" && game.phase !== "setup";
 
 export function randomSeed(): number {
   return crypto.getRandomValues(new Uint32Array(1))[0] ?? 0;
@@ -44,44 +50,70 @@ export function randomSeed(): number {
 export const useGameStore = create<GameStore>((set, get) => ({
   status: "loading",
   game: null,
+  gameId: null,
   lastEvents: [],
 
   async hydrate() {
     const saved = await read<SavedRound>("round");
     if (saved && isResumable(saved)) {
-      set({ status: "ready", game: saved.state, lastEvents: [] });
+      set({ status: "ready", game: saved.state, gameId: saved.gameId, lastEvents: [] });
       return;
     }
     // An older content version or a damaged save is discarded, not resumed (3.6).
-    if (saved) await remove("round");
-    set({ status: "ready", game: null, lastEvents: [] });
+    // Its games row, if any, is closed as abandoned.
+    if (saved) {
+      if (typeof saved.gameId === "string")
+        useProgressStore.getState().recordGameEnd(saved.gameId, "abandoned");
+      await remove("round");
+    }
+    set({ status: "ready", game: null, gameId: null, lastEvents: [] });
   },
 
   start(level, seed = randomSeed()) {
-    const from = get().game?.phase === "over" ? (get().game as GameState) : setupState();
+    // A new round over an unfinished one records the old one as abandoned (spec 2).
+    const current = get();
+    if (inProgress(current.game) && current.gameId) {
+      useProgressStore.getState().recordGameEnd(current.gameId, "abandoned");
+    }
+    const from = current.game?.phase === "over" ? current.game : setupState();
     const { state, events } = step(from, { type: "START", seed, level }, content);
-    set({ game: state, lastEvents: events });
-    persist(state);
+    const gameId = crypto.randomUUID();
+    // The games row exists before any review row points at it (spec 7.3).
+    useProgressStore.getState().recordGameStart({
+      id: gameId,
+      seed,
+      level,
+      contentVersion,
+      startedAt: new Date().toISOString(),
+    });
+    set({ game: state, gameId, lastEvents: events });
+    persist(state, gameId);
     return events;
   },
 
   dispatch(action) {
-    const game = get().game;
-    if (!game) return [];
+    const { game, gameId } = get();
+    if (!game || !gameId) return [];
     const { state, events } = step(game, action, content);
+    const progress = useProgressStore.getState();
+    progress.appendEvents(gameId, events);
+    const over = events.find((e) => e.type === "gameOver");
+    if (over?.type === "gameOver") progress.recordGameEnd(gameId, over.result);
     set({ game: state, lastEvents: events });
-    persist(state);
+    persist(state, gameId);
     return events;
   },
 
-  clear() {
-    set({ game: null, lastEvents: [] });
-    persist(null);
+  quit() {
+    const { game, gameId } = get();
+    if (inProgress(game) && gameId) useProgressStore.getState().recordGameEnd(gameId, "abandoned");
+    set({ game: null, gameId: null, lastEvents: [] });
+    persist(null, null);
   },
 }));
 
 function isResumable(saved: SavedRound): boolean {
-  if (saved.contentVersion !== contentVersion) return false;
+  if (saved.contentVersion !== contentVersion || typeof saved.gameId !== "string") return false;
   const s = saved.state as Partial<GameState> | undefined;
   const ids = new Set(content.characters.map((c) => c.id));
   return (
