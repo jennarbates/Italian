@@ -20,6 +20,7 @@ export default tseslint.config(
   // engine/ stays pure: no React, DOM or app code (spec section 4)
   {
     files: ["src/engine/**/*.ts"],
+    ignores: ["src/engine/**/*.test.ts"], // tests may time things
     languageOptions: { globals: {} },
     rules: {
       "no-restricted-imports": [
