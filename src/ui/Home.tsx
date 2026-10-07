@@ -8,7 +8,7 @@ const links = [
 
 export function Home() {
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col gap-6 p-4">
       <h1 className="text-4xl font-bold">Chi è?</h1>
       <nav className="flex flex-col gap-3">
         {links.map(({ to, label }) => (
