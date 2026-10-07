@@ -221,7 +221,7 @@ test.describe("quit and continue (CHI-061)", () => {
 test.describe("Home (CHI-062)", () => {
   test("level picker, Play, Progress, Settings and sign-in status", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("Guest")).toBeVisible();
+    await expect(page.locator("header").getByText("Guest")).toBeVisible();
     await expect(page.getByRole("link", { name: "Sign in" })).toHaveAttribute("href", "/settings");
     await expect(page.getByRole("link", { name: "Progress" })).toBeVisible();
     await expect(page.getByRole("link", { name: "Settings" })).toBeVisible();
