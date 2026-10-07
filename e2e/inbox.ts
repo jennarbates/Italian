@@ -7,7 +7,7 @@ export function newEmail(): string {
   return `learner-${Date.now()}-${Math.floor(Math.random() * 1e6)}@example.com`;
 }
 
-type Message = { ID: string; Subject: string; Text: string; HTML: string };
+type Message = { ID: string; Date: string; Subject: string; Text: string; HTML: string };
 
 // Every email sent to `to`, newest first, waiting up to 15 s for at least `count`.
 export async function emailsTo(to: string, count = 1): Promise<Message[]> {
@@ -15,15 +15,23 @@ export async function emailsTo(to: string, count = 1): Promise<Message[]> {
     const res = await fetch(`${inbox}/api/v1/search?query=${encodeURIComponent(`to:"${to}"`)}`);
     const { messages = [] } = (await res.json()) as { messages?: { ID: string }[] };
     if (messages.length >= count) {
-      return Promise.all(
+      const full = await Promise.all(
         messages.map(
           async (m) => (await (await fetch(`${inbox}/api/v1/message/${m.ID}`)).json()) as Message,
         ),
       );
+      return full.sort((x, y) => Date.parse(y.Date) - Date.parse(x.Date));
     }
     await new Promise((r) => setTimeout(r, 500));
   }
   throw new Error(`No email to ${to}`);
+}
+
+// How many emails `to` has had so far.
+export async function countEmails(to: string): Promise<number> {
+  const res = await fetch(`${inbox}/api/v1/search?query=${encodeURIComponent(`to:"${to}"`)}`);
+  const { messages = [] } = (await res.json()) as { messages?: unknown[] };
+  return messages.length;
 }
 
 export function codeIn(message: Message): string {

@@ -14,8 +14,12 @@ import { progressSaved, storageKeyFor, useProgressStore, type GuestData } from "
 type AccountStore = {
   // Waiting for the answer to "Save your progress to this account?"
   askToSave: { resolve: (save: boolean) => void } | null;
+  // True once the app knows whose data it is writing (guest or which user) and has
+  // that owner's local copy loaded. Play waits for it, so a signed-in learner's
+  // first rows after a reload never land in guest data.
+  settled: boolean;
 };
-export const useAccountStore = create<AccountStore>(() => ({ askToSave: null }));
+export const useAccountStore = create<AccountStore>(() => ({ askToSave: null, settled: false }));
 
 function ask(): Promise<boolean> {
   return new Promise((resolve) =>
@@ -65,6 +69,8 @@ export async function onAccountChange(userId: string | null) {
   }
   await useProgressStore.getState().switchOwner(userId ?? "guest");
   await useSyncStore.getState().load(userId);
+  // Local data is ready: play can start. The network sync below never holds it up.
+  useAccountStore.setState({ settled: true });
   if (userId) {
     await usePrefs.getState().loadFromProfile(userId);
     await syncNow();

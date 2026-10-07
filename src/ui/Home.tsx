@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import type { Level } from "../engine/index.ts";
+import { useAccountStore } from "../store/account.ts";
 import { useAuthStore } from "../store/authStore.ts";
 import { useGameStore } from "../store/gameStore.ts";
 import { usePrefs } from "../store/prefs.ts";
@@ -15,6 +16,7 @@ export function Home() {
   const navigate = useNavigate();
   const { status, game, start } = useGameStore();
   const auth = useAuthStore();
+  const settled = useAccountStore((a) => a.settled);
   const { level, setLevel } = usePrefs();
   const saved = status === "ready" && !!game && game.phase !== "over" && game.phase !== "setup";
 
@@ -89,7 +91,7 @@ export function Home() {
       <button
         type="button"
         onClick={newRound}
-        disabled={status !== "ready"}
+        disabled={status !== "ready" || !settled}
         className={`min-h-12 rounded-xl font-semibold ${saved ? "bg-stone-200" : "bg-stone-900 text-white"}`}
       >
         {saved ? "New round" : "Play"}

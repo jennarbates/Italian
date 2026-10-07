@@ -95,6 +95,12 @@ describe("guest to account (CHI-085)", () => {
     expect(useProgressStore.getState().games.map((g) => g.id)).toEqual(["older", "g1"]);
   });
 
+  test("the account is settled once the local copy is switched, before syncing", async () => {
+    useAccountStore.setState({ settled: false });
+    await onAccountChange(user);
+    expect(useAccountStore.getState().settled).toBe(true);
+  });
+
   test("without guest data there is no question", async () => {
     await onAccountChange(user);
     expect(useAccountStore.getState().askToSave).toBeNull();

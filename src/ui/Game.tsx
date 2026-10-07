@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { content } from "../content/index.ts";
 import { questionByKey, type Fill, type GameState, type Level } from "../engine/index.ts";
+import { useAccountStore } from "../store/account.ts";
 import { useGameStore } from "../store/gameStore.ts";
 import { Board } from "./game/Board.tsx";
 import { CardDetail } from "./game/CardDetail.tsx";
@@ -23,6 +24,7 @@ const secondary = "min-h-12 flex-1 rounded-xl bg-stone-200 px-4 font-semibold ac
 
 export function Game() {
   const { status, game, gameId, lastAction, start, dispatch, quit } = useGameStore();
+  const settled = useAccountStore((a) => a.settled);
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [zoomed, setZoomed] = useState<string>();
@@ -36,11 +38,11 @@ export function Game() {
     if (game) hadRound.current = true;
   }, [game]);
   useEffect(() => {
-    if (status !== "ready" || game || hadRound.current) return;
+    if (status !== "ready" || !settled || game || hadRound.current) return;
     const level: Level = params.get("level") === "2" ? 2 : 1;
     const seed = params.get("seed");
     start(level, seed !== null && /^\d+$/.test(seed) ? Number(seed) : undefined);
-  }, [status, game, params, start]);
+  }, [status, settled, game, params, start]);
 
   // Open the sheet when there is something to do in it; fold it away when the
   // board is what matters (flipping cards after an answer). Each new phase resets
@@ -60,7 +62,7 @@ export function Game() {
   const setSheetOpen = (open: boolean) => setUi((u) => ({ ...u, sheetOpen: open }));
   const setGuessing = (on: boolean) => setUi((u) => ({ ...u, guessing: on }));
 
-  if (status !== "ready" || !game) return <SkeletonBoard />;
+  if (status !== "ready" || !settled || !game) return <SkeletonBoard />;
   const secret = byId.get(game.playerSecret);
   if (!secret) return <SkeletonBoard />;
 
