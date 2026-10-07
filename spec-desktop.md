@@ -91,7 +91,7 @@ Two new in-memory types:
 // src/ui/progressStats.ts (pure; unit-tested)
 export type ProgressStats = {
   wordsSeen: number;        // distinct lexiconId in reviewLog
-  dueToday: number;         // words where isDue(replay(rows), endOfLocalDay(now))
+  dueToday: number;         // reviewed cards (word × direction) where isDue(card, endOfLocalDay(now))
   mistakesThisWeek: number; // rows with rating "again" or "slip" and localDay in the last 7 local days, today included
   roundsPlayed: number;     // games rows with endedAt set
 };
@@ -110,7 +110,7 @@ Example, for a learner who has played 3 rounds:
 
 **Invariants** (each checked by a unit test, not by hand):
 
-- `0 ≤ dueToday ≤ wordsSeen`.
+- `0 ≤ dueToday ≤` the number of reviewed cards `≤ 2 × wordsSeen` (each word has a card per direction).
 - `mistakesThisWeek` never counts a row older than 7 local days.
 - `progressStats` with empty data returns all zeros.
 - `dueToday` equals the number of rows the Due tab lists for the same `now`.
@@ -671,3 +671,4 @@ Desktop work runs **before launch**, alongside the MVP's Sprints 2 and 3 (`spec.
 - 2026-10-07: CHI-121. DS 7.4: question rows hover to `bg-stone-200`, since they already rest at `bg-stone-100`.
 - 2026-10-07: CHI-123. DS 8.2: the ARIA grid and the roving tabindex (board and tile rows) are `lg` only; the phone keeps its list and tab order (DD11). ShortcutsDialog is `min(90vw, 32rem)`, since the menu item is on the phone too.
 - 2026-10-07: CHI-124. DS 9.1: the level picker keeps its "Level" legend (the diagram's "Choose your level" was a sketch). DS 9.4: new row text "Default level" / "The level Play starts at.", "Sign-in" (the account text as its description), "Privacy" / "What is stored, who handles it, and how to delete your account." with the link "Read the privacy note". The Home links on Settings and Privacy are hidden at `lg`.
+- 2026-10-07: CHI-125. DS 3: `dueToday` counts due cards (word × direction), not words, so it equals the Due list's "Due today (n)" as the last invariant asks; the first invariant, which assumed words, now bounds it by the reviewed cards. `localDay()` moved to `src/services/localDay.ts` so e2e tests can use it.

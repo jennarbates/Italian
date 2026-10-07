@@ -3,6 +3,9 @@ import { content } from "../src/content/index.ts";
 import { allQuestions } from "../src/engine/index.ts";
 import { evaluate } from "../src/engine/meaning.ts";
 import { startGame } from "../src/engine/start.ts";
+import { localDay } from "../src/services/localDay.ts";
+import type { GuestData, ReviewLogRow } from "../src/store/progressStore.ts";
+import { progressStats } from "../src/ui/progressStats.ts";
 import { hasSupabase } from "./inbox.ts";
 
 // Desktop spec DS 13.3: the desktop layout, run by the desktop-chromium and
@@ -589,5 +592,108 @@ test.describe("Home, Settings and Privacy (DS 9.1, 9.4, 9.5)", () => {
     await expect(page.locator("main").getByRole("link", { name: "Home" })).toBeHidden();
     await page.getByRole("link", { name: "Back to Settings" }).click();
     await expect(page).toHaveURL(/\/settings$/);
+  });
+});
+
+test.describe("Progress dashboard (DS 9.3)", () => {
+  // A guest's games and review log, written to IndexedDB as the app keeps them.
+  function seed(page: Page, data: GuestData) {
+    return page.evaluate(
+      (value) =>
+        new Promise<void>((resolve, reject) => {
+          const open = indexedDB.open("chi-e", 1);
+          open.onupgradeneeded = () => open.result.createObjectStore("kv");
+          open.onsuccess = () => {
+            const tx = open.result.transaction("kv", "readwrite");
+            tx.objectStore("kv").put(value, "guest");
+            tx.oncomplete = () => {
+              open.result.close();
+              resolve();
+            };
+            tx.onerror = () => reject(tx.error);
+          };
+        }),
+      data,
+    );
+  }
+
+  test("no tabs: four totals and both lists side by side", async ({ page }) => {
+    const words = content.lexicon.filter((e) => e.pos === "noun").map((e) => e.id);
+    const now = new Date();
+    const at = (hoursAgo: number) => new Date(now.getTime() - hoursAgo * 3_600_000);
+    const row = (i: number, lexiconId: string, rating: ReviewLogRow["rating"], when: Date) => ({
+      id: `r${i}`,
+      gameId: "g1",
+      lexiconId,
+      direction: "recognize" as const,
+      rating,
+      localDay: localDay(when),
+      createdAt: when.toISOString(),
+      ...(rating === "slip"
+        ? { detail: { slot: "art", given: "il", expected: "la", rule: "agreement" } }
+        : {}),
+    });
+    const data: GuestData = {
+      games: [
+        {
+          id: "g1",
+          seed: 1,
+          level: 1,
+          contentVersion: 1,
+          startedAt: at(30).toISOString(),
+          endedAt: at(29).toISOString(),
+          result: "won",
+        },
+        {
+          id: "g2",
+          seed: 2,
+          level: 1,
+          contentVersion: 1,
+          startedAt: at(2).toISOString(),
+          endedAt: at(1).toISOString(),
+          result: "lost",
+        },
+      ],
+      reviewLog: [
+        row(1, words[0] ?? "", "good", at(30)),
+        row(2, words[1] ?? "", "again", at(29)),
+        row(3, words[2] ?? "", "again", at(2)),
+        row(4, words[2] ?? "", "slip", at(1)),
+      ] as ReviewLogRow[],
+    };
+    const expected = progressStats(data, now);
+
+    await page.goto("/");
+    await seed(page, data);
+    await page.goto("/progress");
+    await expect(page.getByRole("tablist")).toHaveCount(0);
+    for (const [label, value] of [
+      ["Words seen", expected.wordsSeen],
+      ["Due today", expected.dueToday],
+      ["Mistakes this week", expected.mistakesThisWeek],
+      ["Rounds played", expected.roundsPlayed],
+    ] as const) {
+      const tile = page.locator("dl > div").filter({ has: page.getByText(label, { exact: true }) });
+      await expect(tile.locator("dd")).toHaveText(String(value));
+    }
+    expect(expected.wordsSeen).toBe(3);
+    expect(expected.roundsPlayed).toBe(2);
+    const mistakes = await page.getByRole("heading", { name: "Mistakes", level: 2 }).boundingBox();
+    const due = await page.getByRole("heading", { name: "Due", level: 2 }).boundingBox();
+    if (!mistakes || !due) throw new Error("no headings");
+    expect(due.y).toBe(mistakes.y);
+    expect(due.x).toBeGreaterThan(mistakes.x);
+    await expect(page.getByRole("list", { name: "Mistakes by word" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /^Due today \(\d+\)$/ })).toHaveText(
+      `Due today (${expected.dueToday})`,
+    );
+    await expect(page.locator("main").getByRole("link", { name: "Home" })).toHaveCount(0);
+  });
+
+  test("with no data, the empty message once, full width, with no tiles", async ({ page }) => {
+    await page.goto("/progress");
+    await expect(page.getByText("Play a round to see your words here.")).toHaveCount(1);
+    await expect(page.locator("dl")).toHaveCount(0);
+    await expect(page.getByRole("tablist")).toHaveCount(0);
   });
 });
