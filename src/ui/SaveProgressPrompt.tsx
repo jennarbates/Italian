@@ -6,6 +6,7 @@ import { onBackdropClick } from "./dialog.ts";
 // Yes is the default (focused first).
 export function SaveProgressPrompt() {
   const askToSave = useAccountStore((s) => s.askToSave);
+  const saving = !!askToSave?.saving; // answered, the choice is being saved
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const d = dialog.current;
@@ -18,6 +19,7 @@ export function SaveProgressPrompt() {
     <dialog
       ref={dialog}
       aria-labelledby="save-title"
+      aria-busy={saving}
       // Escape and the backdrop are "Yes, keep it": nothing is lost by accident.
       onCancel={(e) => {
         e.preventDefault();
@@ -37,6 +39,7 @@ export function SaveProgressPrompt() {
         <button
           type="button"
           autoFocus
+          disabled={saving}
           onClick={() => askToSave?.resolve(true)}
           className="min-h-12 rounded-xl bg-stone-900 font-semibold text-white"
         >
@@ -44,6 +47,7 @@ export function SaveProgressPrompt() {
         </button>
         <button
           type="button"
+          disabled={saving}
           onClick={() => askToSave?.resolve(false)}
           className="min-h-12 rounded-xl bg-stone-200 font-semibold"
         >

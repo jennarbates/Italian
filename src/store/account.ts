@@ -12,8 +12,9 @@ import { useAuthStore } from "./authStore.ts";
 import { progressSaved, storageKeyFor, useProgressStore, type GuestData } from "./progressStore.ts";
 
 type AccountStore = {
-  // Waiting for the answer to "Save your progress to this account?"
-  askToSave: { resolve: (save: boolean) => void } | null;
+  // "Save your progress to this account?" is showing. It stays up, busy, until the
+  // answer is on disk, so leaving the page before then just asks again.
+  askToSave: { resolve: (save: boolean) => void; saving: boolean } | null;
   // True once the app knows whose data it is writing (guest or which user) and has
   // that owner's local copy loaded. Play waits for it, so a signed-in learner's
   // first rows after a reload never land in guest data.
@@ -21,17 +22,16 @@ type AccountStore = {
 };
 export const useAccountStore = create<AccountStore>(() => ({ askToSave: null, settled: false }));
 
+// The first answer counts; the caller closes the prompt once it is applied.
 function ask(): Promise<boolean> {
-  return new Promise((resolve) =>
-    useAccountStore.setState({
-      askToSave: {
-        resolve: (save) => {
-          useAccountStore.setState({ askToSave: null });
-          resolve(save);
-        },
-      },
-    }),
-  );
+  return new Promise((resolve) => {
+    const answer = (save: boolean) => {
+      if (useAccountStore.getState().askToSave?.saving) return;
+      useAccountStore.setState({ askToSave: { resolve: answer, saving: true } });
+      resolve(save);
+    };
+    useAccountStore.setState({ askToSave: { resolve: answer, saving: false } });
+  });
 }
 
 const hasData = (d: Partial<GuestData> | undefined) => !!(d?.games?.length || d?.reviewLog?.length);
@@ -65,7 +65,13 @@ export async function onAccountChange(userId: string | null) {
       progress.owner === "guest" && progress.loaded
         ? progress
         : await read<Partial<GuestData>>("guest");
-    if (hasData(guest)) await adoptGuestData(userId, await ask());
+    if (hasData(guest)) {
+      try {
+        await adoptGuestData(userId, await ask());
+      } finally {
+        useAccountStore.setState({ askToSave: null });
+      }
+    }
   }
   await useProgressStore.getState().switchOwner(userId ?? "guest");
   await useSyncStore.getState().load(userId);
