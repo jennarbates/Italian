@@ -85,7 +85,9 @@ test.describe("round end (CHI-060)", () => {
 
     // Guess right.
     await page.getByRole("button", { name: "Indovina" }).click();
-    await page.getByRole("button", { name: `Guess ${nameOf(g.cpuSecret)}`, exact: true }).click();
+    await page
+      .getByRole("button", { name: new RegExp(`^Guess ${nameOf(g.cpuSecret)}: [^(]*$`) })
+      .click();
     await page.getByRole("dialog").getByRole("button", { name: "Guess", exact: true }).click();
 
     await expect(page.getByRole("heading", { name: "You won!" })).toBeVisible();
@@ -121,7 +123,9 @@ test.describe("round end (CHI-060)", () => {
     const g = startGame(5, 1, content);
     await page.goto("/play?seed=5");
     await page.getByRole("button", { name: "Indovina" }).click();
-    await page.getByRole("button", { name: `Guess ${nameOf(g.cpuSecret)}`, exact: true }).click();
+    await page
+      .getByRole("button", { name: new RegExp(`^Guess ${nameOf(g.cpuSecret)}: [^(]*$`) })
+      .click();
     await page.getByRole("dialog").getByRole("button", { name: "Guess", exact: true }).click();
     await expect(page.getByText("None. Nicely done.")).toBeVisible();
     await page.getByRole("link", { name: "Home" }).click();

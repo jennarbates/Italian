@@ -82,10 +82,12 @@ test("a whole round: ask, answer the CPU right and wrong, guess with confirm", a
   const wrongOne = content.characters.find((c) => c.id !== game.cpuSecret);
   if (!wrongOne) throw new Error("no other character");
   await page.getByRole("button", { name: /questions$/ }).click(); // fold the sheet to reach the board
-  await page.getByRole("button", { name: wrongOne.name, exact: true }).click(); // flip it down
+  await page.getByRole("button", { name: new RegExp(`^${wrongOne.name}: capelli`) }).click(); // flip it down
   await page.getByRole("button", { name: "Indovina" }).click();
   await expect(sheet(page)).toContainText("Tap the card you think it is.");
-  await page.getByRole("button", { name: `Guess ${wrongOne.name} (flipped down)` }).click();
+  await page
+    .getByRole("button", { name: new RegExp(`^Guess ${wrongOne.name}: .*\\(flipped down\\)$`) })
+    .click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toContainText(`Guess ${wrongOne.name}?`);
   await expect(dialog).toContainText(`${wrongOne.name} is flipped down.`);
@@ -95,7 +97,7 @@ test("a whole round: ask, answer the CPU right and wrong, guess with confirm", a
   await expect(page.locator("header")).toContainText("Your turn"); // nothing happened
 
   const target = nameOf(game.cpuSecret);
-  await page.getByRole("button", { name: `Guess ${target}`, exact: true }).click();
+  await page.getByRole("button", { name: new RegExp(`^Guess ${target}: [^(]*$`) }).click();
   await expect(dialog).not.toContainText("flipped down");
   await dialog.getByRole("button", { name: "Guess", exact: true }).click();
   await expect(page.getByRole("heading", { name: "You won!" })).toBeVisible();
@@ -120,7 +122,7 @@ test("a wrong guess loses", async ({ page }) => {
   const wrong = content.characters.find((c) => c.id !== game.cpuSecret);
   if (!wrong) throw new Error("no other character");
   await page.getByRole("button", { name: "Indovina" }).click();
-  await page.getByRole("button", { name: `Guess ${wrong.name}`, exact: true }).click();
+  await page.getByRole("button", { name: new RegExp(`^Guess ${wrong.name}: [^(]*$`) }).click();
   await page.getByRole("dialog").getByRole("button", { name: "Guess", exact: true }).click();
   await expect(page.getByRole("heading", { name: "You lost." })).toBeVisible();
   await expect(

@@ -1,4 +1,6 @@
 import type { Character } from "../../content/schemas.ts";
+import { content } from "../../content/index.ts";
+import { describeCharacter } from "../describe.ts";
 import { Face } from "../Face.tsx";
 import { useLongPress } from "../useLongPress.ts";
 
@@ -15,9 +17,9 @@ type Props = {
 // cross, so the state never depends on color alone.
 export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
   const press = useLongPress(onZoom);
-  const label = guessing
-    ? `Guess ${character.name}${flipped ? " (flipped down)" : ""}`
-    : `${character.name}${flipped ? ", flipped down" : ""}`;
+  // Spec 9: the name and attributes in Italian; the flipped state is aria-pressed.
+  const described = describeCharacter(character, content.lexicon);
+  const label = guessing ? `Guess ${described}${flipped ? " (flipped down)" : ""}` : described;
 
   return (
     <div className="relative" style={{ width: "var(--card-w)" }}>
@@ -67,7 +69,7 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
       <button
         type="button"
         onClick={onZoom}
-        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:right-0 focus:z-10 focus:rounded focus:bg-white focus:px-1 focus:text-xs focus:shadow"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:right-0 focus:z-10 focus:flex focus:min-h-11 focus:min-w-11 focus:items-center focus:rounded focus:bg-white focus:px-1 focus:text-xs focus:shadow"
       >
         Zoom {character.name}
       </button>

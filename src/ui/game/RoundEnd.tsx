@@ -147,7 +147,7 @@ export function RoundEnd({
       </section>
 
       <p className="text-center text-sm text-stone-500">
-        <Link to="/settings" className="underline">
+        <Link to="/settings" className="inline-flex min-h-11 items-center underline">
           Sign in to keep your progress safe
         </Link>
       </p>

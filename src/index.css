@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+/* Spec 9: focus is always visible for keyboard users. */
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
