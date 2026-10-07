@@ -4,6 +4,7 @@
 // save it to the account.
 import { create } from "zustand";
 import { read, remove, write } from "../services/storage.ts";
+import { useGameStore } from "./gameStore.ts";
 import { content } from "../content/index.ts";
 import { pull, useSyncStore, type Op } from "../services/sync.ts";
 import { useAuthStore } from "./authStore.ts";
@@ -91,4 +92,28 @@ export function startAccountSync() {
   if (typeof window !== "undefined") {
     window.addEventListener("online", () => void syncNow());
   }
+}
+
+// Spec 7.3, sign-out: first try to sync. If rows are still waiting, say so and let
+// the learner choose; otherwise sign out straight away.
+export async function requestSignOut(): Promise<"signedOut" | "unsynced"> {
+  await syncNow();
+  if (useSyncStore.getState().outbox.length > 0) return "unsynced";
+  await signOutNow();
+  return "signedOut";
+}
+
+// Sign out and clear this user's local copy (shared devices): their progress, their
+// outbox and any round in progress.
+export async function signOutNow(): Promise<void> {
+  const userId = useAuthStore.getState().userId;
+  await useAuthStore.getState().signOut();
+  useGameStore.setState({ game: null, gameId: null, lastAction: null, lastEvents: [] });
+  await remove("round");
+  if (userId) {
+    await remove(storageKeyFor(userId));
+    await remove(`outbox:${userId}`);
+  }
+  await useSyncStore.getState().load(null);
+  await useProgressStore.getState().switchOwner("guest");
 }
