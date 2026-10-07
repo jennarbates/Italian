@@ -16,7 +16,7 @@ permissions:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v7
 
@@ -74,6 +74,11 @@ jobs:
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium webkit
+
+      # TEMPORARY (revert before merging): stress the specs that hit "WebKit
+      # encountered an internal error", with no retries, to verify the fix.
+      - name: WebKit stress (temporary)
+        run: pnpm exec playwright test --project=webkit --repeat-each=20 --retries=0 e2e/guest-upload.spec.ts e2e/merge.spec.ts e2e/sign-in.spec.ts
 
       - name: Playwright
         run: pnpm test:e2e
