@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { onBackdropClick } from "../dialog.ts";
 
 // Spec 8.1: a menu with "Quit round", which asks to confirm. Quitting records the
 // round as abandoned (spec 2); words already practised stay in the log.
@@ -44,7 +45,9 @@ export function GameMenu({ onQuit }: { onQuit: () => void }) {
       )}
       <dialog
         ref={dialog}
+        onCancel={() => setConfirming(false)}
         onClose={() => setConfirming(false)}
+        onClick={onBackdropClick(() => setConfirming(false))}
         aria-labelledby="quit-title"
         className="m-auto w-[min(90vw,22rem)] rounded-2xl p-5 backdrop:bg-black/50"
       >

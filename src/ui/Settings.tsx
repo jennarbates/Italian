@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { requestSignOut, signOutNow } from "../store/account.ts";
 import { useAuthStore } from "../store/authStore.ts";
 import { usePrefs } from "../store/prefs.ts";
+import { onBackdropClick } from "./dialog.ts";
 import { SignInSheet } from "./SignInSheet.tsx";
 
 // Spec 8.1: the default level, the account (sign in, or sign out with the
@@ -112,9 +113,11 @@ export function Settings() {
       <SignInSheet open={signingIn} onClose={() => setSigningIn(false)} />
       <dialog
         ref={dialog}
+        onCancel={() => setUnsynced(false)}
         onClose={() => setUnsynced(false)}
+        onClick={onBackdropClick(() => setUnsynced(false))}
         aria-labelledby="unsynced-title"
-        className="m-auto w-[min(90vw,22rem)] rounded-2xl p-5 backdrop:bg-black/50"
+        className="m-auto w-[min(90vw,22rem)] rounded-2xl p-5 backdrop:bg-black/50 lg:w-[28rem]"
       >
         <h2 id="unsynced-title" className="text-lg font-semibold">
           Some progress hasn&apos;t synced yet. Sign out anyway?

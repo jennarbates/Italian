@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useAccountStore } from "../store/account.ts";
+import { onBackdropClick } from "./dialog.ts";
 
 // Spec 7.3: signing in with guest progress on this device asks whether to keep it.
 // Yes is the default (focused first).
@@ -17,12 +18,13 @@ export function SaveProgressPrompt() {
     <dialog
       ref={dialog}
       aria-labelledby="save-title"
-      // Escape is "Yes, keep it": nothing is lost by accident.
+      // Escape and the backdrop are "Yes, keep it": nothing is lost by accident.
       onCancel={(e) => {
         e.preventDefault();
         askToSave?.resolve(true);
       }}
-      className="m-auto w-[min(90vw,22rem)] rounded-2xl p-5 backdrop:bg-black/50"
+      onClick={onBackdropClick(() => askToSave?.resolve(true))}
+      className="m-auto w-[min(90vw,22rem)] rounded-2xl p-5 backdrop:bg-black/50 lg:w-[24rem]"
     >
       <h2 id="save-title" className="text-xl font-semibold">
         Save your progress to this account?

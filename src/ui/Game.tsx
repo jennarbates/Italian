@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { useNavigate, useSearchParams } from "react-router";
 import { content } from "../content/index.ts";
 import { questionByKey, type Fill, type GameState, type Level } from "../engine/index.ts";
@@ -35,6 +36,13 @@ export function Game() {
   const [params] = useSearchParams();
   const [zoomed, setZoomed] = useState<string>();
   const [guessFor, setGuessFor] = useState<string>();
+  // Open a dialog for a card. Asking again for the card whose dialog just closed
+  // (its close event can still be on its way) clears it first, so it reopens.
+  const openFor =
+    (set: (id: string | undefined) => void, current: string | undefined) => (id: string) => {
+      if (current === id) flushSync(() => set(undefined));
+      set(id);
+    };
   const desktop = useIsDesktop();
   const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
 
@@ -136,8 +144,10 @@ export function Game() {
       guessing={guessing}
       desktop={desktop}
       hoverPreview={desktop && finePointer && !guessing}
-      onTap={(id) => (guessing ? setGuessFor(id) : dispatch({ type: "FLIP", characterId: id }))}
-      onZoom={setZoomed}
+      onTap={(id) =>
+        guessing ? openFor(setGuessFor, guessFor)(id) : dispatch({ type: "FLIP", characterId: id })
+      }
+      onZoom={openFor(setZoomed, zoomed)}
       onUnflipAll={() => {
         for (const id of game.flipped) dispatch({ type: "FLIP", characterId: id });
       }}

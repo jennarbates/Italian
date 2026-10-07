@@ -1,4 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
+import { content } from "../src/content/index.ts";
+import { startGame } from "../src/engine/start.ts";
+import { hasSupabase } from "./inbox.ts";
 
 // Desktop spec DS 13.3: the desktop layout, run by the desktop-chromium and
 // desktop-webkit projects at 1440 × 900.
@@ -258,5 +261,95 @@ test.describe("mouse: hover preview and right-click (DS 7)", () => {
     if (browserName === "webkit") await card(page, "Luca").dispatchEvent("contextmenu");
     else await page.keyboard.press("ContextMenu");
     await expect(page.getByRole("dialog").getByRole("img", { name: "Luca" })).toBeVisible();
+  });
+});
+
+// The name of the computer's card in a seeded round, to win it at once.
+const cpuName = (seed: number) =>
+  content.characters.find((c) => c.id === startGame(seed, 1, content).cpuSecret)?.name ?? "";
+
+test.describe("round end and dialogs (DS 9.2, DS 9.6)", () => {
+  test("round end is two columns, with Play again focused and not fixed", async ({ page }) => {
+    await page.goto("/play?seed=5");
+    await panel(page).getByRole("button", { name: "Indovina" }).click();
+    await page.getByRole("button", { name: new RegExp(`^Guess ${cpuName(5)}: `) }).click();
+    // Desktop: the dialog's focus starts on Guess, so Enter confirms.
+    await expect(
+      page.getByRole("dialog").getByRole("button", { name: "Guess", exact: true }),
+    ).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("heading", { name: "You won!" })).toBeVisible();
+
+    const again = page.getByRole("button", { name: "Play again" });
+    await expect(again).toBeFocused();
+    expect(
+      await again.evaluate((el) => getComputedStyle(el.parentElement as Element).position),
+    ).toBe("static");
+    // The questions sit to the right of the headline.
+    const head = await page.getByRole("heading", { name: "You won!" }).boundingBox();
+    const questions = await page.getByRole("heading", { name: "Questions" }).boundingBox();
+    if (!head || !questions) throw new Error("no boxes");
+    expect(questions.x).toBeGreaterThan(head.x + head.width);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(1440);
+    await page.keyboard.press("Enter");
+    await expect(page.locator("header")).toContainText("Turn 1");
+  });
+
+  test("dialogs close on Esc and on the backdrop, and give focus back", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    const dialog = page.getByRole("dialog");
+    // GuessConfirm, opened from the keyboard, at 24rem.
+    await panel(page).getByRole("button", { name: "Indovina" }).click();
+    const guess = page.getByRole("button", { name: /^Guess Anna: / });
+    await guess.focus();
+    await page.keyboard.press("Enter");
+    await expect(dialog).toBeVisible();
+    expect((await dialog.boundingBox())?.width).toBe(384);
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(guess).toBeFocused();
+    await guess.press("Enter");
+    await expect(dialog).toBeVisible();
+    await page.mouse.click(10, 10);
+    await expect(dialog).toBeHidden();
+    await expect(guess).toBeFocused();
+    // A click on the dialog's own padding does not close it.
+    await guess.press("Enter");
+    await expect(dialog).toBeVisible();
+    const box = await dialog.boundingBox();
+    if (!box) throw new Error("no dialog box");
+    await page.mouse.click(box.x + 4, box.y + 4);
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("Escape");
+    await panel(page).getByRole("button", { name: "Cancel guess" }).click();
+
+    // CardDetail, at 28rem.
+    await card(page, "Anna").click({ button: "right" });
+    await expect(dialog.getByRole("img", { name: "Anna" })).toHaveJSProperty("offsetWidth", 448);
+    await page.mouse.click(10, 10);
+    await expect(dialog).toBeHidden();
+
+    // The quit confirmation.
+    await page.getByRole("button", { name: "Menu" }).click();
+    await page.getByRole("menuitem", { name: "Quit round" }).click();
+    await expect(dialog).toContainText("Quit this round?");
+    await page.mouse.click(10, 10);
+    await expect(dialog).toBeHidden();
+    await expect(page.locator("header")).toContainText("Turn 1");
+  });
+
+  test("the sign-in sheet is a centred modal", async ({ page }) => {
+    test.skip(!hasSupabase, "needs the local Supabase (CI starts it)");
+    await page.goto("/settings");
+    await page.getByRole("button", { name: "Sign in", exact: true }).click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    const box = await dialog.boundingBox();
+    if (!box) throw new Error("no dialog box");
+    expect(box.width).toBe(448); // 28rem
+    expect(Math.abs(box.x + box.width / 2 - 720)).toBeLessThan(2);
+    expect(Math.abs(box.y + box.height / 2 - 450)).toBeLessThan(2);
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
   });
 });
