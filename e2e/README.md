@@ -1,6 +1,8 @@
 # End-to-end tests
 
-Playwright, run against the production build (`vite build` + `vite preview`) in two phone profiles: Chromium as a Pixel 7 and WebKit as an iPhone 15 (spec 10.2).
+Playwright, run against the production build (`vite build` + `vite preview`) in four profiles: two phones, Chromium as a Pixel 7 and WebKit as an iPhone 15 (spec 10.2), and two desktops, `desktop-chromium` and `desktop-webkit` at 1440 × 900 (desktop spec DS 13.3).
+
+`desktop.spec.ts` runs only on the desktop profiles. The specs written for the phone's bottom sheet, list board and tabs (`phoneOnly` in `playwright.config.ts`) run only on the phones. Everything else runs on all four.
 
 ```bash
 pnpm test:e2e
@@ -45,5 +47,26 @@ And by file:
 | `privacy.spec.ts`, `settings.spec.ts` | Those pages |
 | `states.spec.ts` | Playing on after the connection drops |
 | `sign-in.spec.ts`, `outbox.spec.ts`, `guest-upload.spec.ts`, `merge.spec.ts`, `sign-out.spec.ts` | Accounts and sync (need Supabase) |
+| `desktop.spec.ts` | The desktop layout (below) |
+
+## Desktop
+
+The desktop spec's DS 13.3 cases, all in `desktop.spec.ts`:
+
+| Case | Test |
+|---|---|
+| Board fits | "all 24 cards and the whole panel fit at 1024 × 640" and "… at 1280 × 720" |
+| No sheet | "an always-open panel instead of the sheet, in desktop wording" |
+| Board stable | "card positions are the same in playerTurn and playerReview" |
+| Hover preview | "resting on a card shows a larger preview beside it; leaving hides it", "no preview while guessing, or on a phone-sized window" |
+| Right-click | "right-click opens the card's detail and does not flip it", "the context menu key on a focused card opens its detail" |
+| Keyboard round | "a whole Level 1 round with only the shortcut keys (DS 2.1)" |
+| Shortcuts ignored | "typing sna in the sign-in email field changes nothing in a saved round" (needs Supabase), "keys with Ctrl, Cmd or Alt held do nothing" |
+| Resize | "resize: 1440 × 900 to 390 × 844 and back keeps the same 3 flips", plus a guess in progress and a half-built Level 2 question |
+| Screens | "no horizontal scroll on any screen at 1024 and 1440 wide" |
+| Nav | "DesktopNav is on every screen but /play, marking the current one" |
+| Progress | "no tabs: four totals and both lists side by side" |
+
+`a11y.spec.ts` runs on the desktop profiles too: Italian card names and 44 px targets on every screen. Its Tab-order round is phone-only, since on desktop the board is one tab stop and the keyboard round above covers it.
 
 Tests that need a known game pass `?seed=` to `/play`, and import the engine to know the secrets and the true answers.

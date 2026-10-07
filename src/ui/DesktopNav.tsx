@@ -5,7 +5,7 @@ import { inProgress, useGameStore } from "../store/gameStore.ts";
 import { usePrefs } from "../store/prefs.ts";
 
 const link =
-  "inline-flex min-h-11 items-center px-1 underline-offset-8 decoration-2 hover:underline aria-[current=page]:underline";
+  "inline-flex min-h-11 min-w-11 items-center justify-center px-1 underline-offset-8 decoration-2 hover:underline aria-[current=page]:underline";
 
 // Desktop spec DS 5: the top nav on every screen but Game, at lg only. Play reads
 // "Continue" when a round is saved, by the same rule as Home's "Continue round".

@@ -697,3 +697,46 @@ test.describe("Progress dashboard (DS 9.3)", () => {
     await expect(page.getByRole("tablist")).toHaveCount(0);
   });
 });
+
+// The rest of the DS 13.3 cases.
+test.describe("DS 13.3", () => {
+  const flippedNames = (page: Page) =>
+    page
+      .locator('[aria-label="Board"] button[aria-pressed="true"]')
+      .evaluateAll((els) => els.map((e) => e.getAttribute("aria-label")?.split(":")[0]));
+
+  test("resize: 1440 × 900 to 390 × 844 and back keeps the same 3 flips", async ({ page }) => {
+    await page.goto("/play?seed=3");
+    for (const name of ["Marco", "Sara", "Luca"]) await card(page, name).click();
+    const before = await flippedNames(page);
+    expect(before).toHaveLength(3);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.getByRole("region", { name: "Questions" })).toBeVisible();
+    await expect(page.getByRole("button", { name: /questions$/ })).toBeVisible();
+    expect(await flippedNames(page)).toEqual(before);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await expect(panel(page)).toBeVisible();
+    expect(await flippedNames(page)).toEqual(before);
+    await expect(page.locator("header")).toContainText("Turn 1");
+  });
+
+  test("typing sna in the sign-in email field changes nothing in a saved round", async ({
+    page,
+  }) => {
+    test.skip(!hasSupabase, "needs the local Supabase (CI starts it)");
+    await page.goto("/play?seed=1");
+    await card(page, "Anna").click();
+    await expect(card(page, "Anna")).toHaveAttribute("aria-pressed", "true");
+    await page.goto("/settings");
+    await page.getByRole("button", { name: "Sign in", exact: true }).click();
+    const email = page.getByRole("textbox", { name: "Email" });
+    await email.click();
+    await page.keyboard.type("sna");
+    await expect(email).toHaveValue("sna");
+    await page.keyboard.press("Escape");
+    await nav(page).getByRole("link", { name: "Continue", exact: true }).click();
+    await expect(page.locator("header")).toContainText("Turn 1");
+    await expect(panel(page)).toContainText("Your turn: ask a question, or guess.");
+    expect(await flippedNames(page)).toEqual(["Anna"]);
+  });
+});
