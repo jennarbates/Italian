@@ -203,6 +203,7 @@ export function Game() {
     <TopBar
       game={game}
       secret={secret}
+      onZoom={() => openFor(setZoomed, zoomed)(secret.id)}
       menu={
         <GameMenu
           onQuit={() => {
