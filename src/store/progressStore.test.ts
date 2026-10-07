@@ -126,10 +126,12 @@ describe("the log is append-only", () => {
     const api = Object.keys(useProgressStore.getState()).filter(
       (k) => typeof (useProgressStore.getState() as Record<string, unknown>)[k] === "function",
     );
-    // switchOwner loads another owner's data; nothing edits or deletes rows.
+    // switchOwner loads another owner's data and mergeRemote only adds rows (a union
+    // by id); nothing edits or deletes log rows.
     expect(api.sort()).toEqual([
       "appendEvents",
       "hydrate",
+      "mergeRemote",
       "recordGameEnd",
       "recordGameStart",
       "switchOwner",
