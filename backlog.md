@@ -2,15 +2,15 @@
 
 Built from `spec.md` v0.4. Every deliverable in the spec is a card with acceptance criteria, story points (1, 2, 3, 5), dependencies and spec section references. The four one-week sprints follow the milestones in 10.4.
 
-**85 cards, 179 points.** Cards marked *waits on others* depend on someone outside the build (reviewers, SES approval, playtesters), so start them early.
+**97 cards, 211 points.** Cards marked *waits on others* depend on someone outside the build (reviewers, SES approval, playtesters), so start them early.
 
 ## Sprints
 
 | Sprint | Dates | Points | Goal |
 |---|---|---|---|
-| Sprint 1: Foundations | Oct 7 to Oct 9 | 43 | Spec reviewed and tagged v1, repo and CI live with previews, all 24 characters render from validated content. |
-| Sprint 2: Playable round | Oct 12 to Oct 16 | 71 | Engine and CPU fully tested; a full round plays to a win and a loss on a real phone at both levels. |
-| Sprint 3: Progress, sync, playtest | Oct 19 to Oct 23 | 53 | Learning data, sign-in and sync work end to end; accessibility pass done; 3+ learners have playtested. |
+| Sprint 1: Foundations | Oct 7 to Oct 9 | 47 | Spec reviewed and tagged v1, repo and CI live with previews, all 24 characters render from validated content. |
+| Sprint 2: Playable round | Oct 12 to Oct 16 | 91 | Engine and CPU fully tested; a full round plays to a win and a loss on a real phone at both levels. |
+| Sprint 3: Progress, sync, playtest | Oct 19 to Oct 23 | 61 | Learning data, sign-in and sync work end to end; accessibility pass done; 3+ learners have playtested. |
 | Sprint 4: Fix and launch | Oct 26 to Oct 29 | 12 | Must-fix playtest findings closed, every definition-of-done box checked, live at chie.parlaplay.games. |
 
 ## Epics
@@ -28,12 +28,13 @@ Built from `spec.md` v0.4. Every deliverable in the spec is a card with acceptan
 | Accessibility, states, privacy | 5 | 9 |
 | Testing and playtest | 7 | 18 |
 | Launch | 6 | 7 |
+| Desktop | 12 | 32 |
 
 ## Sprint 1: Foundations (Oct 7 to Oct 9)
 
 Goal: Spec reviewed and tagged v1, repo and CI live with previews, all 24 characters render from validated content.
 
-### Day 1, Wed Oct 7 (7 pts)
+### Day 1, Wed Oct 7 (9 pts)
 
 #### CHI-001 Send the Italian review packet *(waits on others)*
 
@@ -80,6 +81,24 @@ Repo, CI and infra · chore · 1 pt · spec 7.3, 10.4, D30
 Buy parlaplay.games through Cloudflare so its DNS is there from the start; the first production deploy creates the chie record, and SES verification can start on day 2.
 
 - [x] parlaplay.games registered, with its zone active on Cloudflare
+
+#### CHI-116 Request developer review of the desktop spec *(waits on others)*
+
+Desktop · task · 1 pt · DS 13.1, DS 4, DS 6, DS 8
+
+Send DS 4, DS 6 and DS 8 of spec-desktop.md to the developer reviewer.
+
+- [ ] DS 4, DS 6 and DS 8 sent with a return date of Fri Oct 9
+- [ ] Comments collected in one place
+
+#### CHI-117 Ask playtesters to play one round on a laptop *(waits on others)*
+
+Desktop · task · 1 pt · DS 13.2, DD13
+
+Ask the MVP playtesters booked for Thu Oct 22 to bring a laptop for one extra round.
+
+- [ ] At least 2 playtesters confirm they can play one round on a laptop
+- [ ] Each knows whether they will use a mouse or a trackpad
 
 ### Day 2, Thu Oct 8 (17 pts)
 
@@ -171,7 +190,7 @@ Same domain, ready to swap in as Supabase custom SMTP if SES is slow or refused.
 - [ ] Resend account created
 - [ ] Domain added in Resend
 
-### Day 3, Fri Oct 9 (19 pts)
+### Day 3, Fri Oct 9 (21 pts)
 
 #### CHI-004 Fold in reviews and tag spec v1
 
@@ -268,11 +287,22 @@ Stack layers by attributes so the picture can never disagree with the data.
 - [x] All 24 characters render
 - [x] Dropping in new files with the same names changes art with no code change
 
+#### CHI-118 Paper-trace a desktop round and tag spec v1
+
+Desktop · spike · 2 pts · DS 13.1, DS 2.1 · depends on CHI-116
+
+Trace the DS 2.1 round by keyboard and by mouse using only the spec, fold in the review, tag v1.
+
+- [ ] DS 2.1 traced twice, once by keyboard and once by mouse
+- [ ] Every guess logged as a fix or a TBD
+- [ ] Every TBD resolved or moved to DS 14.1
+- [ ] spec-desktop.md tagged v1
+
 ## Sprint 2: Playable round (Oct 12 to Oct 16)
 
 Goal: Engine and CPU fully tested; a full round plays to a win and a loss on a real phone at both levels.
 
-### Day 4, Mon Oct 12 (10 pts)
+### Day 4, Mon Oct 12 (12 pts)
 
 #### CHI-030 Engine types
 
@@ -323,7 +353,18 @@ hasFeature, featureIs and genderIs, plus resolving what an adjective means for a
 - [x] castani on occhi resolves to eyeColor adj.marrone
 - [x] Meaning uses own attr if allowed, else first matching alsoMeans
 
-### Day 5, Tue Oct 13 (25 pts)
+#### CHI-119 Build the desktop app shell and breakpoint
+
+Desktop · task · 2 pts · DS 5, DD1, DD5, DD11 · depends on CHI-118
+
+useIsDesktop(), a full-width shell at lg with DesktopNav on every screen but Game.
+
+- [ ] useIsDesktop() is true at 1024px wide and above, false below, and re-renders on resize
+- [ ] DesktopNav shows Chi è?, Play (or Continue), Progress, Settings and the account on every screen except /play
+- [ ] The current route's link has aria-current="page"
+- [ ] Below 1024px every screen looks exactly as before
+
+### Day 5, Tue Oct 13 (30 pts)
 
 #### CHI-035 ASK validation pipeline
 
@@ -425,7 +466,19 @@ Prove the CPU always splits, never guesses wrong, and is deterministic.
 - [x] Same seed gives the same game
 - [x] Simulation reports average CPU questions to win (expect about 5 or 6)
 
-### Day 6, Wed Oct 14 (16 pts)
+#### CHI-120 Lay out the game as a 6 × 4 board and side panel
+
+Desktop · story · 5 pts · DS 6, DS 2.2, DD2, DD3, DD4 · depends on CHI-119
+
+As a learner at a laptop, I see the board large on the left and the questions beside it.
+
+- [ ] At 1024 × 640 all 24 cards and the whole panel are visible with no page scroll
+- [ ] The panel is aside[aria-label="Questions"] built from sheetFor(), with no collapse toggle
+- [ ] Card positions do not change between playerTurn and playerReview
+- [ ] Resizing across 1024px mid-round keeps flipped cards, a guess in progress and a half-built Level 2 question
+- [ ] Card names scale between 10px and 16px with the card
+
+### Day 6, Wed Oct 14 (21 pts)
 
 #### CHI-049 IndexedDB storage service
 
@@ -486,7 +539,28 @@ As a learner, I can long-press a face to see it large and check small details.
 - [x] Long-press opens the face large with no text
 - [x] Zoom control does the same for keyboard users
 
-### Day 7, Thu Oct 15 (9 pts)
+#### CHI-121 Add the hover preview and right-click detail
+
+Desktop · story · 3 pts · DS 7, DD6 · depends on CHI-120
+
+As a learner with a mouse, I see a face up close by hovering, and open its details by right-clicking.
+
+- [ ] The preview appears after 350 ms on a card, only at lg with (hover: hover) and (pointer: fine)
+- [ ] The preview never shows while guessing or with a dialog open, and never covers the hovered card
+- [ ] Right-click or the context menu key on a card opens CardDetail; other elements keep the browser menu
+- [ ] No layout shift on hover; no fade under prefers-reduced-motion
+
+#### CHI-122 Adapt round end and dialogs for desktop
+
+Desktop · task · 2 pts · DS 9.2, DS 9.6 · depends on CHI-119
+
+Two-column round end with an unfixed action bar; SignInSheet as a centred modal; dialog widths from DS 9.6.
+
+- [ ] Round end is two columns at lg and Play again has focus when it appears
+- [ ] SignInSheet is a centred 28rem modal at lg and a bottom sheet below
+- [ ] Every dialog closes on Esc and on a backdrop click and returns focus to its opener
+
+### Day 7, Thu Oct 15 (14 pts)
 
 #### CHI-055 Level 1 question picker
 
@@ -518,7 +592,19 @@ Render engine feedback from messages.json with placeholders and Italian in itali
 - [x] Every SlotError, slip, duplicate and shape error shows its message
 - [x] Agreement slip shows the correct form next to the answer
 
-### Day 8, Fri Oct 16 (11 pts)
+#### CHI-123 Add keyboard shortcuts and the board grid
+
+Desktop · story · 5 pts · DS 4, DS 8, DD7, DD8, DD9, DD14 · depends on CHI-120
+
+As a learner at a keyboard, I play a whole round without the mouse.
+
+- [ ] keyToAction() returns exactly what the DS 4.2 table says for every cell, checked by unit tests
+- [ ] Keys are ignored with Ctrl, Cmd or Alt held, in inputs, and with a dialog open
+- [ ] The board is an ARIA grid with one tab stop; arrows, Home, End, Ctrl+Home and Ctrl+End move focus
+- [ ] ? and the GameMenu item open the Keyboard shortcuts dialog
+- [ ] GameMenu closes on Esc and on an outside click
+
+### Day 8, Fri Oct 16 (14 pts)
 
 #### CHI-058 CPU turn: Sì / No
 
@@ -573,11 +659,22 @@ Play or Continue round, level picker, Progress, Settings, sign-in status.
 - [x] Continue round shown when a round is saved
 - [x] Sign-in status visible
 
+#### CHI-124 Lay out Home, Settings and Privacy for desktop
+
+Desktop · story · 3 pts · DS 9.1, DS 9.4, DS 9.5 · depends on CHI-119
+
+Two-column Home, row-based Settings and a prose-width Privacy page at lg.
+
+- [ ] Home is two columns at lg with the level cards and Play on the right
+- [ ] Settings rows are label and description left, control right, under Game, Account and About
+- [ ] Privacy is one max-w-prose column with a Back to Settings link
+- [ ] No horizontal scroll at 1024; phone layouts unchanged
+
 ## Sprint 3: Progress, sync, playtest (Oct 19 to Oct 23)
 
 Goal: Learning data, sign-in and sync work end to end; accessibility pass done; 3+ learners have playtested.
 
-### Day 9, Mon Oct 19 (11 pts)
+### Day 9, Mon Oct 19 (14 pts)
 
 #### CHI-070 Progress store and review log
 
@@ -628,7 +725,18 @@ As a learner, I see which words I got wrong and which are due.
 - [x] Due tab lists words due today with next review date
 - [x] Empty state: 'Play a round to see your words here.'
 
-### Day 10, Tue Oct 20 (20 pts)
+#### CHI-125 Build the Progress dashboard
+
+Desktop · story · 3 pts · DS 9.3, DS 3, DD10 · depends on CHI-119
+
+As a learner at a laptop, I see my totals and both word lists at once.
+
+- [ ] At lg there is no tablist and Mistakes and Due show side by side
+- [ ] Tiles read Words seen, Due today, Mistakes this week and Rounds played
+- [ ] progressStats() matches the DS 3 definitions and invariants, checked by unit tests
+- [ ] With no data the empty message shows once, full width, with no tiles
+
+### Day 10, Tue Oct 20 (23 pts)
 
 #### CHI-080 Database migrations
 
@@ -732,7 +840,18 @@ Default level, account sign in or out, link to the privacy note.
 - [x] Sign in and sign out reachable
 - [x] Privacy note linked
 
-### Day 11, Wed Oct 21 (15 pts)
+#### CHI-126 Add desktop Playwright projects and specs
+
+Desktop · test · 3 pts · DS 13.2, DS 13.3 · depends on CHI-120, CHI-121, CHI-122, CHI-123, CHI-124, CHI-125
+
+desktop-chromium and desktop-webkit projects at 1440 × 900 and e2e/desktop.spec.ts with every DS 13.3 case.
+
+- [ ] Every DS 13.3 case is a passing test on both desktop projects
+- [ ] Phone-only specs skip on desktop projects; phone specs pass without edits
+- [ ] a11y.spec.ts passes on the desktop projects
+- [ ] CI runs all four projects green
+
+### Day 11, Wed Oct 21 (17 pts)
 
 #### CHI-090 Accessibility pass
 
@@ -815,6 +934,17 @@ A stable staging build and a short note for testers.
 
 - [ ] Staging build deployed
 - [ ] Findings form or sheet ready (rounds lost, minutes per round, confusing strings)
+
+#### CHI-127 Run the desktop manual laptop pass
+
+Desktop · test · 2 pts · DS 13.4 · depends on CHI-126
+
+The DS 13.4 checks on a MacBook and a Windows laptop, before the playtest build.
+
+- [ ] A full round by mouse and by keyboard in Chrome and Safari on a MacBook at 1280 and 1440
+- [ ] The same plus right-click detail in Edge and Firefox on Windows at 1920 × 1080
+- [ ] Window dragged across 1024px mid-round loses nothing
+- [ ] Results logged in the playtest findings doc
 
 ### Day 12, Thu Oct 22 (4 pts)
 
@@ -941,3 +1071,18 @@ Merge to main, update released-ids.json, confirm the live URL plays on both phon
 | Lighthouse mobile: LCP under 2.5 s, accessibility at least 95 | CHI-094 |
 | Every TBD resolved or moved to section 11 | CHI-114 |
 | README covers run, test, deploy, and adding a character | CHI-113 |
+
+## Desktop definition of done (DS 13.5) mapped to cards
+
+| Item | Cards |
+|---|---|
+| spec-desktop.md reviewed and tagged v1 | CHI-116, CHI-118 |
+| A full round plays by mouse only and by keyboard only at 1024 × 640 and 1440 × 900 | CHI-121, CHI-123, CHI-126 |
+| At 1024 × 640 the 24 cards and the whole panel fit with no scroll | CHI-120, CHI-126 |
+| No horizontal scroll on any screen at 1024 and 1440 | CHI-122, CHI-124, CHI-125, CHI-126 |
+| The hover preview and right-click detail work; neither shows on touch | CHI-121 |
+| Resizing across 1024px mid-round loses nothing | CHI-120, CHI-126 |
+| The phone layout is unchanged; all existing phone e2e tests pass without edits | CHI-119, CHI-126 |
+| Desktop Playwright projects green in CI; axe clean at desktop size | CHI-126 |
+| The manual checks in DS 13.4 are done and logged | CHI-127 |
+| At least 2 playtesters have played one round on a laptop; findings logged with the rest | CHI-117, CHI-103 |

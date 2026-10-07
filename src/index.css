@@ -5,3 +5,10 @@
   outline: 3px solid #2563eb;
   outline-offset: 2px;
 }
+
+/* Desktop spec DS 7.2: the hover preview fades in (not under reduced motion). */
+@keyframes preview-in {
+  from {
+    opacity: 0;
+  }
+}

@@ -69,6 +69,19 @@ describe("guest to account (CHI-085)", () => {
     expect(useAccountStore.getState().askToSave).toBeNull();
   });
 
+  test("the prompt stays up until the answer is on disk, and only the first answer counts", async () => {
+    await playAsGuest();
+    const done = onAccountChange(user);
+    await vi.waitFor(() => expect(useAccountStore.getState().askToSave).not.toBeNull());
+    useAccountStore.getState().askToSave?.resolve(false);
+    expect(useAccountStore.getState().askToSave).toMatchObject({ saving: true });
+    useAccountStore.getState().askToSave?.resolve(true); // a second tap is ignored
+    await done;
+    expect(useAccountStore.getState().askToSave).toBeNull();
+    expect(await read("guest")).toBeUndefined();
+    expect(calls).toEqual([]);
+  });
+
   test("Yes: the rows become the account's, upload games first then the log, and the guest copy goes", async () => {
     await playAsGuest();
     await signInAnswering(true);

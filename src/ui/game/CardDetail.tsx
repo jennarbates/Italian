@@ -21,7 +21,11 @@ export function CardDetail({
   return (
     <dialog
       ref={dialog}
-      onClose={onClose}
+      onCancel={onClose}
+      onClose={(e) => {
+        // A late close event for a dialog that has opened again since.
+        if (!e.currentTarget.open) onClose();
+      }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -32,7 +36,7 @@ export function CardDetail({
           <Face
             character={character}
             label={character.name}
-            className="w-[min(80vw,22rem)] rounded-2xl"
+            className="w-[min(80vw,22rem)] rounded-2xl lg:w-[28rem]"
           />
           <button
             type="button"

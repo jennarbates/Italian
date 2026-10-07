@@ -10,12 +10,29 @@ type Props = {
   onTap: () => void;
   onZoom: () => void;
   guessing: boolean;
+  describedBy?: string; // the hover preview, while it shows
+  // Desktop spec DS 8.2: in the board grid one card is in the tab order (0) and
+  // the rest are not (-1); the Zoom control leaves it, since i does its job.
+  // Undefined on the phone, where every card is a tab stop as before.
+  tabIndex?: number;
+  index?: number;
+  onFocus?: () => void;
 };
 
 // One board card. Tap flips it (or picks it, while guessing); long-press or the
 // Zoom control opens the detail view. Flipped cards hide the face and show a
 // cross, so the state never depends on color alone.
-export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
+export function Card({
+  character,
+  flipped,
+  onTap,
+  onZoom,
+  guessing,
+  describedBy,
+  tabIndex,
+  index,
+  onFocus,
+}: Props) {
   const press = useLongPress(onZoom);
   // Spec 9: the name and attributes in Italian; the flipped state is aria-pressed.
   const described = describeCharacter(character, content.lexicon);
@@ -27,9 +44,17 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
         type="button"
         aria-label={label}
         aria-pressed={guessing ? undefined : flipped}
+        aria-describedby={describedBy}
+        tabIndex={tabIndex}
+        onFocus={onFocus}
+        data-card={index}
         data-flipped={flipped}
-        className={`group relative block aspect-[5/6] w-full select-none rounded-md outline-offset-2 [-webkit-touch-callout:none] [perspective:600px] ${
-          guessing ? "animate-pulse motion-reduce:animate-none" : ""
+        className={`group relative block aspect-[5/6] w-full select-none rounded-md outline-offset-2 [-webkit-touch-callout:none] [perspective:600px] hover:ring-2 ${
+          guessing
+            ? "animate-pulse cursor-pointer hover:ring-blue-600 motion-reduce:animate-none"
+            : flipped
+              ? "hover:ring-stone-400"
+              : "transition-transform duration-100 hover:-translate-y-0.5 hover:ring-stone-400 motion-reduce:transition-none"
         }`}
         {...press}
         onClick={() => {
@@ -45,7 +70,7 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
           <span className="absolute inset-0 overflow-hidden rounded-md shadow-sm ring-1 ring-stone-300 [backface-visibility:hidden]">
             <Face character={character} className="h-full w-full" />
             {!flipped && (
-              <span className="absolute inset-x-0 bottom-0 truncate bg-white/80 px-0.5 text-center text-[10px] leading-tight font-medium">
+              <span className="absolute inset-x-0 bottom-0 truncate bg-white/80 px-0.5 text-center text-[length:clamp(10px,calc(var(--card-w)*0.09),16px)] leading-tight font-medium">
                 {character.name}
               </span>
             )}
@@ -65,7 +90,9 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
             {flipped && (
-              <span className="text-[10px] leading-tight text-stone-800">{character.name}</span>
+              <span className="text-[length:clamp(10px,calc(var(--card-w)*0.09),16px)] leading-tight text-stone-800">
+                {character.name}
+              </span>
             )}
           </span>
         </span>
@@ -73,6 +100,7 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
       <button
         type="button"
         onClick={onZoom}
+        tabIndex={tabIndex === undefined ? undefined : -1}
         className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:right-0 focus:z-10 focus:flex focus:min-h-11 focus:min-w-11 focus:items-center focus:rounded focus:bg-white focus:px-1 focus:text-xs focus:shadow"
       >
         Zoom {character.name}

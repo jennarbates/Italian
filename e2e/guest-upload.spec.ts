@@ -40,6 +40,8 @@ test("No deletes the guest's progress", async ({ page }) => {
   await signIn(page);
   const prompt = page.getByRole("dialog", { name: "Save your progress to this account?" });
   await prompt.getByRole("button", { name: "No, delete it" }).click();
+  // The prompt closes once the choice is on disk; reloading sooner would cancel it.
+  await expect(prompt).toBeHidden();
   await page.goto("/progress");
   await expect(page.getByText("Play a round to see your words here.")).toBeVisible();
 });

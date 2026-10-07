@@ -2,7 +2,21 @@ import { defineConfig, devices } from "@playwright/test";
 
 const port = 4173;
 
-// Spec 10.2: e2e runs in Chromium and WebKit. Phone profiles, since the app is phone-first.
+// Spec 10.2: e2e runs in Chromium and WebKit. Phone profiles, since the app is
+// phone-first, plus desktop profiles at 1440 × 900 for the desktop layout
+// (desktop spec DS 13.3). desktop.spec.ts runs only on desktop.
+const desktop = { width: 1440, height: 900 };
+// Specs written for the phone's bottom sheet, list board and tabs. The desktop
+// projects skip them; desktop.spec.ts covers the same ground at desktop size.
+const phoneOnly = [
+  "board.spec.ts",
+  "level1.spec.ts",
+  "level2.spec.ts",
+  "progress.spec.ts",
+  "round.spec.ts",
+  "states.spec.ts",
+];
+
 export default defineConfig({
   testDir: "e2e",
   fullyParallel: true,
@@ -14,8 +28,18 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   projects: [
-    { name: "chromium", use: { ...devices["Pixel 7"] } },
-    { name: "webkit", use: { ...devices["iPhone 15"] } },
+    { name: "chromium", use: { ...devices["Pixel 7"] }, testIgnore: "desktop.spec.ts" },
+    { name: "webkit", use: { ...devices["iPhone 15"] }, testIgnore: "desktop.spec.ts" },
+    {
+      name: "desktop-chromium",
+      use: { ...devices["Desktop Chrome"], viewport: desktop },
+      testIgnore: phoneOnly,
+    },
+    {
+      name: "desktop-webkit",
+      use: { ...devices["Desktop Safari"], viewport: desktop },
+      testIgnore: phoneOnly,
+    },
   ],
   // Test the production build, not the dev server.
   webServer: {

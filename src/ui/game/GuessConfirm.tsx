@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import type { Character } from "../../content/schemas.ts";
+import { onBackdropClick } from "../dialog.ts";
 import { Face } from "../Face.tsx";
+import { useIsDesktop } from "../useMediaQuery.ts";
 
 // Spec 2, D3: a wrong guess loses the round, so every guess is confirmed, with a
 // warning when the card is flipped down.
@@ -16,19 +18,32 @@ export function GuessConfirm({
   onCancel: () => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const desktop = useIsDesktop();
+  const confirm = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     const d = dialog.current;
     if (!d) return;
-    if (character && !d.open) d.showModal();
+    if (character && !d.open) {
+      d.showModal();
+      // Desktop spec DS 9.6: focus starts on Guess, so Enter confirms.
+      if (desktop) confirm.current?.focus();
+    }
     if (!character && d.open) d.close();
-  }, [character]);
+  }, [character, desktop]);
 
   return (
     <dialog
       ref={dialog}
-      onClose={onCancel}
+      // Esc: update state at once; the close event comes a frame later, and a
+      // reopen before it would find the state unchanged.
+      onCancel={onCancel}
+      onClose={(e) => {
+        // A late close event for a dialog that has opened again since.
+        if (!e.currentTarget.open) onCancel();
+      }}
+      onClick={onBackdropClick(onCancel)}
       aria-labelledby="guess-title"
-      className="m-auto w-[min(90vw,22rem)] rounded-2xl p-5 backdrop:bg-black/50"
+      className="m-auto w-[min(90vw,22rem)] rounded-2xl p-5 backdrop:bg-black/50 lg:w-[24rem]"
     >
       {character && (
         <div className="flex flex-col items-center gap-3 text-center">
@@ -52,6 +67,7 @@ export function GuessConfirm({
             </button>
             <button
               type="button"
+              ref={confirm}
               onClick={onConfirm}
               className="min-h-12 rounded-xl bg-stone-900 font-medium text-white"
             >

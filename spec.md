@@ -687,6 +687,8 @@ The `anon` role has no policies, so it can read and write nothing.
 
 Mobile-first, portrait, styled with Tailwind CSS. The full 24-card board must fit without scrolling in the space a 360 × 640 phone actually shows after the browser's own toolbars (roughly 360 × 560; layout uses `dvh` units, and this is checked on real phones). The question builder (or the CPU's question) lives in a bottom sheet over the board that collapses to a one-line bar, so the board never shrinks.
 
+Desktop (1024px and wider) has its own spec, [`spec-desktop.md`](spec-desktop.md). Nothing below 1024px changes.
+
 ### 8.1 Screens and flow
 
 ```
@@ -700,7 +702,7 @@ Home ──► Game ──► Round end ──► Game (play again)
 | Screen | Contents |
 |---|---|
 | Home | Play (or "Continue round" when one is saved), level picker (1 or 2), Progress, Settings, sign-in status |
-| Game | Top bar (turn, whose turn). Your secret card (small). Board: 4 columns × 6 rows. Bottom sheet: question picker (Level 1) or tile builder (Level 2) on your turn; CPU question with Sì / No on its turn; feedback after each action. Collapsed, the sheet shows one line (e.g. the last answer). "Indovina" (guess) button. "Avanti" (end turn) button. A menu with "Quit round" (asks to confirm). Long-press a card for the detail view (3.5) |
+| Game | Top bar (turn, whose turn). Your secret card (small; tap it for the detail view, 3.5). Board: 4 columns × 6 rows. Bottom sheet: question picker (Level 1) or tile builder (Level 2) on your turn; CPU question with Sì / No on its turn; feedback after each action. Collapsed, the sheet shows one line (e.g. the last answer). "Indovina" (guess) button. "Avanti" (end turn) button. A menu with "Quit round" (asks to confirm). Long-press a card for the detail view (3.5) |
 | Round end | Result, both secrets revealed, question history with answers, this round's mistakes, Play again |
 | Progress | Mistakes tab: grouped by word, showing what was given and what was expected. Due tab: words due today and their next review date |
 | Settings | Default level, account (sign in or out, with the unsynced warning from 7.3), link to the privacy note |
@@ -938,4 +940,5 @@ Also queued: final character art, colorblind mode, Easy CPU setting, championshi
 - 2026-10-06: v0.3. Vocabulary checked against the Profilo with a `level` field per word; adjective agreement errors at Level 2 become soft slips; `slip` rows in the review log; references section.
 - 2026-10-06: v0.4. Spec review fixes. Both `castani` and `marroni` accepted for eyes; high hats, large eyes and a long-press detail view; 6-digit email code replaces the magic link; Resend as SES fallback; staging Supabase for previews; `chie.1412labs.com`; account deletion by email and a privacy note; Quit round; games row at START and ordered outbox flush; unsynced sign-out warning; guest storage persistence and nudge; `cards` stale-write guard and profile trigger; no daily new-card limit; feedback message catalogue (3.7); `SlotError`, `ShapeError` and `Feedback` types; slot-based tile builder; answers lowercase the first letter; `ratedThisTurn` reset; released-ids snapshot; SPA fallback; Sentry URL scrubbing; board fit measured after browser toolbars; launch moved to October 29.
 - 2026-10-06: v0.5. App and email domain is `chie.parlaplay.games` (D30); `1412labs.com` was not ours.
+- 2026-10-07: Desktop layout split out into `spec-desktop.md` (v0.1 draft); 8 links to it.
 - 2026-10-07: The sign-in email carries a sign-in link as well as the code (7.3, D10).
