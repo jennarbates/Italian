@@ -100,7 +100,7 @@ There is no turn limit and no timer. Each round stands alone; there is no match 
 
 ## 3. Content model
 
-All Italian lives in JSON, validated with Zod at build time. Every inflected form is written out as data. There is no inflection code.
+All Italian lives in JSON, validated with Zod at build time (a Vite plugin checks every file in `src/content/`, so a bad file fails `pnpm build`). Every inflected form is written out as data. There is no inflection code.
 
 ### 3.1 Attributes
 
@@ -171,6 +171,12 @@ const Article = z.object({
   text: z.string(),                     // "i"
 });
 
+const Verb = z.object({
+  id: z.string(),                       // "v.ha"
+  pos: z.literal("verb"),
+  text: z.string(),                     // "ha"
+});
+
 const Noun = z.object({
   id: z.string(),                       // "n.capelli"
   pos: z.literal("noun"),
@@ -207,27 +213,29 @@ const Adjective = z.object({
 });
 ```
 
+`lexicon.json` is one array of all four kinds, told apart by `pos`. In the code every object schema is strict, so an unknown or misspelled key fails the build.
+
 A specific form of an adjective is referenced as `<lemmaId>#<formKey>`, e.g. `adj.biondo#mp` is `biondi`.
 
 ```json
 [
   { "id": "n.capelli", "pos": "noun", "text": "capelli", "gloss": "hair",
     "gender": "m", "number": "pl", "defArt": "art.i", "artRule": "art.mpl.consonant",
-    "template": "t.have.adj", "adjAttrs": ["hairColor", "hairLength"] },
+    "template": "t.have.adj", "adjAttrs": ["hairColor", "hairLength"], "level": "A1" },
   { "id": "n.occhiali", "pos": "noun", "text": "occhiali", "gloss": "glasses",
     "gender": "m", "number": "pl", "defArt": "art.gli", "artRule": "art.mpl.vowel",
-    "template": "t.have", "attr": "glasses" },
+    "template": "t.have", "attr": "glasses", "level": "A1" },
   { "id": "n.donna", "pos": "noun", "text": "donna", "gloss": "woman",
     "gender": "f", "number": "sg", "defArt": "art.la", "indefArt": "art.una", "artRule": "art.indef.f",
-    "template": "t.be" },
+    "template": "t.be", "level": "A1" },
   { "id": "adj.biondo", "pos": "adj", "gloss": "blond", "attr": "hairColor",
-    "forms": { "ms": "biondo", "fs": "bionda", "mp": "biondi", "fp": "bionde" } },
+    "forms": { "ms": "biondo", "fs": "bionda", "mp": "biondi", "fp": "bionde" }, "level": "A1" },
   { "id": "adj.castano", "pos": "adj", "gloss": "brown (hair, eyes)", "attr": "hairColor",
     "alsoMeans": [{ "attr": "eyeColor", "value": "adj.marrone" }],
-    "forms": { "ms": "castano", "fs": "castana", "mp": "castani", "fp": "castane" } },
+    "forms": { "ms": "castano", "fs": "castana", "mp": "castani", "fp": "castane" }, "level": "A1" },
   { "id": "adj.marrone", "pos": "adj", "gloss": "brown (eyes)", "attr": "eyeColor",
     "wordChoice": [{ "noun": "n.capelli", "use": "adj.castano" }],
-    "forms": { "ms": "marrone", "fs": "marrone", "mp": "marroni", "fp": "marroni" } }
+    "forms": { "ms": "marrone", "fs": "marrone", "mp": "marroni", "fp": "marroni" }, "level": "A1" }
 ]
 ```
 
