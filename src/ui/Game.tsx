@@ -95,6 +95,7 @@ export function Game() {
       <TopBar
         game={game}
         secret={secret}
+        onZoom={() => setZoomed(secret.id)}
         menu={
           <GameMenu
             onQuit={() => {
