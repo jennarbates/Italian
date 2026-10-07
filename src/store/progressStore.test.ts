@@ -8,7 +8,7 @@ import { localDay, progressSaved, rowsFor, useProgressStore } from "./progressSt
 beforeEach(() => {
   vi.stubGlobal("indexedDB", new IDBFactory());
   resetForTests();
-  useProgressStore.setState({ games: [], reviewLog: [], loaded: false });
+  useProgressStore.setState({ games: [], reviewLog: [], loaded: false, owner: "guest" });
 });
 
 const at = new Date(2026, 9, 6, 23, 30); // 23:30 local time on 6 October
@@ -126,7 +126,14 @@ describe("the log is append-only", () => {
     const api = Object.keys(useProgressStore.getState()).filter(
       (k) => typeof (useProgressStore.getState() as Record<string, unknown>)[k] === "function",
     );
-    expect(api.sort()).toEqual(["appendEvents", "hydrate", "recordGameEnd", "recordGameStart"]);
+    // switchOwner loads another owner's data; nothing edits or deletes rows.
+    expect(api.sort()).toEqual([
+      "appendEvents",
+      "hydrate",
+      "recordGameEnd",
+      "recordGameStart",
+      "switchOwner",
+    ]);
   });
 });
 
@@ -197,5 +204,57 @@ describe("persistence", () => {
     await write("guest", { games: "nope", reviewLog: 3 });
     await useProgressStore.getState().hydrate();
     expect(useProgressStore.getState()).toMatchObject({ loaded: true, games: [], reviewLog: [] });
+  });
+});
+
+describe("owners", () => {
+  test("loading twice never duplicates rows", async () => {
+    await write("guest", { games: [{ id: "g1" }], reviewLog: [{ id: "r1" }] });
+    await Promise.all([
+      useProgressStore.getState().hydrate(),
+      useProgressStore.getState().hydrate(),
+    ]);
+    expect(useProgressStore.getState().games.map((g) => g.id)).toEqual(["g1"]);
+    expect(useProgressStore.getState().reviewLog.map((r) => r.id)).toEqual(["r1"]);
+  });
+
+  test("switching owner loads that owner's data, kept apart from the guest's", async () => {
+    const user = "u1";
+    await write("guest", { games: [{ id: "guest-game" }], reviewLog: [] });
+    await write(`user:${user}`, { games: [{ id: "user-game" }], reviewLog: [] });
+    await useProgressStore.getState().hydrate();
+    expect(useProgressStore.getState().games.map((g) => g.id)).toEqual(["guest-game"]);
+    await useProgressStore.getState().switchOwner(user);
+    expect(useProgressStore.getState()).toMatchObject({ owner: user, loaded: true });
+    expect(useProgressStore.getState().games.map((g) => g.id)).toEqual(["user-game"]);
+    // New rows go to that owner's key.
+    useProgressStore
+      .getState()
+      .recordGameStart({
+        id: "g2",
+        seed: 1,
+        level: 1,
+        contentVersion: 1,
+        startedAt: at.toISOString(),
+      });
+    await progressSaved();
+    expect(
+      (await read<{ games: { id: string }[] }>(`user:${user}`))?.games.map((g) => g.id),
+    ).toEqual(["user-game", "g2"]);
+    expect((await read<{ games: { id: string }[] }>("guest"))?.games.map((g) => g.id)).toEqual([
+      "guest-game",
+    ]);
+  });
+
+  test("switching to the owner you already are does nothing", async () => {
+    useProgressStore
+      .getState()
+      .appendEvents(
+        "g",
+        [{ type: "rating", lexiconId: "n.a", direction: "produce", rating: "good" }],
+        at,
+      );
+    await useProgressStore.getState().switchOwner("guest");
+    expect(useProgressStore.getState().reviewLog).toHaveLength(1);
   });
 });

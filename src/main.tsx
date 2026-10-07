@@ -3,11 +3,13 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 import "./index.css";
 import { router } from "./routes.tsx";
+import { startAccountSync } from "./store/account.ts";
 import { useAuthStore } from "./store/authStore.ts";
 import { useGameStore } from "./store/gameStore.ts";
 import { useProgressStore } from "./store/progressStore.ts";
 
 // Load saved progress and resume a saved round, if any, while the first screen renders.
+startAccountSync();
 void useAuthStore.getState().init();
 void useProgressStore.getState().hydrate();
 void useGameStore.getState().hydrate();
