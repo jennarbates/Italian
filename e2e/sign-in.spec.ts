@@ -44,9 +44,8 @@ test("the email shows the code and a sign-in link (spec 7.3)", async ({ page }) 
   if (!message) throw new Error("no email");
   expect(message.Subject).toBe("Your Chi è? sign-in code");
   expect(codeIn(message)).toMatch(/^\d{6}$/);
-  expect(linkIn(message)).toContain(
-    "redirect_to=" + encodeURIComponent(new URL(page.url()).origin),
-  );
+  const link = new URL(linkIn(message));
+  expect(link.searchParams.get("redirect_to")).toBe(new URL(page.url()).origin);
 });
 
 test("the link in the email signs in and comes back to this app", async ({ page }) => {
@@ -55,7 +54,10 @@ test("the link in the email signs in and comes back to this app", async ({ page 
   const [message] = await emailsTo(email);
   if (!message) throw new Error("no email");
   await page.goto(linkIn(message));
-  await expect(page).toHaveURL(/^http:\/\/localhost:\d+\/$/);
+  // Back on this app's Home, signed in, with the tokens cleared from the URL.
+  await expect(page.getByRole("link", { name: email })).toBeVisible();
+  expect(new URL(page.url()).origin).toBe(new URL(linkIn(message)).searchParams.get("redirect_to"));
+  expect(page.url()).not.toContain("access_token");
   await page.goto("/settings");
   await expect(page.getByText(`Signed in as ${email}`)).toBeVisible();
 });
