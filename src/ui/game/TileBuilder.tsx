@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { content } from "../../content/index.ts";
 import type { Adjective, Article, Noun, Verb } from "../../content/schemas.ts";
 import { parseTiles, type Fill, type ShapeError, type Tiles } from "../../engine/index.ts";
@@ -37,25 +36,39 @@ function shapeFeedback(error: ShapeError, tiles: Tiles) {
   ];
 }
 
+// The question being built. Game holds it, so it survives the swap between the
+// phone's sheet and the desktop panel (desktop spec DS 2.2).
+export type TileDraft = { tiles: Tiles; openAdj?: string; shapeError?: ShapeError };
+
 // Spec 3.4 and 8.1, Level 2: four slots in order (verb, article, noun,
 // adjective) filled by tapping tiles, with no English.
-export function TileBuilder({ onAsk }: { onAsk: (templateId: string, fill: Fill) => void }) {
-  const [tiles, setTiles] = useState<Tiles>({});
-  const [openAdj, setOpenAdj] = useState<string>();
-  const [shapeError, setShapeError] = useState<ShapeError>();
+export function TileBuilder({
+  draft,
+  onDraft,
+  onAsk,
+}: {
+  draft: TileDraft;
+  onDraft: (update: (d: TileDraft) => TileDraft) => void;
+  onAsk: (templateId: string, fill: Fill) => void;
+}) {
+  const { tiles, openAdj, shapeError } = draft;
+  const setOpenAdj = (id: string | undefined) => onDraft((d) => ({ ...d, openAdj: id }));
 
   const set = (slot: keyof Tiles, value: string | undefined) => {
-    setShapeError(undefined);
-    setTiles((t) => {
-      const rest = Object.fromEntries(Object.entries(t).filter(([k]) => k !== slot)) as Tiles;
-      return value === undefined ? rest : { ...rest, [slot]: value };
+    onDraft((d) => {
+      const rest = Object.fromEntries(Object.entries(d.tiles).filter(([k]) => k !== slot)) as Tiles;
+      return {
+        ...d,
+        shapeError: undefined,
+        tiles: value === undefined ? rest : { ...rest, [slot]: value },
+      };
     });
   };
 
   const submit = () => {
     const parsed = parseTiles(tiles, content);
     if ("shapeError" in parsed) {
-      setShapeError(parsed.shapeError);
+      onDraft((d) => ({ ...d, shapeError: parsed.shapeError }));
       return;
     }
     onAsk(parsed.templateId, parsed.fill);

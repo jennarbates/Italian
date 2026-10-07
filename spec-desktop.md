@@ -59,7 +59,7 @@ At every step the mouse works too: clicking does exactly what tapping does on th
 
 | Situation | Rule |
 |---|---|
-| Window resized across 1024px mid-round | Layout swaps (Sheet and SidePanel, 4 × 6 and 6 × 4). Game state, flipped cards and a guess in progress are kept. TBD: verify a half-built Level 2 question survives; if not, lift TileBuilder state into `Game` (CHI-120) |
+| Window resized across 1024px mid-round | Layout swaps (Sheet and SidePanel, 4 × 6 and 6 × 4). Game state, flipped cards, a guess in progress, a half-built Level 2 question and a shown hint are kept: `Game` holds the TileBuilder draft and CpuQuestion's `hintShown`, because the sheet and the panel are different trees (CHI-120) |
 | Focused element unmounted by a resize | Focus moves to the board's roving card (DS 8.2) |
 | Window narrower than 1024px on a laptop | Phone layout, centred, exactly as today. No "too small" message |
 | Window shorter than 640px at 1024px or wider | Cards shrink to fit (the board formula uses height too). Below about 520px tall the panel body scrolls; the actions never leave view |
@@ -666,3 +666,4 @@ Desktop work runs **before launch**, alongside the MVP's Sprints 2 and 3 (`spec.
 
 - 2026-10-07: v0.1. First draft.
 - 2026-10-07: v0.2. Restructured to the full spec format: success criteria, in/out table, desktop round walkthrough, edge cases, data model (`ProgressStats`), shortcuts contract with transition table, check order, invariants and traced example, tests by layer, milestones before launch (DD12), future work, references. Level 1 questions use `q` then arrows instead of number keys. Playwright desktop devices verified at 1280 × 720 and overridden to 1440 × 900.
+- 2026-10-07: CHI-120. DS 2.2 resize TBD resolved: a half-built Level 2 question did not survive the swap, so `Game` now holds the TileBuilder draft, and CpuQuestion's `hintShown` for the same reason.

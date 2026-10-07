@@ -45,7 +45,7 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
           <span className="absolute inset-0 overflow-hidden rounded-md shadow-sm ring-1 ring-stone-300 [backface-visibility:hidden]">
             <Face character={character} className="h-full w-full" />
             {!flipped && (
-              <span className="absolute inset-x-0 bottom-0 truncate bg-white/80 px-0.5 text-center text-[10px] leading-tight font-medium">
+              <span className="absolute inset-x-0 bottom-0 truncate bg-white/80 px-0.5 text-center text-[length:clamp(10px,calc(var(--card-w)*0.09),16px)] leading-tight font-medium">
                 {character.name}
               </span>
             )}
@@ -65,7 +65,9 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
             {flipped && (
-              <span className="text-[10px] leading-tight text-stone-800">{character.name}</span>
+              <span className="text-[length:clamp(10px,calc(var(--card-w)*0.09),16px)] leading-tight text-stone-800">
+                {character.name}
+              </span>
             )}
           </span>
         </span>

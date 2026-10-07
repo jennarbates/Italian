@@ -1,19 +1,22 @@
-import { useState } from "react";
 import type { Question } from "../../engine/index.ts";
 import { hintFor } from "./hints.ts";
 
 // Spec 2 and 8.1: the CPU's question with Sì and No. At Level 1 a hint shows the
-// English; showing it means the answer is not rated (spec 6).
+// English; showing it means the answer is not rated (spec 6). Game holds
+// hintShown, so it survives a layout swap and the h and s/n keys can use it.
 export function CpuQuestion({
   question,
   level,
+  hintShown,
+  onShowHint,
   onAnswer,
 }: {
   question: Question;
   level: 1 | 2;
+  hintShown: boolean;
+  onShowHint: () => void;
   onAnswer: (value: boolean, hintShown: boolean) => void;
 }) {
-  const [hintShown, setHintShown] = useState(false);
   return (
     <div className="flex flex-col gap-3 py-3">
       <p className="text-sm text-stone-600">The computer asks about your card:</p>
@@ -26,7 +29,7 @@ export function CpuQuestion({
         ) : (
           <button
             type="button"
-            onClick={() => setHintShown(true)}
+            onClick={onShowHint}
             className="inline-flex min-h-11 items-center self-start text-sm text-blue-700 underline"
           >
             Show hint
