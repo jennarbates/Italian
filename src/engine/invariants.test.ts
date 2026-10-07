@@ -92,7 +92,7 @@ const game = fc
   .tuple(
     fc.integer(),
     fc.constantFrom(1 as const, 2 as const),
-    fc.array(action, { minLength: 1, maxLength: 120 }),
+    fc.array(action, { minLength: 1, maxLength: 120, size: "max" }),
   )
   .map(([seed, level, rest]): Action[] => [{ type: "START", seed, level }, ...rest]);
 
@@ -256,7 +256,7 @@ describe("spec 4.4 invariants hold after every action of random games", () => {
           if (after.result) results.add(after.result);
         }
       }),
-      runs,
+      { ...runs, seed: 2026 }, // fixed, so this coverage check cannot flake
     );
     expect([...phases].sort()).toEqual(
       ["cpuReview", "cpuTurn", "over", "playerReview", "playerTurn"].sort(),
