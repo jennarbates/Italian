@@ -3,7 +3,7 @@
 // deploys main to production and uploads every other branch as a preview version.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "chi-e",
+  "name": "italian",
   "compatibility_date": "2026-10-06",
   "assets": {
     "directory": "./dist/",
