@@ -15,7 +15,7 @@ beforeEach(() => {
   vi.stubGlobal("indexedDB", new IDBFactory());
   resetForTests();
   useGameStore.setState({ status: "loading", game: null, gameId: null, lastEvents: [] });
-  useProgressStore.setState({ games: [], reviewLog: [], loaded: false });
+  useProgressStore.setState({ games: [], reviewLog: [], loaded: false, owner: "guest" });
 });
 
 const withId = (state: unknown) => ({

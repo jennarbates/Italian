@@ -3,7 +3,8 @@
 // (spec 7.3). Sync for signed-in users builds on this in Sprint 3.
 import { create } from "zustand";
 import type { Direction, GameEvent, Level, SlotError } from "../engine/index.ts";
-import { read, write } from "../services/storage.ts";
+import { read, write, type StorageKey } from "../services/storage.ts";
+import { useSyncStore, type Op } from "../services/sync.ts";
 
 export type GameRow = {
   id: string; // client uuid
@@ -30,7 +31,11 @@ export type GuestData = { games: GameRow[]; reviewLog: ReviewLogRow[] };
 
 type ProgressStore = GuestData & {
   loaded: boolean;
+  // Whose data this is: "guest", or a signed-in user's id (spec 7.3).
+  owner: string;
   hydrate: () => Promise<void>;
+  // Load another owner's local copy (on sign-in or sign-out).
+  switchOwner: (owner: string) => Promise<void>;
   recordGameStart: (game: Omit<GameRow, "endedAt" | "result">) => void;
   recordGameEnd: (gameId: string, result: NonNullable<GameRow["result"]>, at?: Date) => void;
   appendEvents: (gameId: string, events: GameEvent[], at?: Date) => ReviewLogRow[];
@@ -79,38 +84,61 @@ export function rowsFor(
   });
 }
 
+export const storageKeyFor = (owner: string): StorageKey =>
+  owner === "guest" ? "guest" : `user:${owner}`;
+
 let saving: Promise<unknown> = Promise.resolve();
-function persist(data: GuestData) {
-  saving = saving.then(() => write("guest", data));
+function persist(owner: string, data: GuestData) {
+  saving = saving.then(() => write(storageKeyFor(owner), data));
+}
+
+// Signed in, every new row also goes to the outbox for Supabase (spec 7.3).
+function sync(owner: string, ops: Op[]) {
+  if (owner !== "guest") useSyncStore.getState().enqueue(ops);
 }
 
 export const useProgressStore = create<ProgressStore>((set, get) => ({
   games: [],
   reviewLog: [],
   loaded: false,
+  owner: "guest",
+
+  async switchOwner(owner) {
+    // Already this owner's data (loaded, or loading at app start): nothing to do.
+    if (owner === get().owner) return;
+    set({ owner, games: [], reviewLog: [], loaded: false });
+    await get().hydrate();
+  },
 
   async hydrate() {
-    const saved = await read<Partial<GuestData>>("guest");
-    // Anything recorded before the saved data arrived is kept, after it.
+    const owner = get().owner;
+    const saved = await read<Partial<GuestData>>(storageKeyFor(owner));
+    if (get().owner !== owner) return; // switched again while loading
+    // Anything recorded before the saved data arrived is kept, after it. Rows are
+    // matched by id, so loading twice never duplicates them.
     set((s) => ({
       loaded: true,
-      games: [...(Array.isArray(saved?.games) ? saved.games : []), ...s.games],
-      reviewLog: [...(Array.isArray(saved?.reviewLog) ? saved.reviewLog : []), ...s.reviewLog],
+      games: unique([...(Array.isArray(saved?.games) ? saved.games : []), ...s.games]),
+      reviewLog: unique([
+        ...(Array.isArray(saved?.reviewLog) ? saved.reviewLog : []),
+        ...s.reviewLog,
+      ]),
     }));
   },
 
   recordGameStart(game) {
     set((s) => ({ games: [...s.games.filter((g) => g.id !== game.id), game] }));
-    persist(snapshot(get()));
+    persist(get().owner, snapshot(get()));
+    sync(get().owner, [{ kind: "game", row: game }]);
   },
 
   recordGameEnd(gameId, result, at = new Date()) {
-    set((s) => ({
-      games: s.games.map((g) =>
-        g.id === gameId && !g.result ? { ...g, endedAt: at.toISOString(), result } : g,
-      ),
-    }));
-    persist(snapshot(get()));
+    const before = get().games.find((g) => g.id === gameId);
+    if (!before || before.result) return; // a row is closed only once
+    const after: GameRow = { ...before, endedAt: at.toISOString(), result };
+    set((s) => ({ games: s.games.map((g) => (g.id === gameId ? after : g)) }));
+    persist(get().owner, snapshot(get()));
+    sync(get().owner, [{ kind: "game", row: after }]);
   },
 
   appendEvents(gameId, events, at = new Date()) {
@@ -118,13 +146,24 @@ export const useProgressStore = create<ProgressStore>((set, get) => ({
     if (rows.length) {
       // Append only: rows are never edited or removed.
       set((s) => ({ reviewLog: [...s.reviewLog, ...rows] }));
-      persist(snapshot(get()));
+      persist(get().owner, snapshot(get()));
+      sync(
+        get().owner,
+        rows.map((row): Op => ({ kind: "review", row })),
+      );
     }
     return rows;
   },
 }));
 
 const snapshot = ({ games, reviewLog }: GuestData): GuestData => ({ games, reviewLog });
+
+// The last version of each row by id, in first-seen order.
+function unique<T extends { id: string }>(rows: T[]): T[] {
+  const byId = new Map<string, T>();
+  for (const row of rows) byId.set(row.id, row);
+  return [...byId.values()];
+}
 
 export function progressSaved(): Promise<unknown> {
   return saving;

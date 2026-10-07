@@ -11,6 +11,7 @@ import {
   type Level,
 } from "../engine/index.ts";
 import { read, remove, write } from "../services/storage.ts";
+import { useSyncStore } from "../services/sync.ts";
 import { useProgressStore } from "./progressStore.ts";
 
 export type SavedRound = { contentVersion: number; gameId: string; state: GameState };
@@ -100,7 +101,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const progress = useProgressStore.getState();
     progress.appendEvents(gameId, events);
     const over = events.find((e) => e.type === "gameOver");
-    if (over?.type === "gameOver") progress.recordGameEnd(gameId, over.result);
+    if (over?.type === "gameOver") {
+      progress.recordGameEnd(gameId, over.result);
+      void useSyncStore.getState().flush(); // spec 7.3: flush on each round end
+    }
     set({ game: state, lastAction: action, lastEvents: events });
     persist(state, gameId);
     return events;
@@ -108,7 +112,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   quit() {
     const { game, gameId } = get();
-    if (inProgress(game) && gameId) useProgressStore.getState().recordGameEnd(gameId, "abandoned");
+    if (inProgress(game) && gameId) {
+      useProgressStore.getState().recordGameEnd(gameId, "abandoned");
+      void useSyncStore.getState().flush();
+    }
     set({ game: null, gameId: null, lastEvents: [] });
     persist(null, null);
   },
