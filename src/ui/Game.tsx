@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { useSearchParams } from "react-router";
 import { content } from "../content/index.ts";
-import { questionByKey, type GameState, type Level } from "../engine/index.ts";
+import { questionByKey, type Fill, type GameState, type Level } from "../engine/index.ts";
 import { useGameStore } from "../store/gameStore.ts";
 import { Face } from "./Face.tsx";
 import { Board } from "./game/Board.tsx";
@@ -11,6 +11,7 @@ import { FeedbackText } from "./game/FeedbackText.tsx";
 import { GuessConfirm } from "./game/GuessConfirm.tsx";
 import { QuestionPicker } from "./game/QuestionPicker.tsx";
 import { Sheet } from "./game/Sheet.tsx";
+import { TileBuilder } from "./game/TileBuilder.tsx";
 import { TopBar } from "./game/TopBar.tsx";
 
 const byId = new Map(content.characters.map((c) => [c.id, c]));
@@ -59,6 +60,7 @@ export function Game() {
   const { summary, body, actions } = sheetFor(game, {
     guessing,
     ask: (q) => dispatch({ type: "ASK", templateId: q.templateId, fill: q.fill }),
+    askTiles: (templateId, fill) => dispatch({ type: "ASK", templateId, fill }),
     answer: (value, hintShown) => dispatch({ type: "ANSWER", value, hintShown }),
     next: () => dispatch({ type: "END_TURN" }),
     startGuess: () => {
@@ -114,6 +116,7 @@ export function Game() {
 type Handlers = {
   guessing: boolean;
   ask: (q: NonNullable<ReturnType<typeof questionByKey>>) => void;
+  askTiles: (templateId: string, fill: Fill) => void;
   answer: (value: boolean, hintShown: boolean) => void;
   next: () => void;
   startGuess: () => void;
@@ -153,7 +156,11 @@ function sheetFor(
         body: (
           <div className="flex flex-col gap-2 pt-1">
             <FeedbackText feedback={game.lastFeedback} />
-            <QuestionPicker history={game.history} onAsk={h.ask} />
+            {game.level === 1 ? (
+              <QuestionPicker history={game.history} onAsk={h.ask} />
+            ) : (
+              <TileBuilder key={game.turn} onAsk={h.askTiles} />
+            )}
           </div>
         ),
         actions: (
