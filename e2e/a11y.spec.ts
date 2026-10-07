@@ -41,8 +41,10 @@ test.describe("touch targets are at least 44 × 44 px", () => {
   test("Home, Progress and the game at both levels", async ({ page }) => {
     await page.goto("/");
     expect(await smallTargets(page)).toEqual([]);
-    await page.goto("/progress");
-    expect(await smallTargets(page)).toEqual([]);
+    for (const path of ["/progress", "/settings", "/privacy"]) {
+      await page.goto(path);
+      expect(await smallTargets(page), path).toEqual([]);
+    }
     await page.goto("/play?seed=5");
     await expect(page.getByRole("list", { name: "Questions to ask" })).toBeVisible();
     expect(await smallTargets(page)).toEqual([]);
