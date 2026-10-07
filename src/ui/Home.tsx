@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import type { Level } from "../engine/index.ts";
+import { useAuthStore } from "../store/authStore.ts";
 import { useGameStore } from "../store/gameStore.ts";
 
 const levelKey = "chie.level";
@@ -22,6 +23,7 @@ const levels: { level: Level; title: string; detail: string }[] = [
 export function Home() {
   const navigate = useNavigate();
   const { status, game, start } = useGameStore();
+  const auth = useAuthStore();
   const [level, setLevel] = useState<Level>(savedLevel);
   const saved = status === "ready" && !!game && game.phase !== "over" && game.phase !== "setup";
 
@@ -43,13 +45,21 @@ export function Home() {
       <header className="flex items-baseline justify-between pt-2">
         <h1 className="text-4xl font-bold">Chi è?</h1>
         <p className="text-sm text-stone-600">
-          Guest ·{" "}
-          <Link
-            to="/settings"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center text-blue-700 underline"
-          >
-            Sign in
-          </Link>
+          {auth.status === "signedIn" ? (
+            <Link to="/settings" className="inline-flex min-h-11 items-center underline">
+              {auth.email}
+            </Link>
+          ) : (
+            <>
+              Guest ·{" "}
+              <Link
+                to="/settings"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-blue-700 underline"
+              >
+                Sign in
+              </Link>
+            </>
+          )}
         </p>
       </header>
 

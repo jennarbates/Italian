@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router";
 import "./index.css";
 import { router } from "./routes.tsx";
 import { initErrors } from "./services/errors.ts";
+import { useAuthStore } from "./store/authStore.ts";
 import { useGameStore } from "./store/gameStore.ts";
 import { useProgressStore } from "./store/progressStore.ts";
 
@@ -12,6 +13,7 @@ import { useProgressStore } from "./store/progressStore.ts";
 const reporting = initErrors();
 
 // Load saved progress and resume a saved round, if any, while the first screen renders.
+void useAuthStore.getState().init();
 void useProgressStore.getState().hydrate();
 void useGameStore.getState().hydrate();
 
