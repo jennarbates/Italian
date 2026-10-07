@@ -3,6 +3,7 @@ dist
 coverage
 playwright-report
 test-results
+.wrangler
 *.local
 .env
 .env.*

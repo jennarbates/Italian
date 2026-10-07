@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | v0.4 draft (2026-10-06). Becomes `v1` after the review in section 10.1 |
+| Status | v0.5 draft (2026-10-06). Becomes `v1` after the review in section 10.1 |
 | Product name | **Chi è?** ("Who is it?"). Never use "Guess Who" or "Indovina chi?" in public branding (Hasbro trademarks) |
 | Audience for this doc | Whoever builds, reviews, or tests the MVP |
 
@@ -541,7 +541,7 @@ Supabase (Postgres + Auth) with Row Level Security. No custom server code in the
 |---|---|---|
 | Local | Supabase CLI in Docker; catches sign-in emails in a local inbox | Development, Vitest sync tests, Playwright, CI |
 | Staging | Free cloud project | Pull request preview deploys |
-| Production | Free cloud project, upgraded to Pro at launch | `main` deploys at `chie.1412labs.com` |
+| Production | Free cloud project, upgraded to Pro at launch | `main` deploys at `chie.parlaplay.games` |
 
 That uses both free cloud projects. Schema changes are SQL files in `supabase/migrations/`, applied locally, then to staging, then to production with the CLI, before merging any code that needs them. The app only ever holds the public key (called the publishable key in newer Supabase projects, the anon key in older ones); the service role or secret key is never in the app or the repo.
 
@@ -671,7 +671,7 @@ The `anon` role has no policies, so it can read and write nothing.
 ### 7.3 Auth and sync rules
 
 - Sign-in: a 6-digit code sent by email, typed into the same tab; Google sign-in is future work. There is no magic link, because on phones the email often opens in another app or browser, which would sign the user in somewhere without their guest data. The app calls `signInWithOtp` to send the code and `verifyOtp` (type `email`) to check it. The Supabase email template shows `{{ .Token }}` and no link. The sheet offers "Resend code" after Supabase's cooldown.
-- Sending email: Supabase's built-in sender is for testing only (about 2 emails an hour, delivered only to the project team), so production sends through **AWS SES** set as Supabase's custom SMTP, from the domain `chie.1412labs.com`. Setup: verify the domain in SES (SPF, DKIM and DMARC records), then request production access to leave the SES sandbox. Approval can take a day or more, so it is requested on day 2. **Fallback:** if SES access is slow or refused, Resend is used as the custom SMTP instead, with the same domain. Staging uses the built-in sender, which is enough for the team.
+- Sending email: Supabase's built-in sender is for testing only (about 2 emails an hour, delivered only to the project team), so production sends through **AWS SES** set as Supabase's custom SMTP, from the domain `chie.parlaplay.games`. Setup: verify the domain in SES (SPF, DKIM and DMARC records), then request production access to leave the SES sandbox. Approval can take a day or more, so it is requested on day 2. **Fallback:** if SES access is slow or refused, Resend is used as the custom SMTP instead, with the same domain. Staging uses the built-in sender, which is enough for the team.
 - Guest: data lives in IndexedDB under the key `guest` and is never uploaded unless the guest signs in. The app calls `navigator.storage.persist()` to ask the browser to keep it. Safari on iOS can still delete a site's storage after 7 days of Safari use without a visit, so after each finished guest round the app shows a quiet "Sign in to keep your progress safe" nudge, and the privacy note says so. The app needs a connection to load (online only in the MVP, see 11.1); once loaded, a round keeps working if the connection drops.
 - Guest → account (any sign-in while guest data exists on this device): ask "Save your progress to this account?" (default Yes).
   - Yes: rewrite `user_id` on local rows, upload `games` first, then `review_log` with `insert ... on conflict (id) do nothing`.
@@ -755,7 +755,7 @@ docs/spec.md   this file
 
 **Repo and delivery.** Code lives on GitHub. GitHub Actions runs typecheck, lint, Vitest and Playwright on every push and pull request; `main` is protected and merges need green CI. CI starts a local Supabase first (`supabase start`, the Supabase CLI command that launches the local stack in Docker) so the sync tests and Playwright sign-in test have a backend. Cloudflare's GitHub integration builds every pull request to its own preview URL, built with the staging Supabase URL and key; merging to `main` deploys production with the production URL and key.
 
-**Error reporting.** Sentry browser SDK, errors only: no session replay, no performance tracing, `sendDefaultPii: false`, and the user's email is never sent. A `beforeSend` and `beforeBreadcrumb` hook strips query strings and hashes from every URL, and the Sentry project setting that prevents storing IP addresses is turned on. Each release is tagged with its git commit.
+**Error reporting.** Sentry browser SDK, errors only: no session replay, no performance tracing, no session tracking, every `dataCollection` category off (Sentry 11's replacement for `sendDefaultPii: false`), and the user's email is never sent. A `beforeSend` and `beforeBreadcrumb` hook strips query strings and hashes from every URL, and the Sentry project setting that prevents storing IP addresses is turned on. Each release is tagged with its git commit.
 
 **Accessibility.** Target WCAG 2.2 AA.
 - Every card is a button with an accessible name listing the name and attributes in Italian (e.g. "Giulia: capelli castani lunghi, occhi verdi, occhiali"). This gives screen reader users the same information the picture gives everyone else, and doubles as reading practice.
@@ -781,7 +781,7 @@ docs/spec.md   this file
 
 **Cheating.** The CPU's secret is in the page's memory, so a determined player can find it with developer tools. Accepted: single player, nothing at stake.
 
-**Hosting.** Cloudflare, deploying the Vite build as Workers static assets (Cloudflare's recommended path for new projects; requests to static assets are free and unlimited, and commercial use is allowed), served at `chie.1412labs.com`. The Wrangler config sets `assets.not_found_handling = "single-page-application"` so deep links such as `/play` load the app instead of a 404. Supabase free tier for the backend. Chosen over Vercel because Vercel's free plan is non-commercial only and this app may make money later. Chosen over GitHub Pages for the same reason (its terms forbid running an online business or SaaS on it), and because Pages has no preview per pull request and no single-page-app fallback. Supabase's free tier pauses a project after 7 days without activity and allows 2 active free projects (staging and production use both). Accepted until launch: guests are unaffected and signed-in sync waits in the outbox until the project is resumed. Upgrade production to Supabase Pro ($25/month) at public launch; staging stays free and may pause.
+**Hosting.** Cloudflare, deploying the Vite build as Workers static assets (Cloudflare's recommended path for new projects; requests to static assets are free and unlimited, and commercial use is allowed), served at `chie.parlaplay.games`. The Wrangler config sets `assets.not_found_handling = "single-page-application"` so deep links such as `/play` load the app instead of a 404. Supabase free tier for the backend. Chosen over Vercel because Vercel's free plan is non-commercial only and this app may make money later. Chosen over GitHub Pages for the same reason (its terms forbid running an online business or SaaS on it), and because Pages has no preview per pull request and no single-page-app fallback. Supabase's free tier pauses a project after 7 days without activity and allows 2 active free projects (staging and production use both). Accepted until launch: guests are unaffected and signed-in sync waits in the outbox until the project is resumed. Upgrade production to Supabase Pro ($25/month) at public launch; staging stays free and may pause.
 
 ---
 
@@ -837,7 +837,7 @@ Full time on weekdays, starting Wednesday, October 7, 2026, the target launch is
 
 | Day | Date | Deliverable | Done when |
 |---|---|---|---|
-| 1 | Wed Oct 7 | Spec review: section 3, the messages in 3.7, the Profilo vocabulary check and the brown-eyes default to the Italian speaker; sections 4 and 7 to a developer; paper-trace one game. Add DNS for `chie.1412labs.com` | Reviews requested; trace gaps logged; subdomain resolves |
+| 1 | Wed Oct 7 | Spec review: section 3, the messages in 3.7, the Profilo vocabulary check and the brown-eyes default to the Italian speaker; sections 4 and 7 to a developer; paper-trace one game. Add DNS for `chie.parlaplay.games` | Reviews requested; trace gaps logged; subdomain resolves |
 | 2 | Thu Oct 8 | Repo scaffold: pnpm, Vite, React Router, Tailwind, ESLint, Prettier, Vitest, Playwright, GitHub Actions (with local Supabase), Cloudflare previews and SPA fallback, Sentry with URL scrubbing. Create the staging and production Supabase projects. Verify the domain in SES and request production access; open a Resend account as the fallback | CI green on an empty app; a pull request gets a preview URL pointing at staging |
 | 3 | Fri Oct 9 | Character generator, content JSON, messages, placeholder SVG layers (high hat, large eyes); fold in review feedback | Content tests pass; all 24 characters render; spec tagged `v1` |
 | 4-5 | Mon Oct 12 to Tue Oct 13 | Engine: types, `step`, templates, grammar, smart CPU | All engine tests pass, coverage at 90% |
@@ -850,7 +850,7 @@ Full time on weekdays, starting Wednesday, October 7, 2026, the target launch is
 | 12 | Thu Oct 22 | Playtests with 3 or more A1 learners | Findings logged and triaged |
 | 13-15 | Fri Oct 23, Mon Oct 26, Tue Oct 27 | Fix playtest findings | Every must-fix finding fixed |
 | 16 | Wed Oct 28 | Production setup (Supabase Pro, final SES or Resend check), README, DoD sweep | Every 10.3 box checked |
-| 17 | Thu Oct 29 | Launch | Production URL live at `chie.1412labs.com` |
+| 17 | Thu Oct 29 | Launch | Production URL live at `chie.parlaplay.games` |
 
 ---
 
@@ -909,7 +909,7 @@ Also queued: final character art, colorblind mode, Easy CPU setting, championshi
 | D27 | Long-press detail view with no text; colorblind mode with labels is future work | Small details become visible without giving away the Italian |
 | D28 | Account deletion by email request at launch | Meets data-protection duties with no code; in-app deletion later |
 | D29 | Hosting stays on Cloudflare, not GitHub Pages | Pages forbids running a business or SaaS, has no previews and no SPA fallback |
-| D30 | App and email on `chie.1412labs.com` | The 1412labs.com DNS is already set up, so SES verification can start right away |
+| D30 | App and email on `chie.parlaplay.games` | A studio domain bought for this and future language games, each on its own subdomain; its DNS is on Cloudflare, so the Worker custom domain and the SES records live in one place |
 | D31 | Keep the server `cards` table, guarded by `log_count` | Ready for server features like due-word emails; stale devices can't overwrite newer state |
 | D32 | No daily new-card limit in the MVP | Gameplay doesn't follow the schedule yet, so a limit would only discard data |
 | D33 | "Quit round" button; starting a new round abandons the saved one | Every round ends in a recorded result |
@@ -937,3 +937,4 @@ Also queued: final character art, colorblind mode, Easy CPU setting, championshi
 - 2026-10-06: v0.2. No audio; online only; AWS SES for magic links; local plus one production Supabase; Tailwind and bottom sheet; Sentry errors only; character generator; permanent content ids; stack, folders, CI and deploy flow; calendar milestones to October 22; playtest plan.
 - 2026-10-06: v0.3. Vocabulary checked against the Profilo with a `level` field per word; adjective agreement errors at Level 2 become soft slips; `slip` rows in the review log; references section.
 - 2026-10-06: v0.4. Spec review fixes. Both `castani` and `marroni` accepted for eyes; high hats, large eyes and a long-press detail view; 6-digit email code replaces the magic link; Resend as SES fallback; staging Supabase for previews; `chie.1412labs.com`; account deletion by email and a privacy note; Quit round; games row at START and ordered outbox flush; unsynced sign-out warning; guest storage persistence and nudge; `cards` stale-write guard and profile trigger; no daily new-card limit; feedback message catalogue (3.7); `SlotError`, `ShapeError` and `Feedback` types; slot-based tile builder; answers lowercase the first letter; `ratedThisTurn` reset; released-ids snapshot; SPA fallback; Sentry URL scrubbing; board fit measured after browser toolbars; launch moved to October 29.
+- 2026-10-06: v0.5. App and email domain is `chie.parlaplay.games` (D30); `1412labs.com` was not ours.

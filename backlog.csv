@@ -38,12 +38,12 @@ Acceptance criteria:
 - Each knows the session is about 3 rounds on their own phone
 
 Spec: 10.2, 10.4",At least 3 learners confirmed for Oct 22 | Each knows the session is about 3 rounds on their own phone,"Spec sign-off,task,waits-on-others"
-CHI-010,Add DNS for chie.1412labs.com,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 1,Wed Oct 7,1,,,"7.3, 10.4, D30","Create the subdomain now so SES domain verification can start on day 2.
+CHI-010,Buy parlaplay.games on Cloudflare,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 1,Wed Oct 7,1,,,"7.3, 10.4, D30","Buy parlaplay.games through Cloudflare so its DNS is there from the start; the first production deploy creates the chie record, and SES verification can start on day 2.
 
 Acceptance criteria:
-- chie.1412labs.com resolves
+- parlaplay.games registered, with its zone active on Cloudflare
 
-Spec: 7.3, 10.4, D30",chie.1412labs.com resolves,"Repo, CI and infra,chore"
+Spec: 7.3, 10.4, D30",parlaplay.games registered, with its zone active on Cloudflare,"Repo, CI and infra,chore"
 CHI-011,Scaffold the app,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,,,"8.1, 9","pnpm, Vite, React, TypeScript strict, React Router, Zustand, Tailwind, ESLint, Prettier, and the folder structure from section 9.
 
 Acceptance criteria:
@@ -71,10 +71,10 @@ CHI-014,Cloudflare deploys and PR previews,To do,"Repo, CI and infra",chore,Spri
 
 Acceptance criteria:
 - A PR gets its own preview URL pointing at staging Supabase
-- main deploys to chie.1412labs.com with production keys
+- main deploys to chie.parlaplay.games with production keys
 - assets.not_found_handling set to single-page-application, so /play loads directly
 
-Spec: 9, D11, D29","A PR gets its own preview URL pointing at staging Supabase | main deploys to chie.1412labs.com with production keys | assets.not_found_handling set to single-page-application, so /play loads directly","Repo, CI and infra,chore"
+Spec: 9, D11, D29","A PR gets its own preview URL pointing at staging Supabase | main deploys to chie.parlaplay.games with production keys | assets.not_found_handling set to single-page-application, so /play loads directly","Repo, CI and infra,chore"
 CHI-015,Local Supabase for dev and tests,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,,,"7, D16","Supabase CLI in Docker with the local inbox for sign-in emails.
 
 Acceptance criteria:
@@ -93,20 +93,20 @@ Spec: 7, D16, D17",Staging and production projects exist | Env vars wired per en
 CHI-017,"Sentry, errors only, with URL scrubbing",To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,2,CHI-011,,"9, D19","Sentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.
 
 Acceptance criteria:
-- sendDefaultPii is false; replay and tracing off
+- No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off
 - beforeSend and beforeBreadcrumb strip query strings and hashes
 - IP address storage turned off in the Sentry project
 - Releases tagged with the git commit
 
-Spec: 9, D19",sendDefaultPii is false; replay and tracing off | beforeSend and beforeBreadcrumb strip query strings and hashes | IP address storage turned off in the Sentry project | Releases tagged with the git commit,"Repo, CI and infra,chore"
+Spec: 9, D19",No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off | beforeSend and beforeBreadcrumb strip query strings and hashes | IP address storage turned off in the Sentry project | Releases tagged with the git commit,"Repo, CI and infra,chore"
 CHI-018,Verify domain in AWS SES and request production access,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,CHI-010,yes,"7.3, D15","Approval can take a day or more, so it starts on day 2.
 
 Acceptance criteria:
-- SPF, DKIM and DMARC records added for chie.1412labs.com
+- SPF, DKIM and DMARC records added for chie.parlaplay.games
 - Domain verified in SES
 - Production access (leave sandbox) requested
 
-Spec: 7.3, D15","SPF, DKIM and DMARC records added for chie.1412labs.com | Domain verified in SES | Production access (leave sandbox) requested","Repo, CI and infra,chore,waits-on-others"
+Spec: 7.3, D15","SPF, DKIM and DMARC records added for chie.parlaplay.games | Domain verified in SES | Production access (leave sandbox) requested","Repo, CI and infra,chore,waits-on-others"
 CHI-019,Open a Resend account as the email fallback,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,CHI-010,,"7.3, D15","Same domain, ready to swap in as Supabase custom SMTP if SES is slow or refused.
 
 Acceptance criteria:
@@ -666,8 +666,8 @@ Spec: 10.3",No open TBD in the spec | Every 10.3 box checked,"Launch,task"
 CHI-115,Launch,To do,Launch,task,Sprint 4: Fix and launch,Day 17,Thu Oct 29,1,"CHI-110, CHI-111, CHI-112, CHI-113, CHI-114",,"1, 3.6, 10.4","Merge to main, update released-ids.json, confirm the live URL plays on both phones.
 
 Acceptance criteria:
-- chie.1412labs.com live
+- chie.parlaplay.games live
 - released-ids.json updated for this release
 - Full round played on iPhone and Android against production
 
-Spec: 1, 3.6, 10.4",chie.1412labs.com live | released-ids.json updated for this release | Full round played on iPhone and Android against production,"Launch,task"
+Spec: 1, 3.6, 10.4",chie.parlaplay.games live | released-ids.json updated for this release | Full round played on iPhone and Android against production,"Launch,task"

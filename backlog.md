@@ -11,7 +11,7 @@ Built from `spec.md` v0.4. Every deliverable in the spec is a card with acceptan
 | Sprint 1: Foundations | Oct 7 to Oct 9 | 43 | Spec reviewed and tagged v1, repo and CI live with previews, all 24 characters render from validated content. |
 | Sprint 2: Playable round | Oct 12 to Oct 16 | 71 | Engine and CPU fully tested; a full round plays to a win and a loss on a real phone at both levels. |
 | Sprint 3: Progress, sync, playtest | Oct 19 to Oct 23 | 53 | Learning data, sign-in and sync work end to end; accessibility pass done; 3+ learners have playtested. |
-| Sprint 4: Fix and launch | Oct 26 to Oct 29 | 12 | Must-fix playtest findings closed, every definition-of-done box checked, live at chie.1412labs.com. |
+| Sprint 4: Fix and launch | Oct 26 to Oct 29 | 12 | Must-fix playtest findings closed, every definition-of-done box checked, live at chie.parlaplay.games. |
 
 ## Epics
 
@@ -73,13 +73,13 @@ Line up at least three A1 learners now, since playtests depend on other people's
 - [ ] At least 3 learners confirmed for Oct 22
 - [ ] Each knows the session is about 3 rounds on their own phone
 
-#### CHI-010 Add DNS for chie.1412labs.com
+#### CHI-010 Buy parlaplay.games on Cloudflare
 
 Repo, CI and infra · chore · 1 pt · spec 7.3, 10.4, D30
 
-Create the subdomain now so SES domain verification can start on day 2.
+Buy parlaplay.games through Cloudflare so its DNS is there from the start; the first production deploy creates the chie record, and SES verification can start on day 2.
 
-- [ ] chie.1412labs.com resolves
+- [ ] parlaplay.games registered, with its zone active on Cloudflare
 
 ### Day 2, Thu Oct 8 (17 pts)
 
@@ -119,7 +119,7 @@ Repo, CI and infra · chore · 3 pts · spec 9, D11, D29 · depends on CHI-010, 
 Workers static assets, a preview URL per pull request built with staging keys, main deploys production.
 
 - [ ] A PR gets its own preview URL pointing at staging Supabase
-- [ ] main deploys to chie.1412labs.com with production keys
+- [ ] main deploys to chie.parlaplay.games with production keys
 - [ ] assets.not_found_handling set to single-page-application, so /play loads directly
 
 #### CHI-015 Local Supabase for dev and tests
@@ -147,7 +147,7 @@ Repo, CI and infra · chore · 2 pts · spec 9, D19 · depends on CHI-011
 
 Sentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.
 
-- [ ] sendDefaultPii is false; replay and tracing off
+- [ ] No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off
 - [ ] beforeSend and beforeBreadcrumb strip query strings and hashes
 - [ ] IP address storage turned off in the Sentry project
 - [ ] Releases tagged with the git commit
@@ -158,7 +158,7 @@ Repo, CI and infra · chore · 1 pt · spec 7.3, D15 · depends on CHI-010
 
 Approval can take a day or more, so it starts on day 2.
 
-- [ ] SPF, DKIM and DMARC records added for chie.1412labs.com
+- [ ] SPF, DKIM and DMARC records added for chie.parlaplay.games
 - [ ] Domain verified in SES
 - [ ] Production access (leave sandbox) requested
 
@@ -847,7 +847,7 @@ Timebox for the highest-impact must-fix findings.
 
 ## Sprint 4: Fix and launch (Oct 26 to Oct 29)
 
-Goal: Must-fix playtest findings closed, every definition-of-done box checked, live at chie.1412labs.com.
+Goal: Must-fix playtest findings closed, every definition-of-done box checked, live at chie.parlaplay.games.
 
 ### Days 14 to 15, Mon Oct 26 to Tue Oct 27 (5 pts)
 
@@ -915,7 +915,7 @@ Launch · task · 1 pt · spec 1, 3.6, 10.4 · depends on CHI-110, CHI-111, CHI-
 
 Merge to main, update released-ids.json, confirm the live URL plays on both phones.
 
-- [ ] chie.1412labs.com live
+- [ ] chie.parlaplay.games live
 - [ ] released-ids.json updated for this release
 - [ ] Full round played on iPhone and Android against production
 
