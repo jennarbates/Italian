@@ -160,7 +160,7 @@ const Character = z.object({
 - 12 men, 12 women.
 - Every one of the 16 questions gets "yes" from at least 3 and at most 15 of the 24 characters. (`TBD:` tune after playtesting.)
 
-**How characters are made.** `scripts/generate-characters.ts` takes a seed and picks 24 attribute combinations that pass every invariant above, retrying until they do. It runs once by hand, not at build time. Its output is reviewed, given Italian names, and committed as `content/characters.json`. After release, characters change only by editing that file, and ids stay permanent (3.6).
+**How characters are made.** `scripts/generate-characters.ts` takes a seed and picks 24 attribute combinations that pass every invariant above, retrying until they do. It runs once by hand, not at build time. Its output is reviewed, given Italian names, and committed as `content/characters.json`. After release, characters change only by editing that file, and ids stay permanent (3.6). The MVP set is seed 5152: among seeds 1 to 20,000 it had the most natural spread (each hair color on 3 to 6 people, half long hair and half short for both men and women, 7 of 12 men bearded, 4 or 6 people on each skin layer). Ids are `c.` plus the lowercased name.
 
 ### 3.3 Lexicon
 
