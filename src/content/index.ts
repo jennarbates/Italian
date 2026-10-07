@@ -1,12 +1,12 @@
 // The game's content, typed. Every file is checked against its schema when the app
 // builds (scripts/content-check.ts), so the casts here are safe.
-import charactersJson from "./characters.json";
-import lexiconJson from "./lexicon.json";
-import messagesJson from "./messages.json";
-import releasedIdsJson from "./released-ids.json";
+import charactersJson from "./characters.json" with { type: "json" };
+import lexiconJson from "./lexicon.json" with { type: "json" };
+import messagesJson from "./messages.json" with { type: "json" };
+import releasedIdsJson from "./released-ids.json" with { type: "json" };
 import type { Character, LexiconEntry, Messages, Template } from "./schemas.ts";
-import templatesJson from "./templates.json";
-import versionJson from "./version.json";
+import templatesJson from "./templates.json" with { type: "json" };
+import versionJson from "./version.json" with { type: "json" };
 
 export type Content = {
   characters: Character[];
