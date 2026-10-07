@@ -12,13 +12,16 @@ const whoseTurn: Record<GameState["phase"], string> = {
 };
 
 // Spec 8.1: turn, whose turn, and the player's own secret card, always visible.
+// The card is small here, so clicking it opens the detail view to check it.
 export function TopBar({
   game,
   secret,
+  onZoom,
   menu,
 }: {
   game: GameState;
   secret: Character;
+  onZoom: () => void;
   menu?: React.ReactNode;
 }) {
   return (
@@ -36,11 +39,19 @@ export function TopBar({
             <br />
             <span className="font-medium text-stone-900">{secret.name}</span>
           </figcaption>
-          <Face
-            character={secret}
-            label={`Your card: ${secret.name}`}
-            className="h-11 rounded ring-1 ring-stone-300"
-          />
+          <button
+            type="button"
+            onClick={onZoom}
+            title="Zoom your card"
+            className="rounded hover:ring-2 hover:ring-stone-400 focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:outline-none"
+          >
+            <Face
+              character={secret}
+              label={`Your card: ${secret.name}`}
+              className="h-11 rounded ring-1 ring-stone-300"
+            />
+            <span className="sr-only">Zoom your card</span>
+          </button>
         </figure>
         {menu}
       </div>
