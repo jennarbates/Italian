@@ -76,7 +76,8 @@ test.describe("touch targets are at least 44 × 44 px", () => {
 
 test("each card's accessible name lists name and attributes in Italian", async ({ page }) => {
   await page.goto("/play?seed=1");
-  const cards = page.locator('ul[aria-label="Board"] button[aria-pressed]');
+  // A list on the phone, a grid on desktop (desktop spec DS 8.2).
+  const cards = page.locator('[aria-label="Board"] button[aria-pressed]');
   await expect(cards).toHaveCount(24);
   const names = await cards.evaluateAll((els) => els.map((e) => e.getAttribute("aria-label")));
   for (const n of names)
@@ -93,6 +94,9 @@ test.describe("keyboard only", () => {
     ({ browserName }) => browserName !== "chromium",
     "Tab order for buttons is a macOS setting in WebKit",
   );
+  // On desktop the board is one tab stop with arrow keys; desktop.spec.ts plays
+  // its own keyboard round with the shortcut keys (desktop spec DS 2.1).
+  test.skip(({ isMobile }) => !isMobile, "phone tab order; desktop.spec.ts covers desktop");
 
   // Press Tab until the focused element matches, proving it is reachable.
   async function tabTo(

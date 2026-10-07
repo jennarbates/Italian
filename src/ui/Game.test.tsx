@@ -17,6 +17,8 @@ test("loading shows a 24-card skeleton board", () => {
   expect(html).toContain('aria-busy="true"');
   expect(html).toContain('aria-label="Loading"');
   expect(html.match(/animate-pulse/g)).toHaveLength(24);
+  // The same column variables as the board: 4 × 6 here, where there is no matchMedia.
+  expect(html).toContain("--cols:4;--rows:6");
   expect(html).not.toContain('aria-label="Board"');
 });
 

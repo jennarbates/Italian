@@ -7,10 +7,21 @@ const privacyEmail = "privacy@parlaplay.games";
 // guest data, and how to get an account deleted.
 export function Privacy() {
   return (
-    <article className="flex flex-col gap-5 p-4 leading-relaxed">
+    // Desktop spec DS 9.5: one reading column at lg, larger, with a way back to
+    // Settings (DesktopNav has Home).
+    <article className="flex flex-col gap-5 p-4 leading-relaxed lg:mx-auto lg:max-w-prose lg:px-0 lg:py-10 lg:text-lg">
+      <Link
+        to="/settings"
+        className="hidden min-h-11 items-center self-start text-blue-700 underline lg:inline-flex"
+      >
+        <span aria-hidden="true">←&nbsp;</span>Back to Settings
+      </Link>
       <header className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Privacy</h1>
-        <Link to="/" className="inline-flex min-h-11 min-w-11 items-center text-blue-700 underline">
+        <h1 className="text-2xl font-semibold lg:text-4xl">Privacy</h1>
+        <Link
+          to="/"
+          className="inline-flex min-h-11 min-w-11 items-center text-blue-700 underline lg:hidden"
+        >
           Home
         </Link>
       </header>

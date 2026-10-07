@@ -42,7 +42,8 @@ function persist(game: GameState | null, gameId: string | null) {
   );
 }
 
-const inProgress = (game: GameState | null) =>
+// A round worth saving and resuming: Home's "Continue round" and DesktopNav's "Continue".
+export const inProgress = (game: GameState | null): game is GameState =>
   !!game && game.phase !== "over" && game.phase !== "setup";
 
 export function randomSeed(): number {

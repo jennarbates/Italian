@@ -59,7 +59,7 @@ At every step the mouse works too: clicking does exactly what tapping does on th
 
 | Situation | Rule |
 |---|---|
-| Window resized across 1024px mid-round | Layout swaps (Sheet and SidePanel, 4 × 6 and 6 × 4). Game state, flipped cards and a guess in progress are kept. TBD: verify a half-built Level 2 question survives; if not, lift TileBuilder state into `Game` (CHI-120) |
+| Window resized across 1024px mid-round | Layout swaps (Sheet and SidePanel, 4 × 6 and 6 × 4). Game state, flipped cards, a guess in progress, a half-built Level 2 question and a shown hint are kept: `Game` holds the TileBuilder draft and CpuQuestion's `hintShown`, because the sheet and the panel are different trees (CHI-120) |
 | Focused element unmounted by a resize | Focus moves to the board's roving card (DS 8.2) |
 | Window narrower than 1024px on a laptop | Phone layout, centred, exactly as today. No "too small" message |
 | Window shorter than 640px at 1024px or wider | Cards shrink to fit (the board formula uses height too). Below about 520px tall the panel body scrolls; the actions never leave view |
@@ -91,7 +91,7 @@ Two new in-memory types:
 // src/ui/progressStats.ts (pure; unit-tested)
 export type ProgressStats = {
   wordsSeen: number;        // distinct lexiconId in reviewLog
-  dueToday: number;         // words where isDue(replay(rows), endOfLocalDay(now))
+  dueToday: number;         // reviewed cards (word × direction) where isDue(card, endOfLocalDay(now))
   mistakesThisWeek: number; // rows with rating "again" or "slip" and localDay in the last 7 local days, today included
   roundsPlayed: number;     // games rows with endedAt set
 };
@@ -110,7 +110,7 @@ Example, for a learner who has played 3 rounds:
 
 **Invariants** (each checked by a unit test, not by hand):
 
-- `0 ≤ dueToday ≤ wordsSeen`.
+- `0 ≤ dueToday ≤` the number of reviewed cards `≤ 2 × wordsSeen` (each word has a card per direction).
 - `mistakesThisWeek` never counts a row older than 7 local days.
 - `progressStats` with empty data returns all zeros.
 - `dueToday` equals the number of rows the Due tab lists for the same `now`.
@@ -371,7 +371,8 @@ All use Tailwind `hover:`, which only applies on devices that can hover.
 | Card, while guessing | `ring-2 ring-blue-600`, `cursor-pointer` |
 | Primary button | `bg-stone-700` |
 | Secondary button | `bg-stone-300` |
-| Question row, tile | `bg-stone-100` |
+| Question row | `bg-stone-200` (rows are already `bg-stone-100`) |
+| Tile | `bg-stone-100` |
 | DesktopNav link | underline |
 
 ## DS 8. Keyboard
@@ -399,7 +400,7 @@ Shortcuts work at every size (a phone with a keyboard benefits too). The "Press 
 
 ### DS 8.2 Board focus model
 
-- The board is `role="grid"` with four (desktop) or six (phone) `role="row"` elements, each holding `role="gridcell"` cards. The rows follow `--cols`, so `Board` takes `cols` from `useIsDesktop()`.
+- At `lg` the board is `role="grid"` with four `role="row"` elements, each holding six `role="gridcell"` cards. The rows follow `--cols` (`boardShape()`). Below `lg` it stays the list it was, every card a tab stop, so the phone is unchanged (DD11) and its e2e tests pass without edits. The same goes for TileBuilder's roving tabindex per row: `lg` only.
 - **Roving tabindex**: exactly one card has `tabIndex=0` (the last focused, or the first card); the rest have `-1`. Tab enters and leaves the board in one stop.
 - The phone's focus-only "Zoom {name}" button stays as the screen-reader path to CardDetail. At `lg`, `i` does the same thing.
 - `b` and `g` move focus to the roving card.
@@ -666,3 +667,8 @@ Desktop work runs **before launch**, alongside the MVP's Sprints 2 and 3 (`spec.
 
 - 2026-10-07: v0.1. First draft.
 - 2026-10-07: v0.2. Restructured to the full spec format: success criteria, in/out table, desktop round walkthrough, edge cases, data model (`ProgressStats`), shortcuts contract with transition table, check order, invariants and traced example, tests by layer, milestones before launch (DD12), future work, references. Level 1 questions use `q` then arrows instead of number keys. Playwright desktop devices verified at 1280 × 720 and overridden to 1440 × 900.
+- 2026-10-07: CHI-120. DS 2.2 resize TBD resolved: a half-built Level 2 question did not survive the swap, so `Game` now holds the TileBuilder draft, and CpuQuestion's `hintShown` for the same reason.
+- 2026-10-07: CHI-121. DS 7.4: question rows hover to `bg-stone-200`, since they already rest at `bg-stone-100`.
+- 2026-10-07: CHI-123. DS 8.2: the ARIA grid and the roving tabindex (board and tile rows) are `lg` only; the phone keeps its list and tab order (DD11). ShortcutsDialog is `min(90vw, 32rem)`, since the menu item is on the phone too.
+- 2026-10-07: CHI-124. DS 9.1: the level picker keeps its "Level" legend (the diagram's "Choose your level" was a sketch). DS 9.4: new row text "Default level" / "The level Play starts at.", "Sign-in" (the account text as its description), "Privacy" / "What is stored, who handles it, and how to delete your account." with the link "Read the privacy note". The Home links on Settings and Privacy are hidden at `lg`.
+- 2026-10-07: CHI-125. DS 3: `dueToday` counts due cards (word × direction), not words, so it equals the Due list's "Due today (n)" as the last invariant asks; the first invariant, which assumed words, now bounds it by the reviewed cards. `localDay()` moved to `src/services/localDay.ts` so e2e tests can use it.

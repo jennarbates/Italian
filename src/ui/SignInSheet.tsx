@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useAuthStore } from "../store/authStore.ts";
+import { onBackdropClick } from "./dialog.ts";
 
 // Seconds before "Resend code" works. Supabase's default rate limit for sign-in
 // emails is 60 s; the local Supabase used in tests allows a lower value.
@@ -83,9 +84,12 @@ export function SignInSheet({ open, onClose }: { open: boolean; onClose: () => v
   return (
     <dialog
       ref={dialog}
+      onCancel={onClose}
       onClose={onClose}
+      onClick={onBackdropClick(onClose)}
       aria-labelledby="sign-in-title"
-      className="mx-auto mt-auto mb-0 w-full max-w-md rounded-t-2xl p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] backdrop:bg-black/50"
+      // A bottom sheet on the phone; a centred modal at lg (desktop spec DS 9.6).
+      className="mx-auto mt-auto mb-0 w-full max-w-md rounded-t-2xl p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] backdrop:bg-black/50 lg:m-auto lg:w-[28rem] lg:rounded-2xl lg:pb-5"
     >
       <div className="flex items-center justify-between">
         <h2 id="sign-in-title" className="text-xl font-semibold">

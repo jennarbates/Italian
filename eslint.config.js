@@ -44,5 +44,31 @@ export default tseslint.config(
       "no-restricted-properties": ["error", { object: "Math", property: "random" }],
     },
   },
+  // The shortcut logic is pure too (desktop spec DS 4.6): only type imports, and
+  // no DOM, timers or clock.
+  {
+    files: ["src/ui/game/shortcuts.ts"],
+    languageOptions: { globals: {} },
+    rules: {
+      "@typescript-eslint/no-restricted-imports": [
+        "error",
+        {
+          patterns: [{ group: ["*"], allowTypeImports: true, message: "Only type imports here." }],
+        },
+      ],
+      "no-restricted-globals": [
+        "error",
+        "window",
+        "document",
+        "navigator",
+        "localStorage",
+        "Date",
+        "performance",
+        "setTimeout",
+        "setInterval",
+        "requestAnimationFrame",
+      ],
+    },
+  },
   prettier,
 );

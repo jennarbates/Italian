@@ -3,6 +3,7 @@
 // (spec 7.3). Sync for signed-in users builds on this in Sprint 3.
 import { create } from "zustand";
 import type { Direction, GameEvent, Level, SlotError } from "../engine/index.ts";
+import { localDay } from "../services/localDay.ts";
 import { read, write, type StorageKey } from "../services/storage.ts";
 import { useSyncStore, type Op } from "../services/sync.ts";
 
@@ -44,11 +45,8 @@ type ProgressStore = GuestData & {
   appendEvents: (gameId: string, events: GameEvent[], at?: Date) => ReviewLogRow[];
 };
 
-// "2026-10-06" in the device's own timezone (not UTC).
-export function localDay(at: Date): string {
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${at.getFullYear()}-${pad(at.getMonth() + 1)}-${pad(at.getDate())}`;
-}
+// In its own module so code that runs outside Vite (e2e tests) can use it too.
+export { localDay };
 
 // Rating and slip events become log rows; every other event is not learning data.
 export function rowsFor(
