@@ -98,14 +98,13 @@ test("a whole round: ask, answer the CPU right and wrong, guess with confirm", a
   await page.getByRole("button", { name: `Guess ${target}`, exact: true }).click();
   await expect(dialog).not.toContainText("flipped down");
   await dialog.getByRole("button", { name: "Guess", exact: true }).click();
-  await expect(sheet(page)).toContainText("You won!");
-  await expect(sheet(page)).toContainText(`You found ${target}.`);
-  await expect(page.locator("header")).toContainText("Round over");
+  await expect(page.getByRole("heading", { name: "You won!" })).toBeVisible();
+  await expect(page.getByText(`You found ${target} in 2 turns.`)).toBeVisible();
 
   // Play again starts a new round.
   await page.getByRole("button", { name: "Play again" }).click();
   await expect(page.locator("header")).toContainText("Turn 1");
-  await expect(picker(page).getByRole("button", { disabled: true })).toHaveCount(0);
+  await expect(picker(page).locator("button:disabled")).toHaveCount(0);
 });
 
 test("Cancel guess leaves guessing mode without guessing", async ({ page }) => {
@@ -123,8 +122,10 @@ test("a wrong guess loses", async ({ page }) => {
   await page.getByRole("button", { name: "Indovina" }).click();
   await page.getByRole("button", { name: `Guess ${wrong.name}`, exact: true }).click();
   await page.getByRole("dialog").getByRole("button", { name: "Guess", exact: true }).click();
-  await expect(sheet(page)).toContainText("You lost.");
-  await expect(sheet(page)).toContainText(`The computer's card was ${nameOf(game.cpuSecret)}.`);
+  await expect(page.getByRole("heading", { name: "You lost." })).toBeVisible();
+  await expect(
+    page.getByText(`That wasn't it. The computer's card was ${nameOf(game.cpuSecret)}.`),
+  ).toBeVisible();
 });
 
 test("answering the CPU correctly shows Right!", async ({ page }) => {

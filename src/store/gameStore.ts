@@ -19,6 +19,7 @@ type GameStore = {
   status: "loading" | "ready";
   game: GameState | null; // null: no round in progress
   gameId: string | null; // the games row this round writes to (spec 7.1)
+  lastAction: Action | null; // what the last dispatch was, e.g. to tell how a round ended
   lastEvents: GameEvent[];
   // Load the saved round, if there is one and it is still valid.
   hydrate: () => Promise<void>;
@@ -51,6 +52,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   status: "loading",
   game: null,
   gameId: null,
+  lastAction: null,
   lastEvents: [],
 
   async hydrate() {
@@ -86,7 +88,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       contentVersion,
       startedAt: new Date().toISOString(),
     });
-    set({ game: state, gameId, lastEvents: events });
+    set({ game: state, gameId, lastAction: null, lastEvents: events });
     persist(state, gameId);
     return events;
   },
@@ -99,7 +101,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     progress.appendEvents(gameId, events);
     const over = events.find((e) => e.type === "gameOver");
     if (over?.type === "gameOver") progress.recordGameEnd(gameId, over.result);
-    set({ game: state, lastEvents: events });
+    set({ game: state, lastAction: action, lastEvents: events });
     persist(state, gameId);
     return events;
   },
