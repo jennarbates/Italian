@@ -228,15 +228,13 @@ describe("owners", () => {
     expect(useProgressStore.getState()).toMatchObject({ owner: user, loaded: true });
     expect(useProgressStore.getState().games.map((g) => g.id)).toEqual(["user-game"]);
     // New rows go to that owner's key.
-    useProgressStore
-      .getState()
-      .recordGameStart({
-        id: "g2",
-        seed: 1,
-        level: 1,
-        contentVersion: 1,
-        startedAt: at.toISOString(),
-      });
+    useProgressStore.getState().recordGameStart({
+      id: "g2",
+      seed: 1,
+      level: 1,
+      contentVersion: 1,
+      startedAt: at.toISOString(),
+    });
     await progressSaved();
     expect(
       (await read<{ games: { id: string }[] }>(`user:${user}`))?.games.map((g) => g.id),
