@@ -479,7 +479,7 @@ CPU questions always use the default wording (for brown eyes, the word picked in
 
 **Updating after the player answers:** the CPU filters `cpuCandidates` using the true answer, not the player's answer.
 
-Expected length: about 5 or 6 CPU questions to find the player's character. Because the player goes first, a player who also asks good questions wins about half the time. If playtesting shows learners lose too often, the planned fix is an Easy setting (section 11), not a weaker default.
+Measured length (`node scripts/simulate.ts`, 1,000 games): the CPU needs 4.7 questions on average and never more than 5 to find the player's character, close to the best possible (log2 24 ≈ 4.6). A player who asks questions as well as the CPU wins about 78% of games, because both sides need the same number of questions and the player goes first; real learners will ask less efficient questions and win less. If playtesting shows learners lose too often, the planned fix is an Easy setting (section 11), not a weaker default.
 
 ---
 
@@ -606,7 +606,7 @@ create table public.cards (
 
 -- a device with an older copy of the log can never overwrite newer card state
 create function public.cards_keep_newest() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = '' as $$
 begin
   if new.log_count < old.log_count then
     return null;  -- skip this stale update
