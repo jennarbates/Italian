@@ -46,7 +46,7 @@ export function Home() {
           Guest ·{" "}
           <Link
             to="/settings"
-            className="inline-flex min-h-11 items-center text-blue-700 underline"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center text-blue-700 underline"
           >
             Sign in
           </Link>
