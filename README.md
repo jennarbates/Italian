@@ -1,10 +1,10 @@
 # Chi è?
 
-A Guess Who style game for people learning Italian at A1. You play against the computer, and every question you ask or answer is in Italian and gets checked, so a wrong article or verb gets caught and explained. Built for phones first.
+A Guess Who style game for people learning Italian at A1. You play against the computer, and every question you ask or answer is in Italian and gets checked, so a wrong article or verb gets caught and explained. Built for phones first, with a desktop layout planned for launch.
 
 Building started on October 7, 2026, and it's live at [chie.parlaplay.games](https://chie.parlaplay.games). I'm aiming to launch on October 29.
 
-**Status, October 7:** both levels play end to end, with progress tracking, sign-in and sync, on staging and production. What's left waits on people or accounts: the Italian and developer reviews, sending email through SES, Sentry, a real-phone check, playtests, and the launch-week cards.
+**Status, October 7:** both levels play end to end, with progress tracking, sign-in and sync, on staging and production. What's left waits on people or accounts: the Italian and developer reviews, sending email through SES, Sentry, a real-phone check, playtests, and the launch-week cards. The new piece of work is the desktop layout: on a laptop the app is still a phone-width column, and [spec-desktop.md](spec-desktop.md) plans the fix.
 
 ## Planning
 
@@ -12,31 +12,35 @@ I'm running this like a team project even though it's just me, partly to keep th
 
 - [spec.md](spec.md): the full spec. Rules, content model, engine, data, tests and the definition of done. It went through five drafts before any code (changelog at the bottom).
 - [Decision log](spec.md#112-decision-log): every real decision and why I made it.
-- [backlog.md](backlog.md): 85 cards, each with acceptance criteria, points, dependencies and the spec section it comes from.
+- [spec-desktop.md](spec-desktop.md): the desktop layout, as its own spec. A side panel instead of the bottom sheet, a 6 × 4 board, hover and right-click, keyboard shortcuts, and desktop versions of every screen. Its decisions are DD1 onward.
+- [backlog.md](backlog.md): 97 cards, each with acceptance criteria, points, dependencies and the spec section it comes from.
 - [Issues](https://github.com/jennarbates/Italian/issues), [milestones](https://github.com/jennarbates/Italian/milestones) and the [project board](https://github.com/jennarbates/Italian/projects): the same backlog in GitHub. Each sprint is a milestone, and each card is a sub-issue of its epic.
+- [github-setup/desktop_backlog.py](github-setup/desktop_backlog.py): the Desktop cards as data. Running it writes them into `backlog.md`, `backlog.csv` and `github-setup/issues.json`, recounts the points, and checks ids, dependencies and the definition of done.
 - [docs/process.md](docs/process.md): how I work. Definition of ready and done, estimating, branches.
 - [docs/sprints](docs/sprints/): a review and retro at the end of every sprint.
 
 | Sprint | Dates | Points | Goal |
 |---|---|---|---|
 | 0 | Oct 6 | – | Spec, backlog and GitHub setup ([notes](docs/sprints/sprint-0-planning.md)) |
-| 1 | Oct 7–9 | 43 | Spec reviewed, repo and CI running, all 24 characters drawn from the content files |
-| 2 | Oct 12–16 | 71 | A full round playable on a phone at both levels |
-| 3 | Oct 19–23 | 53 | Progress tracking, sign-in and sync; accessibility pass; first playtests |
+| 1 | Oct 7–9 | 47 | Spec reviewed, repo and CI running, all 24 characters drawn from the content files |
+| 2 | Oct 12–16 | 91 | A full round playable on a phone at both levels |
+| 3 | Oct 19–23 | 61 | Progress tracking, sign-in and sync; accessibility pass; first playtests |
 | 4 | Oct 26–29 | 12 | Fix what the playtests find, then launch |
 
 Sprint 2 is the heavy one. Once I know my real velocity from Sprint 1, I'll replan it.
 
+The Desktop epic (12 cards, 32 points) was added on October 7 and runs inside Sprints 1 to 3: spec review this week, the build on days 4 to 11, and laptop sessions in the October 22 playtest. That's why Sprints 1 to 3 have more points than they started with.
+
 | Sprint | Planned | Done so far | Carried over |
 |---|---|---|---|
-| 1 | 43 | 30 | |
-| 2 | 71 | 71 | |
-| 3 | 53 | 41 | |
+| 1 | 47 | 30 | |
+| 2 | 91 | 71 | |
+| 3 | 61 | 41 | |
 | 4 | 12 | 2 | |
 
 "Done so far" counts the points of closed cards, as of October 7. Sprint 2 and most of Sprint 3 were built early, during Sprint 1; what's left in Sprints 1 and 3 waits on reviewers, AWS, Sentry and playtesters.
 
-If something isn't in the spec's scope table, it's not in the MVP. New ideas go in [future work](spec.md#111-future-work).
+If something isn't in the spec's scope table, it's not in the MVP (or, for desktop, in [DS 1](spec-desktop.md#ds-1-scope-and-non-goals)). New ideas go in [future work](spec.md#111-future-work).
 
 ## Stack
 
