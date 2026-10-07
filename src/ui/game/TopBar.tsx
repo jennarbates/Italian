@@ -43,7 +43,8 @@ export function TopBar({
             type="button"
             onClick={onZoom}
             title="Zoom your card"
-            className="rounded hover:ring-2 hover:ring-stone-400 focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:outline-none"
+            // The face is narrower than 44 px; the button keeps the spec 9 target size.
+            className="flex min-w-11 justify-center rounded hover:ring-2 hover:ring-stone-400 focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:outline-none"
           >
             <Face
               character={secret}
