@@ -606,7 +606,7 @@ create table public.cards (
 
 -- a device with an older copy of the log can never overwrite newer card state
 create function public.cards_keep_newest() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = '' as $$
 begin
   if new.log_count < old.log_count then
     return null;  -- skip this stale update
