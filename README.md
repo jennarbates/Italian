@@ -2,7 +2,9 @@
 
 A Guess Who style game for people learning Italian at A1. You play against the computer, and every question you ask or answer is in Italian and gets checked, so a wrong article or verb gets caught and explained. Built for phones first.
 
-Planning is done and I start building on October 7, 2026. I'm aiming to launch on October 29.
+Building started on October 7, 2026, and it's live at [chie.parlaplay.games](https://chie.parlaplay.games). I'm aiming to launch on October 29.
+
+**Status, October 7:** both levels play end to end, with progress tracking, sign-in and sync, on staging and production. What's left waits on people or accounts: the Italian and developer reviews, sending email through SES, Sentry, a real-phone check, playtests, and the launch-week cards.
 
 ## Planning
 
@@ -25,12 +27,14 @@ I'm running this like a team project even though it's just me, partly to keep th
 
 Sprint 2 is the heavy one. Once I know my real velocity from Sprint 1, I'll replan it.
 
-| Sprint | Planned | Done | Carried over |
+| Sprint | Planned | Done so far | Carried over |
 |---|---|---|---|
-| 1 | 43 | | |
-| 2 | 71 | | |
-| 3 | 53 | | |
-| 4 | 12 | | |
+| 1 | 43 | 30 | |
+| 2 | 71 | 71 | |
+| 3 | 53 | 41 | |
+| 4 | 12 | 2 | |
+
+"Done so far" counts the points of closed cards, as of October 7. Sprint 2 and most of Sprint 3 were built early, during Sprint 1; what's left in Sprints 1 and 3 waits on reviewers, AWS, Sentry and playtesters.
 
 If something isn't in the spec's scope table, it's not in the MVP. New ideas go in [future work](spec.md#111-future-work).
 

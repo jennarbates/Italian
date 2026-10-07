@@ -15,7 +15,7 @@ Acceptance criteria:
 - Comments collected in one place
 
 Spec: 4, 7, 10.1",Sections 4 and 7 sent with a return date of Fri Oct 9 | Comments collected in one place,"Spec sign-off,task,waits-on-others"
-CHI-003,Paper-trace one full game,To do,Spec sign-off,spike,Sprint 1: Foundations,Day 1,Wed Oct 7,2,,,10.1,"Play one complete round on paper using only the spec, and log every point where you had to guess.
+CHI-003,Paper-trace one full game,Done,Spec sign-off,spike,Sprint 1: Foundations,Day 1,Wed Oct 7,2,,,10.1,"Play one complete round on paper using only the spec, and log every point where you had to guess.
 
 Acceptance criteria:
 - One full round traced from START to over
@@ -38,13 +38,13 @@ Acceptance criteria:
 - Each knows the session is about 3 rounds on their own phone
 
 Spec: 10.2, 10.4",At least 3 learners confirmed for Oct 22 | Each knows the session is about 3 rounds on their own phone,"Spec sign-off,task,waits-on-others"
-CHI-010,Buy parlaplay.games on Cloudflare,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 1,Wed Oct 7,1,,,"7.3, 10.4, D30","Buy parlaplay.games through Cloudflare so its DNS is there from the start; the first production deploy creates the chie record, and SES verification can start on day 2.
+CHI-010,Buy parlaplay.games on Cloudflare,Done,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 1,Wed Oct 7,1,,,"7.3, 10.4, D30","Buy parlaplay.games through Cloudflare so its DNS is there from the start; the first production deploy creates the chie record, and SES verification can start on day 2.
 
 Acceptance criteria:
 - parlaplay.games registered, with its zone active on Cloudflare
 
 Spec: 7.3, 10.4, D30",parlaplay.games registered, with its zone active on Cloudflare,"Repo, CI and infra,chore"
-CHI-011,Scaffold the app,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,,,"8.1, 9","pnpm, Vite, React, TypeScript strict, React Router, Zustand, Tailwind, ESLint, Prettier, and the folder structure from section 9.
+CHI-011,Scaffold the app,Done,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,,,"8.1, 9","pnpm, Vite, React, TypeScript strict, React Router, Zustand, Tailwind, ESLint, Prettier, and the folder structure from section 9.
 
 Acceptance criteria:
 - Folders engine, content, services, store, ui, scripts, supabase, e2e exist
@@ -52,14 +52,14 @@ Acceptance criteria:
 - TypeScript strict on; lint and format scripts run clean
 
 Spec: 8.1, 9","Folders engine, content, services, store, ui, scripts, supabase, e2e exist | Routes /, /play, /progress, /settings, /privacy render placeholders | TypeScript strict on; lint and format scripts run clean","Repo, CI and infra,chore"
-CHI-012,Set up test tooling,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,2,CHI-011,,"9, 10.2","Vitest with coverage, fast-check, and Playwright for Chromium and WebKit.
+CHI-012,Set up test tooling,Done,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,2,CHI-011,,"9, 10.2","Vitest with coverage, fast-check, and Playwright for Chromium and WebKit.
 
 Acceptance criteria:
 - pnpm test runs Vitest with a coverage report for engine/
 - Playwright runs one smoke test in Chromium and WebKit
 
 Spec: 9, 10.2",pnpm test runs Vitest with a coverage report for engine/ | Playwright runs one smoke test in Chromium and WebKit,"Repo, CI and infra,chore"
-CHI-013,GitHub Actions CI with local Supabase,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,"CHI-012, CHI-015",,9,"Typecheck, lint, Vitest and Playwright on every push and pull request, with supabase start before tests.
+CHI-013,GitHub Actions CI with local Supabase,Done,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,"CHI-012, CHI-015",,9,"Typecheck, lint, Vitest and Playwright on every push and pull request, with supabase start before tests.
 
 Acceptance criteria:
 - CI runs on push and PR
@@ -67,7 +67,7 @@ Acceptance criteria:
 - main is protected and merges need green CI
 
 Spec: 9",CI runs on push and PR | supabase start runs before sync and e2e tests | main is protected and merges need green CI,"Repo, CI and infra,chore"
-CHI-014,Cloudflare deploys and PR previews,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,"CHI-010, CHI-011, CHI-016",,"9, D11, D29","Workers static assets, a preview URL per pull request built with staging keys, main deploys production.
+CHI-014,Cloudflare deploys and PR previews,In progress,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,"CHI-010, CHI-011, CHI-016",,"9, D11, D29","Workers static assets, a preview URL per pull request built with staging keys, main deploys production.
 
 Acceptance criteria:
 - A PR gets its own preview URL pointing at staging Supabase
@@ -75,14 +75,14 @@ Acceptance criteria:
 - assets.not_found_handling set to single-page-application, so /play loads directly
 
 Spec: 9, D11, D29","A PR gets its own preview URL pointing at staging Supabase | main deploys to chie.parlaplay.games with production keys | assets.not_found_handling set to single-page-application, so /play loads directly","Repo, CI and infra,chore"
-CHI-015,Local Supabase for dev and tests,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,,,"7, D16","Supabase CLI in Docker with the local inbox for sign-in emails.
+CHI-015,Local Supabase for dev and tests,Done,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,,,"7, D16","Supabase CLI in Docker with the local inbox for sign-in emails.
 
 Acceptance criteria:
 - supabase start runs locally
 - Sign-in emails appear in the local inbox
 
 Spec: 7, D16",supabase start runs locally | Sign-in emails appear in the local inbox,"Repo, CI and infra,chore"
-CHI-016,Create staging and production Supabase projects,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,,,"7, D16, D17","Two free cloud projects; only the publishable (anon) key ever reaches the app.
+CHI-016,Create staging and production Supabase projects,Done,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,,,"7, D16, D17","Two free cloud projects; only the publishable (anon) key ever reaches the app.
 
 Acceptance criteria:
 - Staging and production projects exist
@@ -90,7 +90,7 @@ Acceptance criteria:
 - No service role or secret key in the app or repo
 
 Spec: 7, D16, D17",Staging and production projects exist | Env vars wired per environment | No service role or secret key in the app or repo,"Repo, CI and infra,chore"
-CHI-017,"Sentry, errors only, with URL scrubbing",To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,2,CHI-011,,"9, D19","Sentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.
+CHI-017,"Sentry, errors only, with URL scrubbing",In progress,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,2,CHI-011,,"9, D19","Sentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.
 
 Acceptance criteria:
 - No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off
@@ -99,7 +99,7 @@ Acceptance criteria:
 - Releases tagged with the git commit
 
 Spec: 9, D19",No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off | beforeSend and beforeBreadcrumb strip query strings and hashes | IP address storage turned off in the Sentry project | Releases tagged with the git commit,"Repo, CI and infra,chore"
-CHI-018,Verify domain in AWS SES and request production access,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,CHI-010,yes,"7.3, D15","Approval can take a day or more, so it starts on day 2.
+CHI-018,Verify domain in AWS SES and request production access,In progress,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,CHI-010,yes,"7.3, D15","Approval can take a day or more, so it starts on day 2.
 
 Acceptance criteria:
 - SPF, DKIM and DMARC records added for chie.parlaplay.games
@@ -114,14 +114,14 @@ Acceptance criteria:
 - Domain added in Resend
 
 Spec: 7.3, D15",Resend account created | Domain added in Resend,"Repo, CI and infra,chore"
-CHI-020,Zod schemas for all content,To do,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,2,CHI-011,,"3, 3.2, 3.3, 3.4","Character, Article, Noun, Adjective and Template schemas, validated at build time.
+CHI-020,Zod schemas for all content,Done,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,2,CHI-011,,"3, 3.2, 3.3, 3.4","Character, Article, Noun, Adjective and Template schemas, validated at build time.
 
 Acceptance criteria:
 - Schemas match 3.2, 3.3 and 3.4 exactly
 - Build fails on invalid content
 
 Spec: 3, 3.2, 3.3, 3.4","Schemas match 3.2, 3.3 and 3.4 exactly | Build fails on invalid content","Content and art,story"
-CHI-021,Write lexicon.json,To do,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,2,CHI-020,,"3.3, D2, D23","8 nouns, 10 adjectives, 6 articles, 2 verbs, with every form written out.
+CHI-021,Write lexicon.json,Done,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,2,CHI-020,,"3.3, D2, D23","8 nouns, 10 adjectives, 6 articles, 2 verbs, with every form written out.
 
 Acceptance criteria:
 - All nouns have gender, number, articles, template, artRule and adjAttrs or attr
@@ -129,33 +129,33 @@ Acceptance criteria:
 - Every entry has a level from the Profilo check
 
 Spec: 3.3, D2, D23","All nouns have gender, number, articles, template, artRule and adjAttrs or attr | castano has alsoMeans eyeColor; marrone has wordChoice for capelli | Every entry has a level from the Profilo check","Content and art,story"
-CHI-022,Write templates.json,To do,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,1,CHI-020,,3.4,"t.have, t.have.adj and t.be as declarative data with named predicates.
+CHI-022,Write templates.json,Done,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,1,CHI-020,,3.4,"t.have, t.have.adj and t.be as declarative data with named predicates.
 
 Acceptance criteria:
 - Three templates with pattern, verb, article, needsAdj, predicate
 
 Spec: 3.4","Three templates with pattern, verb, article, needsAdj, predicate","Content and art,story"
-CHI-023,Write messages.json,To do,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,1,CHI-001,,3.7,"Every feedback string from 3.7, keyed by rule id, with placeholders.
+CHI-023,Write messages.json,Done,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,1,CHI-001,,3.7,"Every feedback string from 3.7, keyed by rule id, with placeholders.
 
 Acceptance criteria:
 - Every key in the 3.7 table exists
 - Reviewer corrections applied
 
 Spec: 3.7",Every key in the 3.7 table exists | Reviewer corrections applied,"Content and art,story"
-CHI-024,Seeded character generator script,To do,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,3,CHI-020,,"3.2, D20","scripts/generate-characters.ts picks 24 attribute combinations that pass every invariant, retrying until they do.
+CHI-024,Seeded character generator script,Done,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,3,CHI-020,,"3.2, D20","scripts/generate-characters.ts picks 24 attribute combinations that pass every invariant, retrying until they do.
 
 Acceptance criteria:
 - Same seed gives the same 24 characters
 - Output passes all 3.2 invariants (unique, 12/12, no beards on women, 3 to 15 yes per question)
 
 Spec: 3.2, D20","Same seed gives the same 24 characters | Output passes all 3.2 invariants (unique, 12/12, no beards on women, 3 to 15 yes per question)","Content and art,story"
-CHI-025,"Generate, name and commit 24 characters",To do,Content and art,task,Sprint 1: Foundations,Day 3,Fri Oct 9,1,CHI-024,,"3.2, 3.6","Run the generator once, review it, give Italian names, commit characters.json.
+CHI-025,"Generate, name and commit 24 characters",Done,Content and art,task,Sprint 1: Foundations,Day 3,Fri Oct 9,1,CHI-024,,"3.2, 3.6","Run the generator once, review it, give Italian names, commit characters.json.
 
 Acceptance criteria:
 - characters.json committed with 24 named characters and permanent ids
 
 Spec: 3.2, 3.6",characters.json committed with 24 named characters and permanent ids,"Content and art,task"
-CHI-026,Content versioning and content tests,To do,Content and art,test,Sprint 1: Foundations,Day 3,Fri Oct 9,2,"CHI-021, CHI-022, CHI-023, CHI-025",,"3.6, 10.2, D21","version.json, released-ids.json, and Vitest checks for schemas, invariants and references.
+CHI-026,Content versioning and content tests,Done,Content and art,test,Sprint 1: Foundations,Day 3,Fri Oct 9,2,"CHI-021, CHI-022, CHI-023, CHI-025",,"3.6, 10.2, D21","version.json, released-ids.json, and Vitest checks for schemas, invariants and references.
 
 Acceptance criteria:
 - All JSON passes Zod
@@ -164,7 +164,7 @@ Acceptance criteria:
 - Test fails if an id in released-ids.json is missing
 
 Spec: 3.6, 10.2, D21",All JSON passes Zod | Every 3.2 invariant is a test | Every referenced lexicon id and message key exists | Test fails if an id in released-ids.json is missing,"Content and art,test"
-CHI-027,Placeholder SVG layers,To do,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,3,,,"3.5, D9, D26","Every file in the 3.5 manifest as flat shapes that make the attribute obvious at about 80 px wide.
+CHI-027,Placeholder SVG layers,Done,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,3,,,"3.5, D9, D26","Every file in the 3.5 manifest as flat shapes that make the attribute obvious at about 80 px wide.
 
 Acceptance criteria:
 - All layer files exist with manifest names
@@ -172,7 +172,7 @@ Acceptance criteria:
 - Each attribute readable at card size
 
 Spec: 3.5, D9, D26",All layer files exist with manifest names | Hat drawn high so short hair shows; eyes drawn large; beard without mustache leaves a gap | Each attribute readable at card size,"Content and art,story"
-CHI-028,SVG face composer,To do,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,2,"CHI-025, CHI-027",,3.5,"Stack layers by attributes so the picture can never disagree with the data.
+CHI-028,SVG face composer,Done,Content and art,story,Sprint 1: Foundations,Day 3,Fri Oct 9,2,"CHI-025, CHI-027",,3.5,"Stack layers by attributes so the picture can never disagree with the data.
 
 Acceptance criteria:
 - Composer picks layers from attrs and skin in z order
@@ -180,14 +180,14 @@ Acceptance criteria:
 - Dropping in new files with the same names changes art with no code change
 
 Spec: 3.5",Composer picks layers from attrs and skin in z order | All 24 characters render | Dropping in new files with the same names changes art with no code change,"Content and art,story"
-CHI-030,Engine types,To do,Game engine,task,Sprint 2: Playable round,Day 4,Mon Oct 12,1,CHI-011,,"4, 4.1","Phase, Fill, QuestionKey, SlotError, ShapeError, Feedback, AskedQuestion, GameState, Action, GameEvent.
+CHI-030,Engine types,Done,Game engine,task,Sprint 2: Playable round,Day 4,Mon Oct 12,1,CHI-011,,"4, 4.1","Phase, Fill, QuestionKey, SlotError, ShapeError, Feedback, AskedQuestion, GameState, Action, GameEvent.
 
 Acceptance criteria:
 - Types match 4.1
 - engine/ imports nothing from React, the DOM or time
 
 Spec: 4, 4.1","Types match 4.1 | engine/ imports nothing from React, the DOM or time","Game engine,task"
-CHI-031,Seeded RNG and START,To do,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,2,CHI-030,,"2, 4.1, 5","Draw both secrets independently from the seed and fix the CPU question order.
+CHI-031,Seeded RNG and START,Done,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,2,CHI-030,,"2, 4.1, 5","Draw both secrets independently from the seed and fix the CPU question order.
 
 Acceptance criteria:
 - Same seed gives the same secrets and cpuQuestionOrder
@@ -195,7 +195,7 @@ Acceptance criteria:
 - Player goes first
 
 Spec: 2, 4.1, 5",Same seed gives the same secrets and cpuQuestionOrder | Secrets may be the same character | Player goes first,"Game engine,story"
-CHI-032,step() and the transition table,To do,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,3,CHI-031,,4.2,"One function moves the game forward; every phase and action pair behaves as in 4.2.
+CHI-032,step() and the transition table,Done,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,3,CHI-031,,4.2,"One function moves the game forward; every phase and action pair behaves as in 4.2.
 
 Acceptance criteria:
 - Every cell of 4.2 implemented, wrongPhase rejections included
@@ -204,7 +204,7 @@ Acceptance criteria:
 - over accepts only START
 
 Spec: 4.2","Every cell of 4.2 implemented, wrongPhase rejections included | FLIP toggles in every phase except setup and over | END_TURN from cpuReview increments turn and clears ratedThisTurn | over accepts only START","Game engine,story"
-CHI-033,Render questions and answers,To do,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,2,CHI-030,,"2, 3.4","render(template, fill) builds the question and the Sì/No answer from the player's own words.
+CHI-033,Render questions and answers,Done,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,2,CHI-030,,"2, 3.4","render(template, fill) builds the question and the Sì/No answer from the player's own words.
 
 Acceptance criteria:
 - Sì answers: 'Sì, ' + lowercased body + '.'
@@ -212,14 +212,14 @@ Acceptance criteria:
 - castani and marroni each render as themselves
 
 Spec: 2, 3.4","Sì answers: 'Sì, ' + lowercased body + '.' | No answers: 'No, non ' + lowercased body + '.' | castani and marroni each render as themselves","Game engine,story"
-CHI-034,Predicates and adjective meaning,To do,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,2,CHI-030,,"3.4, 4.3","hasFeature, featureIs and genderIs, plus resolving what an adjective means for a given noun.
+CHI-034,Predicates and adjective meaning,Done,Game engine,story,Sprint 2: Playable round,Day 4,Mon Oct 12,2,CHI-030,,"3.4, 4.3","hasFeature, featureIs and genderIs, plus resolving what an adjective means for a given noun.
 
 Acceptance criteria:
 - castani on occhi resolves to eyeColor adj.marrone
 - Meaning uses own attr if allowed, else first matching alsoMeans
 
 Spec: 3.4, 4.3","castani on occhi resolves to eyeColor adj.marrone | Meaning uses own attr if allowed, else first matching alsoMeans","Game engine,story"
-CHI-035,ASK validation pipeline,To do,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,5,"CHI-032, CHI-033, CHI-034",,"2, 4.3","Run the five checks in order and reject on the first failure.
+CHI-035,ASK validation pipeline,Done,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,5,"CHI-032, CHI-033, CHI-034",,"2, 4.3","Run the five checks in order and reject on the first failure.
 
 Acceptance criteria:
 - Order: phase, unknownId, grammar, nonsense, duplicate
@@ -229,7 +229,7 @@ Acceptance criteria:
 - Duplicate shows the previous answer and does not use the turn
 
 Spec: 2, 4.3","Order: phase, unknownId, grammar, nonsense, duplicate | Grammar returns one SlotError per wrong slot with the right rule key | capelli marroni rejected with meaning.wordChoice; occhi biondi with meaning.mismatch | occhi castani and occhi marroni share one QuestionKey, so the second is a duplicate | Duplicate shows the previous answer and does not use the turn","Game engine,story"
-CHI-036,Soft agreement slips,To do,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-035,,"3.4, D24","A wrong adjective form is accepted, rendered correctly, and reported as a slip.
+CHI-036,Soft agreement slips,Done,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-035,,"3.4, D24","A wrong adjective form is accepted, rendered correctly, and reported as a slip.
 
 Acceptance criteria:
 - Question rendered with the correct form
@@ -238,7 +238,7 @@ Acceptance criteria:
 - A grammar-rejected question reports the agreement error in errors but emits no agreementSlip
 
 Spec: 3.4, D24",Question rendered with the correct form | agreementSlip event emitted with given and expected | Adjective gets no rating that turn; forms compared by text | A grammar-rejected question reports the agreement error in errors but emits no agreementSlip,"Game engine,story"
-CHI-037,parseTiles and shape errors,To do,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-030,,"3.4, 4.1","Turn the four tile slots into templateId and fill, or a ShapeError.
+CHI-037,parseTiles and shape errors,Done,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-030,,"3.4, 4.1","Turn the four tile slots into templateId and fill, or a ShapeError.
 
 Acceptance criteria:
 - The noun picks the template
@@ -246,7 +246,7 @@ Acceptance criteria:
 - Shape errors dispatch nothing and log nothing
 
 Spec: 3.4, 4.1","The noun picks the template | noVerb, noArt, noNoun, needsAdj, noAdjAllowed each returned | Shape errors dispatch nothing and log nothing","Game engine,story"
-CHI-038,Rating events and ANSWER,To do,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,3,CHI-035,,"4.1, 6, D7","Emit ratings per the section 6 table, at most one per card per turn.
+CHI-038,Rating events and ANSWER,Done,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,3,CHI-035,,"4.1, 6, D7","Emit ratings per the section 6 table, at most one per card per turn.
 
 Acceptance criteria:
 - ratedThisTurn prevents a second rating for the same card and direction
@@ -255,7 +255,7 @@ Acceptance criteria:
 - Level 1 ASKs emit no produce rating or agreementSlip; CPU-question recognize ratings still fire at both levels
 
 Spec: 4.1, 6, D7",ratedThisTurn prevents a second rating for the same card and direction | Correct Sì/No without hint rates recognize as hard; wrong rates again with an answer.wrong detail | hintShown answers produce no rating | Level 1 ASKs emit no produce rating or agreementSlip; CPU-question recognize ratings still fire at both levels,"Game engine,story"
-CHI-039,GUESS resolution,To do,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,1,CHI-032,,"2, 4.2, D3","Right guess wins, wrong guess loses.
+CHI-039,GUESS resolution,Done,Game engine,story,Sprint 2: Playable round,Day 5,Tue Oct 13,1,CHI-032,,"2, 4.2, D3","Right guess wins, wrong guess loses.
 
 Acceptance criteria:
 - Correct guess sets result won
@@ -263,7 +263,7 @@ Acceptance criteria:
 - Both move to over
 
 Spec: 2, 4.2, D3",Correct guess sets result won | Wrong guess sets result lost | Both move to over,"Game engine,story"
-CHI-040,Engine test suite to 90% coverage,To do,Game engine,test,Sprint 2: Playable round,Day 5,Tue Oct 13,5,"CHI-035, CHI-036, CHI-037, CHI-038, CHI-039, CHI-045",,"4.4, 4.5, 9, 10.2","Transition table, invariants, the traced turn, property tests and golden strings.
+CHI-040,Engine test suite to 90% coverage,Done,Game engine,test,Sprint 2: Playable round,Day 5,Tue Oct 13,5,"CHI-035, CHI-036, CHI-037, CHI-038, CHI-039, CHI-045",,"4.4, 4.5, 9, 10.2","Transition table, invariants, the traced turn, property tests and golden strings.
 
 Acceptance criteria:
 - Every transition cell tested
@@ -275,7 +275,7 @@ Acceptance criteria:
 - engine/ line coverage at or above 90%
 
 Spec: 4.4, 4.5, 9, 10.2","Every transition cell tested | All 9 invariants in 4.4 tested | 4.5 traced turn as a test, with the bionde and gli variants | fast-check random action sequences never break invariants | Golden snapshot of 17 questions and 34 answers | step() under 5 ms per action | engine/ line coverage at or above 90%","Game engine,test"
-CHI-045,CPU chooses its move,To do,CPU opponent,story,Sprint 2: Playable round,Day 5,Tue Oct 13,3,"CHI-032, CHI-034, CHI-004",,"5, D8","Guess when one candidate remains, otherwise ask the question that best splits the candidates.
+CHI-045,CPU chooses its move,Done,CPU opponent,story,Sprint 2: Playable round,Day 5,Tue Oct 13,3,"CHI-032, CHI-034, CHI-004",,"5, D8","Guess when one candidate remains, otherwise ask the question that best splits the candidates.
 
 Acceptance criteria:
 - Guesses only with one candidate left
@@ -284,7 +284,7 @@ Acceptance criteria:
 - Uses the default brown-eyes wording
 
 Spec: 5, D8",Guesses only with one candidate left | Picks the question with yes count closest to half | Ties go to the earlier question in cpuQuestionOrder | Uses the default brown-eyes wording,"CPU opponent,story"
-CHI-046,CPU filters candidates on the true answer,To do,CPU opponent,story,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-045,,"2, 5, D4","The CPU always uses the truth, even when the player answers wrongly.
+CHI-046,CPU filters candidates on the true answer,Done,CPU opponent,story,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-045,,"2, 5, D4","The CPU always uses the truth, even when the player answers wrongly.
 
 Acceptance criteria:
 - Candidates filtered by the true answer
@@ -292,7 +292,7 @@ Acceptance criteria:
 - cpuCandidates always contains playerSecret
 
 Spec: 2, 5, D4",Candidates filtered by the true answer | Wrong player answer shows the correct one and logs a mistake | cpuCandidates always contains playerSecret,"CPU opponent,story"
-CHI-047,CPU tests and length simulation,To do,CPU opponent,test,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-046,,"5, 10.2","Prove the CPU always splits, never guesses wrong, and is deterministic.
+CHI-047,CPU tests and length simulation,Done,CPU opponent,test,Sprint 2: Playable round,Day 5,Tue Oct 13,2,CHI-046,,"5, 10.2","Prove the CPU always splits, never guesses wrong, and is deterministic.
 
 Acceptance criteria:
 - Always finds a splitting question
@@ -301,7 +301,7 @@ Acceptance criteria:
 - Simulation reports average CPU questions to win (expect about 5 or 6)
 
 Spec: 5, 10.2",Always finds a splitting question | Never guesses wrong | Same seed gives the same game | Simulation reports average CPU questions to win (expect about 5 or 6),"CPU opponent,test"
-CHI-049,IndexedDB storage service,To do,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,2,CHI-011,,"7.3, 9","Small idb wrapper for saved rounds and guest data, asking the browser to persist it.
+CHI-049,IndexedDB storage service,Done,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,2,CHI-011,,"7.3, 9","Small idb wrapper for saved rounds and guest data, asking the browser to persist it.
 
 Acceptance criteria:
 - Guest data stored under key guest
@@ -309,7 +309,7 @@ Acceptance criteria:
 - Reads and writes wrapped so failures never block play
 
 Spec: 7.3, 9",Guest data stored under key guest | navigator.storage.persist() requested | Reads and writes wrapped so failures never block play,"Game UI,story"
-CHI-050,Game store with save and resume,To do,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,3,"CHI-032, CHI-049",,"2, 3.6, 9","Zustand store wraps step(), saves after every action, and resumes on reload.
+CHI-050,Game store with save and resume,Done,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,3,"CHI-032, CHI-049",,"2, 3.6, 9","Zustand store wraps step(), saves after every action, and resumes on reload.
 
 Acceptance criteria:
 - State saved after every action
@@ -317,7 +317,7 @@ Acceptance criteria:
 - Saved round with an older contentVersion is discarded, not resumed
 
 Spec: 2, 3.6, 9","State saved after every action | Reload mid-round resumes | Saved round with an older contentVersion is discarded, not resumed","Game UI,story"
-CHI-051,Board that fits a real phone,To do,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,5,"CHI-028, CHI-050",,"2, 8, 8.1, 9","As a learner, I see all 24 faces at once and flip them as I rule people out.
+CHI-051,Board that fits a real phone,Done,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,5,"CHI-028, CHI-050",,"2, 8, 8.1, 9","As a learner, I see all 24 faces at once and flip them as I rule people out.
 
 Acceptance criteria:
 - 4 x 6 grid fits about 360 x 560 using dvh, with the sheet collapsed
@@ -326,14 +326,14 @@ Acceptance criteria:
 - Unflip all appears when all 24 are down
 
 Spec: 2, 8, 8.1, 9","4 x 6 grid fits about 360 x 560 using dvh, with the sheet collapsed | Tap flips; flipped shown by more than color (face hidden, icon) | Flip animation off under prefers-reduced-motion | Unflip all appears when all 24 are down","Game UI,story"
-CHI-052,Top bar and secret card,To do,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,1,CHI-050,,8.1,"Turn number, whose turn, and the player's own secret card shown small.
+CHI-052,Top bar and secret card,Done,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,1,CHI-050,,8.1,"Turn number, whose turn, and the player's own secret card shown small.
 
 Acceptance criteria:
 - Turn and whose turn always visible
 - Player's secret card visible
 
 Spec: 8.1",Turn and whose turn always visible | Player's secret card visible,"Game UI,story"
-CHI-053,Bottom sheet,To do,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,3,CHI-011,,"8, D18","Holds the picker, builder or CPU question over the board and collapses to one line.
+CHI-053,Bottom sheet,Done,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,3,CHI-011,,"8, D18","Holds the picker, builder or CPU question over the board and collapses to one line.
 
 Acceptance criteria:
 - Board never shrinks when the sheet opens
@@ -341,14 +341,14 @@ Acceptance criteria:
 - Works one-handed on a phone
 
 Spec: 8, D18",Board never shrinks when the sheet opens | Collapsed sheet shows the last answer | Works one-handed on a phone,"Game UI,story"
-CHI-054,Card detail view,To do,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,2,CHI-051,,"3.5, 9, D27","As a learner, I can long-press a face to see it large and check small details.
+CHI-054,Card detail view,Done,Game UI,story,Sprint 2: Playable round,Day 6,Wed Oct 14,2,CHI-051,,"3.5, 9, D27","As a learner, I can long-press a face to see it large and check small details.
 
 Acceptance criteria:
 - Long-press opens the face large with no text
 - Zoom control does the same for keyboard users
 
 Spec: 3.5, 9, D27",Long-press opens the face large with no text | Zoom control does the same for keyboard users,"Game UI,story"
-CHI-055,Level 1 question picker,To do,Game UI,story,Sprint 2: Playable round,Day 7,Thu Oct 15,2,"CHI-053, CHI-035",,8.1,"As a beginner, I tap one of 16 ready-made questions with English hints.
+CHI-055,Level 1 question picker,Done,Game UI,story,Sprint 2: Playable round,Day 7,Thu Oct 15,2,"CHI-053, CHI-035",,8.1,"As a beginner, I tap one of 16 ready-made questions with English hints.
 
 Acceptance criteria:
 - 16 questions listed with English glosses
@@ -356,7 +356,7 @@ Acceptance criteria:
 - Uses the default brown-eyes wording
 
 Spec: 8.1",16 questions listed with English glosses | Asked questions greyed out and show their answer | Uses the default brown-eyes wording,"Game UI,story"
-CHI-056,Level 2 tile builder,To do,Game UI,story,Sprint 2: Playable round,Day 7,Thu Oct 15,5,"CHI-053, CHI-037",,"3.4, 8.1","As a learner, I build each question from verb, article, noun and adjective tiles with no English.
+CHI-056,Level 2 tile builder,Done,Game UI,story,Sprint 2: Playable round,Day 7,Thu Oct 15,5,"CHI-053, CHI-037",,"3.4, 8.1","As a learner, I build each question from verb, article, noun and adjective tiles with no English.
 
 Acceptance criteria:
 - Four fixed slots in order, filled by tapping tiles
@@ -365,14 +365,14 @@ Acceptance criteria:
 - Chiedi submits; shape errors show inline
 
 Spec: 3.4, 8.1","Four fixed slots in order, filled by tapping tiles | Tapping an adjective opens its forms, each distinct text once | Built question previews in the slots | Chiedi submits; shape errors show inline","Game UI,story"
-CHI-057,Feedback messages,To do,Game UI,story,Sprint 2: Playable round,Day 7,Thu Oct 15,2,"CHI-023, CHI-055",,3.7,"Render engine feedback from messages.json with placeholders and Italian in italics.
+CHI-057,Feedback messages,Done,Game UI,story,Sprint 2: Playable round,Day 7,Thu Oct 15,2,"CHI-023, CHI-055",,3.7,"Render engine feedback from messages.json with placeholders and Italian in italics.
 
 Acceptance criteria:
 - Every SlotError, slip, duplicate and shape error shows its message
 - Agreement slip shows the correct form next to the answer
 
 Spec: 3.7","Every SlotError, slip, duplicate and shape error shows its message | Agreement slip shows the correct form next to the answer","Game UI,story"
-CHI-058,CPU turn: Sì / No,To do,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,"CHI-046, CHI-053",,"2, 8.1","As a learner, I read the CPU's question and answer Sì or No.
+CHI-058,CPU turn: Sì / No,Done,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,"CHI-046, CHI-053",,"2, 8.1","As a learner, I read the CPU's question and answer Sì or No.
 
 Acceptance criteria:
 - CPU question shows in the sheet with Sì and No
@@ -381,14 +381,14 @@ Acceptance criteria:
 - Avanti ends the turn
 
 Spec: 2, 8.1",CPU question shows in the sheet with Sì and No | Wrong answer shows the correct one | Level 1 has Show hint; revealing it removes the rating | Avanti ends the turn,"Game UI,story"
-CHI-059,Guessing with confirm,To do,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,"CHI-039, CHI-051",,"2, 8.1, D3","Indovina, tap a card, confirm. A wrong guess loses, so it is always confirmed.
+CHI-059,Guessing with confirm,Done,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,"CHI-039, CHI-051",,"2, 8.1, D3","Indovina, tap a card, confirm. A wrong guess loses, so it is always confirmed.
 
 Acceptance criteria:
 - Confirm dialog before every guess
 - Dialog warns when the card is flipped down
 
 Spec: 2, 8.1, D3",Confirm dialog before every guess | Dialog warns when the card is flipped down,"Game UI,story"
-CHI-060,Round end screen,To do,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,3,"CHI-058, CHI-059",,"7.3, 8.1, 8.2","Result, both secrets, question history, this round's mistakes, Play again.
+CHI-060,Round end screen,Done,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,3,"CHI-058, CHI-059",,"7.3, 8.1, 8.2","Result, both secrets, question history, this round's mistakes, Play again.
 
 Acceptance criteria:
 - Both secrets revealed
@@ -398,7 +398,7 @@ Acceptance criteria:
 - Guests see the quiet sign-in nudge
 
 Spec: 7.3, 8.1, 8.2",Both secrets revealed | Full question history with answers | This round's mistakes listed | Play again starts a new round | Guests see the quiet sign-in nudge,"Game UI,story"
-CHI-061,Quit round and Continue round,To do,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,CHI-050,,"2, 8.2, D33","Every round ends in a recorded result.
+CHI-061,Quit round and Continue round,Done,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,CHI-050,,"2, 8.2, D33","Every round ends in a recorded result.
 
 Acceptance criteria:
 - Quit round asks to confirm and records abandoned
@@ -407,7 +407,7 @@ Acceptance criteria:
 - Home offers Continue round when one is saved
 
 Spec: 2, 8.2, D33",Quit round asks to confirm and records abandoned | Starting a new round over a saved one records it abandoned | Ratings already logged are kept | Home offers Continue round when one is saved,"Game UI,story"
-CHI-062,Home screen,To do,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,CHI-061,,8.1,"Play or Continue round, level picker, Progress, Settings, sign-in status.
+CHI-062,Home screen,Done,Game UI,story,Sprint 2: Playable round,Day 8,Fri Oct 16,2,CHI-061,,8.1,"Play or Continue round, level picker, Progress, Settings, sign-in status.
 
 Acceptance criteria:
 - Level 1 or 2 picker
@@ -415,7 +415,7 @@ Acceptance criteria:
 - Sign-in status visible
 
 Spec: 8.1",Level 1 or 2 picker | Continue round shown when a round is saved | Sign-in status visible,"Game UI,story"
-CHI-070,Progress store and review log,To do,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,2,"CHI-038, CHI-049",,"6, D5","Turn rating and slip events into append-only ReviewLogRows.
+CHI-070,Progress store and review log,Done,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,2,"CHI-038, CHI-049",,"6, D5","Turn rating and slip events into append-only ReviewLogRows.
 
 Acceptance criteria:
 - Each row has a client uuid, gameId, localDay and createdAt
@@ -423,14 +423,14 @@ Acceptance criteria:
 - Log is never edited or deleted
 
 Spec: 6, D5","Each row has a client uuid, gameId, localDay and createdAt | slip rows logged for agreement slips | Log is never edited or deleted","Learning and progress,story"
-CHI-071,Games rows written at START,To do,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,1,CHI-061,,"7.3, D34","The games row exists before any review row points at it, and is updated at round end.
+CHI-071,Games rows written at START,Done,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,1,CHI-061,,"7.3, D34","The games row exists before any review row points at it, and is updated at round end.
 
 Acceptance criteria:
 - Row written at START with seed, level, contentVersion
 - Row updated with ended_at and won, lost or abandoned
 
 Spec: 7.3, D34","Row written at START with seed, level, contentVersion | Row updated with ended_at and won, lost or abandoned","Learning and progress,story"
-CHI-072,FSRS replay service,To do,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,3,CHI-070,,6,"ts-fsrs with default parameters and 0.9 retention; card state rebuilt by replaying the log.
+CHI-072,FSRS replay service,Done,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,3,CHI-070,,6,"ts-fsrs with default parameters and 0.9 retention; card state rebuilt by replaying the log.
 
 Acceptance criteria:
 - 36 cards (18 lemmas x 2 directions)
@@ -439,14 +439,14 @@ Acceptance criteria:
 - easy never produced
 
 Spec: 6",36 cards (18 lemmas x 2 directions) | Replay in createdAt order | slip rows skipped | easy never produced,"Learning and progress,story"
-CHI-073,SRS tests,To do,Learning and progress,test,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,2,CHI-072,,"6, 10.2","Event to rating table and replay correctness.
+CHI-073,SRS tests,Done,Learning and progress,test,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,2,CHI-072,,"6, 10.2","Event to rating table and replay correctness.
 
 Acceptance criteria:
 - Every row of the section 6 table tested
 - Rebuild from log equals incremental state
 
 Spec: 6, 10.2",Every row of the section 6 table tested | Rebuild from log equals incremental state,"Learning and progress,test"
-CHI-074,Progress screen: Mistakes and Due,To do,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,3,CHI-072,,"8.1, 8.2","As a learner, I see which words I got wrong and which are due.
+CHI-074,Progress screen: Mistakes and Due,Done,Learning and progress,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,3,CHI-072,,"8.1, 8.2","As a learner, I see which words I got wrong and which are due.
 
 Acceptance criteria:
 - Mistakes tab grouped by word, showing given and expected
@@ -454,7 +454,7 @@ Acceptance criteria:
 - Empty state: 'Play a round to see your words here.'
 
 Spec: 8.1, 8.2","Mistakes tab grouped by word, showing given and expected | Due tab lists words due today with next review date | Empty state: 'Play a round to see your words here.'","Learning and progress,story"
-CHI-080,Database migrations,To do,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,"CHI-015, CHI-016",,"7, 7.1, D31","Tables, indexes, the new-user profile trigger and the cards stale-write guard.
+CHI-080,Database migrations,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,"CHI-015, CHI-016",,"7, 7.1, D31","Tables, indexes, the new-user profile trigger and the cards stale-write guard.
 
 Acceptance criteria:
 - profiles, games, review_log, cards created as in 7.1
@@ -463,7 +463,7 @@ Acceptance criteria:
 - Applied locally, then staging, then production before dependent code merges
 
 Spec: 7, 7.1, D31","profiles, games, review_log, cards created as in 7.1 | New auth user gets a profile row | cards update with smaller log_count is skipped | Applied locally, then staging, then production before dependent code merges","Accounts and sync,story"
-CHI-081,Row Level Security and RLS tests,To do,Accounts and sync,test,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,CHI-080,,"7.2, 10.2","Policies from 7.2, proven by tests.
+CHI-081,Row Level Security and RLS tests,Done,Accounts and sync,test,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,CHI-080,,"7.2, 10.2","Policies from 7.2, proven by tests.
 
 Acceptance criteria:
 - RLS enabled on all four tables
@@ -480,7 +480,7 @@ Acceptance criteria:
 - A code reaches an address outside the team
 
 Spec: 7.3, D10, D15",Template shows {{ .Token }} and no link | Production custom SMTP set to SES (or Resend) | A code reaches an address outside the team,"Accounts and sync,chore"
-CHI-083,Sign-in sheet with 6-digit code,To do,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-082, CHI-053",,"7.3, 8.1, 8.2","As a learner, I sign in by typing a code from my email into the same tab.
+CHI-083,Sign-in sheet with 6-digit code,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-082, CHI-053",,"7.3, 8.1, 8.2","As a learner, I sign in by typing a code from my email into the same tab.
 
 Acceptance criteria:
 - signInWithOtp sends the code; verifyOtp type email checks it
@@ -488,7 +488,7 @@ Acceptance criteria:
 - Inline errors for wrong or expired code and for send failure
 
 Spec: 7.3, 8.1, 8.2",signInWithOtp sends the code; verifyOtp type email checks it | Resend code offered after the cooldown | Inline errors for wrong or expired code and for send failure,"Accounts and sync,story"
-CHI-084,Outbox and flush,To do,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-080, CHI-070, CHI-071",,"7.3, 8.2","Every signed-in write goes to an IndexedDB outbox first, then to Supabase.
+CHI-084,Outbox and flush,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-080, CHI-070, CHI-071",,"7.3, 8.2","Every signed-in write goes to an IndexedDB outbox first, then to Supabase.
 
 Acceptance criteria:
 - games rows always flushed before review_log rows
@@ -496,7 +496,7 @@ Acceptance criteria:
 - Failed flush keeps rows and shows 'Saved on this device, will sync later.'
 
 Spec: 7.3, 8.2","games rows always flushed before review_log rows | Flush on round end, app start and the online event | Failed flush keeps rows and shows 'Saved on this device, will sync later.'","Accounts and sync,story"
-CHI-085,Guest to account upload,To do,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,"CHI-083, CHI-084",,"7.3, D6","As a guest who signs in, I keep my progress.
+CHI-085,Guest to account upload,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,"CHI-083, CHI-084",,"7.3, D6","As a guest who signs in, I keep my progress.
 
 Acceptance criteria:
 - Prompt 'Save your progress to this account?' defaults to Yes
@@ -504,21 +504,21 @@ Acceptance criteria:
 - No deletes guest data
 
 Spec: 7.3, D6",Prompt 'Save your progress to this account?' defaults to Yes | Yes rewrites user_id and uploads games then review_log with on conflict do nothing | No deletes guest data,"Accounts and sync,story"
-CHI-086,Cross-device merge,To do,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,"CHI-084, CHI-072",,"7.3, D5, D31","After each sync, download the full log, replay it, upsert cards with log_count.
+CHI-086,Cross-device merge,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,2,"CHI-084, CHI-072",,"7.3, D5, D31","After each sync, download the full log, replay it, upsert cards with log_count.
 
 Acceptance criteria:
 - Two devices converge to the same Progress
 - Stale device cannot overwrite newer cards
 
 Spec: 7.3, D5, D31",Two devices converge to the same Progress | Stale device cannot overwrite newer cards,"Accounts and sync,story"
-CHI-087,Sign-out with unsynced warning,To do,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,1,CHI-084,,"7.3, D35","Sign-out clears local data, warning first if the outbox is not empty.
+CHI-087,Sign-out with unsynced warning,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,1,CHI-084,,"7.3, D35","Sign-out clears local data, warning first if the outbox is not empty.
 
 Acceptance criteria:
 - Local copy cleared on sign-out
 - Unsynced rows trigger 'Some progress hasn't synced yet. Sign out anyway?' with Sign out and Wait
 
 Spec: 7.3, D35",Local copy cleared on sign-out | Unsynced rows trigger 'Some progress hasn't synced yet. Sign out anyway?' with Sign out and Wait,"Accounts and sync,story"
-CHI-088,Sync tests against local Supabase,To do,Accounts and sync,test,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-085, CHI-086",,10.2,"Prove the sync rules in 7.3.
+CHI-088,Sync tests against local Supabase,Done,Accounts and sync,test,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-085, CHI-086",,10.2,"Prove the sync rules in 7.3.
 
 Acceptance criteria:
 - Guest upload is idempotent
@@ -528,7 +528,7 @@ Acceptance criteria:
 - New user gets a profile row
 
 Spec: 10.2",Guest upload is idempotent | games flush before review rows | Two-device merge converges | Smaller log_count upsert ignored | New user gets a profile row,"Accounts and sync,test"
-CHI-089,Settings screen,To do,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,1,CHI-087,,8.1,"Default level, account sign in or out, link to the privacy note.
+CHI-089,Settings screen,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,1,CHI-087,,8.1,"Default level, account sign in or out, link to the privacy note.
 
 Acceptance criteria:
 - Default level saved
@@ -536,7 +536,7 @@ Acceptance criteria:
 - Privacy note linked
 
 Spec: 8.1",Default level saved | Sign in and sign out reachable | Privacy note linked,"Accounts and sync,story"
-CHI-090,Accessibility pass,To do,"Accessibility, states, privacy",story,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,3,CHI-062,,9,"WCAG 2.2 AA: screen reader names in Italian, full keyboard play, visible focus, 44 px targets.
+CHI-090,Accessibility pass,Done,"Accessibility, states, privacy",story,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,3,CHI-062,,9,"WCAG 2.2 AA: screen reader names in Italian, full keyboard play, visible focus, 44 px targets.
 
 Acceptance criteria:
 - Each card's accessible name lists name and attributes in Italian
@@ -544,7 +544,7 @@ Acceptance criteria:
 - Touch targets at least 44 x 44 px
 
 Spec: 9",Each card's accessible name lists name and attributes in Italian | Full round playable by keyboard with visible focus | Touch targets at least 44 x 44 px,"Accessibility, states, privacy,story"
-CHI-091,"Loading, empty and error states",To do,"Accessibility, states, privacy",story,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,2,CHI-084,,8.2,"Every state in the 8.2 table.
+CHI-091,"Loading, empty and error states",Done,"Accessibility, states, privacy",story,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,2,CHI-084,,8.2,"Every state in the 8.2 table.
 
 Acceptance criteria:
 - Skeleton board while loading
@@ -552,7 +552,7 @@ Acceptance criteria:
 - Connection lost mid-round keeps the round playable
 
 Spec: 8.2",Skeleton board while loading | Sync failed banner never blocks play | Connection lost mid-round keeps the round playable,"Accessibility, states, privacy,story"
-CHI-092,Privacy note page,To do,"Accessibility, states, privacy",story,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,1,CHI-011,,"7.3, 9, D28","What is stored, third parties, Safari clearing guest data, and the deletion email address.
+CHI-092,Privacy note page,Done,"Accessibility, states, privacy",story,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,1,CHI-011,,"7.3, 9, D28","What is stored, third parties, Safari clearing guest data, and the deletion email address.
 
 Acceptance criteria:
 - Lists Supabase, Cloudflare, the email sender (SES or Resend) and Sentry, and what each sees
@@ -567,7 +567,7 @@ Acceptance criteria:
 - No rows remain in games, review_log, cards, profiles
 
 Spec: 7.3, 10.3","User deleted on staging | No rows remain in games, review_log, cards, profiles","Accessibility, states, privacy,task"
-CHI-094,Performance and Lighthouse budget,To do,"Accessibility, states, privacy",test,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,2,CHI-090,,"9, 10.3","Initial JS under 250 KB gzipped, LCP under 2.5 s, accessibility score at least 95.
+CHI-094,Performance and Lighthouse budget,Done,"Accessibility, states, privacy",test,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,2,CHI-090,,"9, 10.3","Initial JS under 250 KB gzipped, LCP under 2.5 s, accessibility score at least 95.
 
 Acceptance criteria:
 - Bundle size checked in CI or by hand
@@ -575,7 +575,7 @@ Acceptance criteria:
 - Lighthouse accessibility at least 95
 
 Spec: 9, 10.3",Bundle size checked in CI or by hand | Lighthouse mobile LCP under 2.5 s | Lighthouse accessibility at least 95,"Accessibility, states, privacy,test"
-CHI-100,End-to-end Playwright suite,To do,Testing and playtest,test,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,3,"CHI-060, CHI-061, CHI-083",,10.2,"Chromium and WebKit, against local Supabase.
+CHI-100,End-to-end Playwright suite,Done,Testing and playtest,test,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,3,"CHI-060, CHI-061, CHI-083",,10.2,"Chromium and WebKit, against local Supabase.
 
 Acceptance criteria:
 - Seeded round to a win
@@ -650,7 +650,7 @@ Acceptance criteria:
 - No email, IP, query string or hash in it
 
 Spec: 9, 10.3","Event received | No email, IP, query string or hash in it","Launch,task"
-CHI-113,README,To do,Launch,chore,Sprint 4: Fix and launch,Day 16,Wed Oct 28,2,CHI-025,,"1, 10.3","How to run, test, deploy and add a character.
+CHI-113,README,Done,Launch,chore,Sprint 4: Fix and launch,Day 16,Wed Oct 28,2,CHI-025,,"1, 10.3","How to run, test, deploy and add a character.
 
 Acceptance criteria:
 - Run, test, deploy and add-a-character sections written
