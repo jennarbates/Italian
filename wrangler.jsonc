@@ -15,4 +15,7 @@
   // so they stay on while the workers.dev route for production is off.
   "workers_dev": false,
   "preview_urls": true,
+  // Workers Builds runs `wrangler preview` for non-production branches, which needs
+  // this block even when empty. Assets and compatibility settings stay at the top level.
+  "previews": {},
 }
