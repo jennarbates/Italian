@@ -57,7 +57,7 @@ export function Progress() {
 
       <div role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`}>
         {!loaded ? (
-          <p aria-busy="true" className="text-stone-500">
+          <p aria-busy="true" className="text-stone-600">
             Loading…
           </p>
         ) : empty ? (
@@ -85,7 +85,7 @@ function Mistakes({ log }: { log: ReviewLogRow[] }) {
           <li key={g.lexiconId} className="rounded-xl bg-white p-3 ring-1 ring-stone-200">
             <p>
               <strong lang="it">{w?.text ?? g.lexiconId}</strong>{" "}
-              <span className="text-sm text-stone-500">{w?.gloss}</span>
+              <span className="text-sm text-stone-600">{w?.gloss}</span>
             </p>
             <ul className="mt-1 flex flex-col gap-0.5 text-sm">
               {g.pairs.map((p) => (
@@ -95,7 +95,7 @@ function Mistakes({ log }: { log: ReviewLogRow[] }) {
                   </span>
                   {" → "}
                   <strong lang="it">{p.expected}</strong>
-                  {p.count > 1 && <span className="text-stone-500"> ×{p.count}</span>}
+                  {p.count > 1 && <span className="text-stone-600"> ×{p.count}</span>}
                 </li>
               ))}
             </ul>
@@ -157,7 +157,7 @@ function CardList({
     <section aria-label={title.replace(/ \(\d+\)$/, "")}>
       <h2 className="mb-2 font-semibold">{title}</h2>
       {cards.length === 0 ? (
-        <p className="text-sm text-stone-500">{empty}</p>
+        <p className="text-sm text-stone-600">{empty}</p>
       ) : (
         <ul className="flex flex-col divide-y divide-stone-100 rounded-xl bg-white ring-1 ring-stone-200">
           {cards.map((c) => (
@@ -167,7 +167,7 @@ function CardList({
             >
               <span>
                 <strong lang="it">{word.get(c.lexiconId)?.text ?? c.lexiconId}</strong>{" "}
-                <span className="text-xs text-stone-500">{directionLabel[c.direction]}</span>
+                <span className="text-xs text-stone-600">{directionLabel[c.direction]}</span>
               </span>
               <time dateTime={c.card.due.toISOString()} className="text-sm text-stone-600">
                 {format.format(c.card.due)}

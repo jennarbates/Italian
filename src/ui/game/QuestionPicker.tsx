@@ -26,7 +26,7 @@ export function QuestionPicker({
               <span lang="it" className="font-medium">
                 {q.text}
               </span>
-              <span className="text-xs text-stone-500">
+              <span className="text-xs text-stone-600">
                 {previous ? previous.answerText : hintFor(q)}
               </span>
             </button>

@@ -90,7 +90,7 @@ export function TileBuilder({ onAsk }: { onAsk: (templateId: string, fill: Fill)
             className={`min-h-11 min-w-16 rounded-lg border-2 px-2 ${
               value
                 ? "border-stone-900 bg-white font-semibold"
-                : "border-dashed border-stone-300 text-sm text-stone-400"
+                : "border-dashed border-stone-400 text-sm text-stone-600"
             }`}
             lang={value ? "it" : undefined}
           >

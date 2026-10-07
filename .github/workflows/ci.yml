@@ -38,6 +38,10 @@ jobs:
       - name: Format
         run: pnpm format:check
 
+      # Spec 9: initial JS under 250 KB gzipped.
+      - name: Bundle size
+        run: pnpm build && pnpm check:bundle
+
       - uses: supabase/setup-cli@v3
         with:
           version: 2.119.0

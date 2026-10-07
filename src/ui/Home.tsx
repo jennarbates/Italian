@@ -42,7 +42,7 @@ export function Home() {
     <section className="flex flex-col gap-6 p-4">
       <header className="flex items-baseline justify-between pt-2">
         <h1 className="text-4xl font-bold">Chi è?</h1>
-        <p className="text-sm text-stone-500">
+        <p className="text-sm text-stone-600">
           Guest ·{" "}
           <Link
             to="/settings"
@@ -86,7 +86,7 @@ export function Home() {
             />
             <span>
               <span className="block font-medium">{l.title}</span>
-              <span className="block text-sm text-stone-500">{l.detail}</span>
+              <span className="block text-sm text-stone-600">{l.detail}</span>
             </span>
           </label>
         ))}

@@ -203,14 +203,14 @@ function sheetFor(
         summary: <strong lang="it">{last?.answerText}</strong>,
         body: (
           <div className="flex flex-col gap-2 py-3">
-            <p lang="it" className="text-stone-500">
+            <p lang="it" className="text-stone-600">
               {last?.text}
             </p>
             <p lang="it" className="text-xl font-semibold">
               {last?.answerText}
             </p>
             <FeedbackText feedback={game.lastFeedback} tone="info" />
-            <p className="text-sm text-stone-500">
+            <p className="text-sm text-stone-600">
               Flip down everyone this rules out, then tap Avanti.
             </p>
           </div>
