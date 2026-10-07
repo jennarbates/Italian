@@ -702,7 +702,7 @@ Home ──► Game ──► Round end ──► Game (play again)
 | Screen | Contents |
 |---|---|
 | Home | Play (or "Continue round" when one is saved), level picker (1 or 2), Progress, Settings, sign-in status |
-| Game | Top bar (turn, whose turn). Your secret card (small). Board: 4 columns × 6 rows. Bottom sheet: question picker (Level 1) or tile builder (Level 2) on your turn; CPU question with Sì / No on its turn; feedback after each action. Collapsed, the sheet shows one line (e.g. the last answer). "Indovina" (guess) button. "Avanti" (end turn) button. A menu with "Quit round" (asks to confirm). Long-press a card for the detail view (3.5) |
+| Game | Top bar (turn, whose turn). Your secret card (small; tap it for the detail view, 3.5). Board: 4 columns × 6 rows. Bottom sheet: question picker (Level 1) or tile builder (Level 2) on your turn; CPU question with Sì / No on its turn; feedback after each action. Collapsed, the sheet shows one line (e.g. the last answer). "Indovina" (guess) button. "Avanti" (end turn) button. A menu with "Quit round" (asks to confirm). Long-press a card for the detail view (3.5) |
 | Round end | Result, both secrets revealed, question history with answers, this round's mistakes, Play again |
 | Progress | Mistakes tab: grouped by word, showing what was given and what was expected. Due tab: words due today and their next review date |
 | Settings | Default level, account (sign in or out, with the unsynced warning from 7.3), link to the privacy note |

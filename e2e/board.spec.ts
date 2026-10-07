@@ -117,6 +117,18 @@ test("the top bar shows the turn, whose turn, and your own card", async ({ page 
 });
 
 test.describe("card detail view (spec 3.5)", () => {
+  test("clicking your own card in the top bar opens it large", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    const bar = page.locator("header");
+    const label = await bar.getByRole("img", { name: /^Your card: / }).getAttribute("aria-label");
+    const name = label?.replace("Your card: ", "") ?? "";
+    await bar.getByRole("button", { name: /Zoom your card/ }).click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.getByRole("img", { name })).toBeVisible();
+    await dialog.getByRole("button", { name: "Close" }).click();
+    await expect(dialog).toBeHidden();
+  });
+
   test("long-press opens the face large with no text, and does not flip the card", async ({
     page,
   }) => {
