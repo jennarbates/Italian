@@ -414,7 +414,7 @@
   {
    "key": "CHI-017",
    "title": "CHI-017 Sentry, errors only, with URL scrubbing",
-   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **2 points** · chore\nEpic: {{E1}}\n\nSentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.\n\n### Acceptance criteria\n\n- [ ] sendDefaultPii is false; replay and tracing off\n- [ ] beforeSend and beforeBreadcrumb strip query strings and hashes\n- [ ] IP address storage turned off in the Sentry project\n- [ ] Releases tagged with the git commit\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D19](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
+   "body": "**Sprint 1: Foundations** · Day 2, Thu Oct 8 · **2 points** · chore\nEpic: {{E1}}\n\nSentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.\n\n### Acceptance criteria\n\n- [ ] No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off\n- [ ] beforeSend and beforeBreadcrumb strip query strings and hashes\n- [ ] IP address storage turned off in the Sentry project\n- [ ] Releases tagged with the git commit\n\n### Depends on\n\n- {{CHI-011}} Scaffold the app\n\n### Spec\n\n[9](https://github.com/jennarbates/Italian/blob/main/spec.md#9-non-functional) · [D19](https://github.com/jennarbates/Italian/blob/main/spec.md#112-decision-log)",
    "labels": [
     "type: chore",
     "epic: Repo and infra"

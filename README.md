@@ -57,7 +57,7 @@ The app is the Vite build served as Cloudflare Workers static assets ([wrangler.
 - Every pull request is uploaded as a preview version with its own `workers.dev` URL, built against the **staging** Supabase project. Cloudflare comments the URL on the PR.
 - Merging to `main` deploys to [chie.parlaplay.games](https://chie.parlaplay.games), built against **production**.
 
-[scripts/cloudflare-build.ts](scripts/cloudflare-build.ts) picks the keys from the branch name and fails the build if a variable is missing, if a preview would point at production, or if a key is a secret or service role key.
+[scripts/cloudflare-build.ts](scripts/cloudflare-build.ts) picks the keys from the branch name, tags Sentry with the commit and environment, and fails the build if a variable is missing, if a preview would point at production, or if a key is a secret or service role key.
 
 One-time setup in the Cloudflare dashboard (Workers & Pages → Create → Import a repository → this repo):
 
@@ -66,6 +66,6 @@ One-time setup in the Cloudflare dashboard (Workers & Pages → Create → Impor
 | Build command | `pnpm build:cloudflare` |
 | Deploy command | `npx wrangler deploy` |
 | Non-production branch builds | On, with the default preview command |
-| Build variables | `STAGING_SUPABASE_URL`, `STAGING_SUPABASE_PUBLISHABLE_KEY`, `PRODUCTION_SUPABASE_URL`, `PRODUCTION_SUPABASE_PUBLISHABLE_KEY` |
+| Build variables | `STAGING_SUPABASE_URL`, `STAGING_SUPABASE_PUBLISHABLE_KEY`, `PRODUCTION_SUPABASE_URL`, `PRODUCTION_SUPABASE_PUBLISHABLE_KEY`, `SENTRY_DSN` |
 
-Only the publishable (anon) keys go in there. The `parlaplay.games` zone has to be on the same Cloudflare account for the custom domain.
+Only the publishable (anon) keys go in there. The `parlaplay.games` zone has to be on the same Cloudflare account for the custom domain. Without `SENTRY_DSN` the app builds with error reporting off. In the Sentry project, turn on Settings → Security & Privacy → "Prevent Storing of IP Addresses".

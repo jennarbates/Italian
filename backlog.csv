@@ -93,12 +93,12 @@ Spec: 7, D16, D17",Staging and production projects exist | Env vars wired per en
 CHI-017,"Sentry, errors only, with URL scrubbing",To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,2,CHI-011,,"9, D19","Sentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.
 
 Acceptance criteria:
-- sendDefaultPii is false; replay and tracing off
+- No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off
 - beforeSend and beforeBreadcrumb strip query strings and hashes
 - IP address storage turned off in the Sentry project
 - Releases tagged with the git commit
 
-Spec: 9, D19",sendDefaultPii is false; replay and tracing off | beforeSend and beforeBreadcrumb strip query strings and hashes | IP address storage turned off in the Sentry project | Releases tagged with the git commit,"Repo, CI and infra,chore"
+Spec: 9, D19",No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off | beforeSend and beforeBreadcrumb strip query strings and hashes | IP address storage turned off in the Sentry project | Releases tagged with the git commit,"Repo, CI and infra,chore"
 CHI-018,Verify domain in AWS SES and request production access,To do,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,CHI-010,yes,"7.3, D15","Approval can take a day or more, so it starts on day 2.
 
 Acceptance criteria:

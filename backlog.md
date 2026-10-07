@@ -147,7 +147,7 @@ Repo, CI and infra · chore · 2 pts · spec 9, D19 · depends on CHI-011
 
 Sentry browser SDK with no replay, no tracing, no PII, and URLs stripped of query strings and hashes.
 
-- [ ] sendDefaultPii is false; replay and tracing off
+- [ ] No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off
 - [ ] beforeSend and beforeBreadcrumb strip query strings and hashes
 - [ ] IP address storage turned off in the Sentry project
 - [ ] Releases tagged with the git commit

@@ -747,7 +747,7 @@ docs/spec.md   this file
 
 **Repo and delivery.** Code lives on GitHub. GitHub Actions runs typecheck, lint, Vitest and Playwright on every push and pull request; `main` is protected and merges need green CI. CI starts a local Supabase first (`supabase start`, the Supabase CLI command that launches the local stack in Docker) so the sync tests and Playwright sign-in test have a backend. Cloudflare's GitHub integration builds every pull request to its own preview URL, built with the staging Supabase URL and key; merging to `main` deploys production with the production URL and key.
 
-**Error reporting.** Sentry browser SDK, errors only: no session replay, no performance tracing, `sendDefaultPii: false`, and the user's email is never sent. A `beforeSend` and `beforeBreadcrumb` hook strips query strings and hashes from every URL, and the Sentry project setting that prevents storing IP addresses is turned on. Each release is tagged with its git commit.
+**Error reporting.** Sentry browser SDK, errors only: no session replay, no performance tracing, no session tracking, every `dataCollection` category off (Sentry 11's replacement for `sendDefaultPii: false`), and the user's email is never sent. A `beforeSend` and `beforeBreadcrumb` hook strips query strings and hashes from every URL, and the Sentry project setting that prevents storing IP addresses is turned on. Each release is tagged with its git commit.
 
 **Accessibility.** Target WCAG 2.2 AA.
 - Every card is a button with an accessible name listing the name and attributes in Italian (e.g. "Giulia: capelli castani lunghi, occhi verdi, occhiali"). This gives screen reader users the same information the picture gives everyone else, and doubles as reading practice.
