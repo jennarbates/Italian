@@ -1,0 +1,20 @@
+{
+  "verb.avere": "Use *ha* (avere) for things someone has: *Ha {art} {noun}?*",
+  "verb.essere": "Use *è* (essere) for what someone is: *È {art} {noun}?*",
+  "art.msg.consonant": "*{noun}* is masculine singular and starts with a consonant: use *il*.",
+  "art.fsg": "*{noun}* is feminine singular: use *la*.",
+  "art.mpl.consonant": "*{noun}* is masculine plural and starts with a consonant: use *i*.",
+  "art.mpl.vowel": "*{noun}* is masculine plural and starts with a vowel: use *gli*.",
+  "art.indef.m": "*{noun}* is masculine: use *un*.",
+  "art.indef.f": "*{noun}* is feminine: use *una*.",
+  "agreement": "*{expected}*, not *{given}*: *{noun}* is {genderNumber}.",
+  "meaning.mismatch": "*{noun}* can't be *{given}*. Try a word for {allowed}.",
+  "meaning.wordChoice": "For *{noun}*, Italians say *{use}*.",
+  "duplicate": "You already asked that. The answer was: {answerText}",
+  "shape.noVerb": "Add a verb.",
+  "shape.noArt": "Add an article.",
+  "shape.noNoun": "Add a noun.",
+  "shape.needsAdj": "*{noun}* needs a description: add a color or length.",
+  "shape.noAdjAllowed": "Just ask *Ha {art} {noun}?*",
+  "answer.wrong": "Not quite: {answerText}"
+}
