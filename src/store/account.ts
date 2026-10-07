@@ -5,6 +5,7 @@
 import { create } from "zustand";
 import { read, remove, write } from "../services/storage.ts";
 import { useGameStore } from "./gameStore.ts";
+import { usePrefs } from "./prefs.ts";
 import { content } from "../content/index.ts";
 import { pull, useSyncStore, type Op } from "../services/sync.ts";
 import { useAuthStore } from "./authStore.ts";
@@ -64,7 +65,10 @@ export async function onAccountChange(userId: string | null) {
   }
   await useProgressStore.getState().switchOwner(userId ?? "guest");
   await useSyncStore.getState().load(userId);
-  if (userId) await syncNow();
+  if (userId) {
+    await usePrefs.getState().loadFromProfile(userId);
+    await syncNow();
+  }
 }
 
 // Push the outbox, then pull every device's rows and merge them in (spec 7.3).

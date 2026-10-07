@@ -1,17 +1,8 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import type { Level } from "../engine/index.ts";
 import { useAuthStore } from "../store/authStore.ts";
 import { useGameStore } from "../store/gameStore.ts";
-
-const levelKey = "chie.level";
-function savedLevel(): Level {
-  try {
-    return localStorage.getItem(levelKey) === "2" ? 2 : 1;
-  } catch {
-    return 1;
-  }
-}
+import { usePrefs } from "../store/prefs.ts";
 
 const levels: { level: Level; title: string; detail: string }[] = [
   { level: 1, title: "Level 1", detail: "Tap ready-made questions, with English hints" },
@@ -24,17 +15,10 @@ export function Home() {
   const navigate = useNavigate();
   const { status, game, start } = useGameStore();
   const auth = useAuthStore();
-  const [level, setLevel] = useState<Level>(savedLevel);
+  const { level, setLevel } = usePrefs();
   const saved = status === "ready" && !!game && game.phase !== "over" && game.phase !== "setup";
 
-  const choose = (l: Level) => {
-    setLevel(l);
-    try {
-      localStorage.setItem(levelKey, String(l));
-    } catch {
-      // Remembering the level is a convenience; play works without it.
-    }
-  };
+  const choose = (l: Level) => void setLevel(l, auth.userId);
   const newRound = () => {
     start(level); // over a saved round, this records it as abandoned
     void navigate("/play");

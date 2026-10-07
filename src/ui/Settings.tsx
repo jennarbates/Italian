@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { requestSignOut, signOutNow } from "../store/account.ts";
 import { useAuthStore } from "../store/authStore.ts";
+import { usePrefs } from "../store/prefs.ts";
 import { SignInSheet } from "./SignInSheet.tsx";
 
-// Spec 8.1: account (sign in or out) and the privacy note. The default level and
-// the unsynced sign-out warning arrive with CHI-089 and CHI-087.
+// Spec 8.1: the default level, the account (sign in, or sign out with the
+// unsynced warning), and the privacy note.
 export function Settings() {
-  const { status, email } = useAuthStore();
+  const { status, email, userId } = useAuthStore();
+  const { level, setLevel } = usePrefs();
   const [signingIn, setSigningIn] = useState(false);
   const [busy, setBusy] = useState(false);
   const [unsynced, setUnsynced] = useState(false);
@@ -77,6 +79,29 @@ export function Settings() {
           </>
         )}
       </section>
+
+      <fieldset className="flex flex-col gap-2 rounded-2xl bg-white p-4 ring-1 ring-stone-200">
+        <legend className="float-left mb-1 font-semibold">Default level</legend>
+        {([1, 2] as const).map((l) => (
+          <label key={l} className="flex min-h-11 cursor-pointer items-center gap-3">
+            <input
+              type="radio"
+              name="default-level"
+              checked={level === l}
+              onChange={() => void setLevel(l, userId)}
+              className="h-5 w-5 accent-stone-900"
+            />
+            <span>
+              Level {l}{" "}
+              <span className="text-sm text-stone-600">
+                {l === 1
+                  ? "· ready-made questions with English hints"
+                  : "· build questions from tiles"}
+              </span>
+            </span>
+          </label>
+        ))}
+      </fieldset>
 
       <Link
         to="/privacy"
