@@ -5,3 +5,5 @@ backlog.csv
 # planning docs are hand-formatted
 *.md
 github-setup
+# created by supabase link; ignored by supabase/.gitignore
+supabase/.temp

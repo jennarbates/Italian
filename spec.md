@@ -815,21 +815,21 @@ docs/spec.md   this file
 - [ ] Deployed URL loads on an iPhone and plays a full round.
 - [ ] Deployed URL loads on an Android phone and plays a full round.
 - [ ] All 24 characters render with art that matches their attributes (spot check against data for every character).
-- [ ] Level 1 and Level 2 both playable to a win and a loss.
-- [ ] A grammar mistake at Level 2 shows feedback naming the rule and appears in the Mistakes tab; an agreement slip shows the correct form and also appears there.
+- [x] Level 1 and Level 2 both playable to a win and a loss.
+- [x] A grammar mistake at Level 2 shows feedback naming the rule and appears in the Mistakes tab; an agreement slip shows the correct form and also appears there.
 - [ ] Every lexicon entry has a `level` from the Profilo check.
-- [ ] Guest progress survives a reload.
-- [ ] Signing in with guest progress uploads it; signing in on a second browser shows the same Progress.
-- [ ] RLS test proves user A cannot read user B's `review_log`.
+- [x] Guest progress survives a reload.
+- [x] Signing in with guest progress uploads it; signing in on a second browser shows the same Progress.
+- [x] RLS test proves user A cannot read user B's `review_log`.
 - [ ] A sign-in code email reaches an address outside the team (SES out of the sandbox, or Resend as the fallback).
 - [ ] The privacy note is live and gives the account deletion email; one deletion has been tested on staging.
 - [ ] A pull request preview signs in against staging, never production.
 - [ ] Sentry receives a test error from production, with no personal data in it.
 - [ ] At least 3 A1 learners have playtested, and their findings are logged and triaged.
-- [ ] `engine/` coverage at or above 90%; CI green.
-- [ ] Lighthouse mobile: LCP under 2.5 s, accessibility score at least 95.
+- [x] `engine/` coverage at or above 90%; CI green.
+- [x] Lighthouse mobile: LCP under 2.5 s, accessibility score at least 95.
 - [ ] Every `TBD:` in this doc is resolved or explicitly moved to section 11.
-- [ ] README covers run, test, deploy, and adding a character.
+- [x] README covers run, test, deploy, and adding a character.
 
 ### 10.4 Milestones
 
