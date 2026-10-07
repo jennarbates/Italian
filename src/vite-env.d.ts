@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-// Set per environment by scripts/cloudflare-build.ts (spec 9, D16, D19), or by CI
+// Set per environment by vite.config.ts on Workers Builds (spec 9, D16, D19), or by CI
 // from the local Supabase.
 interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL?: string;

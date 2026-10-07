@@ -107,10 +107,10 @@ To change the art, replace files in `public/art/` with new SVGs of the same name
 
 The app is the Vite build served as Cloudflare Workers static assets ([wrangler.jsonc](wrangler.jsonc)). Cloudflare's GitHub integration (Workers Builds) deploys it:
 
-- Every pull request is uploaded as a preview version with its own `workers.dev` URL, built against the **staging** Supabase project. Cloudflare comments the URL on the PR.
+- Every pull request is uploaded as a preview with its own URL, `<branch>-italian.jennaraquelbates.workers.dev`, built against the **staging** Supabase project. Cloudflare comments the URL on the PR.
 - Merging to `main` deploys to [chie.parlaplay.games](https://chie.parlaplay.games), built against **production**.
 
-[scripts/cloudflare-build.ts](scripts/cloudflare-build.ts) picks the keys from the branch name, tags Sentry with the commit and environment, and fails the build if a variable is missing, if a preview would point at production, or if a key is a secret or service role key.
+On Workers Builds, [vite.config.ts](vite.config.ts) picks the keys from the branch name (using [scripts/cloudflare-env.ts](scripts/cloudflare-env.ts)), whichever build command runs, since previews run plain `pnpm run build`. It tags Sentry with the commit and environment, and fails the build if a variable is missing, if a preview would point at production, or if a key is a secret or service role key.
 
 One-time setup in the Cloudflare dashboard (Workers & Pages → Create → Import a repository → this repo):
 

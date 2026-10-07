@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:cloudflare": "node scripts/cloudflare-build.ts",
+    "build:cloudflare": "pnpm build",
     "preview": "vite preview",
     "check:bundle": "node scripts/check-bundle.ts",
     "typecheck": "tsc -b",
