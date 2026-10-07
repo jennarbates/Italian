@@ -2,9 +2,10 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { contentCheck } from "./scripts/content-check.ts";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), contentCheck()],
   test: {
     include: ["src/**/*.test.{ts,tsx}", "scripts/**/*.test.ts"],
     environment: "node",
