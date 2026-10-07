@@ -51,6 +51,21 @@ jobs:
       - name: Start local Supabase
         run: supabase start -x studio,storage-api,imgproxy,edge-runtime,logflare,vector,supavisor
 
+      # The app (built by Playwright) and the sync tests talk to the local Supabase:
+      # its URL, public key and inbox. config.toml allows a sign-in email a second,
+      # so the resend cooldown can be short.
+      - name: Point the app at local Supabase
+        run: |
+          supabase status -o env > "$RUNNER_TEMP/supabase.env"
+          echo "Supabase gives: $(cut -d= -f1 "$RUNNER_TEMP/supabase.env" | tr '\n' ' ')"
+          set -a; . "$RUNNER_TEMP/supabase.env"; set +a
+          {
+            echo "VITE_SUPABASE_URL=$API_URL"
+            echo "VITE_SUPABASE_PUBLISHABLE_KEY=${PUBLISHABLE_KEY:-$ANON_KEY}"
+            echo "SUPABASE_INBOX_URL=${MAILPIT_URL:-${INBUCKET_URL:-http://127.0.0.1:54324}}"
+            echo "VITE_OTP_COOLDOWN_S=2"
+          } >> "$GITHUB_ENV"
+
       - name: Vitest
         run: pnpm test
 
