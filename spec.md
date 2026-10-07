@@ -239,7 +239,7 @@ A specific form of an adjective is referenced as `<lemmaId>#<formKey>`, e.g. `ad
 ]
 ```
 
-Full MVP lexicon: 8 nouns (`capelli`, `occhi`, `occhiali`, `cappello`, `barba`, `baffi`, `uomo`, `donna`), 10 adjectives (`biondo`, `castano`, `nero`, `rosso`, `bianco`, `corto`, `lungo`, `azzurro`, `marrone`, `verde`), articles (`il`, `la`, `i`, `gli`, `un`, `una`), verbs (`ha`, `è`).
+Full MVP lexicon: 8 nouns (`capelli`, `occhi`, `occhiali`, `cappello`, `barba`, `baffi`, `uomo`, `donna`), 10 adjectives (`biondo`, `castano`, `nero`, `rosso`, `bianco`, `corto`, `lungo`, `azzurro`, `marrone`, `verde`), articles (`il`, `la`, `l'`, `i`, `gli`, `un`, `una`), verbs (`ha`, `è`). `l'` is there because every noun needs a definite article and `uomo`'s is `l'`; no question uses it, since `uomo` is only asked with `È un uomo?`.
 
 Vocabulary choice: `castani` for brown hair and `azzurri` for blue eyes, the standard textbook forms. For brown eyes, both `castani` and `marroni` are accepted: `castani` is the traditional form and `marroni` is very common in everyday speech, and A1 exams (CILS, CELI) publish no word list that picks one. `capelli marroni` is not natural Italian, so it is rejected with a hint. The Italian review in 10.1 confirms all strings.
 
