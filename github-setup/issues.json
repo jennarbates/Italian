@@ -97,6 +97,11 @@
    "name": "epic: Launch",
    "color": "4dcb57",
    "description": "Card belongs to the Launch epic"
+  },
+  {
+   "name": "epic: Desktop",
+   "color": "0e8a16",
+   "description": "Backlog epic: Desktop"
   }
  ],
  "milestones": [
@@ -223,6 +228,15 @@
    "labels": [
     "epic",
     "epic: Launch"
+   ]
+  },
+  {
+   "key": "E11",
+   "title": "Epic: Desktop",
+   "body": "Epic for the Chi è? desktop layout. 12 cards, 32 story points.\n\nSpec: [spec-desktop.md](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md). The cards are attached as sub-issues below. Full backlog: [backlog.md](https://github.com/jennarbates/Italian/blob/main/backlog.md).",
+   "labels": [
+    "epic",
+    "epic: Desktop"
    ]
   }
  ],
@@ -1617,6 +1631,201 @@
    ],
    "points": 1,
    "target_date": "2026-10-29"
+  },
+  {
+   "key": "CHI-116",
+   "title": "CHI-116 Request developer review of the desktop spec",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **1 points** · task\nEpic: {{E11}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nSend DS 4, DS 6 and DS 8 of spec-desktop.md to the developer reviewer.\n\n### Acceptance criteria\n\n- [ ] DS 4, DS 6 and DS 8 sent with a return date of Fri Oct 9\n- [ ] Comments collected in one place\n\n### Spec\n\n[DS 13.1](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-131-spec-sign-off-before-building) · [DS 4](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-4-core-logic-contract-shortcuts) · [DS 6](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-6-game-screen) · [DS 8](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-8-keyboard)",
+   "labels": [
+    "type: task",
+    "epic: Desktop",
+    "waits on others"
+   ],
+   "milestone": "S1",
+   "epic": "E11",
+   "deps": [],
+   "points": 1,
+   "target_date": "2026-10-07"
+  },
+  {
+   "key": "CHI-117",
+   "title": "CHI-117 Ask playtesters to play one round on a laptop",
+   "body": "**Sprint 1: Foundations** · Day 1, Wed Oct 7 · **1 points** · task\nEpic: {{E11}}\n\n> [!NOTE]\n> Waits on someone outside the build. Start it early and chase it.\n\nAsk the MVP playtesters booked for Thu Oct 22 to bring a laptop for one extra round.\n\n### Acceptance criteria\n\n- [ ] At least 2 playtesters confirm they can play one round on a laptop\n- [ ] Each knows whether they will use a mouse or a trackpad\n\n### Spec\n\n[DS 13.2](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-132-tests) · [DD13](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log)",
+   "labels": [
+    "type: task",
+    "epic: Desktop",
+    "waits on others"
+   ],
+   "milestone": "S1",
+   "epic": "E11",
+   "deps": [],
+   "points": 1,
+   "target_date": "2026-10-07"
+  },
+  {
+   "key": "CHI-118",
+   "title": "CHI-118 Paper-trace a desktop round and tag spec v1",
+   "body": "**Sprint 1: Foundations** · Day 3, Fri Oct 9 · **2 points** · spike\nEpic: {{E11}}\n\nTrace the DS 2.1 round by keyboard and by mouse using only the spec, fold in the review, tag v1.\n\n### Acceptance criteria\n\n- [ ] DS 2.1 traced twice, once by keyboard and once by mouse\n- [ ] Every guess logged as a fix or a TBD\n- [ ] Every TBD resolved or moved to DS 14.1\n- [ ] spec-desktop.md tagged v1\n\n### Depends on\n\n- {{CHI-116}} Request developer review of the desktop spec\n\n### Spec\n\n[DS 13.1](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-131-spec-sign-off-before-building) · [DS 2.1](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-21-a-desktop-round-step-by-step)",
+   "labels": [
+    "type: spike",
+    "epic: Desktop"
+   ],
+   "milestone": "S1",
+   "epic": "E11",
+   "deps": [
+    "CHI-116"
+   ],
+   "points": 2,
+   "target_date": "2026-10-09"
+  },
+  {
+   "key": "CHI-119",
+   "title": "CHI-119 Build the desktop app shell and breakpoint",
+   "body": "**Sprint 2: Playable round** · Day 4, Mon Oct 12 · **2 points** · task\nEpic: {{E11}}\n\nuseIsDesktop(), a full-width shell at lg with DesktopNav on every screen but Game.\n\n### Acceptance criteria\n\n- [ ] useIsDesktop() is true at 1024px wide and above, false below, and re-renders on resize\n- [ ] DesktopNav shows Chi è?, Play (or Continue), Progress, Settings and the account on every screen except /play\n- [ ] The current route's link has aria-current=\"page\"\n- [ ] Below 1024px every screen looks exactly as before\n\n### Depends on\n\n- {{CHI-118}} Paper-trace a desktop round and tag spec v1\n\n### Spec\n\n[DS 5](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-5-breakpoint-and-app-shell) · [DD1](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log) · [DD5](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log) · [DD11](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log)",
+   "labels": [
+    "type: task",
+    "epic: Desktop"
+   ],
+   "milestone": "S2",
+   "epic": "E11",
+   "deps": [
+    "CHI-118"
+   ],
+   "points": 2,
+   "target_date": "2026-10-12"
+  },
+  {
+   "key": "CHI-120",
+   "title": "CHI-120 Lay out the game as a 6 × 4 board and side panel",
+   "body": "**Sprint 2: Playable round** · Day 5, Tue Oct 13 · **5 points** · story\nEpic: {{E11}}\n\nAs a learner at a laptop, I see the board large on the left and the questions beside it.\n\n### Acceptance criteria\n\n- [ ] At 1024 × 640 all 24 cards and the whole panel are visible with no page scroll\n- [ ] The panel is aside[aria-label=\"Questions\"] built from sheetFor(), with no collapse toggle\n- [ ] Card positions do not change between playerTurn and playerReview\n- [ ] Resizing across 1024px mid-round keeps flipped cards, a guess in progress and a half-built Level 2 question\n- [ ] Card names scale between 10px and 16px with the card\n\n### Depends on\n\n- {{CHI-119}} Build the desktop app shell and breakpoint\n\n### Spec\n\n[DS 6](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-6-game-screen) · [DS 2.2](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-22-edge-cases) · [DD2](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log) · [DD3](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log) · [DD4](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Desktop"
+   ],
+   "milestone": "S2",
+   "epic": "E11",
+   "deps": [
+    "CHI-119"
+   ],
+   "points": 5,
+   "target_date": "2026-10-13"
+  },
+  {
+   "key": "CHI-121",
+   "title": "CHI-121 Add the hover preview and right-click detail",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **3 points** · story\nEpic: {{E11}}\n\nAs a learner with a mouse, I see a face up close by hovering, and open its details by right-clicking.\n\n### Acceptance criteria\n\n- [ ] The preview appears after 350 ms on a card, only at lg with (hover: hover) and (pointer: fine)\n- [ ] The preview never shows while guessing or with a dialog open, and never covers the hovered card\n- [ ] Right-click or the context menu key on a card opens CardDetail; other elements keep the browser menu\n- [ ] No layout shift on hover; no fade under prefers-reduced-motion\n\n### Depends on\n\n- {{CHI-120}} Lay out the game as a 6 × 4 board and side panel\n\n### Spec\n\n[DS 7](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-7-mouse) · [DD6](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Desktop"
+   ],
+   "milestone": "S2",
+   "epic": "E11",
+   "deps": [
+    "CHI-120"
+   ],
+   "points": 3,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-122",
+   "title": "CHI-122 Adapt round end and dialogs for desktop",
+   "body": "**Sprint 2: Playable round** · Day 6, Wed Oct 14 · **2 points** · task\nEpic: {{E11}}\n\nTwo-column round end with an unfixed action bar; SignInSheet as a centred modal; dialog widths from DS 9.6.\n\n### Acceptance criteria\n\n- [ ] Round end is two columns at lg and Play again has focus when it appears\n- [ ] SignInSheet is a centred 28rem modal at lg and a bottom sheet below\n- [ ] Every dialog closes on Esc and on a backdrop click and returns focus to its opener\n\n### Depends on\n\n- {{CHI-119}} Build the desktop app shell and breakpoint\n\n### Spec\n\n[DS 9.2](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-92-round-end) · [DS 9.6](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-96-dialogs)",
+   "labels": [
+    "type: task",
+    "epic: Desktop"
+   ],
+   "milestone": "S2",
+   "epic": "E11",
+   "deps": [
+    "CHI-119"
+   ],
+   "points": 2,
+   "target_date": "2026-10-14"
+  },
+  {
+   "key": "CHI-123",
+   "title": "CHI-123 Add keyboard shortcuts and the board grid",
+   "body": "**Sprint 2: Playable round** · Day 7, Thu Oct 15 · **5 points** · story\nEpic: {{E11}}\n\nAs a learner at a keyboard, I play a whole round without the mouse.\n\n### Acceptance criteria\n\n- [ ] keyToAction() returns exactly what the DS 4.2 table says for every cell, checked by unit tests\n- [ ] Keys are ignored with Ctrl, Cmd or Alt held, in inputs, and with a dialog open\n- [ ] The board is an ARIA grid with one tab stop; arrows, Home, End, Ctrl+Home and Ctrl+End move focus\n- [ ] ? and the GameMenu item open the Keyboard shortcuts dialog\n- [ ] GameMenu closes on Esc and on an outside click\n\n### Depends on\n\n- {{CHI-120}} Lay out the game as a 6 × 4 board and side panel\n\n### Spec\n\n[DS 4](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-4-core-logic-contract-shortcuts) · [DS 8](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-8-keyboard) · [DD7](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log) · [DD8](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log) · [DD9](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log) · [DD14](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Desktop"
+   ],
+   "milestone": "S2",
+   "epic": "E11",
+   "deps": [
+    "CHI-120"
+   ],
+   "points": 5,
+   "target_date": "2026-10-15"
+  },
+  {
+   "key": "CHI-124",
+   "title": "CHI-124 Lay out Home, Settings and Privacy for desktop",
+   "body": "**Sprint 2: Playable round** · Day 8, Fri Oct 16 · **3 points** · story\nEpic: {{E11}}\n\nTwo-column Home, row-based Settings and a prose-width Privacy page at lg.\n\n### Acceptance criteria\n\n- [ ] Home is two columns at lg with the level cards and Play on the right\n- [ ] Settings rows are label and description left, control right, under Game, Account and About\n- [ ] Privacy is one max-w-prose column with a Back to Settings link\n- [ ] No horizontal scroll at 1024; phone layouts unchanged\n\n### Depends on\n\n- {{CHI-119}} Build the desktop app shell and breakpoint\n\n### Spec\n\n[DS 9.1](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-91-home) · [DS 9.4](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-94-settings) · [DS 9.5](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-95-privacy)",
+   "labels": [
+    "type: story",
+    "epic: Desktop"
+   ],
+   "milestone": "S2",
+   "epic": "E11",
+   "deps": [
+    "CHI-119"
+   ],
+   "points": 3,
+   "target_date": "2026-10-16"
+  },
+  {
+   "key": "CHI-125",
+   "title": "CHI-125 Build the Progress dashboard",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 9, Mon Oct 19 · **3 points** · story\nEpic: {{E11}}\n\nAs a learner at a laptop, I see my totals and both word lists at once.\n\n### Acceptance criteria\n\n- [ ] At lg there is no tablist and Mistakes and Due show side by side\n- [ ] Tiles read Words seen, Due today, Mistakes this week and Rounds played\n- [ ] progressStats() matches the DS 3 definitions and invariants, checked by unit tests\n- [ ] With no data the empty message shows once, full width, with no tiles\n\n### Depends on\n\n- {{CHI-119}} Build the desktop app shell and breakpoint\n\n### Spec\n\n[DS 9.3](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-93-progress-dashboard) · [DS 3](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-3-data-and-content-model) · [DD10](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-142-decision-log)",
+   "labels": [
+    "type: story",
+    "epic: Desktop"
+   ],
+   "milestone": "S3",
+   "epic": "E11",
+   "deps": [
+    "CHI-119"
+   ],
+   "points": 3,
+   "target_date": "2026-10-19"
+  },
+  {
+   "key": "CHI-126",
+   "title": "CHI-126 Add desktop Playwright projects and specs",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 10, Tue Oct 20 · **3 points** · test\nEpic: {{E11}}\n\ndesktop-chromium and desktop-webkit projects at 1440 × 900 and e2e/desktop.spec.ts with every DS 13.3 case.\n\n### Acceptance criteria\n\n- [ ] Every DS 13.3 case is a passing test on both desktop projects\n- [ ] Phone-only specs skip on desktop projects; phone specs pass without edits\n- [ ] a11y.spec.ts passes on the desktop projects\n- [ ] CI runs all four projects green\n\n### Depends on\n\n- {{CHI-120}} Lay out the game as a 6 × 4 board and side panel\n- {{CHI-121}} Add the hover preview and right-click detail\n- {{CHI-122}} Adapt round end and dialogs for desktop\n- {{CHI-123}} Add keyboard shortcuts and the board grid\n- {{CHI-124}} Lay out Home, Settings and Privacy for desktop\n- {{CHI-125}} Build the Progress dashboard\n\n### Spec\n\n[DS 13.2](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-132-tests) · [DS 13.3](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-133-desktop-e2e-cases)",
+   "labels": [
+    "type: test",
+    "epic: Desktop"
+   ],
+   "milestone": "S3",
+   "epic": "E11",
+   "deps": [
+    "CHI-120",
+    "CHI-121",
+    "CHI-122",
+    "CHI-123",
+    "CHI-124",
+    "CHI-125"
+   ],
+   "points": 3,
+   "target_date": "2026-10-20"
+  },
+  {
+   "key": "CHI-127",
+   "title": "CHI-127 Run the desktop manual laptop pass",
+   "body": "**Sprint 3: Progress, sync, playtest** · Day 11, Wed Oct 21 · **2 points** · test\nEpic: {{E11}}\n\nThe DS 13.4 checks on a MacBook and a Windows laptop, before the playtest build.\n\n### Acceptance criteria\n\n- [ ] A full round by mouse and by keyboard in Chrome and Safari on a MacBook at 1280 and 1440\n- [ ] The same plus right-click detail in Edge and Firefox on Windows at 1920 × 1080\n- [ ] Window dragged across 1024px mid-round loses nothing\n- [ ] Results logged in the playtest findings doc\n\n### Depends on\n\n- {{CHI-126}} Add desktop Playwright projects and specs\n\n### Spec\n\n[DS 13.4](https://github.com/jennarbates/Italian/blob/main/spec-desktop.md#ds-134-manual)",
+   "labels": [
+    "type: test",
+    "epic: Desktop"
+   ],
+   "milestone": "S3",
+   "epic": "E11",
+   "deps": [
+    "CHI-126"
+   ],
+   "points": 2,
+   "target_date": "2026-10-21"
   }
  ]
 }

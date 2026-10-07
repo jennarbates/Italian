@@ -43,7 +43,7 @@ CHI-010,Buy parlaplay.games on Cloudflare,Done,"Repo, CI and infra",chore,Sprint
 Acceptance criteria:
 - parlaplay.games registered, with its zone active on Cloudflare
 
-Spec: 7.3, 10.4, D30",parlaplay.games registered, with its zone active on Cloudflare,"Repo, CI and infra,chore"
+Spec: 7.3, 10.4, D30","parlaplay.games registered, with its zone active on Cloudflare","Repo, CI and infra,chore"
 CHI-011,Scaffold the app,Done,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,3,,,"8.1, 9","pnpm, Vite, React, TypeScript strict, React Router, Zustand, Tailwind, ESLint, Prettier, and the folder structure from section 9.
 
 Acceptance criteria:
@@ -98,7 +98,7 @@ Acceptance criteria:
 - IP address storage turned off in the Sentry project
 - Releases tagged with the git commit
 
-Spec: 9, D19",No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off | beforeSend and beforeBreadcrumb strip query strings and hashes | IP address storage turned off in the Sentry project | Releases tagged with the git commit,"Repo, CI and infra,chore"
+Spec: 9, D19","No personal data collected (dataCollection off, the successor to sendDefaultPii); replay, tracing and session tracking off | beforeSend and beforeBreadcrumb strip query strings and hashes | IP address storage turned off in the Sentry project | Releases tagged with the git commit","Repo, CI and infra,chore"
 CHI-018,Verify domain in AWS SES and request production access,In progress,"Repo, CI and infra",chore,Sprint 1: Foundations,Day 2,Thu Oct 8,1,CHI-010,yes,"7.3, D15","Approval can take a day or more, so it starts on day 2.
 
 Acceptance criteria:
@@ -671,3 +671,108 @@ Acceptance criteria:
 - Full round played on iPhone and Android against production
 
 Spec: 1, 3.6, 10.4",chie.parlaplay.games live | released-ids.json updated for this release | Full round played on iPhone and Android against production,"Launch,task"
+CHI-116,Request developer review of the desktop spec,To do,Desktop,task,Sprint 1: Foundations,Day 1,Wed Oct 7,1,,yes,"DS 13.1, DS 4, DS 6, DS 8","Send DS 4, DS 6 and DS 8 of spec-desktop.md to the developer reviewer.
+
+Acceptance criteria:
+- DS 4, DS 6 and DS 8 sent with a return date of Fri Oct 9
+- Comments collected in one place
+
+Spec: DS 13.1, DS 4, DS 6, DS 8","DS 4, DS 6 and DS 8 sent with a return date of Fri Oct 9 | Comments collected in one place","Desktop,task,waits-on-others"
+CHI-117,Ask playtesters to play one round on a laptop,To do,Desktop,task,Sprint 1: Foundations,Day 1,Wed Oct 7,1,,yes,"DS 13.2, DD13","Ask the MVP playtesters booked for Thu Oct 22 to bring a laptop for one extra round.
+
+Acceptance criteria:
+- At least 2 playtesters confirm they can play one round on a laptop
+- Each knows whether they will use a mouse or a trackpad
+
+Spec: DS 13.2, DD13",At least 2 playtesters confirm they can play one round on a laptop | Each knows whether they will use a mouse or a trackpad,"Desktop,task,waits-on-others"
+CHI-118,Paper-trace a desktop round and tag spec v1,To do,Desktop,spike,Sprint 1: Foundations,Day 3,Fri Oct 9,2,CHI-116,,"DS 13.1, DS 2.1","Trace the DS 2.1 round by keyboard and by mouse using only the spec, fold in the review, tag v1.
+
+Acceptance criteria:
+- DS 2.1 traced twice, once by keyboard and once by mouse
+- Every guess logged as a fix or a TBD
+- Every TBD resolved or moved to DS 14.1
+- spec-desktop.md tagged v1
+
+Spec: DS 13.1, DS 2.1","DS 2.1 traced twice, once by keyboard and once by mouse | Every guess logged as a fix or a TBD | Every TBD resolved or moved to DS 14.1 | spec-desktop.md tagged v1","Desktop,spike"
+CHI-119,Build the desktop app shell and breakpoint,To do,Desktop,task,Sprint 2: Playable round,Day 4,Mon Oct 12,2,CHI-118,,"DS 5, DD1, DD5, DD11","useIsDesktop(), a full-width shell at lg with DesktopNav on every screen but Game.
+
+Acceptance criteria:
+- useIsDesktop() is true at 1024px wide and above, false below, and re-renders on resize
+- DesktopNav shows Chi è?, Play (or Continue), Progress, Settings and the account on every screen except /play
+- The current route's link has aria-current=""page""
+- Below 1024px every screen looks exactly as before
+
+Spec: DS 5, DD1, DD5, DD11","useIsDesktop() is true at 1024px wide and above, false below, and re-renders on resize | DesktopNav shows Chi è?, Play (or Continue), Progress, Settings and the account on every screen except /play | The current route's link has aria-current=""page"" | Below 1024px every screen looks exactly as before","Desktop,task"
+CHI-120,Lay out the game as a 6 × 4 board and side panel,To do,Desktop,story,Sprint 2: Playable round,Day 5,Tue Oct 13,5,CHI-119,,"DS 6, DS 2.2, DD2, DD3, DD4","As a learner at a laptop, I see the board large on the left and the questions beside it.
+
+Acceptance criteria:
+- At 1024 × 640 all 24 cards and the whole panel are visible with no page scroll
+- The panel is aside[aria-label=""Questions""] built from sheetFor(), with no collapse toggle
+- Card positions do not change between playerTurn and playerReview
+- Resizing across 1024px mid-round keeps flipped cards, a guess in progress and a half-built Level 2 question
+- Card names scale between 10px and 16px with the card
+
+Spec: DS 6, DS 2.2, DD2, DD3, DD4","At 1024 × 640 all 24 cards and the whole panel are visible with no page scroll | The panel is aside[aria-label=""Questions""] built from sheetFor(), with no collapse toggle | Card positions do not change between playerTurn and playerReview | Resizing across 1024px mid-round keeps flipped cards, a guess in progress and a half-built Level 2 question | Card names scale between 10px and 16px with the card","Desktop,story"
+CHI-121,Add the hover preview and right-click detail,To do,Desktop,story,Sprint 2: Playable round,Day 6,Wed Oct 14,3,CHI-120,,"DS 7, DD6","As a learner with a mouse, I see a face up close by hovering, and open its details by right-clicking.
+
+Acceptance criteria:
+- The preview appears after 350 ms on a card, only at lg with (hover: hover) and (pointer: fine)
+- The preview never shows while guessing or with a dialog open, and never covers the hovered card
+- Right-click or the context menu key on a card opens CardDetail; other elements keep the browser menu
+- No layout shift on hover; no fade under prefers-reduced-motion
+
+Spec: DS 7, DD6","The preview appears after 350 ms on a card, only at lg with (hover: hover) and (pointer: fine) | The preview never shows while guessing or with a dialog open, and never covers the hovered card | Right-click or the context menu key on a card opens CardDetail; other elements keep the browser menu | No layout shift on hover; no fade under prefers-reduced-motion","Desktop,story"
+CHI-122,Adapt round end and dialogs for desktop,To do,Desktop,task,Sprint 2: Playable round,Day 6,Wed Oct 14,2,CHI-119,,"DS 9.2, DS 9.6","Two-column round end with an unfixed action bar; SignInSheet as a centred modal; dialog widths from DS 9.6.
+
+Acceptance criteria:
+- Round end is two columns at lg and Play again has focus when it appears
+- SignInSheet is a centred 28rem modal at lg and a bottom sheet below
+- Every dialog closes on Esc and on a backdrop click and returns focus to its opener
+
+Spec: DS 9.2, DS 9.6",Round end is two columns at lg and Play again has focus when it appears | SignInSheet is a centred 28rem modal at lg and a bottom sheet below | Every dialog closes on Esc and on a backdrop click and returns focus to its opener,"Desktop,task"
+CHI-123,Add keyboard shortcuts and the board grid,To do,Desktop,story,Sprint 2: Playable round,Day 7,Thu Oct 15,5,CHI-120,,"DS 4, DS 8, DD7, DD8, DD9, DD14","As a learner at a keyboard, I play a whole round without the mouse.
+
+Acceptance criteria:
+- keyToAction() returns exactly what the DS 4.2 table says for every cell, checked by unit tests
+- Keys are ignored with Ctrl, Cmd or Alt held, in inputs, and with a dialog open
+- The board is an ARIA grid with one tab stop; arrows, Home, End, Ctrl+Home and Ctrl+End move focus
+- ? and the GameMenu item open the Keyboard shortcuts dialog
+- GameMenu closes on Esc and on an outside click
+
+Spec: DS 4, DS 8, DD7, DD8, DD9, DD14","keyToAction() returns exactly what the DS 4.2 table says for every cell, checked by unit tests | Keys are ignored with Ctrl, Cmd or Alt held, in inputs, and with a dialog open | The board is an ARIA grid with one tab stop; arrows, Home, End, Ctrl+Home and Ctrl+End move focus | ? and the GameMenu item open the Keyboard shortcuts dialog | GameMenu closes on Esc and on an outside click","Desktop,story"
+CHI-124,"Lay out Home, Settings and Privacy for desktop",To do,Desktop,story,Sprint 2: Playable round,Day 8,Fri Oct 16,3,CHI-119,,"DS 9.1, DS 9.4, DS 9.5","Two-column Home, row-based Settings and a prose-width Privacy page at lg.
+
+Acceptance criteria:
+- Home is two columns at lg with the level cards and Play on the right
+- Settings rows are label and description left, control right, under Game, Account and About
+- Privacy is one max-w-prose column with a Back to Settings link
+- No horizontal scroll at 1024; phone layouts unchanged
+
+Spec: DS 9.1, DS 9.4, DS 9.5","Home is two columns at lg with the level cards and Play on the right | Settings rows are label and description left, control right, under Game, Account and About | Privacy is one max-w-prose column with a Back to Settings link | No horizontal scroll at 1024; phone layouts unchanged","Desktop,story"
+CHI-125,Build the Progress dashboard,To do,Desktop,story,"Sprint 3: Progress, sync, playtest",Day 9,Mon Oct 19,3,CHI-119,,"DS 9.3, DS 3, DD10","As a learner at a laptop, I see my totals and both word lists at once.
+
+Acceptance criteria:
+- At lg there is no tablist and Mistakes and Due show side by side
+- Tiles read Words seen, Due today, Mistakes this week and Rounds played
+- progressStats() matches the DS 3 definitions and invariants, checked by unit tests
+- With no data the empty message shows once, full width, with no tiles
+
+Spec: DS 9.3, DS 3, DD10","At lg there is no tablist and Mistakes and Due show side by side | Tiles read Words seen, Due today, Mistakes this week and Rounds played | progressStats() matches the DS 3 definitions and invariants, checked by unit tests | With no data the empty message shows once, full width, with no tiles","Desktop,story"
+CHI-126,Add desktop Playwright projects and specs,To do,Desktop,test,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-120, CHI-121, CHI-122, CHI-123, CHI-124, CHI-125",,"DS 13.2, DS 13.3","desktop-chromium and desktop-webkit projects at 1440 × 900 and e2e/desktop.spec.ts with every DS 13.3 case.
+
+Acceptance criteria:
+- Every DS 13.3 case is a passing test on both desktop projects
+- Phone-only specs skip on desktop projects; phone specs pass without edits
+- a11y.spec.ts passes on the desktop projects
+- CI runs all four projects green
+
+Spec: DS 13.2, DS 13.3",Every DS 13.3 case is a passing test on both desktop projects | Phone-only specs skip on desktop projects; phone specs pass without edits | a11y.spec.ts passes on the desktop projects | CI runs all four projects green,"Desktop,test"
+CHI-127,Run the desktop manual laptop pass,To do,Desktop,test,"Sprint 3: Progress, sync, playtest",Day 11,Wed Oct 21,2,CHI-126,,DS 13.4,"The DS 13.4 checks on a MacBook and a Windows laptop, before the playtest build.
+
+Acceptance criteria:
+- A full round by mouse and by keyboard in Chrome and Safari on a MacBook at 1280 and 1440
+- The same plus right-click detail in Edge and Firefox on Windows at 1920 × 1080
+- Window dragged across 1024px mid-round loses nothing
+- Results logged in the playtest findings doc
+
+Spec: DS 13.4",A full round by mouse and by keyboard in Chrome and Safari on a MacBook at 1280 and 1440 | The same plus right-click detail in Edge and Firefox on Windows at 1920 × 1080 | Window dragged across 1024px mid-round loses nothing | Results logged in the playtest findings doc,"Desktop,test"

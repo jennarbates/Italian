@@ -687,6 +687,8 @@ The `anon` role has no policies, so it can read and write nothing.
 
 Mobile-first, portrait, styled with Tailwind CSS. The full 24-card board must fit without scrolling in the space a 360 × 640 phone actually shows after the browser's own toolbars (roughly 360 × 560; layout uses `dvh` units, and this is checked on real phones). The question builder (or the CPU's question) lives in a bottom sheet over the board that collapses to a one-line bar, so the board never shrinks.
 
+Desktop (1024px and wider) has its own spec, [`spec-desktop.md`](spec-desktop.md). Nothing below 1024px changes.
+
 ### 8.1 Screens and flow
 
 ```
@@ -938,3 +940,4 @@ Also queued: final character art, colorblind mode, Easy CPU setting, championshi
 - 2026-10-06: v0.3. Vocabulary checked against the Profilo with a `level` field per word; adjective agreement errors at Level 2 become soft slips; `slip` rows in the review log; references section.
 - 2026-10-06: v0.4. Spec review fixes. Both `castani` and `marroni` accepted for eyes; high hats, large eyes and a long-press detail view; 6-digit email code replaces the magic link; Resend as SES fallback; staging Supabase for previews; `chie.1412labs.com`; account deletion by email and a privacy note; Quit round; games row at START and ordered outbox flush; unsynced sign-out warning; guest storage persistence and nudge; `cards` stale-write guard and profile trigger; no daily new-card limit; feedback message catalogue (3.7); `SlotError`, `ShapeError` and `Feedback` types; slot-based tile builder; answers lowercase the first letter; `ratedThisTurn` reset; released-ids snapshot; SPA fallback; Sentry URL scrubbing; board fit measured after browser toolbars; launch moved to October 29.
 - 2026-10-06: v0.5. App and email domain is `chie.parlaplay.games` (D30); `1412labs.com` was not ours.
+- 2026-10-07: Desktop layout split out into `spec-desktop.md` (v0.1 draft); 8 links to it.
