@@ -21,7 +21,7 @@ export function QuestionPicker({
               type="button"
               disabled={!!previous}
               onClick={() => onAsk(q)}
-              className="flex min-h-12 w-full flex-col items-start rounded-lg bg-stone-100 px-3 py-1.5 text-left enabled:active:bg-stone-200 disabled:bg-stone-50 disabled:text-stone-400"
+              className="flex min-h-12 w-full flex-col items-start rounded-lg bg-stone-100 px-3 py-1.5 text-left enabled:hover:bg-stone-200 enabled:active:bg-stone-200 disabled:bg-stone-50 disabled:text-stone-400"
             >
               <span lang="it" className="font-medium">
                 {q.text}

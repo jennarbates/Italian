@@ -18,14 +18,15 @@ import { SidePanel } from "./game/SidePanel.tsx";
 import { TileBuilder, type TileDraft } from "./game/TileBuilder.tsx";
 import { TopBar } from "./game/TopBar.tsx";
 import { SyncBanner } from "./SyncBanner.tsx";
-import { useIsDesktop } from "./useMediaQuery.ts";
+import { useIsDesktop, useMediaQuery } from "./useMediaQuery.ts";
 
 const emptyDraft: TileDraft = { tiles: {} };
 const byId = new Map(content.characters.map((c) => [c.id, c]));
 
 const primary =
-  "min-h-12 flex-1 rounded-xl bg-stone-900 px-4 font-semibold text-white active:bg-stone-700";
-const secondary = "min-h-12 flex-1 rounded-xl bg-stone-200 px-4 font-semibold active:bg-stone-300";
+  "min-h-12 flex-1 rounded-xl bg-stone-900 px-4 font-semibold text-white hover:bg-stone-700 active:bg-stone-700";
+const secondary =
+  "min-h-12 flex-1 rounded-xl bg-stone-200 px-4 font-semibold hover:bg-stone-300 active:bg-stone-300";
 
 export function Game() {
   const { status, game, gameId, lastAction, start, dispatch, quit } = useGameStore();
@@ -35,6 +36,7 @@ export function Game() {
   const [zoomed, setZoomed] = useState<string>();
   const [guessFor, setGuessFor] = useState<string>();
   const desktop = useIsDesktop();
+  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
 
   // /play with no round in progress starts one (at ?level=, default 1). ?seed= is
   // for tests that need a known game. Only on arrival: after Quit round the page
@@ -133,6 +135,7 @@ export function Game() {
       flipped={game.flipped}
       guessing={guessing}
       desktop={desktop}
+      hoverPreview={desktop && finePointer && !guessing}
       onTap={(id) => (guessing ? setGuessFor(id) : dispatch({ type: "FLIP", characterId: id }))}
       onZoom={setZoomed}
       onUnflipAll={() => {

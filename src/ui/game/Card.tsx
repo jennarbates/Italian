@@ -10,12 +10,13 @@ type Props = {
   onTap: () => void;
   onZoom: () => void;
   guessing: boolean;
+  describedBy?: string; // the hover preview, while it shows
 };
 
 // One board card. Tap flips it (or picks it, while guessing); long-press or the
 // Zoom control opens the detail view. Flipped cards hide the face and show a
 // cross, so the state never depends on color alone.
-export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
+export function Card({ character, flipped, onTap, onZoom, guessing, describedBy }: Props) {
   const press = useLongPress(onZoom);
   // Spec 9: the name and attributes in Italian; the flipped state is aria-pressed.
   const described = describeCharacter(character, content.lexicon);
@@ -27,9 +28,14 @@ export function Card({ character, flipped, onTap, onZoom, guessing }: Props) {
         type="button"
         aria-label={label}
         aria-pressed={guessing ? undefined : flipped}
+        aria-describedby={describedBy}
         data-flipped={flipped}
-        className={`group relative block aspect-[5/6] w-full select-none rounded-md outline-offset-2 [-webkit-touch-callout:none] [perspective:600px] ${
-          guessing ? "animate-pulse motion-reduce:animate-none" : ""
+        className={`group relative block aspect-[5/6] w-full select-none rounded-md outline-offset-2 [-webkit-touch-callout:none] [perspective:600px] hover:ring-2 ${
+          guessing
+            ? "animate-pulse cursor-pointer hover:ring-blue-600 motion-reduce:animate-none"
+            : flipped
+              ? "hover:ring-stone-400"
+              : "transition-transform duration-100 hover:-translate-y-0.5 hover:ring-stone-400 motion-reduce:transition-none"
         }`}
         {...press}
         onClick={() => {

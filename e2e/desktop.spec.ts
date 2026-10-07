@@ -180,3 +180,83 @@ test.describe("game: 6 × 4 board and side panel (DS 6)", () => {
     await expect(slots).toHaveText(built);
   });
 });
+
+test.describe("mouse: hover preview and right-click (DS 7)", () => {
+  const tooltip = (page: Page) => page.getByRole("tooltip");
+
+  test("resting on a card shows a larger preview beside it; leaving hides it", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    const chiara = card(page, "Chiara");
+    await chiara.hover();
+    await page.waitForTimeout(100);
+    await expect(tooltip(page)).toHaveCount(0); // not before the delay
+    await page.waitForTimeout(300);
+    await expect(tooltip(page)).toBeVisible();
+    await expect(tooltip(page)).toHaveText("Chiara");
+    const id = await tooltip(page).getAttribute("id");
+    await expect(chiara).toHaveAttribute("aria-describedby", id ?? "");
+    // Beside the card, never over it, and twice as wide.
+    const c = await chiara.boundingBox();
+    const t = await tooltip(page).boundingBox();
+    if (!c || !t) throw new Error("no boxes");
+    expect(t.x >= c.x + c.width || t.x + t.width <= c.x).toBe(true);
+    expect(t.width).toBeCloseTo(Math.min(c.width * 2, 256), 0);
+    // Straight on to the next card: it swaps at once.
+    await card(page, "Davide").hover();
+    await expect(tooltip(page)).toHaveText("Davide", { timeout: 200 });
+    await page.mouse.move(5, 300);
+    await expect(tooltip(page)).toHaveCount(0);
+  });
+
+  test("no preview while guessing, or on a phone-sized window", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    await panel(page).getByRole("button", { name: "Indovina" }).click();
+    await page.getByRole("button", { name: /^Guess Chiara: / }).hover();
+    await page.waitForTimeout(500);
+    await expect(tooltip(page)).toHaveCount(0);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/play?seed=1");
+    await card(page, "Chiara").hover();
+    await page.waitForTimeout(500);
+    await expect(tooltip(page)).toHaveCount(0);
+  });
+
+  test("a click hides it, and it has no fade under reduced motion", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/play?seed=1");
+    await card(page, "Elena").hover();
+    await expect(tooltip(page)).toBeVisible();
+    expect(await tooltip(page).evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
+    await page.mouse.down();
+    await expect(tooltip(page)).toHaveCount(0);
+    await page.mouse.up();
+  });
+
+  test("right-click opens the card's detail and does not flip it", async ({ page }) => {
+    await page.goto("/play?seed=1");
+    const davide = card(page, "Davide");
+    await davide.hover();
+    await expect(tooltip(page)).toBeVisible();
+    await davide.click({ button: "right" });
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.getByRole("img", { name: "Davide" })).toBeVisible();
+    await expect(tooltip(page)).toHaveCount(0);
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(davide).toHaveAttribute("aria-pressed", "false");
+    // Elsewhere, right-click does nothing of ours.
+    await page.getByRole("button", { name: "Indovina" }).click({ button: "right" });
+    await expect(page.getByRole("dialog")).toBeHidden();
+  });
+
+  test("the context menu key on a focused card opens its detail", async ({ page, browserName }) => {
+    await page.goto("/play?seed=1");
+    await card(page, "Luca").focus();
+    // The key raises contextmenu on the focused element. Macs have no such key and
+    // WebKit does not raise it for a simulated one, so there the event is sent.
+    if (browserName === "webkit") await card(page, "Luca").dispatchEvent("contextmenu");
+    else await page.keyboard.press("ContextMenu");
+    await expect(page.getByRole("dialog").getByRole("img", { name: "Luca" })).toBeVisible();
+  });
+});

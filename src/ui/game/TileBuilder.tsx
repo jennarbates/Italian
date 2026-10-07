@@ -84,7 +84,7 @@ export function TileBuilder({
     `min-h-11 min-w-11 rounded-lg px-3 font-medium ring-1 ${
       selected
         ? "bg-stone-900 text-white ring-stone-900"
-        : "bg-white ring-stone-300 active:bg-stone-100"
+        : "bg-white ring-stone-300 hover:bg-stone-100 active:bg-stone-100"
     }`;
 
   return (

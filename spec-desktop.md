@@ -371,7 +371,8 @@ All use Tailwind `hover:`, which only applies on devices that can hover.
 | Card, while guessing | `ring-2 ring-blue-600`, `cursor-pointer` |
 | Primary button | `bg-stone-700` |
 | Secondary button | `bg-stone-300` |
-| Question row, tile | `bg-stone-100` |
+| Question row | `bg-stone-200` (rows are already `bg-stone-100`) |
+| Tile | `bg-stone-100` |
 | DesktopNav link | underline |
 
 ## DS 8. Keyboard
@@ -667,3 +668,4 @@ Desktop work runs **before launch**, alongside the MVP's Sprints 2 and 3 (`spec.
 - 2026-10-07: v0.1. First draft.
 - 2026-10-07: v0.2. Restructured to the full spec format: success criteria, in/out table, desktop round walkthrough, edge cases, data model (`ProgressStats`), shortcuts contract with transition table, check order, invariants and traced example, tests by layer, milestones before launch (DD12), future work, references. Level 1 questions use `q` then arrows instead of number keys. Playwright desktop devices verified at 1280 × 720 and overridden to 1440 × 900.
 - 2026-10-07: CHI-120. DS 2.2 resize TBD resolved: a half-built Level 2 question did not survive the swap, so `Game` now holds the TileBuilder draft, and CpuQuestion's `hintShown` for the same reason.
+- 2026-10-07: CHI-121. DS 7.4: question rows hover to `bg-stone-200`, since they already rest at `bg-stone-100`.
