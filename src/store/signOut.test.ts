@@ -42,13 +42,11 @@ beforeEach(async () => {
 
 async function playSignedIn() {
   useGameStore.getState().start(2, 99);
-  useGameStore
-    .getState()
-    .dispatch({
-      type: "ASK",
-      templateId: "t.have",
-      fill: { verb: "v.e", art: "art.la", noun: "n.barba" },
-    });
+  useGameStore.getState().dispatch({
+    type: "ASK",
+    templateId: "t.have",
+    fill: { verb: "v.e", art: "art.la", noun: "n.barba" },
+  });
   await new Promise((r) => setTimeout(r, 20));
 }
 
