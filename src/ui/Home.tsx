@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import type { Level } from "../engine/index.ts";
 import { useAccountStore } from "../store/account.ts";
 import { useAuthStore } from "../store/authStore.ts";
-import { useGameStore } from "../store/gameStore.ts";
+import { inProgress, useGameStore } from "../store/gameStore.ts";
 import { usePrefs } from "../store/prefs.ts";
 
 const levels: { level: Level; title: string; detail: string }[] = [
@@ -18,7 +18,7 @@ export function Home() {
   const auth = useAuthStore();
   const settled = useAccountStore((a) => a.settled);
   const { level, setLevel } = usePrefs();
-  const saved = status === "ready" && !!game && game.phase !== "over" && game.phase !== "setup";
+  const saved = status === "ready" && inProgress(game);
 
   const choose = (l: Level) => void setLevel(l, auth.userId);
   const newRound = () => {
