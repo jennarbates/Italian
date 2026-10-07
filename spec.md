@@ -100,7 +100,7 @@ There is no turn limit and no timer. Each round stands alone; there is no match 
 
 ## 3. Content model
 
-All Italian lives in JSON, validated with Zod at build time. Every inflected form is written out as data. There is no inflection code.
+All Italian lives in JSON, validated with Zod at build time (a Vite plugin checks every file in `src/content/`, so a bad file fails `pnpm build`). Every inflected form is written out as data. There is no inflection code.
 
 ### 3.1 Attributes
 
@@ -160,7 +160,7 @@ const Character = z.object({
 - 12 men, 12 women.
 - Every one of the 16 questions gets "yes" from at least 3 and at most 15 of the 24 characters. (`TBD:` tune after playtesting.)
 
-**How characters are made.** `scripts/generate-characters.ts` takes a seed and picks 24 attribute combinations that pass every invariant above, retrying until they do. It runs once by hand, not at build time. Its output is reviewed, given Italian names, and committed as `content/characters.json`. After release, characters change only by editing that file, and ids stay permanent (3.6).
+**How characters are made.** `scripts/generate-characters.ts` takes a seed and picks 24 attribute combinations that pass every invariant above, retrying until they do. It runs once by hand, not at build time. Its output is reviewed, given Italian names, and committed as `content/characters.json`. After release, characters change only by editing that file, and ids stay permanent (3.6). The MVP set is seed 5152: among seeds 1 to 20,000 it had the most natural spread (each hair color on 3 to 6 people, half long hair and half short for both men and women, 7 of 12 men bearded, 4 or 6 people on each skin layer). Ids are `c.` plus the lowercased name.
 
 ### 3.3 Lexicon
 
@@ -169,6 +169,12 @@ const Article = z.object({
   id: z.string(),                       // "art.i"
   pos: z.literal("article"),
   text: z.string(),                     // "i"
+});
+
+const Verb = z.object({
+  id: z.string(),                       // "v.ha"
+  pos: z.literal("verb"),
+  text: z.string(),                     // "ha"
 });
 
 const Noun = z.object({
@@ -207,31 +213,33 @@ const Adjective = z.object({
 });
 ```
 
+`lexicon.json` is one array of all four kinds, told apart by `pos`. In the code every object schema is strict, so an unknown or misspelled key fails the build.
+
 A specific form of an adjective is referenced as `<lemmaId>#<formKey>`, e.g. `adj.biondo#mp` is `biondi`.
 
 ```json
 [
   { "id": "n.capelli", "pos": "noun", "text": "capelli", "gloss": "hair",
     "gender": "m", "number": "pl", "defArt": "art.i", "artRule": "art.mpl.consonant",
-    "template": "t.have.adj", "adjAttrs": ["hairColor", "hairLength"] },
+    "template": "t.have.adj", "adjAttrs": ["hairColor", "hairLength"], "level": "A1" },
   { "id": "n.occhiali", "pos": "noun", "text": "occhiali", "gloss": "glasses",
     "gender": "m", "number": "pl", "defArt": "art.gli", "artRule": "art.mpl.vowel",
-    "template": "t.have", "attr": "glasses" },
+    "template": "t.have", "attr": "glasses", "level": "A1" },
   { "id": "n.donna", "pos": "noun", "text": "donna", "gloss": "woman",
     "gender": "f", "number": "sg", "defArt": "art.la", "indefArt": "art.una", "artRule": "art.indef.f",
-    "template": "t.be" },
+    "template": "t.be", "level": "A1" },
   { "id": "adj.biondo", "pos": "adj", "gloss": "blond", "attr": "hairColor",
-    "forms": { "ms": "biondo", "fs": "bionda", "mp": "biondi", "fp": "bionde" } },
+    "forms": { "ms": "biondo", "fs": "bionda", "mp": "biondi", "fp": "bionde" }, "level": "A1" },
   { "id": "adj.castano", "pos": "adj", "gloss": "brown (hair, eyes)", "attr": "hairColor",
     "alsoMeans": [{ "attr": "eyeColor", "value": "adj.marrone" }],
-    "forms": { "ms": "castano", "fs": "castana", "mp": "castani", "fp": "castane" } },
+    "forms": { "ms": "castano", "fs": "castana", "mp": "castani", "fp": "castane" }, "level": "A1" },
   { "id": "adj.marrone", "pos": "adj", "gloss": "brown (eyes)", "attr": "eyeColor",
     "wordChoice": [{ "noun": "n.capelli", "use": "adj.castano" }],
-    "forms": { "ms": "marrone", "fs": "marrone", "mp": "marroni", "fp": "marroni" } }
+    "forms": { "ms": "marrone", "fs": "marrone", "mp": "marroni", "fp": "marroni" }, "level": "A1" }
 ]
 ```
 
-Full MVP lexicon: 8 nouns (`capelli`, `occhi`, `occhiali`, `cappello`, `barba`, `baffi`, `uomo`, `donna`), 10 adjectives (`biondo`, `castano`, `nero`, `rosso`, `bianco`, `corto`, `lungo`, `azzurro`, `marrone`, `verde`), articles (`il`, `la`, `i`, `gli`, `un`, `una`), verbs (`ha`, `è`).
+Full MVP lexicon: 8 nouns (`capelli`, `occhi`, `occhiali`, `cappello`, `barba`, `baffi`, `uomo`, `donna`), 10 adjectives (`biondo`, `castano`, `nero`, `rosso`, `bianco`, `corto`, `lungo`, `azzurro`, `marrone`, `verde`), articles (`il`, `la`, `l'`, `i`, `gli`, `un`, `una`), verbs (`ha`, `è`). `l'` is there because every noun needs a definite article and `uomo`'s is `l'`; no question uses it, since `uomo` is only asked with `È un uomo?`.
 
 Vocabulary choice: `castani` for brown hair and `azzurri` for blue eyes, the standard textbook forms. For brown eyes, both `castani` and `marroni` are accepted: `castani` is the traditional form and `marroni` is very common in everyday speech, and A1 exams (CILS, CELI) publish no word list that picks one. `capelli marroni` is not natural Italian, so it is rejected with a hint. The Italian review in 10.1 confirms all strings.
 

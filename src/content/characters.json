@@ -1,0 +1,362 @@
+[
+  {
+    "id": "c.anna",
+    "name": "Anna",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.rosso",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.verde",
+      "glasses": false,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s1"
+  },
+  {
+    "id": "c.chiara",
+    "name": "Chiara",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.nero",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.verde",
+      "glasses": true,
+      "hat": true,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s3"
+  },
+  {
+    "id": "c.davide",
+    "name": "Davide",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.nero",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.marrone",
+      "glasses": false,
+      "hat": true,
+      "beard": true,
+      "mustache": true
+    },
+    "skin": "s2"
+  },
+  {
+    "id": "c.elena",
+    "name": "Elena",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.castano",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.azzurro",
+      "glasses": false,
+      "hat": true,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s4"
+  },
+  {
+    "id": "c.enzo",
+    "name": "Enzo",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.castano",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.verde",
+      "glasses": false,
+      "hat": false,
+      "beard": true,
+      "mustache": true
+    },
+    "skin": "s3"
+  },
+  {
+    "id": "c.francesca",
+    "name": "Francesca",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.biondo",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.marrone",
+      "glasses": true,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s5"
+  },
+  {
+    "id": "c.franco",
+    "name": "Franco",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.bianco",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.verde",
+      "glasses": false,
+      "hat": true,
+      "beard": true,
+      "mustache": false
+    },
+    "skin": "s5"
+  },
+  {
+    "id": "c.giorgio",
+    "name": "Giorgio",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.bianco",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.marrone",
+      "glasses": false,
+      "hat": true,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s4"
+  },
+  {
+    "id": "c.giulia",
+    "name": "Giulia",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.rosso",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.verde",
+      "glasses": false,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s5"
+  },
+  {
+    "id": "c.laura",
+    "name": "Laura",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.nero",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.marrone",
+      "glasses": false,
+      "hat": true,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s5"
+  },
+  {
+    "id": "c.lorenzo",
+    "name": "Lorenzo",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.castano",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.azzurro",
+      "glasses": true,
+      "hat": true,
+      "beard": false,
+      "mustache": true
+    },
+    "skin": "s5"
+  },
+  {
+    "id": "c.luca",
+    "name": "Luca",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.nero",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.azzurro",
+      "glasses": false,
+      "hat": false,
+      "beard": true,
+      "mustache": false
+    },
+    "skin": "s3"
+  },
+  {
+    "id": "c.lucia",
+    "name": "Lucia",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.biondo",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.verde",
+      "glasses": false,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s5"
+  },
+  {
+    "id": "c.marco",
+    "name": "Marco",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.nero",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.verde",
+      "glasses": true,
+      "hat": false,
+      "beard": true,
+      "mustache": false
+    },
+    "skin": "s1"
+  },
+  {
+    "id": "c.marta",
+    "name": "Marta",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.biondo",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.verde",
+      "glasses": false,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s4"
+  },
+  {
+    "id": "c.matteo",
+    "name": "Matteo",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.rosso",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.azzurro",
+      "glasses": false,
+      "hat": false,
+      "beard": false,
+      "mustache": true
+    },
+    "skin": "s4"
+  },
+  {
+    "id": "c.paolo",
+    "name": "Paolo",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.nero",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.verde",
+      "glasses": false,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s1"
+  },
+  {
+    "id": "c.pietro",
+    "name": "Pietro",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.castano",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.azzurro",
+      "glasses": false,
+      "hat": false,
+      "beard": true,
+      "mustache": true
+    },
+    "skin": "s1"
+  },
+  {
+    "id": "c.roberto",
+    "name": "Roberto",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.castano",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.marrone",
+      "glasses": true,
+      "hat": false,
+      "beard": false,
+      "mustache": true
+    },
+    "skin": "s2"
+  },
+  {
+    "id": "c.sara",
+    "name": "Sara",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.biondo",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.verde",
+      "glasses": true,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s1"
+  },
+  {
+    "id": "c.sofia",
+    "name": "Sofia",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.rosso",
+      "hairLength": "adj.lungo",
+      "eyeColor": "adj.azzurro",
+      "glasses": true,
+      "hat": true,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s3"
+  },
+  {
+    "id": "c.stefano",
+    "name": "Stefano",
+    "attrs": {
+      "gender": "n.uomo",
+      "hairColor": "adj.biondo",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.marrone",
+      "glasses": true,
+      "hat": true,
+      "beard": true,
+      "mustache": true
+    },
+    "skin": "s2"
+  },
+  {
+    "id": "c.teresa",
+    "name": "Teresa",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.bianco",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.marrone",
+      "glasses": true,
+      "hat": true,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s4"
+  },
+  {
+    "id": "c.valentina",
+    "name": "Valentina",
+    "attrs": {
+      "gender": "n.donna",
+      "hairColor": "adj.castano",
+      "hairLength": "adj.corto",
+      "eyeColor": "adj.marrone",
+      "glasses": true,
+      "hat": false,
+      "beard": false,
+      "mustache": false
+    },
+    "skin": "s2"
+  }
+]
