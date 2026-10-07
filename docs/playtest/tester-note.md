@@ -5,7 +5,7 @@ Thanks for helping. Chi è? is a Guess Who style game for learning Italian at A1
 ## Before you start
 
 - Use your own phone and the browser you usually use.
-- Open **<!-- TODO: stable staging URL -->**
+- Open **https://chi-102-playtest-build-italian.jennaraquelbates.workers.dev**
 - You don't need an account. Play as a guest and skip any "Sign in" buttons. Your rounds are saved on your phone.
 - This is a test version. Nothing you do here affects anyone else.
 
