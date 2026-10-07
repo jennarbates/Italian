@@ -472,14 +472,14 @@ Acceptance criteria:
 - anon can read and write nothing
 
 Spec: 7.2, 10.2",RLS enabled on all four tables | review_log has no update or delete policy | Test proves user A cannot read user B's review_log | anon can read and write nothing,"Accounts and sync,test"
-CHI-082,Sign-in email template and SMTP,To do,Accounts and sync,chore,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,1,"CHI-018, CHI-019, CHI-016",,"7.3, D10, D15","Code-only email template; production sends through SES or Resend, staging uses the built-in sender.
+CHI-082,Sign-in email template and SMTP,To do,Accounts and sync,chore,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,1,"CHI-018, CHI-019, CHI-016",,"7.3, D10, D15","Email template with the code and a sign-in link; production sends through SES or Resend, staging uses the built-in sender.
 
 Acceptance criteria:
-- Template shows {{ .Token }} and no link
+- Template shows {{ .Token }} and {{ .ConfirmationURL }}, and the link comes back to the deploy that asked
 - Production custom SMTP set to SES (or Resend)
 - A code reaches an address outside the team
 
-Spec: 7.3, D10, D15",Template shows {{ .Token }} and no link | Production custom SMTP set to SES (or Resend) | A code reaches an address outside the team,"Accounts and sync,chore"
+Spec: 7.3, D10, D15",Template shows {{ .Token }} and {{ .ConfirmationURL }}, and the link comes back to the deploy that asked | Production custom SMTP set to SES (or Resend) | A code reaches an address outside the team,"Accounts and sync,chore"
 CHI-083,Sign-in sheet with 6-digit code,Done,Accounts and sync,story,"Sprint 3: Progress, sync, playtest",Day 10,Tue Oct 20,3,"CHI-082, CHI-053",,"7.3, 8.1, 8.2","As a learner, I sign in by typing a code from my email into the same tab.
 
 Acceptance criteria:

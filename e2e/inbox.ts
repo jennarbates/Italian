@@ -39,3 +39,9 @@ export function codeIn(message: Message): string {
   if (!code) throw new Error(`No code in "${message.Subject}"`);
   return code;
 }
+
+export function linkIn(message: Message): string {
+  const href = /<a\s[^>]*href="([^"]+)"/i.exec(message.HTML)?.[1];
+  if (!href) throw new Error(`No link in "${message.Subject}"`);
+  return href.replaceAll("&amp;", "&");
+}

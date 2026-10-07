@@ -656,9 +656,9 @@ Policies from 7.2, proven by tests.
 
 Accounts and sync · chore · 1 pt · spec 7.3, D10, D15 · depends on CHI-018, CHI-019, CHI-016
 
-Code-only email template; production sends through SES or Resend, staging uses the built-in sender.
+Email template with the code and a sign-in link; production sends through SES or Resend, staging uses the built-in sender.
 
-- [ ] Template shows {{ .Token }} and no link
+- [ ] Template shows {{ .Token }} and {{ .ConfirmationURL }}, and the link comes back to the deploy that asked
 - [ ] Production custom SMTP set to SES (or Resend)
 - [ ] A code reaches an address outside the team
 

@@ -10,6 +10,7 @@ const auth = {
   signOut: vi.fn(),
 };
 vi.mock("../services/supabase.ts", () => ({ supabase: { auth } }));
+vi.stubGlobal("window", { location: { origin: "https://preview.example.dev" } });
 const { useAuthStore } = await import("./authStore.ts");
 
 beforeEach(() => {
@@ -18,12 +19,12 @@ beforeEach(() => {
 });
 
 describe("sendCode", () => {
-  test("asks Supabase for an email code, creating the user if new", async () => {
+  test("asks Supabase for an email code, creating the user if new, with the link back here", async () => {
     auth.signInWithOtp.mockResolvedValue({ error: null });
     expect(await useAuthStore.getState().sendCode("a@b.co")).toEqual({ ok: true });
     expect(auth.signInWithOtp).toHaveBeenCalledWith({
       email: "a@b.co",
-      options: { shouldCreateUser: true },
+      options: { shouldCreateUser: true, emailRedirectTo: "https://preview.example.dev" },
     });
   });
 

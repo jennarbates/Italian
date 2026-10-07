@@ -1,5 +1,6 @@
-// Spec 7.3: sign-in with a 6-digit code typed into the same tab. signInWithOtp
-// sends it, verifyOtp (type "email") checks it. Guests never touch Supabase.
+// Spec 7.3: the email carries a 6-digit code and a sign-in link. signInWithOtp
+// sends it, verifyOtp (type "email") checks the code, and the client picks up the
+// session when the link opens the app. Guests never touch Supabase.
 import { create } from "zustand";
 import { supabase } from "../services/supabase.ts";
 
@@ -46,7 +47,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
     if (!supabase) return { ok: false, error: "send" };
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { shouldCreateUser: true },
+      // The link comes back to this deploy, so a preview never signs in on production.
+      options: { shouldCreateUser: true, emailRedirectTo: window.location.origin },
     });
     if (!error) return { ok: true };
     if (error.status === 429) {

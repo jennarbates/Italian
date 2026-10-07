@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { codeIn, emailsTo, hasSupabase, newEmail } from "./inbox.ts";
+import { codeIn, emailsTo, hasSupabase, linkIn, newEmail } from "./inbox.ts";
 
 // CHI-083 (and CHI-082's template): signing in with a 6-digit code against the
 // local Supabase. CI points the app at it; without it the tests are skipped.
@@ -37,15 +37,27 @@ test("sign in with the code from the email, typed into the same tab", async ({ p
   await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();
 });
 
-test("the email shows the code and has no link (spec 7.3)", async ({ page }) => {
+test("the email shows the code and a sign-in link (spec 7.3)", async ({ page }) => {
   const email = newEmail();
   await requestCode(page, email);
   const [message] = await emailsTo(email);
   if (!message) throw new Error("no email");
   expect(message.Subject).toBe("Your Chi è? sign-in code");
   expect(codeIn(message)).toMatch(/^\d{6}$/);
-  expect(message.HTML).not.toMatch(/<a\s/i);
-  expect(message.Text).not.toMatch(/https?:\/\//);
+  expect(linkIn(message)).toContain(
+    "redirect_to=" + encodeURIComponent(new URL(page.url()).origin),
+  );
+});
+
+test("the link in the email signs in and comes back to this app", async ({ page }) => {
+  const email = newEmail();
+  await requestCode(page, email);
+  const [message] = await emailsTo(email);
+  if (!message) throw new Error("no email");
+  await page.goto(linkIn(message));
+  await expect(page).toHaveURL(/^http:\/\/localhost:\d+\/$/);
+  await page.goto("/settings");
+  await expect(page.getByText(`Signed in as ${email}`)).toBeVisible();
 });
 
 test("a wrong code shows an inline error", async ({ page }) => {
