@@ -6,6 +6,7 @@ import { requestPersistence } from "../../services/storage.ts";
 import { useProgressStore } from "../../store/progressStore.ts";
 import { Face } from "../Face.tsx";
 import { renderMessage } from "../messages.ts";
+import { ignoreHeldEnter } from "../dialog.ts";
 import { useIsDesktop } from "../useMediaQuery.ts";
 
 const byId = new Map(content.characters.map((c) => [c.id, c]));
@@ -186,6 +187,7 @@ export function RoundEnd({
         ref={playAgain}
         type="button"
         onClick={onPlayAgain}
+        onKeyDown={ignoreHeldEnter}
         className="min-h-12 flex-1 rounded-xl bg-stone-900 font-semibold text-white"
       >
         Play again
